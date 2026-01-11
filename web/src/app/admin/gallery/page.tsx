@@ -40,6 +40,7 @@ export default function GalleryAdminPage() {
     const [formData, setFormData] = useState({
         title: "",
         imageUrl: "",
+        fileId: "",
         category: "Campus"
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,8 +91,8 @@ export default function GalleryAdminPage() {
         setIsDragging(false);
     };
 
-    const processImage = (src: string) => {
-        setFormData(prev => ({ ...prev, imageUrl: src }));
+    const processImage = (src: string, fileId: string = "") => {
+        setFormData(prev => ({ ...prev, imageUrl: src, fileId: fileId }));
     };
 
     const uploadFile = async (file: File) => {
@@ -157,7 +158,7 @@ export default function GalleryAdminPage() {
             const data = await response.json();
             if (response.ok) {
                 setItems(prev => [data.data, ...prev]);
-                setFormData({ title: "", imageUrl: "", category: "Campus" });
+                setFormData({ title: "", imageUrl: "", fileId: "", category: "Campus" });
                 setShowForm(false);
             } else {
                 alert(data.message || "Error adding image");
@@ -186,7 +187,7 @@ export default function GalleryAdminPage() {
     };
 
     const onFileUploadSuccess = (res: any) => {
-        processImage(res.url);
+        processImage(res.url, res.fileId);
         setIsUploading(false);
     };
 

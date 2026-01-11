@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface IGallery extends Document {
     title: string;
     imageUrl: string;
+    fileId?: string;
     category: 'Campus' | 'Events' | 'Hostel' | 'Classroom';
     createdAt: Date;
 }
@@ -10,6 +11,7 @@ export interface IGallery extends Document {
 const GallerySchema: Schema = new Schema({
     title: { type: String, required: true },
     imageUrl: { type: String, required: true },
+    fileId: { type: String },
     category: {
         type: String,
         required: true,

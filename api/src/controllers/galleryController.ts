@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Gallery from '../models/Gallery';
+import { imagekit } from '../routes/imagekitRoutes';
 
 /**
  * @desc    Create a new gallery image entry
@@ -8,7 +9,7 @@ import Gallery from '../models/Gallery';
  */
 export const createImage = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { title, imageUrl, category } = req.body;
+        const { title, imageUrl, fileId, category } = req.body;
 
         if (!title || !imageUrl || !category) {
             res.status(400).json({ success: false, message: 'Please provide title, imageUrl and category' });
@@ -18,6 +19,7 @@ export const createImage = async (req: Request, res: Response): Promise<void> =>
         const image = await Gallery.create({
             title,
             imageUrl,
+            fileId,
             category
         });
 
@@ -71,12 +73,25 @@ export const getImages = async (req: Request, res: Response): Promise<void> => {
  */
 export const deleteImage = async (req: Request, res: Response): Promise<void> => {
     try {
-        const image = await Gallery.findByIdAndDelete(req.params.id);
+        const image = await Gallery.findById(req.params.id);
 
         if (!image) {
             res.status(404).json({ success: false, message: 'Gallery image not found' });
             return;
         }
+
+        // If it's an ImageKit asset, delete it from the CDN
+        if (image.fileId) {
+            try {
+                await imagekit.deleteFile(image.fileId);
+                console.log(`Deleted file ${image.fileId} from ImageKit`);
+            } catch (ikError) {
+                console.error(`Failed to delete file ${image.fileId} from ImageKit:`, ikError);
+                // We proceed to delete from DB anyway, or handle as needed
+            }
+        }
+
+        await Gallery.findByIdAndDelete(req.params.id);
 
         res.status(200).json({
             success: true,
