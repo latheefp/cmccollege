@@ -1,7 +1,22 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
+import { ImageKitProvider, IKUpload } from 'imagekitio-next';
+import ImageKit from 'imagekit-javascript';
+
+const publicKey = process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY;
+const urlEndpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT;
+
+const authenticator = async () => {
+    try {
+        const response = await fetch('http://localhost:5000/api/imagekit/auth');
+        if (!response.ok) throw new Error('Authentication failed');
+        return await response.json();
+    } catch (error) {
+        throw new Error(`Authentication request failed: ${error}`);
+    }
+};
 
 interface GalleryItem {
     _id: string;
@@ -19,6 +34,7 @@ export default function GalleryAdminPage() {
     const [error, setError] = useState("");
     const [activeFilter, setActiveFilter] = useState('All');
     const [showForm, setShowForm] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
 
     // Form state
     const [formData, setFormData] = useState({
@@ -27,6 +43,16 @@ export default function GalleryAdminPage() {
         category: "Campus"
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const ikUploadRef = useRef<HTMLInputElement>(null);
+
+    const ikClient = useMemo(() => {
+        if (!publicKey || !urlEndpoint) return null;
+        return new ImageKit({
+            publicKey,
+            urlEndpoint
+        });
+    }, []);
 
     const fetchGallery = async () => {
         try {
@@ -68,27 +94,39 @@ export default function GalleryAdminPage() {
         setFormData(prev => ({ ...prev, imageUrl: src }));
     };
 
-    const handleDrop = (e: React.DragEvent) => {
+    const uploadFile = async (file: File) => {
+        if (!ikClient) return;
+        setIsUploading(true);
+        try {
+            // Manually fetch auth params for the core SDK
+            const authParams = await authenticator();
+            const res = await ikClient.upload({
+                file,
+                fileName: file.name,
+                tags: ["gallery"],
+                ...authParams
+            });
+            onFileUploadSuccess(res);
+        } catch (err) {
+            onFileUploadError(err);
+        }
+    };
+
+    const handleDrop = async (e: React.DragEvent) => {
         e.preventDefault();
         setIsDragging(false);
 
-        // 1. Try to extract from file (Desktop drop)
+        // 1. Desktop drop (Files)
         const files = e.dataTransfer.files;
         if (files && files.length > 0) {
             const file = files[0];
             if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    if (event.target?.result) {
-                        processImage(event.target.result as string);
-                    }
-                };
-                reader.readAsDataURL(file);
+                await uploadFile(file);
                 return;
             }
         }
 
-        // 2. Try to extract from HTML/Text (Browser drop)
+        // 2. Browser drop (Images/URLs)
         const html = e.dataTransfer.getData('text/html');
         if (html) {
             const match = html.match(/src="([^"]+)"/);
@@ -107,6 +145,7 @@ export default function GalleryAdminPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!formData.imageUrl) return alert("Please provide an image.");
+        if (isUploading) return alert("Image is still uploading...");
 
         setIsSubmitting(true);
         try {
@@ -146,15 +185,29 @@ export default function GalleryAdminPage() {
         }
     };
 
+    const onFileUploadSuccess = (res: any) => {
+        processImage(res.url);
+        setIsUploading(false);
+    };
+
+    const onFileUploadError = (err: any) => {
+        console.error("Upload error", err);
+        alert("Upload failed.");
+        setIsUploading(false);
+    };
+
+    const onUploadStart = () => {
+        setIsUploading(true);
+    };
+
     const filteredItems = activeFilter === 'All'
         ? items
         : items.filter(item => item.category === activeFilter);
 
-    return (
+    const renderContent = () => (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header Area */}
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-gradient-to-br from-emerald-900 to-emerald-950 p-10 rounded-[48px] shadow-2xl relative overflow-hidden group">
-                {/* Decorative background element */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000"></div>
 
                 <div className="relative z-10">
@@ -181,11 +234,9 @@ export default function GalleryAdminPage() {
                 )}
             </div>
 
-            {/* Add Image Form - Glassmorphism UI */}
             {showForm && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-emerald-950/40 backdrop-blur-md animate-in fade-in duration-300">
                     <div className="bg-white/90 backdrop-blur-2xl p-10 rounded-[56px] shadow-[0_40px_100px_rgba(6,95,70,0.2)] border border-white/50 w-full max-w-4xl relative overflow-hidden animate-in zoom-in slide-in-from-bottom-8 duration-500">
-                        {/* Glass Decor */}
                         <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
 
                         <div className="flex justify-between items-center mb-10 relative z-10">
@@ -203,7 +254,6 @@ export default function GalleryAdminPage() {
 
                         <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-                                {/* Drag & Drop Area - Premium Visuals */}
                                 <div className="lg:col-span-3">
                                     <div
                                         onDragOver={handleDragOver}
@@ -214,8 +264,19 @@ export default function GalleryAdminPage() {
                                             : isDragging
                                                 ? 'border-emerald-600 bg-emerald-100 scale-[1.02] shadow-2xl'
                                                 : 'border-zinc-200 bg-zinc-50/50 hover:bg-zinc-100/50'
-                                            }`}
+                                            } ${isUploading ? 'cursor-wait' : 'cursor-pointer'}`}
+                                        onClick={() => ikUploadRef.current?.click()}
                                     >
+                                        <div className="hidden">
+                                            <IKUpload
+                                                ref={ikUploadRef}
+                                                onSuccess={onFileUploadSuccess}
+                                                onError={onFileUploadError}
+                                                onUploadStart={onUploadStart}
+                                                className="hidden"
+                                            />
+                                        </div>
+
                                         {formData.imageUrl ? (
                                             <>
                                                 <Image
@@ -228,7 +289,7 @@ export default function GalleryAdminPage() {
                                                 <div className="absolute inset-0 bg-emerald-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
                                                     <button
                                                         type="button"
-                                                        onClick={() => processImage("")}
+                                                        onClick={(e) => { e.stopPropagation(); processImage(""); }}
                                                         className="px-8 py-4 bg-white text-emerald-950 font-black rounded-2xl shadow-2xl hover:scale-105 active:scale-95 transition-all"
                                                     >
                                                         Change Asset
@@ -237,13 +298,22 @@ export default function GalleryAdminPage() {
                                             </>
                                         ) : (
                                             <div className={`text-center p-12 transition-all duration-500 ${isDragging ? 'scale-110' : ''}`}>
-                                                <div className={`w-24 h-24 rounded-[32px] flex items-center justify-center mx-auto mb-6 transition-all duration-500 shadow-2xl ${isDragging ? 'bg-emerald-600 text-white animate-pulse' : 'bg-white text-emerald-600'}`}>
-                                                    <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                    </svg>
-                                                </div>
-                                                <p className="text-emerald-950 font-black text-2xl tracking-tight mb-2">Drop Image Here</p>
-                                                <p className="text-zinc-500 font-medium">Browser, Desktop, or URL source</p>
+                                                {isUploading ? (
+                                                    <div className="flex flex-col items-center">
+                                                        <div className="w-16 h-16 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin mb-4"></div>
+                                                        <p className="text-emerald-900 font-black text-xl animate-pulse">Uploading to CDN...</p>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <div className={`w-24 h-24 rounded-[32px] flex items-center justify-center mx-auto mb-6 transition-all duration-500 shadow-2xl ${isDragging ? 'bg-emerald-600 text-white animate-pulse' : 'bg-white text-emerald-600'}`}>
+                                                            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                            </svg>
+                                                        </div>
+                                                        <p className="text-emerald-950 font-black text-2xl tracking-tight mb-2">Drop or Click to Upload</p>
+                                                        <p className="text-zinc-500 font-medium">ImageKit Powered CDN Storage</p>
+                                                    </>
+                                                )}
                                             </div>
                                         )}
                                     </div>
@@ -281,16 +351,16 @@ export default function GalleryAdminPage() {
                                         </div>
                                     </div>
                                     <div className="space-y-3">
-                                        <label className="text-xs font-black text-emerald-900 uppercase tracking-widest ml-1">Digital Source</label>
+                                        <label className="text-xs font-black text-emerald-900 uppercase tracking-widest ml-1">Digital Source (URL)</label>
                                         <input
                                             type="url"
                                             name="imageUrl"
-                                            required
                                             value={formData.imageUrl}
                                             onChange={handleInputChange}
-                                            placeholder="https://..."
+                                            placeholder="https://ik.imagekit.io/..."
                                             className="w-full px-7 py-5 rounded-3xl bg-zinc-100/50 border border-zinc-200 focus:border-emerald-500 focus:bg-white outline-none transition-all text-emerald-950 font-bold placeholder:text-zinc-400"
                                         />
+                                        <p className="text-[10px] text-zinc-400 font-medium ml-1">Upload an image or paste a direct CDN link.</p>
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +368,7 @@ export default function GalleryAdminPage() {
                             <div className="flex gap-6 pt-6">
                                 <button
                                     type="submit"
-                                    disabled={isSubmitting || !formData.imageUrl}
+                                    disabled={isSubmitting || !formData.imageUrl || isUploading}
                                     className="px-12 py-6 bg-emerald-800 text-white font-black rounded-3xl hover:bg-emerald-900 transition-all flex items-center justify-center gap-3 shadow-2xl shadow-emerald-900/40 disabled:opacity-50 disabled:shadow-none active:scale-95 group/save"
                                 >
                                     {isSubmitting ? "Processing..." : "Publish to Gallery"}
@@ -317,7 +387,6 @@ export default function GalleryAdminPage() {
                 </div>
             )}
 
-            {/* Content Filters - Pill Style */}
             <div className="flex flex-wrap items-center gap-4 bg-zinc-100/50 p-3 rounded-[32px] w-fit border border-zinc-100">
                 <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-4 mr-2">Filter View</span>
                 {CATEGORIES.map((cat) => (
@@ -334,7 +403,6 @@ export default function GalleryAdminPage() {
                 ))}
             </div>
 
-            {/* Gallery Grid - Modern Benton Look */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
                 {loading ? (
                     <div className="col-span-full py-40 text-center">
@@ -368,7 +436,6 @@ export default function GalleryAdminPage() {
                                 className="object-cover group-hover:scale-110 transition-transform duration-1000"
                             />
 
-                            {/* Hover Narrative Layer */}
                             <div className="absolute inset-x-4 bottom-4 bg-white/20 backdrop-blur-3xl rounded-[36px] p-6 border border-white/30 transform translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 shadow-2xl">
                                 <div className="flex justify-between items-start gap-4">
                                     <div className="flex-1 min-w-0">
@@ -385,8 +452,6 @@ export default function GalleryAdminPage() {
                                     </button>
                                 </div>
                             </div>
-
-                            {/* Always visible category badge */}
                             <div className="absolute top-6 left-6 px-4 py-2 bg-black/20 backdrop-blur-md rounded-full border border-white/20 group-hover:opacity-0 transition-opacity">
                                 <span className="text-[9px] font-black text-white uppercase tracking-widest">{item.category}</span>
                             </div>
@@ -395,5 +460,29 @@ export default function GalleryAdminPage() {
                 )}
             </div>
         </div>
+    );
+
+    if (!publicKey || !urlEndpoint) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-zinc-900 animate-in fade-in duration-500">
+                <div className="p-12 bg-zinc-800 rounded-[48px] border-2 border-emerald-500/20 text-center max-w-md shadow-2xl">
+                    <div className="w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                        <svg className="w-10 h-10 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                    </div>
+                    <h2 className="text-white font-black text-3xl tracking-tight mb-4">Storage Keys Missing</h2>
+                    <p className="text-zinc-400 font-medium mb-8">Please configure your ImageKit public key and URL endpoint in `.env.local` to enable uploads.</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <ImageKitProvider
+            publicKey={publicKey}
+            urlEndpoint={urlEndpoint}
+            authenticator={authenticator}
+        >
+            {renderContent()}
+        </ImageKitProvider>
     );
 }

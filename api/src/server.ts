@@ -5,6 +5,7 @@ import connectDB from './config/db';
 import enquiryRoutes from './routes/enquiryRoutes';
 import announcementRoutes from './routes/announcementRoutes';
 import galleryRoutes from './routes/galleryRoutes';
+import imagekitRoutes from './routes/imagekitRoutes';
 
 // Load environment variables
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/gallery', galleryRoutes);
+app.use('/api/imagekit', imagekitRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('School API is running');
