@@ -58,3 +58,41 @@ export const getEnquiries = async (req: Request, res: Response): Promise<void> =
         });
     }
 };
+
+/**
+ * @desc    Update enquiry status
+ * @route   PATCH /api/enquiries/:id
+ * @access  Admin (Public for now)
+ */
+export const updateEnquiryStatus = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { status } = req.body;
+
+        if (!['Pending', 'Read'].includes(status)) {
+            res.status(400).json({ success: false, message: 'Invalid status' });
+            return;
+        }
+
+        const enquiry = await Enquiry.findByIdAndUpdate(
+            req.params.id,
+            { status },
+            { new: true, runValidators: true }
+        );
+
+        if (!enquiry) {
+            res.status(404).json({ success: false, message: 'Enquiry not found' });
+            return;
+        }
+
+        res.status(200).json({
+            success: true,
+            data: enquiry,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server Error',
+            error: (error as Error).message,
+        });
+    }
+};
