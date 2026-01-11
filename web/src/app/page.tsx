@@ -1,38 +1,49 @@
 import Image from "next/image";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-20">
       {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center py-24 px-6 md:py-40 bg-emerald-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          {/* Subtle Geometric Pattern Alternative */}
-          <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
+      <section className="relative min-h-[80vh] flex flex-col items-center justify-center py-24 px-6 md:py-40 text-white overflow-hidden">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero_campus_background_1768115501790.png"
+            alt="School Campus"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-emerald-950/70" />
         </div>
+
         <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            Integrated School for Higher Secondary
-          </h1>
-          <p className="text-xl md:text-2xl text-emerald-100 mb-10 max-w-2xl mx-auto">
-            Academic Excellence with Islamic Values
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="px-8 py-4 bg-white text-emerald-900 font-semibold rounded-lg shadow-lg hover:bg-emerald-50 transition-all text-lg">
-              Admissions Open
-            </button>
-            <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all text-lg">
-              Learn More
-            </button>
-          </div>
+          <ScrollReveal>
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+              Integrated School for Higher Secondary
+            </h1>
+            <p className="text-xl md:text-2xl text-emerald-100 mb-10 max-w-2xl mx-auto">
+              Academic Excellence with Islamic Values
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button className="px-8 py-4 bg-white text-emerald-900 font-semibold rounded-lg shadow-lg hover:bg-emerald-50 transition-all text-lg hover:scale-105 active:scale-95">
+                Admissions Open
+              </button>
+              <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all text-lg hover:scale-105 active:scale-95">
+                Learn More
+              </button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="py-20 px-6 max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-emerald-800 mb-6">About Our Integrated Education</h2>
-            <div className="space-y-4 text-lg text-zinc-600 leading-relaxed">
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <ScrollReveal>
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-8">About Our Integrated Education</h2>
+            <div className="space-y-6 text-lg text-zinc-600 leading-relaxed">
               <p>
                 Our school offers a unique integrated +1 and +2 education system that combines rigorous academic training with deep-rooted Islamic moral values.
               </p>
@@ -40,93 +51,112 @@ export default function Home() {
                 We focus on developing well-rounded individuals who excel in their studies while maintaining a strong spiritual connection and disciplined lifestyle. Our environment is designed to nurture both the intellect and the soul.
               </p>
             </div>
-          </div>
-          <div className="relative h-80 rounded-2xl bg-zinc-100 flex items-center justify-center border-2 border-emerald-100 overflow-hidden shadow-inner">
-            {/* Placeholder for About Image */}
-            <div className="text-emerald-800/20">
-              <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM3.89 9.5l8.11 4.41 8.11-4.41L12 5.09 3.89 9.5zM5 13.18v2.82l7 3.82 7-3.82v-2.82l-7 3.82-7-3.82z" />
-              </svg>
-            </div>
-          </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={200} className="relative h-[450px] rounded-2xl overflow-hidden shadow-2xl border border-emerald-50">
+            <Image
+              src="/images/classroom_learning_1768115518451.png"
+              alt="Classroom Learning"
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-700"
+            />
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Academic Programs Section */}
-      <section className="py-20 px-6 bg-zinc-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-emerald-800 mb-4">Academic Programs</h2>
-            <p className="text-zinc-600 max-w-2xl mx-auto">Tailored streams to help every student achieve their career goals with excellence.</p>
-          </div>
+      <section className="py-24 px-6 bg-zinc-50">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Academic Programs</h2>
+            <p className="text-zinc-600 text-lg max-w-2xl mx-auto">Tailored streams to help every student achieve their career goals with excellence.</p>
+          </ScrollReveal>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { title: "+1 Science", desc: "Intensive training in Physics, Chemistry, and Biology/Maths with a focus on competitive exams." },
               { title: "+2 Commerce", desc: "Expert guidance in Accountancy, Business Studies, and Economics for a strong future in finance." },
               { title: "Integrated Coaching", desc: "Coaching for medical and engineering entrance exams integrated with regular school hours." }
             ].map((program, i) => (
-              <div key={i} className="p-8 bg-white rounded-xl shadow-sm border border-emerald-50 hover:border-emerald-200 transition-colors">
-                <h3 className="text-xl font-bold text-emerald-900 mb-4">{program.title}</h3>
-                <p className="text-zinc-600 leading-relaxed">{program.desc}</p>
-              </div>
+              <ScrollReveal key={i} delay={i * 150}>
+                <div className="h-full p-8 bg-white rounded-xl shadow-sm border border-emerald-50 hover:border-emerald-200 transition-all hover:shadow-md group">
+                  <h3 className="text-xl font-bold text-emerald-900 mb-4 group-hover:text-emerald-700 transition-colors uppercase tracking-wide">{program.title}</h3>
+                  <p className="text-zinc-600 leading-relaxed text-lg">{program.desc}</p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 px-6 max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-emerald-800 mb-4">Why Choose Us</h2>
-          <p className="text-zinc-600">The pillars of our institution that ensure your child's success.</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <ScrollReveal className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Why Choose Us</h2>
+          <p className="text-zinc-600 text-lg">The pillars of our institution that ensure your child's success.</p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {[
-            { title: "Quality Education", icon: "🎓" },
-            { title: "Moral Training", icon: "✨" },
-            { title: "Experienced Faculty", icon: "👨‍🏫" },
-            { title: "Safe Campus", icon: "🛡️" }
+            { title: "Quality Education", icon: "🎓", delay: 0 },
+            { title: "Moral Training", icon: "✨", delay: 100 },
+            { title: "Experienced Faculty", icon: "👨‍🏫", delay: 200 },
+            { title: "Safe Campus", icon: "🛡️", delay: 300 }
           ].map((point, i) => (
-            <div key={i} className="text-center p-6">
-              <div className="text-4xl mb-4">{point.icon}</div>
-              <h3 className="text-lg font-bold text-emerald-900">{point.title}</h3>
-            </div>
+            <ScrollReveal key={i} delay={point.delay} className="text-center p-8 bg-emerald-50/30 rounded-2xl border border-emerald-100/50 hover:bg-white hover:shadow-xl hover:border-emerald-200 transition-all group">
+              <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300 inline-block">{point.icon}</div>
+              <h3 className="text-xl font-bold text-emerald-900">{point.title}</h3>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
       {/* Facilities Preview Section */}
-      <section className="py-20 px-6 bg-emerald-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-emerald-800 mb-4">Our Facilities</h2>
-            <p className="text-zinc-600">Premium infrastructure providing a comfortable learning experience.</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="py-24 px-6 bg-emerald-900/5">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Our Facilities</h2>
+            <p className="text-zinc-600 text-lg">Premium infrastructure providing a comfortable learning experience.</p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { name: "Hostel", icon: "🏠" },
-              { name: "Masjid", icon: "🕌" },
-              { name: "Labs", icon: "🧪" },
-              { name: "Library", icon: "📚" }
+              { name: "Hostel", img: "/images/school_hostel_1768115536813.png" },
+              { name: "Masjid", img: "/images/school_masjid_1768115559090.png" },
+              { name: "Labs", img: "/images/science_lab_1768115578614.png" },
+              { name: "Library", img: "/images/school_library_1768115599802.png" }
             ].map((facility, i) => (
-              <div key={i} className="flex flex-col items-center p-6 bg-white rounded-xl shadow-sm border border-emerald-100">
-                <div className="text-3xl mb-3">{facility.icon}</div>
-                <span className="font-semibold text-emerald-900">{facility.name}</span>
-              </div>
+              <ScrollReveal key={i} delay={i * 100} className="group">
+                <div className="relative h-64 rounded-xl overflow-hidden shadow-lg border border-white">
+                  <Image
+                    src={facility.img}
+                    alt={facility.name}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/90 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                    <span className="text-xl font-bold text-white tracking-widest uppercase">{facility.name}</span>
+                  </div>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 px-6 bg-emerald-900 text-white text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Admissions Now Open</h2>
-          <p className="text-emerald-100 text-lg mb-10">Start your journey towards academic excellence and strong moral values today.</p>
-          <button className="px-10 py-4 bg-white text-emerald-900 font-bold rounded-lg shadow-xl hover:scale-105 transition-transform text-lg">
+      <section className="py-24 px-6 bg-emerald-900 text-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
+        </div>
+        <ScrollReveal className="relative z-10 max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold mb-8">Admissions Now Open</h2>
+          <p className="text-emerald-100 text-xl mb-12 max-w-2xl mx-auto">Start your journey towards academic excellence and strong moral values today.</p>
+          <button className="px-12 py-5 bg-white text-emerald-900 font-bold rounded-lg shadow-2xl hover:bg-emerald-50 hover:scale-105 active:scale-95 transition-all text-xl">
             Enquire Now
           </button>
-        </div>
+        </ScrollReveal>
       </section>
 
     </div>
