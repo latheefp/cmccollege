@@ -151,142 +151,182 @@ export default function GalleryAdminPage() {
         : items.filter(item => item.category === activeFilter);
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header Area */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-                <div>
-                    <h2 className="text-2xl font-bold text-zinc-900">Gallery Management</h2>
-                    <p className="text-zinc-500 mt-1 font-medium italic">Update the school gallery with the latest moments.</p>
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 bg-gradient-to-br from-emerald-900 to-emerald-950 p-10 rounded-[48px] shadow-2xl relative overflow-hidden group">
+                {/* Decorative background element */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000"></div>
+
+                <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-1 bg-emerald-400 rounded-full"></div>
+                        <span className="text-emerald-400 font-black uppercase tracking-[0.3em] text-[10px]">Studio Manager</span>
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Gallery <span className="text-emerald-400">Hub</span></h2>
+                    <p className="text-emerald-100/60 mt-4 font-medium max-w-md leading-relaxed text-lg">Curate the visual legacy of our school with a premium, high-performance aesthetic.</p>
                 </div>
+
                 {!showForm && (
                     <button
                         onClick={() => setShowForm(true)}
-                        className="w-full sm:w-auto px-6 py-4 bg-emerald-800 text-white font-bold rounded-2xl hover:bg-emerald-900 transition-all shadow-xl flex items-center justify-center gap-3 active:scale-95 group"
+                        className="relative z-10 w-full lg:w-auto px-10 py-5 bg-white text-emerald-950 font-black rounded-3xl hover:bg-emerald-50 transition-all shadow-[0_20px_40px_rgba(0,0,0,0.2)] flex items-center justify-center gap-4 active:scale-95 group/btn"
                     >
-                        <svg className="w-6 h-6 transform group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                        Add New Image
+                        <div className="w-8 h-8 bg-emerald-100 rounded-xl flex items-center justify-center group-hover/btn:bg-emerald-200 transition-colors">
+                            <svg className="w-5 h-5 text-emerald-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
+                            </svg>
+                        </div>
+                        <span className="text-lg">Add to Collection</span>
                     </button>
                 )}
             </div>
 
-            {/* Add Image Form */}
+            {/* Add Image Form - Glassmorphism UI */}
             {showForm && (
-                <div className="bg-white p-8 rounded-[32px] shadow-2xl border border-emerald-100 animate-in fade-in zoom-in duration-300">
-                    <div className="flex justify-between items-center mb-6">
-                        <h3 className="text-xl font-bold text-emerald-950 uppercase tracking-tight">Add Gallery Image</h3>
-                        <button onClick={() => setShowForm(false)} className="text-zinc-400 hover:text-zinc-600">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-                        </button>
-                    </div>
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        {/* Drag & Drop Area */}
-                        <div
-                            onDragOver={handleDragOver}
-                            onDragLeave={handleDragLeave}
-                            onDrop={handleDrop}
-                            className={`relative aspect-video rounded-3xl border-2 border-dashed transition-all flex flex-col items-center justify-center overflow-hidden group ${formData.imageUrl
-                                ? 'border-emerald-500 bg-emerald-50'
-                                : isDragging
-                                    ? 'border-emerald-600 bg-emerald-100'
-                                    : 'border-zinc-200 bg-zinc-50 hover:bg-zinc-100'
-                                }`}
-                        >
-                            {formData.imageUrl ? (
-                                <>
-                                    <Image
-                                        src={formData.imageUrl}
-                                        alt="Preview"
-                                        fill
-                                        unoptimized
-                                        className="object-contain p-4"
-                                    />
-                                    <div className="absolute inset-0 bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                                        <button
-                                            type="button"
-                                            onClick={() => processImage("")}
-                                            className="px-6 py-3 bg-white text-red-600 font-bold rounded-xl shadow-lg hover:bg-red-50 transition-colors"
-                                        >
-                                            Change Image
-                                        </button>
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="text-center p-8">
-                                    <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-zinc-100 group-hover:scale-110 transition-transform">
-                                        <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                    </div>
-                                    <p className="text-zinc-900 font-bold text-lg mb-1">Drag and drop an image</p>
-                                    <p className="text-zinc-500 text-sm">from browser or desktop, or paste URL below</p>
-                                </div>
-                            )}
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-emerald-950/40 backdrop-blur-md animate-in fade-in duration-300">
+                    <div className="bg-white/90 backdrop-blur-2xl p-10 rounded-[56px] shadow-[0_40px_100px_rgba(6,95,70,0.2)] border border-white/50 w-full max-w-4xl relative overflow-hidden animate-in zoom-in slide-in-from-bottom-8 duration-500">
+                        {/* Glass Decor */}
+                        <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+                        <div className="flex justify-between items-center mb-10 relative z-10">
+                            <div>
+                                <h3 className="text-3xl font-black text-emerald-950 tracking-tight">New Showcase</h3>
+                                <p className="text-zinc-500 font-medium">Add a new moment to the school's story.</p>
+                            </div>
+                            <button
+                                onClick={() => setShowForm(false)}
+                                className="w-14 h-14 bg-zinc-100 hover:bg-zinc-200 text-zinc-500 rounded-2xl flex items-center justify-center transition-all active:scale-90"
+                            >
+                                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label className="text-sm font-bold text-zinc-600 ml-1">Title</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    required
-                                    value={formData.title}
-                                    onChange={handleInputChange}
-                                    placeholder="e.g. Science Lab Session"
-                                    className="w-full px-5 py-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 focus:border-emerald-500 outline-none transition-all"
-                                />
+                        <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
+                            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+                                {/* Drag & Drop Area - Premium Visuals */}
+                                <div className="lg:col-span-3">
+                                    <div
+                                        onDragOver={handleDragOver}
+                                        onDragLeave={handleDragLeave}
+                                        onDrop={handleDrop}
+                                        className={`relative aspect-[4/3] rounded-[40px] border-4 border-dashed transition-all duration-500 flex flex-col items-center justify-center overflow-hidden group ${formData.imageUrl
+                                            ? 'border-emerald-500 bg-emerald-50/50'
+                                            : isDragging
+                                                ? 'border-emerald-600 bg-emerald-100 scale-[1.02] shadow-2xl'
+                                                : 'border-zinc-200 bg-zinc-50/50 hover:bg-zinc-100/50'
+                                            }`}
+                                    >
+                                        {formData.imageUrl ? (
+                                            <>
+                                                <Image
+                                                    src={formData.imageUrl}
+                                                    alt="Preview"
+                                                    fill
+                                                    unoptimized
+                                                    className="object-cover animate-in fade-in zoom-in duration-500"
+                                                />
+                                                <div className="absolute inset-0 bg-emerald-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => processImage("")}
+                                                        className="px-8 py-4 bg-white text-emerald-950 font-black rounded-2xl shadow-2xl hover:scale-105 active:scale-95 transition-all"
+                                                    >
+                                                        Change Asset
+                                                    </button>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <div className={`text-center p-12 transition-all duration-500 ${isDragging ? 'scale-110' : ''}`}>
+                                                <div className={`w-24 h-24 rounded-[32px] flex items-center justify-center mx-auto mb-6 transition-all duration-500 shadow-2xl ${isDragging ? 'bg-emerald-600 text-white animate-pulse' : 'bg-white text-emerald-600'}`}>
+                                                    <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                </div>
+                                                <p className="text-emerald-950 font-black text-2xl tracking-tight mb-2">Drop Image Here</p>
+                                                <p className="text-zinc-500 font-medium">Browser, Desktop, or URL source</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="lg:col-span-2 space-y-8">
+                                    <div className="space-y-3">
+                                        <label className="text-xs font-black text-emerald-900 uppercase tracking-widest ml-1">Asset Identity</label>
+                                        <input
+                                            type="text"
+                                            name="title"
+                                            required
+                                            value={formData.title}
+                                            onChange={handleInputChange}
+                                            placeholder="What is this moment?"
+                                            className="w-full px-7 py-5 rounded-3xl bg-zinc-100/50 border border-zinc-200 focus:border-emerald-500 focus:bg-white outline-none transition-all text-emerald-950 font-bold placeholder:text-zinc-400"
+                                        />
+                                    </div>
+                                    <div className="space-y-3">
+                                        <label className="text-xs font-black text-emerald-900 uppercase tracking-widest ml-1">Context Category</label>
+                                        <div className="relative">
+                                            <select
+                                                name="category"
+                                                value={formData.category}
+                                                onChange={handleInputChange}
+                                                className="w-full px-7 py-5 rounded-3xl bg-zinc-100/50 border border-zinc-200 focus:border-emerald-500 focus:bg-white outline-none transition-all text-emerald-950 font-bold appearance-none"
+                                            >
+                                                {CATEGORIES.filter(c => c !== 'All').map(cat => (
+                                                    <option key={cat} value={cat}>{cat}</option>
+                                                ))}
+                                            </select>
+                                            <div className="absolute right-7 top-1/2 -translate-y-1/2 pointer-events-none text-emerald-600">
+                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" /></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-3">
+                                        <label className="text-xs font-black text-emerald-900 uppercase tracking-widest ml-1">Digital Source</label>
+                                        <input
+                                            type="url"
+                                            name="imageUrl"
+                                            required
+                                            value={formData.imageUrl}
+                                            onChange={handleInputChange}
+                                            placeholder="https://..."
+                                            className="w-full px-7 py-5 rounded-3xl bg-zinc-100/50 border border-zinc-200 focus:border-emerald-500 focus:bg-white outline-none transition-all text-emerald-950 font-bold placeholder:text-zinc-400"
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-bold text-zinc-600 ml-1">Category</label>
-                                <select
-                                    name="category"
-                                    value={formData.category}
-                                    onChange={handleInputChange}
-                                    className="w-full px-5 py-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 focus:border-emerald-500 outline-none transition-all"
+
+                            <div className="flex gap-6 pt-6">
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting || !formData.imageUrl}
+                                    className="px-12 py-6 bg-emerald-800 text-white font-black rounded-3xl hover:bg-emerald-900 transition-all flex items-center justify-center gap-3 shadow-2xl shadow-emerald-900/40 disabled:opacity-50 disabled:shadow-none active:scale-95 group/save"
                                 >
-                                    {CATEGORIES.filter(c => c !== 'All').map(cat => (
-                                        <option key={cat} value={cat}>{cat}</option>
-                                    ))}
-                                </select>
+                                    {isSubmitting ? "Processing..." : "Publish to Gallery"}
+                                    <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowForm(false)}
+                                    className="px-10 py-6 bg-zinc-100 text-zinc-600 font-bold rounded-3xl hover:bg-zinc-200 transition-all active:scale-95"
+                                >
+                                    Dismiss
+                                </button>
                             </div>
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-sm font-bold text-zinc-600 ml-1">Image URL (Direct Link)</label>
-                            <input
-                                type="url"
-                                name="imageUrl"
-                                required
-                                value={formData.imageUrl}
-                                onChange={handleInputChange}
-                                placeholder="Paste image link here..."
-                                className="w-full px-5 py-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 focus:border-emerald-500 outline-none transition-all"
-                            />
-                        </div>
-                        <div className="flex gap-4 pt-4">
-                            <button
-                                type="submit"
-                                disabled={isSubmitting || !formData.imageUrl}
-                                className="px-10 py-4 bg-emerald-800 text-white font-black rounded-2xl hover:bg-emerald-900 transition-all flex items-center justify-center gap-2 shadow-xl shadow-emerald-900/20 disabled:opacity-50 disabled:shadow-none active:scale-95"
-                            >
-                                {isSubmitting ? "Uploading..." : "Publish to Gallery"}
-                            </button>
-                            <button type="button" onClick={() => setShowForm(false)} className="px-8 py-4 bg-zinc-100 text-zinc-600 font-bold rounded-2xl hover:bg-zinc-200 transition-colors">Cancel</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             )}
 
-            {/* Filter Chips */}
-            <div className="flex flex-wrap gap-2">
+            {/* Content Filters - Pill Style */}
+            <div className="flex flex-wrap items-center gap-4 bg-zinc-100/50 p-3 rounded-[32px] w-fit border border-zinc-100">
+                <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-4 mr-2">Filter View</span>
                 {CATEGORIES.map((cat) => (
                     <button
                         key={cat}
                         onClick={() => setActiveFilter(cat)}
-                        className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeFilter === cat
-                            ? 'bg-emerald-600 text-white shadow-md scale-105'
-                            : 'bg-white text-zinc-400 hover:bg-zinc-100 border border-zinc-100'
+                        className={`px-8 py-3.5 rounded-2xl text-sm font-black transition-all duration-300 ${activeFilter === cat
+                            ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-600/20 scale-105'
+                            : 'text-zinc-500 hover:text-emerald-700 hover:bg-white tracking-tight'
                             }`}
                     >
                         {cat}
@@ -294,48 +334,61 @@ export default function GalleryAdminPage() {
                 ))}
             </div>
 
-            {/* Gallery Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[400px]">
+            {/* Gallery Grid - Modern Benton Look */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
                 {loading ? (
-                    <div className="col-span-full py-32 text-center">
-                        <div className="w-10 h-10 border-4 border-emerald-100 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
-                        <p className="text-zinc-400 font-bold italic tracking-widest text-sm">Loading Gallery...</p>
+                    <div className="col-span-full py-40 text-center">
+                        <div className="w-16 h-16 border-[6px] border-emerald-50 border-t-emerald-600 rounded-full animate-spin mx-auto mb-6"></div>
+                        <p className="text-zinc-400 font-black italic tracking-[0.2em] uppercase text-xs">Loading Digital Archives</p>
                     </div>
                 ) : error ? (
-                    <div className="col-span-full py-32 text-center">
-                        <p className="text-red-500 font-bold">{error}</p>
+                    <div className="col-span-full py-32 text-center bg-red-50 rounded-[48px] border-2 border-red-100">
+                        <p className="text-red-500 font-black text-xl italic">{error}</p>
                     </div>
                 ) : filteredItems.length === 0 ? (
-                    <div className="col-span-full py-32 text-center bg-zinc-50 rounded-[40px] border-2 border-dashed border-zinc-100">
-                        <p className="text-zinc-400 font-bold italic tracking-widest text-lg">No images found.</p>
+                    <div className="col-span-full py-40 text-center bg-zinc-50 rounded-[64px] border-4 border-dashed border-zinc-100 group">
+                        <div className="w-20 h-20 bg-white rounded-[32px] flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                            <svg className="w-10 h-10 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        </div>
+                        <p className="text-zinc-400 font-black italic tracking-[0.3em] uppercase text-sm">No Assets Found</p>
+                        <p className="text-zinc-300 mt-2 font-medium italic">Begin by adding your first showcase.</p>
                     </div>
                 ) : (
-                    filteredItems.map((item) => (
-                        <div key={item._id} className="group relative aspect-square bg-zinc-100 rounded-[32px] overflow-hidden border border-zinc-100 hover:shadow-2xl transition-all duration-500">
+                    filteredItems.map((item, idx) => (
+                        <div
+                            key={item._id}
+                            style={{ animationDelay: `${idx * 100}ms` }}
+                            className="group relative aspect-[4/5] bg-zinc-200 rounded-[48px] overflow-hidden border-8 border-white shadow-lg hover:shadow-[0_30px_70px_rgba(6,95,70,0.25)] transition-all duration-700 animate-in fade-in slide-in-from-bottom-6"
+                        >
                             <Image
                                 src={item.imageUrl}
                                 alt={item.title}
                                 fill
                                 unoptimized
-                                className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                className="object-cover group-hover:scale-110 transition-transform duration-1000"
                             />
 
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6">
-                                <div className="flex justify-end">
+                            {/* Hover Narrative Layer */}
+                            <div className="absolute inset-x-4 bottom-4 bg-white/20 backdrop-blur-3xl rounded-[36px] p-6 border border-white/30 transform translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 shadow-2xl">
+                                <div className="flex justify-between items-start gap-4">
+                                    <div className="flex-1 min-w-0">
+                                        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-emerald-300 mb-1.5 block drop-shadow-sm">{item.category}</span>
+                                        <h4 className="text-white font-black text-xl leading-tight truncate drop-shadow-sm">{item.title}</h4>
+                                    </div>
                                     <button
                                         onClick={() => handleDelete(item._id)}
-                                        className="p-3 bg-white/20 hover:bg-red-500 text-white rounded-2xl backdrop-blur-md transition-all group/del"
+                                        className="w-12 h-12 bg-white/30 hover:bg-red-500 text-white rounded-2xl flex items-center justify-center transition-all group/del active:scale-90"
                                     >
-                                        <svg className="w-5 h-5 transform group-hover/del:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                     </button>
                                 </div>
-                                <div>
-                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-300 mb-1 block">{item.category}</span>
-                                    <h4 className="text-white font-bold text-lg">{item.title}</h4>
-                                </div>
+                            </div>
+
+                            {/* Always visible category badge */}
+                            <div className="absolute top-6 left-6 px-4 py-2 bg-black/20 backdrop-blur-md rounded-full border border-white/20 group-hover:opacity-0 transition-opacity">
+                                <span className="text-[9px] font-black text-white uppercase tracking-widest">{item.category}</span>
                             </div>
                         </div>
                     ))
