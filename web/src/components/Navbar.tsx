@@ -34,12 +34,20 @@ export default function Navbar() {
                         <Link href="/facilities" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
                             Facilities
                         </Link>
+                        <Link href="/gallery" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                            Gallery
+                        </Link>
+                        <Link href="/announcements" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                            Announcements
+                        </Link>
                         <Link href="/contact" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
                             Contact
                         </Link>
-                        <button className="px-6 py-2.5 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-colors shadow-sm">
-                            Admissions
-                        </button>
+                        <Link href="/admissions">
+                            <button className="px-6 py-2.5 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-colors shadow-sm cursor-pointer">
+                                Admissions
+                            </button>
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -106,15 +114,31 @@ export default function Navbar() {
                             Facilities
                         </Link>
                         <Link
+                            href="/gallery"
+                            onClick={() => setIsOpen(false)}
+                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                        >
+                            Gallery
+                        </Link>
+                        <Link
+                            href="/announcements"
+                            onClick={() => setIsOpen(false)}
+                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                        >
+                            Announcements
+                        </Link>
+                        <Link
                             href="/contact"
                             onClick={() => setIsOpen(false)}
                             className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
                         >
                             Contact
                         </Link>
-                        <button className="w-full mt-2 px-6 py-3 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-colors shadow-sm">
-                            Admissions
-                        </button>
+                        <Link href="/admissions" onClick={() => setIsOpen(false)}>
+                            <button className="w-full mt-2 px-6 py-3 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-colors shadow-sm">
+                                Admissions
+                            </button>
+                        </Link>
                     </div>
                 )}
             </div>
