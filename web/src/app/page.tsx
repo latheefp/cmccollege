@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
@@ -27,12 +28,16 @@ export default function Home() {
               Academic Excellence with Islamic Values
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button className="px-8 py-4 bg-white text-emerald-900 font-semibold rounded-lg shadow-lg hover:bg-emerald-50 transition-all text-lg hover:scale-105 active:scale-95">
-                Admissions Open
-              </button>
-              <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all text-lg hover:scale-105 active:scale-95">
-                Learn More
-              </button>
+              <Link href="/admissions">
+                <button className="px-8 py-4 bg-white text-emerald-900 font-semibold rounded-lg shadow-lg hover:bg-emerald-50 transition-all text-lg hover:scale-105 active:scale-95 cursor-pointer">
+                  Admissions Open
+                </button>
+              </Link>
+              <Link href="/about">
+                <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all text-lg hover:scale-105 active:scale-95 cursor-pointer">
+                  Learn More
+                </button>
+              </Link>
             </div>
           </ScrollReveal>
         </div>
@@ -50,6 +55,11 @@ export default function Home() {
               <p>
                 We focus on developing well-rounded individuals who excel in their studies while maintaining a strong spiritual connection and disciplined lifestyle. Our environment is designed to nurture both the intellect and the soul.
               </p>
+              <Link href="/about" className="inline-block pt-4">
+                <button className="px-6 py-3 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                  Discover Our Story
+                </button>
+              </Link>
             </div>
           </ScrollReveal>
 
@@ -102,7 +112,7 @@ export default function Home() {
             { title: "Moral Training", icon: "✨", delay: 100 },
             { title: "Experienced Faculty", icon: "👨‍🏫", delay: 200 },
             { title: "Safe Campus", icon: "🛡️", delay: 300 }
-          ].map((point, i) => (
+          ].map((point, i) => (point &&
             <ScrollReveal key={i} delay={point.delay} className="text-center p-8 bg-emerald-50/30 rounded-2xl border border-emerald-100/50 hover:bg-white hover:shadow-xl hover:border-emerald-200 transition-all group">
               <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300 inline-block">{point.icon}</div>
               <h3 className="text-xl font-bold text-emerald-900">{point.title}</h3>
@@ -126,22 +136,68 @@ export default function Home() {
               { name: "Labs", img: "/images/science_lab_1768115578614.png" },
               { name: "Library", img: "/images/school_library_1768115599802.png" }
             ].map((facility, i) => (
-              <ScrollReveal key={i} delay={i * 100} className="group">
-                <div className="relative h-64 rounded-xl overflow-hidden shadow-lg border border-white">
-                  <Image
-                    src={facility.img}
-                    alt={facility.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/90 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <span className="text-xl font-bold text-white tracking-widest uppercase">{facility.name}</span>
+              <ScrollReveal key={i} delay={i * 100} className="group cursor-pointer">
+                <Link href="/facilities">
+                  <div className="relative h-64 rounded-xl overflow-hidden shadow-lg border border-white">
+                    <Image
+                      src={facility.img}
+                      alt={facility.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/90 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                      <span className="text-xl font-bold text-white tracking-widest uppercase">{facility.name}</span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
+          <div className="mt-16 text-center">
+            <Link href="/facilities">
+              <button className="px-8 py-4 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                Explore All Facilities
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Preview Section */}
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <ScrollReveal className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Gallery Preview</h2>
+          <p className="text-zinc-600 text-lg">Glimpses of our vibrant campus activities and events.</p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            { title: "Sports Day", src: "/images/school_sports_day_1768117809679.png" },
+            { title: "Cultural Performance", src: "/images/cultural_fest_performance_1768117835053.png" },
+            { title: "Science Expo", src: "/images/science_exhibition_project_1768117868795.png" },
+            { title: "Academic Award", src: "/images/school_annual_award_ceremony_stage_1768117893644.png" },
+            { title: "Library", src: "/images/school_library_1768115599802.png" },
+            { title: "Campus", src: "/images/hero_campus_background_1768115501790.png" }
+          ].map((item, i) => (
+            <ScrollReveal key={i} delay={i * 50} className="group relative h-72 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-emerald-50">
+              <Image
+                src={item.src}
+                alt={item.title}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-emerald-950/20 group-hover:bg-transparent transition-colors duration-500" />
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <Link href="/gallery">
+            <button className="px-10 py-4 border-2 border-emerald-800 text-emerald-800 font-bold rounded-xl hover:bg-emerald-800 hover:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer">
+              View Full Gallery
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -153,9 +209,11 @@ export default function Home() {
         <ScrollReveal className="relative z-10 max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold mb-8">Admissions Now Open</h2>
           <p className="text-emerald-100 text-xl mb-12 max-w-2xl mx-auto">Start your journey towards academic excellence and strong moral values today.</p>
-          <button className="px-12 py-5 bg-white text-emerald-900 font-bold rounded-lg shadow-2xl hover:bg-emerald-50 hover:scale-105 active:scale-95 transition-all text-xl">
-            Enquire Now
-          </button>
+          <Link href="/contact">
+            <button className="px-12 py-5 bg-white text-emerald-900 font-bold rounded-lg shadow-2xl hover:bg-emerald-50 hover:scale-105 active:scale-95 transition-all text-xl cursor-pointer">
+              Enquire Now
+            </button>
+          </Link>
         </ScrollReveal>
       </section>
 
