@@ -31,7 +31,17 @@ export default function SiteEditorPage() {
 
     // State for Editor Modal
     const [isModalOpen, setIsModalOpen] = React.useState(false);
-    const [selectedElement, setSelectedElement] = React.useState<{ key: string, page: string, label: string } | null>(null);
+    const [selectedElement, setSelectedElement] = React.useState<{
+        key: string,
+        page: string,
+        label: string,
+        type: 'text' | 'image',
+        initialValue: string
+    } | null>(null);
+
+    // Refs for DOM manipulation and restoring
+    const activeElementRef = React.useRef<HTMLElement | null>(null);
+    const originalValueRef = React.useRef<string>("");
 
     // Use Effect to handle double-click events
     useEffect(() => {
@@ -47,6 +57,33 @@ export default function SiteEditorPage() {
                 const editablePage = target.getAttribute('data-page');
 
                 if (editableKey && editablePage) {
+                    // Store DOM reference
+                    activeElementRef.current = target;
+
+                    // Determine Type and Value
+                    let type: 'text' | 'image' = 'text';
+                    let initialValue = '';
+
+                    if (target.tagName === 'IMG') {
+                        type = 'image';
+                        initialValue = target.getAttribute('src') || '';
+                        // Special handling for Next.js Image component which might wrap the img or modify src
+                        // Usually Next.js Images have src attribute on the img tag.
+                        // However, if we are using srcset, we might need to be careful.
+                        // For Step 4, we assume changing 'src' is enough for visual preview.
+                        // Note: If using Next.js <Image>, updating 'src' directly might work for preview.
+                        // But srcset might override it. Let's see.
+                        if (target.hasAttribute('srcset')) {
+                            // Clear srcset to ensure src takes precedence during preview
+                            target.setAttribute('data-original-srcset', target.getAttribute('srcset') || '');
+                            target.removeAttribute('srcset');
+                        }
+                    } else {
+                        initialValue = target.innerText;
+                    }
+
+                    originalValueRef.current = initialValue;
+
                     // Highlight Effect
                     const originalOutline = target.style.outline;
                     const originalTransition = target.style.transition;
@@ -69,7 +106,9 @@ export default function SiteEditorPage() {
                     setSelectedElement({
                         key: editableKey,
                         page: editablePage,
-                        label: editableKey.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) // Simple Humanize
+                        label: editableKey.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), // Simple Humanize
+                        type,
+                        initialValue
                     });
                     setIsModalOpen(true);
                 }
@@ -83,6 +122,66 @@ export default function SiteEditorPage() {
             document.removeEventListener('dblclick', handleDoubleClick);
         };
     }, []);
+
+    const handleUpdate = (newValue: string) => {
+        if (activeElementRef.current) {
+            if (selectedElement?.type === 'image') {
+                activeElementRef.current.setAttribute('src', newValue);
+            } else {
+                activeElementRef.current.innerText = newValue;
+            }
+        }
+    };
+
+    const handleClose = () => {
+        // Restore original value if cancelled (simplified for now: we assume close = cancel/finish without save)
+        // Step 4 "Cancelling restores original value".
+        // But "Confirming" (or clicking outside?) isn't explicitly separated from Cancel in UI yet.
+        // Let's assume closing the modal WITHOUT a future 'Save' action implies revert?
+        // Wait, Step 4 says "Safely discard changes until publishing".
+        // Actually, usually "Save" in modal means "Keep in memory", "Cancel" means "Revert".
+        // The modal currently has "Cancel" and "Save Changes".
+        // Let's split logic:
+        // Modal needs to distinguish Cancel vs Save.
+        // For now, let's implement: Closing via X/Backdrop/Cancel -> Revert.
+        // If the user clicked "Save" (which is disabled in previous step, but we should enable it for 'local' save),
+        // we wouldn't revert.
+        // Let's leave "Save" button disabled/dummy for now or enable it as "Apply"?
+        // Prompt says "Add 'Cancel' action... Cancelling restores original value".
+        // So we need a distinct onCancel.
+
+        setIsModalOpen(false);
+        // We'll handle the actual revert logic in a specific onCancel handler passed to Modal,
+        // OR we just revert here if we define 'close' as 'cancel'.
+        // Let's assume for this step, if we just close the modal, we revert.
+        // If the user clicked "Save" (which is disabled in previous step, but we should enable it for 'local' save),
+        // we wouldn't revert.
+        // Let's leave "Save" button disabled/dummy for now or enable it as "Apply"?
+        // Prompt says "Add 'Cancel' action... Cancelling restores original value".
+        // So we need a distinct onCancel.
+    };
+
+    const handleCancel = () => {
+        if (activeElementRef.current) {
+            if (selectedElement?.type === 'image') {
+                activeElementRef.current.setAttribute('src', originalValueRef.current);
+                // Restore srcset if it was hidden
+                if (activeElementRef.current.hasAttribute('data-original-srcset')) {
+                    activeElementRef.current.setAttribute('srcset', activeElementRef.current.getAttribute('data-original-srcset') || '');
+                    activeElementRef.current.removeAttribute('data-original-srcset');
+                }
+            } else {
+                activeElementRef.current.innerText = originalValueRef.current;
+            }
+        }
+        setIsModalOpen(false);
+    }
+
+    // We treat "Close" (X, backdrop) as Cancel for safety to avoid accidental persistent edits in view mode
+    // Ideally "Save" should commit to a local store. For Step 4, "Live Preview" is key.
+    // If I close the modal, should the text STAY changed or REVERT?
+    // "Cancelling restores original value". implied that "Saving/Confirming" KEEPS it.
+    // I'll update EditorModal to call onCancel.
 
     if (!PageComponent) {
         return (
@@ -154,8 +253,10 @@ export default function SiteEditorPage() {
             {/* Editor Modal */}
             <EditorModal
                 isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                onClose={handleCancel}
+                onUpdate={handleUpdate}
                 selectedElement={selectedElement}
+                onSave={() => setIsModalOpen(false)}
             />
         </div>
     );
