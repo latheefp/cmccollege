@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import EditorModal from "../_components/EditorModal";
 
 // Import Page Components
 import HomePage from "@/app/page";
@@ -27,6 +28,61 @@ export default function SiteEditorPage() {
     const pageKey = pageSlug?.toLowerCase();
 
     const PageComponent = PAGES[pageKey];
+
+    // State for Editor Modal
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+    const [selectedElement, setSelectedElement] = React.useState<{ key: string, page: string, label: string } | null>(null);
+
+    // Use Effect to handle double-click events
+    useEffect(() => {
+        const handleDoubleClick = (e: MouseEvent) => {
+            // Find the closest editable element
+            const target = (e.target as HTMLElement).closest('[data-editable]');
+
+            if (target && target instanceof HTMLElement) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const editableKey = target.getAttribute('data-editable');
+                const editablePage = target.getAttribute('data-page');
+
+                if (editableKey && editablePage) {
+                    // Highlight Effect
+                    const originalOutline = target.style.outline;
+                    const originalTransition = target.style.transition;
+
+                    target.style.transition = 'all 0.2s ease-in-out';
+                    target.style.outline = '4px solid #10b981'; // Emerald-500
+                    target.style.borderRadius = '4px';
+                    target.style.boxShadow = '0 0 0 4px rgba(16, 185, 129, 0.2)';
+                    target.style.cursor = 'pointer';
+
+                    // Remove highlight after a short delay
+                    setTimeout(() => {
+                        target.style.outline = originalOutline;
+                        target.style.transition = originalTransition;
+                        target.style.boxShadow = '';
+                        target.style.borderRadius = '';
+                    }, 800);
+
+                    // Open Modal
+                    setSelectedElement({
+                        key: editableKey,
+                        page: editablePage,
+                        label: editableKey.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) // Simple Humanize
+                    });
+                    setIsModalOpen(true);
+                }
+            }
+        };
+
+        // Attach event listener to the document
+        document.addEventListener('dblclick', handleDoubleClick);
+
+        return () => {
+            document.removeEventListener('dblclick', handleDoubleClick);
+        };
+    }, []);
 
     if (!PageComponent) {
         return (
@@ -56,16 +112,19 @@ export default function SiteEditorPage() {
                     <span className="text-emerald-100 font-medium capitalize">{pageKey} Page</span>
                 </div>
                 <div className="flex items-center gap-4 text-xs font-medium text-emerald-200/80">
-                    <span>Read Only View</span>
+                    <span className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        Double-click elements to edit
+                    </span>
                 </div>
             </div>
 
             {/* Page Preview Viewport */}
             <div className="flex-grow relative border-x-4 border-b-4 border-emerald-900/10 rounded-b-xl overflow-hidden bg-white shadow-xl isolate">
-                {/* 
-            Container for the page. 
+                {/*
+            Container for the page.
             We use 'isolate' to create a new stacking context so page fixed elements don't escape easily (though fixed refers to viewport).
-            Since typical pages use 'fixed' for standard navbar, it might look messy. 
+            Since typical pages use 'fixed' for standard navbar, it might look messy.
             Ideally we would render this in an iframe, but Step 2 asks to "load page component".
             We'll render it directly.
         */}
@@ -73,13 +132,13 @@ export default function SiteEditorPage() {
                     <PageComponent />
                 </div>
 
-                {/* Overlay to prevent interaction (links etc) for now? 
+                {/* Overlay to prevent interaction (links etc) for now?
             Prompt says "No event listeners yet", "No edit logic yet".
-            It does NOT say "Disable interactions". 
-            But "No backend interaction". 
-            If I click a Link in the page, it will navigate AWAY from admin. 
-            Maybe I should prevent navigation? 
-            Step 3 adds interactions. 
+            It does NOT say "Disable interactions".
+            But "No backend interaction".
+            If I click a Link in the page, it will navigate AWAY from admin.
+            Maybe I should prevent navigation?
+            Step 3 adds interactions.
             For now, I'll leave it interactive (links work) or just let it be.
             The prompt says "View and navigate the real website pages inside an editor context".
             Actually, "navigate" implies I should be able to click links?
@@ -91,6 +150,13 @@ export default function SiteEditorPage() {
             Step 2 goal: "Admin sees the real website inside admin panel".
         */}
             </div>
+
+            {/* Editor Modal */}
+            <EditorModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                selectedElement={selectedElement}
+            />
         </div>
     );
 }
