@@ -201,7 +201,12 @@ export default function SiteEditorPage() {
 
         setIsPublishing(true);
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/pages/${pageKey}/publish-inline`, {
+            // Hardcode base URL for now to guarantee correctness
+            const baseUrl = 'http://localhost:5000/api';
+            const apiUrl = `${baseUrl}/pages/${pageKey}/publish-inline`;
+
+
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -209,7 +214,10 @@ export default function SiteEditorPage() {
                 body: JSON.stringify({ changes }),
             });
 
-            if (!response.ok) throw new Error('Failed to publish');
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Failed to publish: ${response.status} ${response.statusText} - ${errorText}`);
+            }
 
             // Success
             alert('Changes published successfully! The live site is now updated.');
