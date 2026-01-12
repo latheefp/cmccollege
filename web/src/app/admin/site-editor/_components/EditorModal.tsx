@@ -17,7 +17,7 @@ interface EditorModalProps {
     onUpdate: (value: string) => void;
 }
 
-export default function EditorModal({ isOpen, onClose, selectedElement, onUpdate }: EditorModalProps) {
+export default function EditorModal({ isOpen, onClose, selectedElement, onUpdate, onSave }: EditorModalProps) {
     const [value, setValue] = React.useState("");
 
     useEffect(() => {
@@ -125,8 +125,8 @@ export default function EditorModal({ isOpen, onClose, selectedElement, onUpdate
                         Cancel
                     </button>
                     <button
-                        disabled
-                        className="px-6 py-2 bg-emerald-800/50 text-white font-bold rounded-lg cursor-not-allowed opacity-70"
+                        onClick={() => onSave?.(value)}
+                        className="px-6 py-2 bg-emerald-800 text-white font-bold rounded-lg hover:bg-emerald-900 transition-colors"
                     >
                         Save Changes
                     </button>

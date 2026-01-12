@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
+import { usePageContent } from "@/hooks/usePageContent";
+
 
 interface GalleryImage {
   _id: string;
@@ -104,9 +106,15 @@ const GalleryCard = ({ item, index, featured }: { item: any, index: number, feat
   );
 };
 
+
+
+
 export default function Home() {
   const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch dynamic page content
+  const { content, getImage, getText } = usePageContent("home");
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -147,7 +155,7 @@ export default function Home() {
         {/* Hero Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero_campus_background_1768115501790.png"
+            src={getImage("hero-bg", "/images/hero_campus_background_1768115501790.png")}
             alt="School Campus"
             fill
             className="object-cover"
@@ -161,10 +169,10 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           <ScrollReveal>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6" data-editable="hero-title" data-page="home">
-              Integrated School for Higher Secondary
+              {getText("hero-title", "Integrated School for Higher Secondary")}
             </h1>
             <p className="text-xl md:text-2xl text-emerald-100 mb-10 max-w-2xl mx-auto" data-editable="hero-subtitle" data-page="home">
-              Academic Excellence with Islamic Values
+              {getText("hero-subtitle", "Academic Excellence with Islamic Values")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/admissions">

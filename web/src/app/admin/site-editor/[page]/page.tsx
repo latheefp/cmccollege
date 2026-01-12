@@ -39,6 +39,10 @@ export default function SiteEditorPage() {
         initialValue: string
     } | null>(null);
 
+    // Change Store
+    const [changes, setChanges] = React.useState<Record<string, string>>({});
+    const [isPublishing, setIsPublishing] = React.useState(false);
+
     // Refs for DOM manipulation and restoring
     const activeElementRef = React.useRef<HTMLElement | null>(null);
     const originalValueRef = React.useRef<string>("");
@@ -82,6 +86,11 @@ export default function SiteEditorPage() {
                         initialValue = target.innerText;
                     }
 
+                    // Check if we have a pending change for this key
+                    if (changes[editableKey]) {
+                        initialValue = changes[editableKey];
+                    }
+
                     originalValueRef.current = initialValue;
 
                     // Highlight Effect
@@ -121,7 +130,7 @@ export default function SiteEditorPage() {
         return () => {
             document.removeEventListener('dblclick', handleDoubleClick);
         };
-    }, []);
+    }, [changes]); // Depend on changes to ensure latest values are used
 
     const handleUpdate = (newValue: string) => {
         if (activeElementRef.current) {
@@ -149,19 +158,11 @@ export default function SiteEditorPage() {
         // Let's leave "Save" button disabled/dummy for now or enable it as "Apply"?
         // Prompt says "Add 'Cancel' action... Cancelling restores original value".
         // So we need a distinct onCancel.
-
-        setIsModalOpen(false);
-        // We'll handle the actual revert logic in a specific onCancel handler passed to Modal,
-        // OR we just revert here if we define 'close' as 'cancel'.
-        // Let's assume for this step, if we just close the modal, we revert.
-        // If the user clicked "Save" (which is disabled in previous step, but we should enable it for 'local' save),
-        // we wouldn't revert.
-        // Let's leave "Save" button disabled/dummy for now or enable it as "Apply"?
-        // Prompt says "Add 'Cancel' action... Cancelling restores original value".
-        // So we need a distinct onCancel.
     };
 
     const handleCancel = () => {
+        // Revert to original value (which might be a previous change or initial content)
+        // Since 'originalValueRef' captures the state when modal opened, this is correct.
         if (activeElementRef.current) {
             if (selectedElement?.type === 'image') {
                 activeElementRef.current.setAttribute('src', originalValueRef.current);
@@ -175,7 +176,53 @@ export default function SiteEditorPage() {
             }
         }
         setIsModalOpen(false);
-    }
+    };
+
+    const handleSave = () => {
+        if (selectedElement && activeElementRef.current) {
+            let newValue = "";
+            if (selectedElement.type === 'image') {
+                newValue = activeElementRef.current.getAttribute('src') || "";
+            } else {
+                newValue = activeElementRef.current.innerText;
+            }
+
+            // Commit to Change Store
+            setChanges(prev => ({
+                ...prev,
+                [selectedElement.key]: newValue
+            }));
+        }
+        setIsModalOpen(false);
+    };
+
+    const handlePublish = async () => {
+        if (Object.keys(changes).length === 0) return;
+
+        setIsPublishing(true);
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/pages/${pageKey}/publish-inline`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ changes }),
+            });
+
+            if (!response.ok) throw new Error('Failed to publish');
+
+            // Success
+            alert('Changes published successfully! The live site is now updated.');
+            setChanges({}); // Clear changes
+            // Ideally reload the iframe/page to reflect "clean" state, but logic holds.
+
+        } catch (error) {
+            console.error(error);
+            alert('Failed to publish changes. Please try again.');
+        } finally {
+            setIsPublishing(false);
+        }
+    };
 
     // We treat "Close" (X, backdrop) as Cancel for safety to avoid accidental persistent edits in view mode
     // Ideally "Save" should commit to a local store. For Step 4, "Live Preview" is key.
@@ -215,6 +262,24 @@ export default function SiteEditorPage() {
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                         Double-click elements to edit
                     </span>
+                    {/* Publish Action */}
+                    <div className="flex items-center gap-3">
+                        {Object.keys(changes).length > 0 && (
+                            <span className="text-emerald-300 animate-pulse">
+                                {Object.keys(changes).length} Unsaved Change{Object.keys(changes).length !== 1 ? 's' : ''}
+                            </span>
+                        )}
+                        <button
+                            onClick={handlePublish}
+                            disabled={Object.keys(changes).length === 0 || isPublishing}
+                            className={`px-4 py-2 rounded-lg font-bold transition-all ${Object.keys(changes).length > 0
+                                ? 'bg-emerald-500 text-white hover:bg-emerald-400 shadow-lg hover:scale-105'
+                                : 'bg-emerald-800/50 text-emerald-600 cursor-not-allowed'
+                                }`}
+                        >
+                            {isPublishing ? 'Publishing...' : 'Publish Changes'}
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -256,7 +321,7 @@ export default function SiteEditorPage() {
                 onClose={handleCancel}
                 onUpdate={handleUpdate}
                 selectedElement={selectedElement}
-                onSave={() => setIsModalOpen(false)}
+                onSave={handleSave}
             />
         </div>
     );
