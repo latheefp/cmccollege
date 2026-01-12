@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 
 interface GalleryImage {
@@ -19,6 +20,81 @@ const placeholderImages = [
   { title: "School Library", src: "/images/school_library_1768115599802.png", tag: "Campus" },
   { title: "Annual Awards", src: "/images/school_annual_award_ceremony_stage_1768117893644.png", tag: "Events" }
 ];
+
+const GalleryCard = ({ item, index, featured }: { item: any, index: number, featured?: boolean }) => {
+  const [isCaptionVisible, setIsCaptionVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Auto-play micro-carousel for small cards only
+  useEffect(() => {
+    if (featured || isHovered) {
+      if (featured) setIsCaptionVisible(false); // Large card remains hover-based
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setIsCaptionVisible((prev) => !prev);
+    }, 4000); // Cycle every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [featured, isHovered]);
+
+  const displayTag = item.tag === 'Classroom' ? 'Practical Session' : item.tag;
+
+  return (
+    <ScrollReveal
+      delay={index * 100}
+      className={`group relative overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 h-full border border-emerald-50/20
+        ${item.featured ? 'md:col-span-2 md:row-span-2 min-h-[400px] rounded-[40px]' : 'min-h-[250px] md:min-h-0 rounded-[30px]'}
+        ${item.variant ? 'rounded-tr-[80px]' : ''}
+        ${index === 1 ? 'rounded-bl-[80px]' : ''}
+      `}
+    >
+      <div
+        className="relative w-full h-full cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <motion.div
+          className="relative w-full h-full"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          {item.src && (
+            <Image
+              src={item.src}
+              alt={item.title}
+              fill
+              className="object-cover"
+            />
+          )}
+
+          <AnimatePresence>
+            {(isCaptionVisible || isHovered) && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 bg-gradient-to-t from-emerald-950/95 via-emerald-950/25 to-transparent flex flex-col justify-end p-8 md:p-12"
+              >
+                <span className="text-emerald-300/80 text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] mb-2">
+                  {displayTag}
+                </span>
+                <h3 className="text-white text-lg md:text-2xl font-bold leading-tight line-clamp-3">
+                  {item.title}
+                </h3>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Subtle border glint on hover */}
+        <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-colors duration-700 pointer-events-none rounded-inherit" />
+      </div>
+    </ScrollReveal>
+  );
+};
 
 export default function Home() {
   const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
@@ -238,44 +314,9 @@ export default function Home() {
               />
             ))
           ) : (
-            imagesToRender.map((item, i) => {
-              // Semantic Label Correction
-              const displayTag = item.tag === 'Classroom' ? 'Practical Session' : item.tag;
-
-              return (
-                <ScrollReveal
-                  key={i}
-                  delay={i * 100}
-                  className={`group relative overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 h-full border border-emerald-50/20 hover:scale-[1.02]
-                    ${item.featured ? 'md:col-span-2 md:row-span-2 min-h-[400px] rounded-[40px]' : 'min-h-[250px] md:min-h-0 rounded-[30px]'}
-                    ${item.variant ? 'rounded-tr-[80px]' : ''}
-                    ${i === 1 ? 'rounded-bl-[80px]' : ''}
-                  `}
-                >
-                  {item.src && (
-                    <Image
-                      src={item.src}
-                      alt={item.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-in-out"
-                    />
-                  )}
-
-                  {/* Editorial-Style Overlay: Strictly Bottom-Anchored */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/95 via-emerald-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8 md:p-12">
-                    <span className="text-emerald-300/80 text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      {displayTag}
-                    </span>
-                    <h3 className="text-white text-lg md:text-2xl font-bold leading-tight line-clamp-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  {/* Subtle border glint on hover */}
-                  <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-colors duration-700 pointer-events-none rounded-inherit" />
-                </ScrollReveal>
-              );
-            })
+            imagesToRender.map((item, i) => (
+              <GalleryCard key={i} item={item} index={i} featured={item.featured} />
+            ))
           )}
         </div>
 
@@ -294,7 +335,6 @@ export default function Home() {
           <p className="mt-6 text-zinc-400 text-sm font-medium tracking-wide">Detailed view of academic, sports, and cultural milestones</p>
         </div>
       </section>
-
 
       {/* Call to Action Section */}
       <section className="py-24 px-6 bg-emerald-900 text-white text-center relative overflow-hidden">
@@ -315,4 +355,3 @@ export default function Home() {
     </div>
   );
 }
-
