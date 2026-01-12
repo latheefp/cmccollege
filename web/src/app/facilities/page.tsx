@@ -12,10 +12,10 @@ export default function FacilitiesPage() {
                 </div>
                 <div className="relative z-10 max-w-5xl mx-auto text-center">
                     <ScrollReveal>
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6" data-editable="header-title" data-page="facilities">
                             Our Facilities
                         </h1>
-                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto">
+                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto" data-editable="header-subtitle" data-page="facilities">
                             Modern infrastructure designed to foster academic excellence and moral growth.
                         </p>
                     </ScrollReveal>
@@ -25,8 +25,8 @@ export default function FacilitiesPage() {
             {/* Academic Facilities */}
             <section className="py-24 px-6 max-w-7xl mx-auto">
                 <ScrollReveal className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Academic Infrastructure</h2>
-                    <p className="text-zinc-600 text-lg">State-of-the-art learning environments for students.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="academic-heading" data-page="facilities">Academic Infrastructure</h2>
+                    <p className="text-zinc-600 text-lg" data-editable="academic-desc" data-page="facilities">State-of-the-art learning environments for students.</p>
                 </ScrollReveal>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -68,8 +68,8 @@ export default function FacilitiesPage() {
             <section className="py-24 px-6 bg-emerald-900/5">
                 <div className="max-w-7xl mx-auto">
                     <ScrollReveal className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Residential & Support</h2>
-                        <p className="text-zinc-600 text-lg">A home away from home with essential support systems.</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="residential-heading" data-page="facilities">Residential & Support</h2>
+                        <p className="text-zinc-600 text-lg" data-editable="residential-desc" data-page="facilities">A home away from home with essential support systems.</p>
                     </ScrollReveal>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -119,8 +119,8 @@ export default function FacilitiesPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                     <div className="lg:col-span-7">
                         <ScrollReveal>
-                            <h2 className="text-3xl md:text-5xl font-bold text-emerald-900 mb-8">Safety & Discipline</h2>
-                            <p className="text-xl text-zinc-600 mb-10 leading-relaxed">
+                            <h2 className="text-3xl md:text-5xl font-bold text-emerald-900 mb-8" data-editable="safety-heading" data-page="facilities">Safety & Discipline</h2>
+                            <p className="text-xl text-zinc-600 mb-10 leading-relaxed" data-editable="safety-desc" data-page="facilities">
                                 We prioritize a safe and orderly environment. Our campus is monitored around the clock to ensure student security and maintain the high standards of discipline our institution is known for.
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -145,6 +145,8 @@ export default function FacilitiesPage() {
                                 alt="Security and Safety"
                                 fill
                                 className="object-cover"
+                                data-editable="safety-image"
+                                data-page="facilities"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/40 to-transparent" />
                         </ScrollReveal>
@@ -155,8 +157,8 @@ export default function FacilitiesPage() {
             {/* Final Call to Action */}
             <section className="py-20 px-6 bg-emerald-900 text-white text-center">
                 <ScrollReveal className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Experience our Infrastructure</h2>
-                    <p className="text-emerald-100 text-lg mb-10">Visit our campus to see our facilities firsthand and start your journey today.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-6" data-editable="cta-heading" data-page="facilities">Experience our Infrastructure</h2>
+                    <p className="text-emerald-100 text-lg mb-10" data-editable="cta-desc" data-page="facilities">Visit our campus to see our facilities firsthand and start your journey today.</p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
                         <Link
                             href="/admissions"

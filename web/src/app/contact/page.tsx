@@ -58,10 +58,10 @@ export default function ContactPage() {
                 </div>
                 <div className="relative z-10 max-w-5xl mx-auto text-center">
                     <ScrollReveal>
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6" data-editable="header-title" data-page="contact">
                             Contact & Enquiry
                         </h1>
-                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto">
+                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto" data-editable="header-subtitle" data-page="contact">
                             We're here to help you. Reach out for any questions regarding admissions or our integrated programs.
                         </p>
                     </ScrollReveal>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                     {/* Left Side: Contact Details */}
                     <div className="lg:col-span-5">
                         <ScrollReveal>
-                            <h2 className="text-3xl font-bold text-emerald-800 mb-8 border-b-2 border-emerald-100 pb-4">Get in Touch</h2>
+                            <h2 className="text-3xl font-bold text-emerald-800 mb-8 border-b-2 border-emerald-100 pb-4" data-editable="get-in-touch-heading" data-page="contact">Get in Touch</h2>
                             <div className="space-y-8">
                                 {[
                                     { title: "Our Location", detail: "123 Educational Street, Knowledge City, State, Country", icon: "📍" },
@@ -96,8 +96,8 @@ export default function ContactPage() {
                             </div>
 
                             <div className="mt-12 p-8 bg-emerald-50 rounded-3xl border border-emerald-100">
-                                <h4 className="font-bold text-emerald-900 mb-4">Admissions Liaison</h4>
-                                <p className="text-zinc-600 italic">"Our dedicated admissions team is available for campus visits and one-on-one counseling. Feel free to call us for an appointment."</p>
+                                <h4 className="font-bold text-emerald-900 mb-4" data-editable="admissions-box-title" data-page="contact">Admissions Liaison</h4>
+                                <p className="text-zinc-600 italic" data-editable="admissions-box-text" data-page="contact">"Our dedicated admissions team is available for campus visits and one-on-one counseling. Feel free to call us for an appointment."</p>
                             </div>
                         </ScrollReveal>
                     </div>
@@ -105,7 +105,7 @@ export default function ContactPage() {
                     {/* Right Side: Enquiry Form */}
                     <div className="lg:col-span-7">
                         <ScrollReveal delay={200} className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-emerald-50">
-                            <h3 className="text-2xl font-bold text-emerald-900 mb-8">Send an Enquiry</h3>
+                            <h3 className="text-2xl font-bold text-emerald-900 mb-8" data-editable="form-heading" data-page="contact">Send an Enquiry</h3>
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
@@ -193,8 +193,8 @@ export default function ContactPage() {
             <section className="py-24 px-6 bg-zinc-50">
                 <div className="max-w-7xl mx-auto">
                     <ScrollReveal className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-emerald-800 mb-4">Visit Our Campus</h2>
-                        <p className="text-zinc-600 text-lg">Use the map below to find the best route to our school.</p>
+                        <h2 className="text-3xl font-bold text-emerald-800 mb-4" data-editable="visit-us-heading" data-page="contact">Visit Our Campus</h2>
+                        <p className="text-zinc-600 text-lg" data-editable="visit-us-text" data-page="contact">Use the map below to find the best route to our school.</p>
                     </ScrollReveal>
 
                     <ScrollReveal delay={200} className="rounded-3xl overflow-hidden shadow-2xl border-8 border-white h-[450px] relative">
@@ -223,8 +223,8 @@ export default function ContactPage() {
             {/* FAQ/CTA Section */}
             <section className="py-20 px-6 bg-emerald-900 text-white text-center">
                 <ScrollReveal className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Still have questions?</h2>
-                    <p className="text-emerald-100 text-lg mb-10">Check our FAQ or call us directly for immediate assistance regarding your admission.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-6" data-editable="faq-heading" data-page="contact">Still have questions?</h2>
+                    <p className="text-emerald-100 text-lg mb-10" data-editable="faq-text" data-page="contact">Check our FAQ or call us directly for immediate assistance regarding your admission.</p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
                         <button className="px-10 py-5 bg-white text-emerald-900 font-bold rounded-xl shadow-xl hover:scale-105 transition-transform text-lg">
                             View FAQ

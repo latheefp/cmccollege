@@ -11,10 +11,10 @@ export default function AdmissionsPage() {
                 </div>
                 <div className="relative z-10 max-w-5xl mx-auto text-center">
                     <ScrollReveal>
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6" data-editable="header-title" data-page="admissions">
                             Admissions
                         </h1>
-                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto">
+                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto" data-editable="header-subtitle" data-page="admissions">
                             Integrated +1 / +2 Programme: A Journey of Academic and Spiritual Growth.
                         </p>
                     </ScrollReveal>
@@ -25,12 +25,12 @@ export default function AdmissionsPage() {
             <section className="py-24 px-6 max-w-5xl mx-auto">
                 <ScrollReveal>
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-emerald-800 mb-8">Admission Philosophy</h2>
+                        <h2 className="text-3xl font-bold text-emerald-800 mb-8" data-editable="philosophy-heading" data-page="admissions">Admission Philosophy</h2>
                         <div className="space-y-6 text-lg text-zinc-600 leading-relaxed text-left">
-                            <p>
+                            <p data-editable="philosophy-text-1" data-page="admissions">
                                 At our institution, admissions are more than just a process; they are the start of a partnership. We look for students who are eager to excel academically while embracing the moral and spiritual values that define our community.
                             </p>
-                            <p>
+                            <p data-editable="philosophy-text-2" data-page="admissions">
                                 Our integrated programme is designed to provide a seamless transition into higher secondary education, ensuring that students are well-prepared for both competitive entrance exams and the challenges of life, all within a disciplined and nurturing environment.
                             </p>
                         </div>
@@ -42,8 +42,8 @@ export default function AdmissionsPage() {
             <section className="py-24 px-6 bg-zinc-50">
                 <div className="max-w-7xl mx-auto">
                     <ScrollReveal className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Eligibility Criteria</h2>
-                        <p className="text-zinc-600 text-lg">Requirements for joining our integrated programmes.</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="eligibility-heading" data-page="admissions">Eligibility Criteria</h2>
+                        <p className="text-zinc-600 text-lg" data-editable="eligibility-desc" data-page="admissions">Requirements for joining our integrated programmes.</p>
                     </ScrollReveal>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -99,8 +99,8 @@ export default function AdmissionsPage() {
             {/* Admission Process */}
             <section className="py-24 px-6 max-w-7xl mx-auto">
                 <ScrollReveal className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Admission Process</h2>
-                    <p className="text-zinc-600 text-lg">Your step-by-step guide to joining our school.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="process-heading" data-page="admissions">Admission Process</h2>
+                    <p className="text-zinc-600 text-lg" data-editable="process-desc" data-page="admissions">Your step-by-step guide to joining our school.</p>
                 </ScrollReveal>
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -132,6 +132,8 @@ export default function AdmissionsPage() {
                                 alt="Counseling"
                                 fill
                                 className="object-cover"
+                                data-editable="counseling-image"
+                                data-page="admissions"
                             />
                         </ScrollReveal>
                         <ScrollReveal delay={200} className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl border-4 border-white">
@@ -140,6 +142,8 @@ export default function AdmissionsPage() {
                                 alt="Document Verification"
                                 fill
                                 className="object-cover"
+                                data-editable="verification-image"
+                                data-page="admissions"
                             />
                         </ScrollReveal>
                     </div>
@@ -155,7 +159,7 @@ export default function AdmissionsPage() {
                                 <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
                             </svg>
                         </div>
-                        <h2 className="text-3xl font-bold mb-10 text-center">Required Documents</h2>
+                        <h2 className="text-3xl font-bold mb-10 text-center" data-editable="docs-heading" data-page="admissions">Required Documents</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             {[
                                 "Transfer Certificate (Original)",
@@ -180,8 +184,8 @@ export default function AdmissionsPage() {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <ScrollReveal>
-                            <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-8">Ready to Start Your Journey?</h2>
-                            <p className="text-xl text-zinc-600 mb-10 leading-relaxed">
+                            <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-8" data-editable="final-cta-heading" data-page="admissions">Ready to Start Your Journey?</h2>
+                            <p className="text-xl text-zinc-600 mb-10 leading-relaxed" data-editable="final-cta-desc" data-page="admissions">
                                 Admissions are currently open for the current academic session. Join a community where your academic potential and character are nurtured together.
                             </p>
                             <button className="px-12 py-5 bg-emerald-800 text-white font-bold rounded-xl shadow-xl hover:bg-emerald-900 hover:scale-105 active:scale-95 transition-all text-xl">
@@ -194,12 +198,14 @@ export default function AdmissionsPage() {
                                 alt="Admissions Open"
                                 fill
                                 className="object-cover"
+                                data-editable="final-cta-image"
+                                data-page="admissions"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/60 to-transparent" />
                             <div className="absolute bottom-10 left-10 right-10">
                                 <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-emerald-100 shadow-xl">
-                                    <p className="text-emerald-900 font-bold text-xl mb-2 italic">"A New Beginning Awaits!"</p>
-                                    <p className="text-zinc-600">Limited seats available for the upcoming session.</p>
+                                    <p className="text-emerald-900 font-bold text-xl mb-2 italic" data-editable="final-cta-card-title" data-page="admissions">"A New Beginning Awaits!"</p>
+                                    <p className="text-zinc-600" data-editable="final-cta-card-desc" data-page="admissions">Limited seats available for the upcoming session.</p>
                                 </div>
                             </div>
                         </ScrollReveal>

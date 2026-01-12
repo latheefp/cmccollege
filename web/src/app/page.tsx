@@ -152,16 +152,18 @@ export default function Home() {
             fill
             className="object-cover"
             priority
+            data-editable="hero-bg"
+            data-page="home"
           />
           <div className="absolute inset-0 bg-emerald-950/70" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           <ScrollReveal>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6" data-editable="hero-title" data-page="home">
               Integrated School for Higher Secondary
             </h1>
-            <p className="text-xl md:text-2xl text-emerald-100 mb-10 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-emerald-100 mb-10 max-w-2xl mx-auto" data-editable="hero-subtitle" data-page="home">
               Academic Excellence with Islamic Values
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -184,12 +186,12 @@ export default function Home() {
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <ScrollReveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-8">About Our Integrated Education</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-8" data-editable="about-heading" data-page="home">About Our Integrated Education</h2>
             <div className="space-y-6 text-lg text-zinc-600 leading-relaxed">
-              <p>
+              <p data-editable="about-text-1" data-page="home">
                 Our school offers a unique integrated +1 and +2 education system that combines rigorous academic training with deep-rooted Islamic moral values.
               </p>
-              <p>
+              <p data-editable="about-text-2" data-page="home">
                 We focus on developing well-rounded individuals who excel in their studies while maintaining a strong spiritual connection and disciplined lifestyle. Our environment is designed to nurture both the intellect and the soul.
               </p>
               <Link href="/about" className="inline-block pt-4">
@@ -206,6 +208,8 @@ export default function Home() {
               alt="Classroom Learning"
               fill
               className="object-cover hover:scale-105 transition-transform duration-700"
+              data-editable="about-image"
+              data-page="home"
             />
           </ScrollReveal>
         </div>
@@ -215,8 +219,8 @@ export default function Home() {
       <section className="py-24 px-6 bg-zinc-50">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Academic Programs</h2>
-            <p className="text-zinc-600 text-lg max-w-2xl mx-auto">Tailored streams to help every student achieve their career goals with excellence.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="academic-heading" data-page="home">Academic Programs</h2>
+            <p className="text-zinc-600 text-lg max-w-2xl mx-auto" data-editable="academic-description" data-page="home">Tailored streams to help every student achieve their career goals with excellence.</p>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -239,8 +243,8 @@ export default function Home() {
       {/* Why Choose Us Section */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <ScrollReveal className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Why Choose Us</h2>
-          <p className="text-zinc-600 text-lg">The pillars of our institution that ensure your child's success.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="why-choose-heading" data-page="home">Why Choose Us</h2>
+          <p className="text-zinc-600 text-lg" data-editable="why-choose-description" data-page="home">The pillars of our institution that ensure your child's success.</p>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -262,8 +266,8 @@ export default function Home() {
       <section className="py-24 px-6 bg-emerald-900/5">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Our Facilities</h2>
-            <p className="text-zinc-600 text-lg">Premium infrastructure providing a comfortable learning experience.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="facilities-heading" data-page="home">Our Facilities</h2>
+            <p className="text-zinc-600 text-lg" data-editable="facilities-description" data-page="home">Premium infrastructure providing a comfortable learning experience.</p>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -304,8 +308,8 @@ export default function Home() {
       {/* Gallery Preview Section */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <ScrollReveal className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-emerald-800 mb-4 tracking-tight">Gallery Preview</h2>
-          <p className="text-zinc-600 text-lg max-w-2xl mx-auto italic font-medium">Capturing the vibrant energy and excellence of our integrated campus life.</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-emerald-800 mb-4 tracking-tight" data-editable="gallery-heading" data-page="home">Gallery Preview</h2>
+          <p className="text-zinc-600 text-lg max-w-2xl mx-auto italic font-medium" data-editable="gallery-description" data-page="home">Capturing the vibrant energy and excellence of our integrated campus life.</p>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-8 h-full md:h-[800px]">
@@ -351,8 +355,8 @@ export default function Home() {
           <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
         </div>
         <ScrollReveal className="relative z-10 max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold mb-8">Admissions Now Open</h2>
-          <p className="text-emerald-100 text-xl mb-12 max-w-2xl mx-auto">Start your journey towards academic excellence and strong moral values today.</p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-8" data-editable="cta-heading" data-page="home">Admissions Now Open</h2>
+          <p className="text-emerald-100 text-xl mb-12 max-w-2xl mx-auto" data-editable="cta-description" data-page="home">Start your journey towards academic excellence and strong moral values today.</p>
           <Link href="/contact">
             <button className="px-12 py-5 bg-white text-emerald-900 font-bold rounded-lg shadow-2xl hover:bg-emerald-50 hover:scale-105 active:scale-95 transition-all text-xl cursor-pointer">
               Enquire Now
