@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { FileText } from 'lucide-react';
 
 export default function AdminLayout({
     children,
@@ -41,6 +42,11 @@ export default function AdminLayout({
                 </svg>
             )
         },
+        {
+            name: 'Pages', href: '/admin/pages', icon: (
+                <FileText className="w-5 h-5" />
+            )
+        },
     ];
 
     return (
@@ -60,8 +66,8 @@ export default function AdminLayout({
                             key={item.name}
                             href={item.href}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${pathname === item.href
-                                    ? 'bg-emerald-600/10 text-emerald-500 font-semibold'
-                                    : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                                ? 'bg-emerald-600/10 text-emerald-500 font-semibold'
+                                : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                                 }`}
                         >
                             {item.icon}
@@ -112,8 +118,8 @@ export default function AdminLayout({
                             href={item.href}
                             onClick={() => setIsSidebarOpen(false)}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${pathname === item.href
-                                    ? 'bg-emerald-600/10 text-emerald-500 font-semibold'
-                                    : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                                ? 'bg-emerald-600/10 text-emerald-500 font-semibold'
+                                : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                                 }`}
                         >
                             {item.icon}
