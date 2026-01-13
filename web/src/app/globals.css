@@ -10,6 +10,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Override Emerald with Maroon Theme */
+  --color-emerald-50: #fcf4f8;
+  --color-emerald-100: #f8e8f0;
+  --color-emerald-200: #f0d0e0;
+  --color-emerald-300: #e2a0c0;
+  --color-emerald-400: #cf6d9c;
+  --color-emerald-500: #b8407a;
+  --color-emerald-600: #9e2b63;
+  --color-emerald-700: #851a51;
+  --color-emerald-800: #7b0046;
+  --color-emerald-900: #66063b;
+  --color-emerald-950: #3b001e;
 }
 
 @media (prefers-color-scheme: dark) {
