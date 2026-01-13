@@ -46,7 +46,7 @@ const MarqueeRow = ({ title, items, reverse = false }: { title: string, items: t
                                     src={item.logo}
                                     alt={`${item.name} logo`}
                                     fill
-                                    className="object-contain p-2 filter grayscale-0 opacity-90 hover:opacity-100 transition-opacity"
+                                    className="object-contain p-1 filter grayscale-0 opacity-90 hover:opacity-100 transition-opacity"
                                 />
                             </div>
                         </div>
