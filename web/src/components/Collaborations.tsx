@@ -39,14 +39,14 @@ const MarqueeRow = ({ title, items, reverse = false }: { title: string, items: t
                     {[...items, ...items, ...items, ...items].map((item, index) => (
                         <div
                             key={index}
-                            className="relative w-40 h-20 flex-shrink-0 flex items-center justify-center p-3 bg-white rounded-lg border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
+                            className="relative w-40 h-20 flex-shrink-0 flex items-center justify-center p-2 bg-white rounded-lg border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
                         >
                             <div className="relative w-full h-full">
                                 <Image
                                     src={item.logo}
                                     alt={`${item.name} logo`}
                                     fill
-                                    className="object-contain p-1 filter grayscale-0 opacity-90 hover:opacity-100 transition-opacity"
+                                    className="object-contain filter grayscale-0 opacity-90 hover:opacity-100 transition-opacity"
                                 />
                             </div>
                         </div>
