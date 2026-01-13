@@ -163,7 +163,7 @@ export default function Home() {
             data-editable="hero-bg"
             data-page="home"
           />
-          <div className="absolute inset-0 bg-emerald-950/70" />
+          {/* Overlay removed as per request */}
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
@@ -294,7 +294,7 @@ export default function Home() {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/90 to-transparent" />
+                    {/* Overlay removed */}
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                       <span className="text-xl font-bold text-white tracking-widest uppercase">{facility.name}</span>
                     </div>
