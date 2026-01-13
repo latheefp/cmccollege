@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
+import Gallery from "@/components/Gallery";
 import { usePageContent } from "@/hooks/usePageContent";
 
 
@@ -309,7 +310,6 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Academic Programs Section */}
       <section className="py-24 px-6 bg-zinc-50">
         <div className="max-w-7xl mx-auto">
@@ -403,49 +403,8 @@ export default function Home() {
       </section>
 
       {/* Gallery Preview Section */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <ScrollReveal className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-emerald-800 mb-4 tracking-tight" data-editable="gallery-heading" data-page="home">Gallery Preview</h2>
-          <p className="text-zinc-600 text-lg max-w-2xl mx-auto italic font-medium" data-editable="gallery-description" data-page="home">Capturing the vibrant energy and excellence of our integrated campus life.</p>
-        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-8 h-full md:h-[800px]">
-          {isLoading ? (
-            // Loading State - Skeletons matching premium roundedness
-            Array(5).fill(0).map((_, i) => (
-              <div
-                key={i}
-                className={`animate-pulse bg-emerald-50 border border-emerald-100/50
-                  ${i === 0 ? "md:col-span-2 md:row-span-2 min-h-[450px] rounded-[60px] md:rounded-[80px]" : "min-h-[300px] md:min-h-0"}
-                  ${i === 1 ? "rounded-tr-[140px] rounded-bl-[140px] rounded-tl-[40px] rounded-br-[40px]" : ""}
-                  ${i === 3 ? "rounded-tl-[140px] rounded-br-[140px] rounded-tr-[40px] rounded-bl-[40px]" : ""}
-                  ${i !== 0 && i !== 1 && i !== 3 ? "rounded-[100px] md:rounded-full" : ""}
-                `}
-              />
-            ))
-          ) : (
-            imagesToRender.map((item, i) => (
-              <GalleryCard key={i} item={item} index={i} featured={item.featured} />
-            ))
-          )}
-        </div>
-
-        <div className="mt-20 relative text-center">
-          {/* Subtle decoration line */}
-          <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-100 to-transparent -z-10" />
-
-          <Link href="/gallery" className="group inline-flex items-center gap-4 px-10 py-5 bg-white text-emerald-900 font-bold rounded-2xl border border-emerald-100 hover:bg-emerald-800 hover:text-white transition-all shadow-sm hover:shadow-2xl hover:border-emerald-700">
-            <span className="text-lg tracking-tight">Explore Full Gallery</span>
-            <div className="w-10 h-10 rounded-full bg-emerald-800 text-white flex items-center justify-center group-hover:bg-white group-hover:text-emerald-800 transition-colors shadow-inner">
-              <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.6} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </div>
-          </Link>
-          <p className="mt-6 text-zinc-400 text-sm font-medium tracking-wide">Detailed view of academic, sports, and cultural milestones</p>
-        </div>
-      </section>
-
+      <Gallery />
       {/* Call to Action Section */}
       <section className="py-24 px-6 bg-emerald-900 text-white text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
