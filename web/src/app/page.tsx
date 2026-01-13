@@ -196,7 +196,7 @@ export default function Home() {
       </section>
 
       {/* About Section - Premium Bordered Card */}
-      <section className="pt-24 pb-12 px-6 bg-zinc-50/50">
+      <section className="pt-14 pb-10 px-4 md:px-6 bg-zinc-50/50">
         <ScrollReveal>
           <div className="max-w-4xl mx-auto bg-white border-l-4 border-emerald-800 shadow-xl shadow-emerald-900/5 p-8 md:p-14 rounded-r-2xl relative overflow-hidden">
             {/* Background decoration */}
@@ -207,7 +207,7 @@ export default function Home() {
                 About Our College
               </h2>
 
-              <div className="space-y-6 text-lg text-zinc-600 leading-relaxed font-normal max-w-3xl">
+              <div className="space-y-5 text-lg text-zinc-600 leading-relaxed font-normal max-w-3xl">
                 <p data-editable="about-text-1" data-page="home">
                   CM College of Arts and Science, Nadavayal, Wayanad, is a self-financing institution affiliated with the University of Calicut. Established in April 2010 under the guidance of CM Center Madavoor, the college is set across 15 acres of serene campus.
                 </p>
@@ -216,7 +216,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="mt-10">
+              <div className="mt-8">
                 <Link href="/about">
                   <button className="px-8 py-3 bg-emerald-800 text-white font-medium text-lg rounded-lg hover:bg-emerald-900 transition-all shadow-sm hover:shadow-md active:scale-95 cursor-pointer">
                     Know More
