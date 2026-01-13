@@ -10,6 +10,7 @@ import Professionals from "@/components/Professionals";
 import NewsSection from "@/components/NewsSection";
 import ClubsCarousel from "@/components/ClubsCarousel";
 import StatsSection from "@/components/StatsSection";
+import Collaborations from "@/components/Collaborations";
 import { usePageContent } from "@/hooks/usePageContent";
 
 
@@ -315,6 +316,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Collaborations Section */}
+      <Collaborations />
+
       {/* Academic Programs Section */}
       <section className="py-24 px-6 bg-zinc-50">
         <div className="max-w-7xl mx-auto">
@@ -439,6 +443,6 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-    </div>
+    </div >
   );
 }
