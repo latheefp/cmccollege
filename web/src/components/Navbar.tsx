@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
+import TopBar from "./TopBar";
+
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
@@ -14,143 +16,146 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-emerald-50 top-[var(--ticker-height,0px)]">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="flex justify-between items-center h-20">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 md:-ml-3 lg:-ml-3">
-                        <div className="relative w-64 h-16">
-                            <Image
-                                src="/images/logo.png"
-                                alt="School Logo"
-                                fill
-                                className="object-contain object-left"
-                            />
+        <header className="fixed w-full z-50 top-[var(--ticker-height,0px)] flex flex-col">
+            <TopBar />
+            <nav className="w-full bg-white/80 backdrop-blur-md border-b border-emerald-50">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="flex justify-between items-center h-20">
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-2 md:-ml-3 lg:-ml-3">
+                            <div className="relative w-64 h-16">
+                                <Image
+                                    src="/images/logo.png"
+                                    alt="School Logo"
+                                    fill
+                                    className="object-contain object-left"
+                                />
+                            </div>
+                        </Link>
+
+                        {/* Desktop Navigation */}
+                        <div className="hidden md:flex items-center gap-8">
+                            <Link href="/" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                                Home
+                            </Link>
+                            <Link href="/about" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                                About
+                            </Link>
+                            <Link href="/academics" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                                Academics
+                            </Link>
+                            <Link href="/facilities" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                                Facilities
+                            </Link>
+                            <Link href="/gallery" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                                Gallery
+                            </Link>
+                            <Link href="/announcements" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                                Announcements
+                            </Link>
+                            <Link href="/contact" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
+                                Contact
+                            </Link>
+                            <Link href="/admissions">
+                                <button className="px-6 py-2.5 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-colors shadow-sm cursor-pointer">
+                                    Admissions
+                                </button>
+                            </Link>
                         </div>
-                    </Link>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-8">
-                        <Link href="/" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
-                            Home
-                        </Link>
-                        <Link href="/about" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
-                            About
-                        </Link>
-                        <Link href="/academics" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
-                            Academics
-                        </Link>
-                        <Link href="/facilities" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
-                            Facilities
-                        </Link>
-                        <Link href="/gallery" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
-                            Gallery
-                        </Link>
-                        <Link href="/announcements" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
-                            Announcements
-                        </Link>
-                        <Link href="/contact" className="text-zinc-600 hover:text-emerald-800 font-medium transition-colors">
-                            Contact
-                        </Link>
-                        <Link href="/admissions">
-                            <button className="px-6 py-2.5 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-colors shadow-sm cursor-pointer">
-                                Admissions
-                            </button>
-                        </Link>
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="p-2 text-zinc-600 hover:text-emerald-800 transition-colors"
-                        >
-                            <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                        {/* Mobile Menu Button */}
+                        <div className="md:hidden">
+                            <button
+                                onClick={() => setIsOpen(!isOpen)}
+                                className="p-2 text-zinc-600 hover:text-emerald-800 transition-colors"
                             >
-                                {isOpen ? (
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                ) : (
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                )}
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                {/* Mobile Navigation */}
-                {isOpen && (
-                    <div className="md:hidden py-6 border-t border-emerald-50 flex flex-col gap-4 animate-in slide-in-from-top duration-300">
-                        <Link
-                            href="/"
-                            onClick={() => setIsOpen(false)}
-                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            href="/about"
-                            onClick={() => setIsOpen(false)}
-                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
-                        >
-                            About
-                        </Link>
-                        <Link
-                            href="/academics"
-                            onClick={() => setIsOpen(false)}
-                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
-                        >
-                            Academics
-                        </Link>
-                        <Link
-                            href="/facilities"
-                            onClick={() => setIsOpen(false)}
-                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
-                        >
-                            Facilities
-                        </Link>
-                        <Link
-                            href="/gallery"
-                            onClick={() => setIsOpen(false)}
-                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
-                        >
-                            Gallery
-                        </Link>
-                        <Link
-                            href="/announcements"
-                            onClick={() => setIsOpen(false)}
-                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
-                        >
-                            Announcements
-                        </Link>
-                        <Link
-                            href="/contact"
-                            onClick={() => setIsOpen(false)}
-                            className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
-                        >
-                            Contact
-                        </Link>
-                        <Link href="/admissions" onClick={() => setIsOpen(false)}>
-                            <button className="w-full mt-2 px-6 py-3 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-colors shadow-sm">
-                                Admissions
+                                <svg
+                                    className="w-6 h-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    {isOpen ? (
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    ) : (
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M4 6h16M4 12h16M4 18h16"
+                                        />
+                                    )}
+                                </svg>
                             </button>
-                        </Link>
+                        </div>
                     </div>
-                )}
-            </div>
-        </nav>
+
+                    {/* Mobile Navigation */}
+                    {isOpen && (
+                        <div className="md:hidden py-6 border-t border-emerald-50 flex flex-col gap-4 animate-in slide-in-from-top duration-300">
+                            <Link
+                                href="/"
+                                onClick={() => setIsOpen(false)}
+                                className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                            >
+                                Home
+                            </Link>
+                            <Link
+                                href="/about"
+                                onClick={() => setIsOpen(false)}
+                                className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                            >
+                                About
+                            </Link>
+                            <Link
+                                href="/academics"
+                                onClick={() => setIsOpen(false)}
+                                className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                            >
+                                Academics
+                            </Link>
+                            <Link
+                                href="/facilities"
+                                onClick={() => setIsOpen(false)}
+                                className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                            >
+                                Facilities
+                            </Link>
+                            <Link
+                                href="/gallery"
+                                onClick={() => setIsOpen(false)}
+                                className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                            >
+                                Gallery
+                            </Link>
+                            <Link
+                                href="/announcements"
+                                onClick={() => setIsOpen(false)}
+                                className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                            >
+                                Announcements
+                            </Link>
+                            <Link
+                                href="/contact"
+                                onClick={() => setIsOpen(false)}
+                                className="text-lg font-medium text-zinc-600 hover:text-emerald-800 transition-colors px-2"
+                            >
+                                Contact
+                            </Link>
+                            <Link href="/admissions" onClick={() => setIsOpen(false)}>
+                                <button className="w-full mt-2 px-6 py-3 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-colors shadow-sm">
+                                    Admissions
+                                </button>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            </nav>
+        </header>
     );
 }
