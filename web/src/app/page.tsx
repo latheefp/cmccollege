@@ -195,36 +195,37 @@ export default function Home() {
         </div> */}
       </section>
 
-      {/* About Section */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <ScrollReveal delay={200} className="relative h-[450px] rounded-2xl overflow-hidden shadow-2xl border border-emerald-50">
-            <Image
-              src="/images/college.png"
-              alt="College Building"
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-700"
-              data-editable="about-image"
-              data-page="home"
-            />
-          </ScrollReveal>
-          <ScrollReveal>
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-8" data-editable="about-heading" data-page="home">About Our College</h2>
-            <div className="space-y-6 text-lg text-zinc-600 leading-relaxed">
-              <p data-editable="about-text-1" data-page="home">
-                CM college of Arts and Science Nadavayal, Wayanad, Kerala is a self-financing college affiliated to the University of Calicut, run by CM center Madavoor, Calicut, Kerala. Established in the year April 2010, the college is situated in Panamaram, shares its 15 acres of beautiful land. Recognized by Government of kerala, the college is affiliated to the University of Calicut.
-              </p>
-              <p data-editable="about-text-2" data-page="home">
-                In a short span of time, our college has achieved greater heights since its inception a decade ago by educating thousands of students from various parts of our states. Even though, Wayanad district has been little backward compared to many other districts of Kerala due to its geographical structure, we undertake the challenge to serve and provide better education for all the community.
-              </p>
-              <Link href="/about" className="inline-block pt-4">
-                <button className="px-6 py-3 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-all hover:scale-105 active:scale-95 cursor-pointer">
-                  Discover Our Story
-                </button>
-              </Link>
+      {/* About Section - Premium Bordered Card */}
+      <section className="py-24 px-6 bg-zinc-50/50">
+        <ScrollReveal>
+          <div className="max-w-4xl mx-auto bg-white border-l-4 border-emerald-800 shadow-xl shadow-emerald-900/5 p-8 md:p-14 rounded-r-2xl relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50/50 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+
+            <div className="relative z-10 flex flex-col items-start text-left">
+              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6 tracking-tight" data-editable="about-heading" data-page="home">
+                About Our College
+              </h2>
+
+              <div className="space-y-6 text-lg text-zinc-600 leading-relaxed font-normal max-w-3xl">
+                <p data-editable="about-text-1" data-page="home">
+                  CM College of Arts and Science, Nadavayal, Wayanad, is a self-financing institution affiliated with the University of Calicut. Established in April 2010 under the guidance of CM Center Madavoor, the college is set across 15 acres of serene campus.
+                </p>
+                <p data-editable="about-text-2" data-page="home">
+                  Over the years, the institution has remained committed to providing quality higher education, empowering students with academic excellence, integrity, and skills for a changing world.
+                </p>
+              </div>
+
+              <div className="mt-10">
+                <Link href="/about">
+                  <button className="px-8 py-3 bg-emerald-800 text-white font-medium text-lg rounded-lg hover:bg-emerald-900 transition-all shadow-sm hover:shadow-md active:scale-95 cursor-pointer">
+                    Know More
+                  </button>
+                </Link>
+              </div>
             </div>
-          </ScrollReveal>
-        </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Premium Divider */}
