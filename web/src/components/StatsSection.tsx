@@ -81,7 +81,7 @@ function Counter({ value }: { value: number }) {
 
 export default function StatsSection() {
     return (
-        <section className="relative py-24 bg-[#111111] overflow-hidden">
+        <section className="relative py-12 md:py-16 bg-[#111111] overflow-hidden">
             {/* Background Ambience */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-transparent to-transparent opacity-40 pointer-events-none" />
@@ -104,22 +104,22 @@ export default function StatsSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.15, duration: 0.6 }}
-                                className="flex flex-col items-center justify-center p-10 group relative"
+                                className="flex flex-col items-center justify-center p-6 md:p-8 group relative"
                             >
                                 <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                                 {/* Icon with soft glow */}
-                                <div className="relative mb-6">
+                                <div className="relative mb-4">
                                     <div className="absolute inset-0 bg-emerald-500/30 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                                    <div className="relative w-14 h-14 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-emerald-300/90 group-hover:text-emerald-300 group-hover:border-emerald-500/30 transition-all duration-500 shadow-lg">
+                                    <div className="relative w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-emerald-300/90 group-hover:text-emerald-300 group-hover:border-emerald-500/30 transition-all duration-500 shadow-lg">
                                         {stat.icon}
                                     </div>
                                 </div>
 
                                 {/* Number */}
-                                <div className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight flex items-baseline gap-1 drop-shadow-sm">
+                                <div className="text-3xl md:text-4xl font-bold text-white mb-1 tracking-tight flex items-baseline gap-1 drop-shadow-sm">
                                     <Counter value={stat.value} />
-                                    <span className="text-emerald-400/80 text-3xl font-light">{stat.suffix}</span>
+                                    <span className="text-emerald-400/80 text-2xl font-light">{stat.suffix}</span>
                                 </div>
 
                                 {/* Label */}
