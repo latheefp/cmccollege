@@ -1,36 +1,37 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-const professionals = [
+const alumni = [
     {
-        name: "Dr. A. Rahman",
-        role: "Professor",
-        department: "Computer Science",
-        experience: "15+ years experience",
+        name: "Mohammed Faizal",
+        role: "Software Engineer",
+        company: "TCS, Bangalore",
+        graduation: "BCA · 2022",
         image: "/images/principal_portrait_placeholder_1768116114971.png"
     },
     {
-        name: "Ms. Fathima K",
-        role: "Lecturer",
-        department: "Mathematics",
-        experience: "8+ years experience",
+        name: "Ayesha Rahman",
+        role: "Data Analyst",
+        company: "Infosys",
+        graduation: "BSc Computer Science · 2021",
         image: "/images/principal_portrait_placeholder_1768116114971.png"
     },
     {
-        name: "Mr. Salman P",
-        role: "Head of Department",
-        department: "Commerce",
-        experience: "12+ years experience",
+        name: "Salman P",
+        role: "Business Executive",
+        company: "HDFC Bank",
+        graduation: "BCom · 2020",
         image: "/images/principal_portrait_placeholder_1768116114971.png"
     },
     {
-        name: "Dr. N. Hameed",
-        role: "Principal",
-        department: "Academic Leadership",
-        experience: "Administration",
-        image: "/images/Principal.jpeg"
+        name: "Fathima K",
+        role: "UI/UX Designer",
+        company: "Startup Studio",
+        graduation: "BCA · 2023",
+        image: "/images/principal_portrait_placeholder_1768116114971.png"
     }
 ];
 
@@ -56,13 +57,13 @@ export default function Professionals() {
                         transition={{ delay: 0.1 }}
                         className="text-zinc-500 text-lg max-w-2xl mx-auto text-center font-medium"
                     >
-                        Experienced educators dedicated to shaping future leaders
+                        Our alumni building successful careers across industries
                     </motion.p>
                 </div>
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {professionals.map((prof, index) => (
+                    {alumni.map((alum, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, y: 20 }}
@@ -71,14 +72,14 @@ export default function Professionals() {
                             transition={{ delay: index * 0.1 }}
                             className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                         >
-                            {/* Profile Image */}
+                            {/* Profile Image (Color) */}
                             <div className="relative w-32 h-32 mx-auto mb-6">
                                 <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-zinc-50 shadow-inner">
                                     <Image
-                                        src={prof.image}
-                                        alt={prof.name}
+                                        src={alum.image}
+                                        alt={alum.name}
                                         fill
-                                        className="object-cover object-top"
+                                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                                     />
                                 </div>
                             </div>
@@ -86,20 +87,36 @@ export default function Professionals() {
                             {/* Text Content */}
                             <div className="text-center">
                                 <h3 className="text-xl font-semibold text-zinc-900 mb-1 group-hover:text-emerald-800 transition-colors">
-                                    {prof.name}
+                                    {alum.name}
                                 </h3>
-                                <p className="text-sm font-bold text-emerald-700 uppercase tracking-wider mb-1">
-                                    {prof.role}
+                                <p className="text-sm font-medium text-zinc-600 mb-1">
+                                    {alum.role}
                                 </p>
-                                <p className="text-sm text-zinc-500 font-medium mb-3">
-                                    {prof.department}
+                                <p className="text-sm font-bold text-emerald-600 mb-3">
+                                    {alum.company}
                                 </p>
                                 <div className="inline-block px-3 py-1 bg-zinc-50 rounded-full text-xs font-medium text-zinc-400">
-                                    {prof.experience}
+                                    {alum.graduation}
                                 </div>
                             </div>
                         </motion.div>
                     ))}
+                </div>
+
+                {/* Explore Button */}
+                <div className="mt-16 text-center">
+                    <Link href="/alumni">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-8 py-4 bg-emerald-800 text-white font-bold rounded-full shadow-lg hover:cursor-pointer hover:bg-emerald-900 transition-all flex items-center gap-2 mx-auto"
+                        >
+                            <span>Browse All Alumni</span>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </motion.button>
+                    </Link>
                 </div>
 
             </div>
