@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Gallery from "@/components/Gallery";
 import Professionals from "@/components/Professionals";
 import NewsSection from "@/components/NewsSection";
+import ClubsCarousel from "@/components/ClubsCarousel";
 import { usePageContent } from "@/hooks/usePageContent";
 
 
@@ -409,6 +410,9 @@ export default function Home() {
 
       {/* News Section */}
       <NewsSection />
+
+      {/* Clubs Section */}
+      <ClubsCarousel />
 
       {/* Gallery Preview Section */}
 
