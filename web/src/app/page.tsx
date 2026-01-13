@@ -9,6 +9,7 @@ import Gallery from "@/components/Gallery";
 import Professionals from "@/components/Professionals";
 import NewsSection from "@/components/NewsSection";
 import ClubsCarousel from "@/components/ClubsCarousel";
+import StatsSection from "@/components/StatsSection";
 import { usePageContent } from "@/hooks/usePageContent";
 
 
@@ -404,6 +405,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <StatsSection />
 
       {/* Meet the professionals section*/}
       <Professionals />
@@ -413,6 +415,9 @@ export default function Home() {
 
       {/* Clubs Section */}
       <ClubsCarousel />
+
+      {/* Stats Section */}
+
 
       {/* Gallery Preview Section */}
 
