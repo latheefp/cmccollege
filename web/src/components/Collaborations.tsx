@@ -18,9 +18,9 @@ const programs = [
 
 const MarqueeRow = ({ title, items, reverse = false }: { title: string, items: typeof partners, reverse?: boolean }) => {
     return (
-        <div className="flex flex-col md:flex-row items-center border-b border-zinc-100 last:border-b-0">
+        <div className="flex flex-col md:flex-row items-stretch border-b border-zinc-100 last:border-b-0">
             {/* Side Label */}
-            <div className="w-full md:w-64 md:flex-shrink-0 p-6 md:p-10 border-b md:border-b-0 md:border-r border-zinc-100 bg-zinc-50/50 flex items-center justify-center md:justify-start">
+            <div className="w-full md:w-64 md:flex-shrink-0 p-6 md:p-8 border-b md:border-b-0 md:border-r border-zinc-100 bg-zinc-50/50 flex items-center justify-center md:justify-start">
                 <h3 className="text-sm font-bold text-[#7B0046] uppercase tracking-widest text-center md:text-left leading-relaxed">
                     {title}
                 </h3>
@@ -33,7 +33,7 @@ const MarqueeRow = ({ title, items, reverse = false }: { title: string, items: t
                 <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
                 <div
-                    className="flex items-center gap-12 flex-nowrap min-w-full animate-marquee"
+                    className="flex items-center gap-10 flex-nowrap min-w-full animate-marquee"
                     style={{ width: "fit-content", animationDirection: reverse ? "reverse" : "normal" }}
                 >
                     {[...items, ...items, ...items, ...items].map((item, index) => (
