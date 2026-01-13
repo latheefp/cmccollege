@@ -168,7 +168,7 @@ export default function Home() {
           {/* Overlay removed as per request */}
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
+        {/* <div className="relative z-10 max-w-5xl mx-auto text-center">
           <ScrollReveal>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6" data-editable="hero-title" data-page="home">
               {getText("hero-title", "Integrated School for Higher Secondary")}
@@ -189,7 +189,7 @@ export default function Home() {
               </Link>
             </div>
           </ScrollReveal>
-        </div>
+        </div> */}
       </section>
 
       {/* About Section */}
