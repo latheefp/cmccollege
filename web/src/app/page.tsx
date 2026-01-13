@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import Gallery from "@/components/Gallery";
 import Professionals from "@/components/Professionals";
+import NewsSection from "@/components/NewsSection";
 import { usePageContent } from "@/hooks/usePageContent";
 
 
@@ -405,6 +406,9 @@ export default function Home() {
 
       {/* Meet the professionals section*/}
       <Professionals />
+
+      {/* News Section */}
+      <NewsSection />
 
       {/* Gallery Preview Section */}
 
