@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Footer() {
     const pathname = usePathname();
@@ -16,12 +17,14 @@ export default function Footer() {
                 {/* School Info */}
                 <div className="col-span-1 md:col-span-1">
                     <div className="flex items-center gap-2 mb-6">
-                        <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-emerald-950 font-bold">
-                            S
+                        <div className="relative w-16 h-16">
+                            <Image
+                                src="/images/logo.png"
+                                alt="School Logo"
+                                fill
+                                className="object-contain brightness-0 invert"
+                            />
                         </div>
-                        <span className="text-xl font-bold tracking-tight text-white">
-                            School Name
-                        </span>
                     </div>
                     <p className="text-emerald-200/80 leading-relaxed mb-6">
                         Providing high-quality integrated education with strong Islamic values to nurture the leaders of tomorrow.

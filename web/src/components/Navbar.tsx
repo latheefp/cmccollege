@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,12 +19,14 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
-                        <div className="w-10 h-10 bg-emerald-800 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                            S
+                        <div className="relative w-64 h-16">
+                            <Image
+                                src="/images/logo.png"
+                                alt="School Logo"
+                                fill
+                                className="object-contain object-left"
+                            />
                         </div>
-                        <span className="text-xl font-bold text-emerald-900 tracking-tight">
-                            School Name
-                        </span>
                     </Link>
 
                     {/* Desktop Navigation */}
