@@ -258,21 +258,21 @@ export default function Home() {
 
             {/* Right Side - Content Card */}
             <ScrollReveal className="w-full md:w-7/12">
-              <div className="h-full bg-white rounded-[24px] md:rounded-[32px] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-emerald-50/50 flex flex-col justify-center relative overflow-hidden">
+              <div className="h-full bg-white rounded-[24px] md:rounded-[32px] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border-l-4 border-[#7B0046] flex flex-col justify-center relative overflow-hidden">
                 {/* Subtle background pattern */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-50"></div>
 
                 {/* Label */}
                 <div className="flex items-center gap-3 mb-6 relative z-10">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
-                  <span className="text-emerald-700 text-[11px] font-bold tracking-widest uppercase bg-emerald-50/80 px-3 py-1.5 rounded-lg backdrop-blur-sm border border-emerald-100">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#7B0046] animate-pulse"></span>
+                  <span className="text-[#7B0046] text-[11px] font-bold tracking-widest uppercase bg-[#7B0046]/5 px-3 py-1.5 rounded-lg backdrop-blur-sm border border-[#7B0046]/10">
                     Principal&apos;s Message
                   </span>
                 </div>
 
                 {/* Heading */}
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-zinc-900 mb-6 leading-tight relative z-10">
-                  Message from <span className="text-emerald-800 block md:inline">The Principal</span>
+                  Message from <span className="text-[#7B0046] block md:inline">The Principal</span>
                 </h2>
 
                 {/* Text Content */}
