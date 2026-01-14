@@ -333,7 +333,7 @@ export default function Home() {
                 <div className="relative mb-8 z-10 text-left md:text-justify">
                   <span className="absolute -top-6 -left-4 text-8xl text-emerald-100/40 font-serif leading-none select-none">&quot;</span>
                   <div className="relative z-10 space-y-4 text-zinc-600 leading-relaxed text-[15px] md:text-lg text-left md:text-justify">
-                    <p className="hidden md:block">
+                    <p className="block">
                       Welcome to CM College of Arts and Science. Located in the serene surroundings of Wayanad, our college offers quality education rooted in discipline and strong human values. We focus on academic excellence, practical skills, and holistic development guided by a dedicated faculty. With modern facilities, eco-friendly campus, active student life, and strong placement support, CM College provides the ideal environment for learning and growth. We warmly invite students from Kerala and beyond to join us and build a successful future.
                     </p>
                   </div>
