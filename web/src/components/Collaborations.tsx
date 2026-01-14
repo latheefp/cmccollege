@@ -18,9 +18,9 @@ const programs = [
 
 const MarqueeRow = ({ title, items, reverse = false }: { title: string, items: typeof partners, reverse?: boolean }) => {
     return (
-        <div className="flex flex-col md:flex-row items-stretch border-b border-zinc-100 last:border-b-0">
+        <div className="flex flex-col md:flex-row items-stretch border-b border-zinc-100 last:border-b-0 pt-10">
             {/* Side Label */}
-            <div className="w-full md:w-64 md:flex-shrink-0 p-6 md:p-8 border-b md:border-b-0 md:border-r border-zinc-100 bg-zinc-50/50 flex items-center justify-center md:justify-start">
+            <div className="w-full md:w-64 md:flex-shrink-0 p-6 md:p-8 flex items-center justify-center md:justify-start">
                 <h3 className="text-sm font-bold text-[#7B0046] uppercase tracking-widest text-center md:text-left leading-relaxed">
                     {title}
                 </h3>

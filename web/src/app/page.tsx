@@ -206,7 +206,7 @@ export default function Home() {
 
             <div className="relative z-10 flex flex-col items-start text-left">
               <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6 tracking-tight" data-editable="about-heading" data-page="home">
-                About Our College
+                CM College
               </h2>
 
               <div className="text-lg text-zinc-600 leading-relaxed font-normal space-y-5 lg:columns-2 lg:gap-12 text-left md:text-justify">
@@ -234,7 +234,7 @@ export default function Home() {
       </section>
 
       {/* Premium Divider */}
-      <div className="relative py-4 md:py-6">
+      {/* <div className="relative py-4 md:py-6">
         <div className="absolute inset-0 flex items-center" aria-hidden="true">
           <div className="w-full border-t border-gray-300/50"></div>
         </div>
@@ -243,7 +243,11 @@ export default function Home() {
             <div className="h-2 w-2 rounded-full bg-[#7B0046] ring-4 ring-gray-300"></div>
           </div>
         </div>
-      </div>
+      </div> */}
+
+      {/* Collaborations Section */}
+      <Collaborations />
+
       {/* Principal section - Redesigned */}
       <section className="pb-20 pt-8 px-4 md:px-6 bg-transparent">
         <div className="max-w-7xl mx-auto">
@@ -284,23 +288,8 @@ export default function Home() {
                 <div className="relative mb-8 z-10 text-left md:text-justify">
                   <span className="absolute -top-6 -left-4 text-8xl text-emerald-100/40 font-serif leading-none select-none">&quot;</span>
                   <div className="relative z-10 space-y-4 text-zinc-600 leading-relaxed text-[15px] md:text-lg text-left md:text-justify">
-                    <p className="block md:hidden font-medium text-zinc-800">
-                      Welcome to CM College of Arts and Science. Our institution provides quality education in the peaceful surroundings of Wayanad, offering a balance of academic knowledge, practical skills, and value-based learning to shape responsible individuals.
-                    </p>
-                    <p className="hidden md:block font-medium text-zinc-800">
-                      Welcome to CM College of Arts and Science. Our institution is built on quality education, discipline, and strong human values. Located in the peaceful surroundings of Wayanad, the college provides an ideal environment for focused learning and personal growth.
-                    </p>
-                    <p className="hidden md:block font-medium text-zinc-800">
-                      We believe education plays a vital role in shaping careers and responsible individuals. Our goal is to offer students the right balance of academic knowledge, practical skills, and value-based learning. Our dedicated faculty guide students toward success in higher studies, careers, and life.
-                    </p>
-                    <p className="hidden md:block font-medium text-zinc-800">
-                      The college offers a range of UG and PG programmes supported by modern facilities, including well-equipped laboratories, a library, digital classrooms, sports facilities, and active student clubs. Our eco-friendly campus further enhances the learning experience.
-                    </p>
-                    <p className="hidden md:block font-medium text-zinc-800">
-                      Through our placement cell, industry training, internships, and co-curricular activities, we help students grow with confidence and purpose.
-                    </p>
                     <p className="hidden md:block">
-                      I warmly invite students from Kerala and beyond to join CM College and experience quality education in harmony with nature.
+                      Welcome to CM College of Arts and Science. Located in the serene surroundings of Wayanad, our college offers quality education rooted in discipline and strong human values. We focus on academic excellence, practical skills, and holistic development guided by a dedicated faculty. With modern facilities, eco-friendly campus, active student life, and strong placement support, CM College provides the ideal environment for learning and growth. We warmly invite students from Kerala and beyond to join us and build a successful future.
                     </p>
                   </div>
                 </div>
@@ -332,8 +321,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Collaborations Section */}
-      <Collaborations />
 
       {/* Academic Programs Section */}
       <section className="py-24 px-6 bg-zinc-50">
