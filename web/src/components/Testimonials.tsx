@@ -55,9 +55,22 @@ export default function Testimonials() {
         setCurrentIndex(index);
     };
 
+    const handleDragEnd = (event: any, info: any) => {
+        const offset = info.offset.x;
+        const velocity = info.velocity.x;
+
+        if (offset < -50 || velocity < -500) {
+            // Swipe Left -> Next
+            setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        } else if (offset > 50 || velocity > 500) {
+            // Swipe Right -> Previous
+            setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+        }
+    };
+
     return (
         <section
-            className="relative w-full py-24 md:py-32 overflow-hidden flex items-center justify-center"
+            className="relative w-full py-24 md:py-32 overflow-hidden flex items-center justify-center cursor-grab active:cursor-grabbing"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -98,11 +111,15 @@ export default function Testimonials() {
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={testimonials[currentIndex].id}
-                            initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                            transition={{ duration: 0.5, ease: "easeOut" }}
-                            className="absolute inset-0 flex flex-col items-center justify-center px-4"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            dragElastic={1}
+                            onDragEnd={handleDragEnd}
+                            className="absolute inset-0 flex flex-col items-center justify-center px-4 touch-pan-y"
                         >
                             <div className="max-w-4xl">
                                 <p className="text-base md:text-lg lg:text-xl font-medium leading-loose italic opacity-90 mb-6 md:mb-8 font-serif">
