@@ -20,11 +20,11 @@ export default function Navbar() {
         <header className="fixed w-full z-50 top-[var(--ticker-height,0px)] flex flex-col shadow-lg">
             <TopBar />
             <nav className="w-full bg-gradient-to-r from-white via-white to-blue-50 border-b border-zinc-100">
-                <div className="max-w-[1440px] mx-auto px-4 md:px-8">
+                <div className="w-full px-4 xl:px-8">
                     <div className="flex justify-between items-center h-24">
                         {/* Logo (Left) */}
                         <Link href="/" className="flex items-center">
-                            <div className="relative w-64 h-20">
+                            <div className="relative w-48 xl:w-64 h-16 xl:h-20">
                                 <Image
                                     src="/images/logo.png"
                                     alt="School Logo"
@@ -35,9 +35,9 @@ export default function Navbar() {
                         </Link>
 
                         {/* Right Section: Navigation & Socials */}
-                        <div className="hidden lg:flex items-center gap-12">
+                        <div className="hidden lg:flex items-center gap-6 xl:gap-3">
                             {/* Desktop Navigation */}
-                            <div className="flex items-center gap-6 xl:gap-8">
+                            <div className="flex items-center gap-3 xl:gap-8">
                                 {[
                                     { name: "HOME", href: "/" },
                                     { name: "ABOUT US", href: "/about" },
@@ -53,7 +53,7 @@ export default function Navbar() {
                                     <Link
                                         key={link.name}
                                         href={link.href}
-                                        className="text-[11px] xl:text-[12px] font-black text-zinc-800 hover:text-[#5D1035] transition-colors uppercase tracking-widest relative group whitespace-nowrap"
+                                        className="text-[10px] xl:text-[12px] font-black text-zinc-800 hover:text-[#5D1035] transition-colors uppercase tracking-widest relative group whitespace-nowrap"
                                     >
                                         {link.name}
                                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5D1035] transition-all duration-300 group-hover:w-full"></span>
@@ -65,15 +65,12 @@ export default function Navbar() {
                             <div className="h-6 w-px bg-zinc-200"></div>
 
                             {/* Social Icons & Search */}
-                            <div className="flex items-center gap-6">
+                            <div className="flex items-center gap-3">
                                 <Link href="https://facebook.com" target="_blank" className="text-[#5D1035] hover:opacity-80 transition-opacity">
                                     <Facebook className="w-5 h-5" />
                                 </Link>
                                 <Link href="https://instagram.com" target="_blank" className="text-[#5D1035] hover:opacity-80 transition-opacity">
                                     <Instagram className="w-5 h-5" />
-                                </Link>
-                                <Link href="https://youtube.com" target="_blank" className="text-[#5D1035] hover:opacity-80 transition-opacity">
-                                    <Youtube className="w-6 h-6" />
                                 </Link>
                                 <button className="text-[#5D1035] hover:opacity-80 transition-opacity">
                                     <Search className="w-5 h-5" />
