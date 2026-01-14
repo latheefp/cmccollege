@@ -120,6 +120,24 @@ export default function Home() {
   const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Hero Slider State
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const heroImages = [
+    "/images/hero_campus_background_1768115501790.png",
+    "/images/school_sports_day_1768117809679.png",
+    "/images/school_library_1768115599802.png"
+  ];
+
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isPaused, heroImages.length]);
+
   // Fetch dynamic page content
   const { content, getImage, getText } = usePageContent("home");
 
@@ -156,21 +174,54 @@ export default function Home() {
     }));
 
   return (
-    <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-20">
+    <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[148px] lg:pt-[164px]">
       {/* Hero Section */}
-      <section className="relative min-h-[75vh] flex flex-col items-center justify-center py-24 px-6 md:py-40 text-white overflow-hidden">
-        {/* Hero Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={getImage("hero-bg", "/images/hero_campus_background_1768115501790.png")}
-            alt="School Campus"
-            fill
-            className="object-cover"
-            priority
-            data-editable="hero-bg"
-            data-page="home"
-          />
-          {/* Overlay removed as per request */}
+      <section
+        className="relative min-h-[75vh] flex flex-col items-center justify-center py-24 px-6 md:py-40 text-white overflow-hidden"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        {/* Hero Background Slider */}
+        <div className="absolute inset-0 z-0 bg-black">
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.div
+              key={currentSlide}
+              initial={{ x: "100%", opacity: 1 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "-100%", opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                ease: [0.32, 0.72, 0, 1] // Custom ease for smooth sliding
+              }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={heroImages[currentSlide]}
+                alt={`Hero Slide ${currentSlide + 1}`}
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Dark Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40 z-10" />
+        </div>
+
+        {/* Navigation Dots */}
+        <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-3">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentSlide
+                ? "bg-white w-8"
+                : "bg-white/50 hover:bg-white/80"
+                }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
 
         {/* <div className="relative z-10 max-w-5xl mx-auto text-center">

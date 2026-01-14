@@ -21,7 +21,7 @@ export default function Navbar() {
             <TopBar />
             <nav className="w-full bg-gradient-to-r from-white via-white to-blue-50 border-b border-zinc-100">
                 <div className="w-full px-4 xl:px-8">
-                    <div className="flex justify-between items-center h-24">
+                    <div className="flex justify-between items-center h-28 lg:h-27 py-2">
                         {/* Logo (Left) */}
                         <Link href="/" className="flex items-center">
                             <div className="relative w-40 lg:w-48 2xl:w-64 h-16 2xl:h-20">
