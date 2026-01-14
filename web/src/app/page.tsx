@@ -209,11 +209,14 @@ export default function Home() {
                 About Our College
               </h2>
 
-              <div className="text-lg text-zinc-600 leading-relaxed font-normal space-y-5 lg:columns-2 lg:gap-12 text-justify">
-                <p data-editable="about-text-1" data-page="home" className="break-inside-avoid">
+              <div className="text-lg text-zinc-600 leading-relaxed font-normal space-y-5 lg:columns-2 lg:gap-12 text-left md:text-justify">
+                <p className="block md:hidden">
+                  CM College of Arts and Science, Nadavayal, Wayanad, is a self-financing institution affiliated with the University of Calicut. Established in 2010 under the guidance of CM Center Madavoor, the college is set across 15 acres of serene campus, committed to providing quality higher education and empowering students.
+                </p>
+                <p data-editable="about-text-1" data-page="home" className="hidden md:block break-inside-avoid">
                   CM college of Arts and Science Nadavayal, Wayanad, Kerala is a self-financing college affiliated to the University of Calicut, run by CM center Madavoor, Calicut, Kerala. Established in the year April 2010, the college is situated in Panamaram, shares its 15 acres of beautiful land. Recognized by Government of kerala, the college is affiliated to the University of Calicut.
                 </p>
-                <p data-editable="about-text-2" data-page="home" className="break-inside-avoid">
+                <p data-editable="about-text-2" data-page="home" className="hidden md:block break-inside-avoid">
                   In a short span of time, our college has achieved greater heights since its inception a decade ago by educating thousands of students from various parts of our states. Even though, Wayanad district has been little backward compared to many other districts of Kerala due to its geographical structure, we undertake the challenge to serve and provide better education for all the community.
                 </p>
               </div>
@@ -278,22 +281,25 @@ export default function Home() {
                 </h2>
 
                 {/* Text Content */}
-                <div className="relative mb-8 z-10 text-justify">
+                <div className="relative mb-8 z-10 text-left md:text-justify">
                   <span className="absolute -top-6 -left-4 text-8xl text-emerald-100/40 font-serif leading-none select-none">&quot;</span>
-                  <div className="relative z-10 space-y-4 text-zinc-600 leading-relaxed text-[15px] md:text-lg text-justify">
-                    <p className="font-medium text-zinc-800">
+                  <div className="relative z-10 space-y-4 text-zinc-600 leading-relaxed text-[15px] md:text-lg text-left md:text-justify">
+                    <p className="block md:hidden font-medium text-zinc-800">
+                      Welcome to CM College of Arts and Science. Our institution provides quality education in the peaceful surroundings of Wayanad, offering a balance of academic knowledge, practical skills, and value-based learning to shape responsible individuals.
+                    </p>
+                    <p className="hidden md:block font-medium text-zinc-800">
                       Welcome to CM College of Arts and Science. Our institution is built on quality education, discipline, and strong human values. Located in the peaceful surroundings of Wayanad, the college provides an ideal environment for focused learning and personal growth.
                     </p>
-                    <p className="font-medium text-zinc-800">
+                    <p className="hidden md:block font-medium text-zinc-800">
                       We believe education plays a vital role in shaping careers and responsible individuals. Our goal is to offer students the right balance of academic knowledge, practical skills, and value-based learning. Our dedicated faculty guide students toward success in higher studies, careers, and life.
                     </p>
-                    <p className="font-medium text-zinc-800">
+                    <p className="hidden md:block font-medium text-zinc-800">
                       The college offers a range of UG and PG programmes supported by modern facilities, including well-equipped laboratories, a library, digital classrooms, sports facilities, and active student clubs. Our eco-friendly campus further enhances the learning experience.
                     </p>
-                    <p className="font-medium text-zinc-800">
+                    <p className="hidden md:block font-medium text-zinc-800">
                       Through our placement cell, industry training, internships, and co-curricular activities, we help students grow with confidence and purpose.
                     </p>
-                    <p>
+                    <p className="hidden md:block">
                       I warmly invite students from Kerala and beyond to join CM College and experience quality education in harmony with nature.
                     </p>
                   </div>
