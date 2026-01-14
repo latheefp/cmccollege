@@ -233,8 +233,12 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
+
+
+      {/* Collaborations Section */}
+      <Collaborations />
       {/* Premium Divider */}
-      {/* <div className="relative py-4 md:py-6">
+      <div className="relative py-4 md:py-6">
         <div className="absolute inset-0 flex items-center" aria-hidden="true">
           <div className="w-full border-t border-gray-300/50"></div>
         </div>
@@ -243,10 +247,7 @@ export default function Home() {
             <div className="h-2 w-2 rounded-full bg-[#7B0046] ring-4 ring-gray-300"></div>
           </div>
         </div>
-      </div> */}
-
-      {/* Collaborations Section */}
-      <Collaborations />
+      </div>
 
       {/* Principal section - Redesigned */}
       <section className="pb-20 pt-8 px-4 md:px-6 bg-transparent">
