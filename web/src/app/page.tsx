@@ -11,6 +11,7 @@ import NewsSection from "@/components/NewsSection";
 import ClubsCarousel from "@/components/ClubsCarousel";
 import StatsSection from "@/components/StatsSection";
 import Collaborations from "@/components/Collaborations";
+import Testimonials from "@/components/Testimonials";
 import { usePageContent } from "@/hooks/usePageContent";
 
 
@@ -417,6 +418,9 @@ export default function Home() {
 
       {/* News Section */}
       <NewsSection />
+
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* Clubs Section */}
       <ClubsCarousel />
