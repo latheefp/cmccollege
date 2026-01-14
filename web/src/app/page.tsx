@@ -178,8 +178,6 @@ export default function Home() {
       {/* Hero Section */}
       <section
         className="relative min-h-[75vh] flex flex-col items-center justify-center py-24 px-6 md:py-40 text-white overflow-hidden"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
       >
         {/* Hero Background Slider */}
         <div className="absolute inset-0 z-0 bg-black">
