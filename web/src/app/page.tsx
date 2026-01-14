@@ -300,7 +300,7 @@ export default function Home() {
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-base font-bold text-zinc-900">Principal Name</h4>
+                    <h4 className="text-base font-bold text-zinc-900">Shafi Pulpara</h4>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-2">
                       <p className="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">CM College of Arts & Science</p>
                       <span className="hidden sm:inline text-zinc-300">•</span>
