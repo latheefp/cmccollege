@@ -1,0 +1,136 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { X, Calendar, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// CONFIGURATION
+const ADMISSION_CONFIG = {
+    // Set dates to include today for demonstration
+    startDate: new Date("2026-01-13"),
+    endDate: new Date("2026-05-31"),
+    academicYear: "2026–27",
+};
+
+export default function AdmissionPopup() {
+    const [isVisible, setIsVisible] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+
+        const checkVisibility = () => {
+            const now = new Date();
+            const hasClosedPopup = sessionStorage.getItem("admission-popup-closed");
+
+            if (
+                !hasClosedPopup &&
+                now >= ADMISSION_CONFIG.startDate &&
+                now <= ADMISSION_CONFIG.endDate
+            ) {
+                // Show immediately
+                setIsVisible(true);
+                return;
+            }
+        };
+
+        checkVisibility();
+    }, []);
+
+    const handleClose = () => {
+        setIsVisible(false);
+        sessionStorage.setItem("admission-popup-closed", "true");
+    };
+
+    if (!isMounted) return null;
+
+    return (
+        <AnimatePresence>
+            {isVisible && (
+                <>
+                    {/* Backdrop with blur */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={handleClose}
+                        className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 sm:p-0"
+                    />
+
+                    {/* Modal Container */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="fixed z-50 w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden
+                       top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                       mx-4 sm:mx-auto border border-emerald-100"
+                    >
+                        {/* Decorative Header Bar */}
+                        <div className="h-2 bg-gradient-to-r from-emerald-800 to-emerald-600 w-full" />
+
+                        <div className="p-6 sm:p-8 relative">
+                            {/* Close Button */}
+                            <button
+                                onClick={handleClose}
+                                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                                aria-label="Close popup"
+                            >
+                                <X size={20} />
+                            </button>
+
+                            {/* Content */}
+                            <div className="space-y-6 text-center">
+                                <div className="space-y-2">
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold tracking-wide uppercase">
+                                        <span className="relative flex h-2 w-2">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+                                        </span>
+                                        Admissions Open
+                                    </div>
+
+                                    <h2 className="text-3xl font-bold text-gray-900">
+                                        Apply for {ADMISSION_CONFIG.academicYear}
+                                    </h2>
+
+                                    <p className="text-gray-600 max-w-md mx-auto">
+                                        Secure your future with our integrated +1 / +2 Science & Commerce programs combined with Islamic values.
+                                    </p>
+                                </div>
+
+                                {/* Date Highlight */}
+                                <div className="flex items-center justify-center gap-2 text-sm font-medium text-emerald-800 bg-emerald-50/50 py-2 rounded-lg">
+                                    <Calendar size={18} />
+                                    <span>Applications closing soon for Phase 1</span>
+                                </div>
+
+                                {/* Actions */}
+                                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                                    <button
+                                        onClick={() => {
+                                            // Navigate to admission page logic would go here
+                                            handleClose(); // Close popup when navigated? Or keep it? keeping it simple for now.
+                                        }}
+                                        className="flex-1 inline-flex items-center justify-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white font-medium py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-emerald-900/20 active:scale-95 group"
+                                    >
+                                        Apply Now
+                                        <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                                    </button>
+
+                                    <button
+                                        onClick={handleClose}
+                                        className="flex-1 inline-flex items-center justify-center gap-2 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium py-3 px-6 rounded-xl transition-colors active:scale-95"
+                                    >
+                                        View Prospectus
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
+    );
+}
