@@ -324,7 +324,7 @@ export default function Home() {
                 {/* Label */}
                 <div className="flex items-center gap-3 mb-6 relative z-10">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#7B0046] animate-pulse"></span>
-                  <span className="text-[#7B0046] text-[11px] font-bold tracking-widest uppercase bg-[#7B0046]/5 px-4 py-2 md:px-6 md:py-3 rounded-lg backdrop-blur-sm border border-[#7B0046]/10">
+                  <span className="text-white text-base md:text-lg font-bold tracking-wide bg-emerald-700 px-4 py-2 md:px-6 md:py-3 rounded-xl backdrop-blur-sm border border-[#7B0046]/10">
                     Principal&apos;s Message
                   </span>
                 </div>
