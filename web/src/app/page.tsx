@@ -368,7 +368,7 @@ export default function Home() {
 
 
       {/* Academic Programs Section */}
-      <section className="py-12 md:py-24 px-4 md:px-6 bg-zinc-50">
+      <section className="py-12 md:py-24 px-4 md:px-6 bg-emerald-900/5">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="academic-heading" data-page="home">Departments of Academic Studies</h2>
