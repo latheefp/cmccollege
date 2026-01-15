@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Inbox } from 'lucide-react';
 
 interface Enquiry {
     _id: string;
@@ -85,9 +87,22 @@ export default function EnquiriesAdminPage() {
                         <button onClick={fetchEnquiries} className="mt-4 text-emerald-600 font-bold hover:underline">Retry</button>
                     </div>
                 ) : enquiries.length === 0 ? (
-                    <div className="py-24 text-center">
-                        <p className="text-zinc-400 font-bold italic text-lg">No enquiries found yet.</p>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="py-24 flex flex-col items-center justify-center text-center p-8"
+                    >
+                        <div className="relative mb-6">
+                            <div className="absolute inset-0 bg-emerald-100 rounded-full blur-xl opacity-50 animate-pulse"></div>
+                            <div className="relative bg-white p-6 rounded-full shadow-sm border border-emerald-50">
+                                <Inbox className="w-12 h-12 text-emerald-200" strokeWidth={1.5} />
+                            </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-zinc-900 mb-2">No Enquiries Yet</h3>
+                        <p className="text-zinc-500 max-w-sm mx-auto">
+                            When parents make enquiries, they will appear here instantly.
+                        </p>
+                    </motion.div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
@@ -149,7 +164,7 @@ export default function EnquiriesAdminPage() {
 
                 {/* Info Footer */}
                 <div className="px-8 py-5 bg-zinc-50/50 flex items-center justify-between">
-                    <p className="text-sm text-zinc-400 font-medium italic">Showing {enquiries.length} live records from MongoDB</p>
+                    <p className="text-sm text-zinc-400 font-medium italic">Showing {enquiries.length} records</p>
                 </div>
             </div>
         </div>

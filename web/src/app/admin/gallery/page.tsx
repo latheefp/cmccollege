@@ -223,7 +223,7 @@ export default function GalleryAdminPage() {
                 {!showForm && (
                     <button
                         onClick={() => setShowForm(true)}
-                        className="relative z-10 w-full lg:w-auto px-10 py-5 bg-white text-emerald-950 font-black rounded-3xl hover:bg-emerald-50 transition-all shadow-[0_20px_40px_rgba(0,0,0,0.2)] flex items-center justify-center gap-4 active:scale-95 group/btn"
+                        className="relative z-10 w-full lg:w-auto px-10 py-5 bg-white text-emerald-950 font-black rounded-3xl hover:bg-emerald-50 transition-all shadow-[0_20px_40px_rgba(0,0,0,0.2)] flex items-center justify-center gap-4 active:scale-95 group/btn hover:cursor-pointer hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
                     >
                         <div className="w-8 h-8 bg-emerald-100 rounded-xl flex items-center justify-center group-hover/btn:bg-emerald-200 transition-colors">
                             <svg className="w-5 h-5 text-emerald-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -247,7 +247,7 @@ export default function GalleryAdminPage() {
                             </div>
                             <button
                                 onClick={() => setShowForm(false)}
-                                className="w-14 h-14 bg-zinc-100 hover:bg-zinc-200 text-zinc-500 rounded-2xl flex items-center justify-center transition-all active:scale-90"
+                                className="w-14 h-14 bg-zinc-100 hover:bg-zinc-200 text-zinc-500 rounded-2xl flex items-center justify-center transition-all active:scale-90 cursor-pointer"
                             >
                                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
@@ -445,7 +445,7 @@ export default function GalleryAdminPage() {
                                     </div>
                                     <button
                                         onClick={() => handleDelete(item._id)}
-                                        className="w-12 h-12 bg-white/30 hover:bg-red-500 text-white rounded-2xl flex items-center justify-center transition-all group/del active:scale-90"
+                                        className="w-12 h-12 bg-white/30 hover:bg-red-500 text-white rounded-2xl flex items-center justify-center transition-all group/del active:scale-90 cursor-pointer"
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

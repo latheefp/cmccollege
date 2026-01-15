@@ -2,13 +2,23 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import {
+    Users,
+    Megaphone,
+    Image as ImageIcon,
+    TrendingUp,
+    Clock,
+    AlertCircle,
+    ArrowRight,
+    Calendar,
+    Briefcase
+} from 'lucide-react';
 
 interface Enquiry {
     _id: string;
     name: string;
-    phone: string;
     email: string;
-    message: string;
     status: 'Pending' | 'Read';
     createdAt: string;
 }
@@ -16,26 +26,13 @@ interface Enquiry {
 interface Announcement {
     _id: string;
     title: string;
-    description: string;
     isImportant: boolean;
     createdAt: string;
 }
 
 interface GalleryImage {
     _id: string;
-    title: string;
-    imageUrl: string;
-    category: string;
     createdAt: string;
-}
-
-interface Activity {
-    id: string;
-    type: 'enquiry' | 'announcement' | 'gallery' | 'status';
-    user: string;
-    action: string;
-    time: string;
-    date: Date;
 }
 
 export default function AdminDashboardPage() {
@@ -43,208 +40,235 @@ export default function AdminDashboardPage() {
     const [announcements, setAnnouncements] = useState<Announcement[]>([]);
     const [gallery, setGallery] = useState<GalleryImage[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
 
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
-    const fetchData = async () => {
-        try {
-            setLoading(true);
-            const baseUrl = API_URL.endsWith('/api') ? API_URL : `${API_URL.replace(/\/$/, '')}/api`;
-
-            const [enqRes, annRes, galRes] = await Promise.all([
-                fetch(`${baseUrl}/enquiries`),
-                fetch(`${baseUrl}/announcements`),
-                fetch(`${baseUrl}/gallery`)
-            ]);
-
-            const [enqData, annData, galData] = await Promise.all([
-                enqRes.json(),
-                annRes.json(),
-                galRes.json()
-            ]);
-
-            if (enqData.success) setEnquiries(enqData.data);
-            if (annData.success) setAnnouncements(annData.data);
-            if (galData.success) setGallery(galData.data);
-
-            setError(null);
-        } catch (err) {
-            console.error('Error fetching dashboard data:', err);
-            setError('Failed to fetch dashboard data. Please check your connection.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const baseUrl = API_URL.endsWith('/api') ? API_URL : `${API_URL.replace(/\/$/, '')}/api`;
+                const [enqRes, annRes, galRes] = await Promise.all([
+                    fetch(`${baseUrl}/enquiries`),
+                    fetch(`${baseUrl}/announcements`),
+                    fetch(`${baseUrl}/gallery`)
+                ]);
+
+                const [enqData, annData, galData] = await Promise.all([
+                    enqRes.json(), annRes.json(), galRes.json()
+                ]);
+
+                if (enqData.success) setEnquiries(enqData.data);
+                if (annData.success) setAnnouncements(annData.data);
+                if (galData.success) setGallery(galData.data);
+            } catch (err) {
+                console.error('Data fetch error:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchData();
-    }, []);
+    }, [API_URL]);
 
-    const getTimeAgo = (dateString: string) => {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-
-        if (diffInSeconds < 60) return 'Just now';
-        if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
-        if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
-        if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)}d ago`;
-        return date.toLocaleDateString();
+    const getTimeAgo = (dateStr: string) => {
+        const days = Math.floor((new Date().getTime() - new Date(dateStr).getTime()) / (1000 * 3600 * 24));
+        return days === 0 ? 'Today' : days === 1 ? 'Yesterday' : `${days}d ago`;
     };
-
-    const activities: Activity[] = [
-        ...enquiries.slice(0, 3).map(e => ({
-            id: e._id,
-            type: 'enquiry' as const,
-            user: e.name,
-            action: 'submitted a new enquiry',
-            time: getTimeAgo(e.createdAt),
-            date: new Date(e.createdAt)
-        })),
-        ...announcements.slice(0, 2).map(a => ({
-            id: a._id,
-            type: 'announcement' as const,
-            user: 'Admin',
-            action: `posted "${a.title}" notice`,
-            time: getTimeAgo(a.createdAt),
-            date: new Date(a.createdAt)
-        })),
-        ...gallery.slice(0, 1).map(g => ({
-            id: g._id,
-            type: 'gallery' as const,
-            user: 'Admin',
-            action: 'uploaded a new image to Gallery',
-            time: getTimeAgo(g.createdAt),
-            date: new Date(g.createdAt)
-        }))
-    ].sort((a, b) => b.date.getTime() - a.date.getTime());
 
     const stats = [
-        { name: 'Total Enquiries', value: enquiries.length.toString(), icon: '✉️', color: 'bg-blue-50 text-blue-600', trend: `${enquiries.filter(e => e.status === 'Pending').length} pending`, href: '/admin/enquiries' },
-        { name: 'Announcements', value: announcements.length.toString(), icon: '📢', color: 'bg-emerald-50 text-emerald-600', trend: `${announcements.filter(a => a.isImportant).length} important`, href: '/admin/announcements' },
-        { name: 'Gallery Images', value: gallery.length.toString(), icon: '🖼️', color: 'bg-purple-50 text-purple-600', trend: 'Latest upload ' + (gallery[0] ? getTimeAgo(gallery[0].createdAt) : 'N/A'), href: '/admin/gallery' },
-        { name: 'Campus Visitors', value: '82', icon: '📍', color: 'bg-orange-50 text-orange-600', trend: 'Upcoming: 4 tours', href: '#' },
+        {
+            label: 'Total Enquiries',
+            val: enquiries.length,
+            trend: `+${enquiries.filter(e => new Date(e.createdAt).getMonth() === new Date().getMonth()).length} this month`,
+            icon: Users,
+            color: 'from-blue-600 to-blue-400',
+            bg: 'bg-blue-50',
+            text: 'text-blue-600',
+            href: '/admin/enquiries'
+        },
+        {
+            label: 'Announcements',
+            val: announcements.length,
+            trend: 'Active',
+            icon: Megaphone,
+            color: 'from-emerald-600 to-emerald-400',
+            bg: 'bg-emerald-50',
+            text: 'text-emerald-600',
+            href: '/admin/announcements'
+        },
+        {
+            label: 'Gallery Assets',
+            val: gallery.length,
+            trend: 'Images',
+            icon: ImageIcon,
+            color: 'from-purple-600 to-purple-400',
+            bg: 'bg-purple-50',
+            text: 'text-purple-600',
+            href: '/admin/gallery'
+        },
+        {
+            label: 'Engagement',
+            val: '98%',
+            trend: 'Avg. Response Rate',
+            icon: TrendingUp,
+            color: 'from-orange-600 to-orange-400',
+            bg: 'bg-orange-50',
+            text: 'text-orange-600',
+            href: '#'
+        }
     ];
 
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center min-h-[400px]">
-                <div className="flex flex-col items-center gap-4">
-                    <div className="w-12 h-12 border-4 border-emerald-100 border-t-emerald-600 rounded-full animate-spin"></div>
-                    <p className="text-zinc-500 font-medium">Loading dashboard data...</p>
-                </div>
-            </div>
-        );
-    }
+    const pendingEnquiries = enquiries.filter(e => e.status === 'Pending').slice(0, 4);
 
-    if (error) {
-        return (
-            <div className="bg-red-50 border border-red-100 p-8 rounded-2xl text-center">
-                <p className="text-red-600 font-medium mb-4">{error}</p>
-                <button
-                    onClick={fetchData}
-                    className="px-6 py-2 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-colors"
-                >
-                    Retry Loading
-                </button>
-            </div>
-        );
-    }
+    if (loading) return (
+        <div className="flex h-96 items-center justify-center">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-zinc-200 border-t-zinc-800" />
+        </div>
+    );
 
     return (
-        <div className="space-y-10">
-            {/* Welcome Header */}
-            <div>
-                <h2 className="text-2xl font-bold text-zinc-900">Dashboard Overview</h2>
-                <p className="text-zinc-500 mt-1">Welcome back! Here's what's happening at your school today.</p>
+        <div className="space-y-8 animate-in fade-in duration-500">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+                <div>
+                    <h1 className="text-2xl font-bold text-zinc-900">Dashboard Overview</h1>
+                    <p className="text-zinc-500">Real-time updates and performance metrics</p>
+                </div>
+                <div className="flex gap-2">
+                    <span className="hidden sm:flex items-center gap-2 px-3 py-1 bg-zinc-100 rounded-full text-xs font-medium text-zinc-600">
+                        <Calendar size={14} />
+                        {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    </span>
+                </div>
             </div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {stats.map((stat) => (
-                    <Link key={stat.name} href={stat.href} className="block transition-transform hover:-translate-y-1">
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 hover:shadow-md transition-shadow h-full">
-                            <div className="flex justify-between items-start mb-4">
-                                <div className={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center text-2xl shadow-sm italic`}>
-                                    {stat.icon}
+            {/* Stats Overview */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {stats.map((stat, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                    >
+                        <Link href={stat.href} className="group block relative overflow-hidden bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm hover:shadow-lg transition-all duration-300">
+                            <div className={`absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity ${stat.text}`}>
+                                <stat.icon size={64} />
+                            </div>
+                            <div className="relative z-10">
+                                <div className={`w-10 h-10 rounded-xl mb-4 flex items-center justify-center ${stat.bg} ${stat.text}`}>
+                                    <stat.icon size={20} />
+                                </div>
+                                <div className="text-3xl font-bold text-zinc-900 mb-1">{stat.val}</div>
+                                <div className="flex items-center justify-between">
+                                    <div className="text-sm text-zinc-500 font-medium">{stat.label}</div>
+                                    <div className={`text-xs font-semibold px-2 py-0.5 rounded-full ${stat.bg} ${stat.text}`}>
+                                        {stat.trend}
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <p className="text-zinc-500 text-sm font-medium">{stat.name}</p>
-                                <h3 className="text-3xl font-bold text-zinc-900 mt-1">{stat.value}</h3>
-                                <p className="text-[11px] text-zinc-400 font-medium mt-3 flex items-center gap-1 uppercase tracking-wider">
-                                    {stat.trend}
-                                </p>
-                            </div>
-                        </div>
-                    </Link>
+                            <div className={`absolute bottom-0 left-0 h-1 w-0 group-hover:w-full bg-gradient-to-r ${stat.color} transition-all duration-500`} />
+                        </Link>
+                    </motion.div>
                 ))}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Recent Activity */}
-                <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-zinc-100 overflow-hidden">
-                    <div className="p-6 border-b border-zinc-50 flex justify-between items-center">
-                        <h3 className="text-lg font-bold text-zinc-900">Recent Activity</h3>
-                        <button className="text-emerald-600 text-sm font-bold hover:underline">View All</button>
-                    </div>
-                    <div className="p-0">
-                        {activities.length > 0 ? (
-                            activities.map((activity, idx) => (
-                                <div key={activity.id} className={`p-6 flex items-center gap-4 ${idx !== activities.length - 1 ? 'border-b border-zinc-50' : ''} hover:bg-zinc-50/50 transition-colors`}>
-                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${activity.type === 'enquiry' ? 'bg-blue-50 text-blue-600' :
-                                        activity.type === 'gallery' ? 'bg-purple-50 text-purple-600' :
-                                            activity.type === 'announcement' ? 'bg-emerald-50 text-emerald-600' : 'bg-zinc-50 text-zinc-600'
-                                        }`}>
-                                        {activity.type === 'enquiry' ? '✉️' : activity.type === 'gallery' ? '🖼️' : activity.type === 'announcement' ? '📢' : '⚙️'}
-                                    </div>
-                                    <div className="flex-grow">
-                                        <p className="text-sm text-zinc-800">
-                                            <span className="font-bold">{activity.user}</span> {activity.action}
-                                        </p>
-                                        <p className="text-xs text-zinc-400 mt-1 font-medium italic">{activity.time}</p>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <div className="p-12 text-center">
-                                <p className="text-zinc-400 italic">No recent activity found.</p>
+                {/* Main Content: Pending Action Items */}
+                <div className="lg:col-span-2 space-y-6">
+                    <div className="bg-white rounded-2xl border border-zinc-100 shadow-sm overflow-hidden flex flex-col h-full">
+                        <div className="p-6 border-b border-zinc-50 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                                <h3 className="font-bold text-zinc-900">Pending Enquiries</h3>
                             </div>
-                        )}
+                            <Link href="/admin/enquiries" className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 group">
+                                View All <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </div>
+
+                        <div className="p-2 flex-1">
+                            {pendingEnquiries.length > 0 ? (
+                                <div className="space-y-2">
+                                    {pendingEnquiries.map((enq) => (
+                                        <div key={enq._id} className="flex items-center justify-between p-4 hover:bg-zinc-50 rounded-xl transition-colors group cursor-pointer">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">
+                                                    {enq.name.charAt(0)}
+                                                </div>
+                                                <div>
+                                                    <div className="font-semibold text-zinc-900">{enq.name}</div>
+                                                    <div className="text-xs text-zinc-500">{enq.email}</div>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-6">
+                                                <div className="text-xs text-zinc-400 font-medium flex items-center gap-1">
+                                                    <Clock size={12} /> {getTimeAgo(enq.createdAt)}
+                                                </div>
+                                                <div className="hidden sm:block">
+                                                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-100">
+                                                        Action Reqd
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="h-full flex flex-col items-center justify-center py-12 text-zinc-400">
+                                    <Briefcase size={32} className="mb-2 opacity-20" />
+                                    <p>No pending enquiries!</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 
-                {/* Quick Actions / Tips */}
+                {/* Sidebar: Quick Info */}
                 <div className="space-y-6">
-                    <div className="bg-emerald-900 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
-                        <div className="relative z-10">
-                            <h3 className="text-lg font-bold mb-2">School Motto</h3>
-                            <p className="text-emerald-100 text-sm italic leading-relaxed">
-                                "Knowledge is light, and character is its guide."
-                            </p>
-                            <div className="mt-8 pt-6 border-t border-emerald-800">
-                                <p className="text-xs font-bold uppercase tracking-widest text-emerald-400">Pro Tip</p>
-                                <p className="text-sm text-emerald-50 mt-2">Check new enquiries daily to maintain high parent satisfaction.</p>
-                            </div>
+                    {/* Activity Timeline */}
+                    <div className="bg-white rounded-2xl border border-zinc-100 shadow-sm p-6">
+                        <h3 className="font-bold text-zinc-900 mb-6 flex items-center gap-2">
+                            <Clock size={18} className="text-zinc-400" />
+                            Recent Activity
+                        </h3>
+                        <div className="space-y-6 relative before:absolute before:left-2 before:top-0 before:bottom-0 before:w-0.5 before:bg-zinc-100">
+                            {[
+                                ...enquiries.slice(0, 2).map(e => ({ type: 'Enquiry', msg: `New enquiry from ${e.name}`, time: getTimeAgo(e.createdAt) })),
+                                ...announcements.slice(0, 1).map(a => ({ type: 'Notice', msg: `Posted "${a.title}"`, time: getTimeAgo(a.createdAt) })),
+                                ...gallery.slice(0, 1).map(g => ({ type: 'Upload', msg: 'New gallery image added', time: getTimeAgo(g.createdAt) }))
+                            ].map((item, i) => (
+                                <div key={i} className="relative pl-8 cursor-pointer hover:bg-zinc-50/50 p-2 rounded-lg transition-colors">
+                                    <div className="absolute left-0 top-3 w-4 h-4 rounded-full border-2 border-white bg-blue-500 shadow-sm z-10" />
+                                    <p className="text-sm font-medium text-zinc-800">{item.msg}</p>
+                                    <p className="text-xs text-zinc-400 mt-1">{item.time}</p>
+                                </div>
+                            ))}
                         </div>
-                        {/* Decorative circles */}
-                        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
-                        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-emerald-400/10 rounded-full blur-2xl"></div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
-                        <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-widest mb-6">Quick Links</h3>
-                        <div className="space-y-4">
-                            <button className="w-full py-3 px-4 bg-zinc-50 hover:bg-zinc-100 text-zinc-700 text-sm font-bold rounded-xl transition-all flex items-center justify-between group">
-                                Post Announcement
-                                <span className="text-zinc-300 group-hover:text-emerald-600 transition-colors">→</span>
-                            </button>
-                            <button className="w-full py-3 px-4 bg-zinc-50 hover:bg-zinc-100 text-zinc-700 text-sm font-bold rounded-xl transition-all flex items-center justify-between group">
-                                Upload Gallery
-                                <span className="text-zinc-300 group-hover:text-emerald-600 transition-colors">→</span>
-                            </button>
+                    {/* Pro Tip Card */}
+                    {/* Daily Quote Card */}
+                    <div className="bg-gradient-to-br from-emerald-900 to-teal-900 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs uppercase tracking-wider mb-3">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                Daily Inspiration
+                            </div>
+                            <blockquote className="text-lg font-serif italic leading-relaxed text-emerald-50 opacity-90">
+                                "Education is the passport to the future, for tomorrow belongs to those who prepare for it today."
+                            </blockquote>
+                            <div className="mt-4 flex items-center gap-3">
+                                <div className="h-0.5 w-8 bg-emerald-500/50"></div>
+                                <cite className="text-sm font-medium text-emerald-300 not-italic">Malcolm X</cite>
+                            </div>
                         </div>
+                        {/* Decorative elements */}
+                        <div className="absolute -bottom-8 -right-8 text-emerald-800/20 rotate-12">
+                            <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.01697 21L5.01697 18C5.01697 16.8954 5.9124 16 7.01697 16H10.017C10.5693 16 11.017 15.5523 11.017 15V9C11.017 8.44772 10.5693 8 10.017 8H6.01697C5.46468 8 5.01697 8.44772 5.01697 9V11C5.01697 11.5523 4.56925 12 4.01697 12H3.01697V5H13.017V15C13.017 18.3137 10.3307 21 7.01697 21H5.01697Z" />
+                            </svg>
+                        </div>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
                     </div>
                 </div>
             </div>

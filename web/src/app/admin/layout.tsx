@@ -159,12 +159,7 @@ export default function AdminLayout({
 
             {/* Main Content Area */}
             <div className="flex-grow lg:ml-64 flex flex-col transition-all duration-300">
-                {/* Debug Info */}
-                {user && (
-                    <div className="bg-yellow-100 p-2 text-xs text-center border-b border-yellow-200 text-yellow-800">
-                        DEBUG: Role = {String((user.publicMetadata as any)?.role)} | Metadata = {JSON.stringify(user.publicMetadata)}
-                    </div>
-                )}
+                {/* Debug Info Removed */}
                 {/* Top Header */}
                 <header className="h-20 bg-white border-b border-zinc-200 sticky top-0 z-40 flex items-center justify-between px-6 lg:px-10">
                     <div className="flex items-center gap-4">
