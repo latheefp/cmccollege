@@ -12,7 +12,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className="bg-emerald-950 text-emerald-50 py-20 px-6">
+        <footer className="bg-emerald-950 text-emerald-50 py-15 px-6">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
                 {/* School Info */}
                 <div className="col-span-1 md:col-span-1">
@@ -119,7 +119,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-emerald-900/50 text-center text-sm text-emerald-200/40">
+            <div className="max-w-7xl mx-auto mt-10 pt-8 border-t border-emerald-900/50 text-center text-sm text-emerald-200/40">
                 <p>&copy; {new Date().getFullYear()} School Name. All rights reserved.</p>
             </div>
         </footer>
