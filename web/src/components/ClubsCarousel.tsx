@@ -83,14 +83,14 @@ export default function ClubsCarousel() {
     const displayClubs = [...clubs, ...clubs, ...clubs];
 
     return (
-        <section className="py-24 bg-zinc-50 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 mb-16">
+        <section className="py-12 md:py-24 bg-zinc-50 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8 md:mb-16">
                 <div className="text-center">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-3xl md:text-4xl font-semibold text-emerald-800 mb-3 tracking-tight"
+                        className="text-2xl md:text-4xl font-semibold text-emerald-800 mb-2 md:mb-3 tracking-tight"
                     >
                         Student Clubs & Activities
                     </motion.h2>
@@ -99,7 +99,7 @@ export default function ClubsCarousel() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-zinc-500 text-lg max-w-2xl mx-auto font-medium"
+                        className="text-zinc-500 text-sm md:text-lg max-w-2xl mx-auto font-medium"
                     >
                         Platforms that encourage leadership, innovation, and social responsibility
                     </motion.p>
@@ -109,22 +109,22 @@ export default function ClubsCarousel() {
             {/* Carousel */}
             <motion.div
                 ref={carouselRef}
-                className="pl-6"
+                className="pl-4 md:pl-6"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
                 <motion.div
                     animate={controls}
                     style={{ x }}
-                    className="flex gap-6 w-max"
+                    className="flex gap-4 md:gap-6 w-max"
                 >
                     {displayClubs.map((club, index) => (
                         <motion.div
                             key={`${club.id}-${index}`}
-                            className="bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 w-28 h-28 md:w-48 md:h-48 flex flex-col items-center justify-center border border-zinc-100 group cursor-pointer relative overflow-hidden"
+                            className="bg-white rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 w-28 h-28 md:w-48 md:h-48 flex flex-col items-center justify-center border border-zinc-100 group cursor-pointer relative overflow-hidden"
                             whileHover={{ y: -8 }}
                         >
-                            <div className="relative w-14 h-14 md:w-24 md:h-24 mb-2 md:mb-4 transition-transform duration-500 group-hover:scale-110">
+                            <div className="relative w-12 h-12 md:w-24 md:h-24 mb-2 md:mb-4 transition-transform duration-500 group-hover:scale-110">
                                 <Image
                                     src={club.image}
                                     alt={club.name}

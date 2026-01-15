@@ -107,7 +107,7 @@ export default function Testimonials() {
                 </motion.div>
 
                 {/* Testimonial Carousel */}
-                <div className="relative min-h-[350px] md:min-h-[300px] flex items-center justify-center">
+                <div className="relative min-h-[450px] md:min-h-[350px] flex items-center justify-center">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={testimonials[currentIndex].id}
@@ -119,17 +119,17 @@ export default function Testimonials() {
                             dragConstraints={{ left: 0, right: 0 }}
                             dragElastic={1}
                             onDragEnd={handleDragEnd}
-                            className="absolute inset-0 flex flex-col items-center justify-center px-4 touch-pan-y"
+                            className="absolute inset-0 flex flex-col items-center justify-center px-4 md:px-12 touch-pan-y"
                         >
                             <div className="max-w-4xl">
-                                <p className="text-base md:text-lg lg:text-xl font-medium leading-loose italic opacity-90 mb-6 md:mb-8 font-serif">
+                                <p className="text-sm sm:text-base md:text-xl font-medium leading-loose italic opacity-90 mb-6 md:mb-8 font-serif">
                                     &quot;{testimonials[currentIndex].quote}&quot;
                                 </p>
-                                <div className="flex flex-col items-center gap-1.5">
-                                    <h4 className="text-base md:text-lg font-bold text-emerald-200 uppercase tracking-wide">
+                                <div className="flex flex-col items-center gap-2">
+                                    <h4 className="text-sm md:text-lg font-bold text-emerald-200 uppercase tracking-wide">
                                         {testimonials[currentIndex].name}
                                     </h4>
-                                    <span className="text-xs md:text-sm text-gray-300 font-medium tracking-wider bg-white/10 px-3 py-1 rounded-full">
+                                    <span className="text-[10px] md:text-sm text-gray-300 font-medium tracking-wider bg-white/10 px-3 py-1 rounded-full">
                                         {testimonials[currentIndex].program} &bull; {testimonials[currentIndex].year}
                                     </span>
                                 </div>

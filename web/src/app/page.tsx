@@ -177,7 +177,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[148px] lg:pt-[164px]">
       {/* Hero Section */}
       <section
-        className="relative min-h-[75vh] flex flex-col items-center justify-center py-24 px-6 md:py-40 text-white overflow-hidden"
+        className="relative min-h-[60vh] md:min-h-[75vh] flex flex-col items-center justify-center py-16 px-4 md:py-40 text-white overflow-hidden"
       >
         {/* Hero Background Slider */}
         <div className="absolute inset-0 z-0 bg-black">
@@ -368,9 +368,9 @@ export default function Home() {
 
 
       {/* Academic Programs Section */}
-      <section className="py-24 px-6 bg-zinc-50">
+      <section className="py-12 md:py-24 px-4 md:px-6 bg-zinc-50">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-16">
+          <ScrollReveal className="text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="academic-heading" data-page="home">Departments of Academic Studies</h2>
             <p className="text-zinc-600 text-lg max-w-2xl mx-auto" data-editable="academic-description" data-page="home">Offering a wide range of undergraduate and postgraduate programs driven by excellence.</p>
           </ScrollReveal>
@@ -418,14 +418,14 @@ export default function Home() {
       </section>
 
       {/* Facilities Preview Section */}
-      <section className="py-24 px-6 bg-emerald-900/5">
+      <section className="py-12 md:py-24 px-4 md:px-6 bg-emerald-900/5">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="facilities-heading" data-page="home">Campus Facilities</h2>
-            <p className="text-zinc-600 text-lg" data-editable="facilities-description" data-page="home">Premium infrastructure providing a comfortable learning experience.</p>
+          <ScrollReveal className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl md:text-4xl font-bold text-emerald-800 mb-3 md:mb-4" data-editable="facilities-heading" data-page="home">Campus Facilities</h2>
+            <p className="text-zinc-600 text-sm md:text-lg" data-editable="facilities-description" data-page="home">Premium infrastructure providing a comfortable learning experience.</p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 md:gap-8">
             {[
               { name: "Hostel", img: "/images/school_hostel_1768115536813.png" },
               { name: "Masjid", img: "/images/school_masjid_1768115559090.png" },
