@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 interface Announcement {
     _id: string;
@@ -20,8 +21,13 @@ const fallbackAnnouncements = [
 ];
 
 export default function BottomTicker() {
+    const pathname = usePathname();
     const [announcements, setAnnouncements] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
+
+    if (pathname?.startsWith('/admin')) {
+        return null;
+    }
 
     useEffect(() => {
         const fetchAnnouncements = async () => {
