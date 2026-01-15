@@ -6,7 +6,7 @@ export const requireAdmin = [
     requireAuth(),
     // Check the role in metadata
     (req: Request, res: Response, next: NextFunction) => {
-        const role = ((req as any).auth?.sessionClaims?.metadata as any)?.role;
+        const role = ((req as any).auth()?.sessionClaims?.metadata as any)?.role;
 
         if (role !== 'admin' && role !== 'super_admin') {
             res.status(403).json({ message: 'Forbidden: Admin access required' });

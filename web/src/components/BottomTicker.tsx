@@ -79,20 +79,24 @@ export default function BottomTicker() {
                 </div>
 
                 {/* Marquee Container */}
+                {/* Optimized for seamless infinite loop */}
                 <div className="flex-1 relative overflow-hidden flex items-center">
                     {/* Gradient Mask Left */}
                     <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-neutral-900 to-transparent z-10 pointer-events-none"></div>
                     {/* Gradient Mask Right */}
                     <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-neutral-900 to-transparent z-10 pointer-events-none"></div>
 
-                    {/* Optimized for 9s infinite loop with gap correction */}
-                    <div className="flex items-center gap-12 animate-marquee whitespace-nowrap min-w-full pr-12" style={{ animationDuration: '9s' }}>
-                        {Array(8).fill(displayList).flat().map((item, index) => (
-                            <div key={index} className="flex items-center gap-3 group cursor-pointer">
-                                <span className="text-neutral-300 text-xs md:text-sm font-medium hover:text-white transition-colors">
-                                    {item}
-                                </span>
-                                <span className="text-white text-[10px]">|</span>
+                    <div className="flex animate-marquee whitespace-nowrap w-max" style={{ animationDuration: '25s', willChange: 'transform' }}>
+                        {[0, 1].map((part) => (
+                            <div key={part} className="flex items-center gap-12 pr-12">
+                                {Array(4).fill(displayList).flat().map((item, index) => (
+                                    <div key={`${part}-${index}`} className="flex items-center gap-3 group cursor-pointer">
+                                        <span className="text-neutral-300 text-xs md:text-sm font-medium hover:text-white transition-colors">
+                                            {item}
+                                        </span>
+                                        <span className="text-white text-[10px]">|</span>
+                                    </div>
+                                ))}
                             </div>
                         ))}
                     </div>

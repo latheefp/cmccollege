@@ -39,7 +39,7 @@ export const promoteUserToAdmin = async (req: Request, res: Response) => {
 
 export const syncUser = async (req: Request, res: Response) => {
     try {
-        const { userId, sessionClaims } = (req as any).auth;
+        const { userId, sessionClaims } = (req as any).auth();
 
         if (!userId) {
             return res.status(401).json({ error: 'Unauthorized' });
