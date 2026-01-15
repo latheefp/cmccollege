@@ -174,7 +174,7 @@ export default function Home() {
     }));
 
   return (
-    <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[148px] lg:pt-[164px]">
+    <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[148px] lg:pt-[164px] bg-[#7B0046]/[0.03]">
       {/* Hero Section */}
       <section
         className="relative min-h-[60vh] md:min-h-[75vh] flex flex-col items-center justify-center py-16 px-4 md:py-40 text-white overflow-hidden"
