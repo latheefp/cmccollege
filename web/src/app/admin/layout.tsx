@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { FileText } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useUser, UserButton, SignOutButton } from '@clerk/nextjs';
+import { FileText, LogOut } from 'lucide-react';
 
 export default function AdminLayout({
     children,
@@ -12,6 +13,19 @@ export default function AdminLayout({
 }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const pathname = usePathname();
+    const { user, isLoaded } = useUser();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (isLoaded && user) {
+            console.log("Admin Layout - Authorization Check:", user.publicMetadata); // DEBUG LOG
+            const role = (user.publicMetadata as any)?.role;
+            if (role !== "admin" && role !== "super_admin") {
+                console.log("Access Denied. Role found:", role); // DEBUG LOG
+                // router.push('/'); // TEMPORARILY DISABLED FOR DEBUGGING
+            }
+        }
+    }, [user, isLoaded, router]);
 
     const navigation = [
         {
@@ -22,16 +36,16 @@ export default function AdminLayout({
             )
         },
         {
-            name: 'Enquiries', href: '/admin/enquiries', icon: (
+            name: 'Announcements', href: '/admin/announcements', icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
             )
         },
         {
-            name: 'Announcements', href: '/admin/announcements', icon: (
+            name: 'Enquiries', href: '/admin/enquiries', icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
             )
         },
@@ -47,6 +61,13 @@ export default function AdminLayout({
                 <FileText className="w-5 h-5" />
             )
         },
+        // {
+        //     name: 'Users', href: '/admin/users', icon: (
+        //         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+        //         </svg>
+        //     )
+        // },
     ];
 
     return (
@@ -77,15 +98,14 @@ export default function AdminLayout({
                 </nav>
 
                 <div className="p-4 border-t border-zinc-800">
-                    <Link
-                        href="/"
-                        className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-red-400 transition-colors"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                        Logout
-                    </Link>
+                    <div className="p-4 border-t border-zinc-800">
+                        <SignOutButton>
+                            <button className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-red-400 transition-colors w-full text-left">
+                                <LogOut className="w-5 h-5" />
+                                Logout
+                            </button>
+                        </SignOutButton>
+                    </div>
                 </div>
             </aside>
 
@@ -126,20 +146,25 @@ export default function AdminLayout({
                             {item.name}
                         </Link>
                     ))}
-                    <Link
-                        href="/"
-                        className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-red-400 transition-colors mt-8"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                        Logout
-                    </Link>
+                    <div className="mt-8 border-t border-zinc-800 pt-2">
+                        <SignOutButton>
+                            <button className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-red-400 transition-colors w-full text-left">
+                                <LogOut className="w-5 h-5" />
+                                Logout
+                            </button>
+                        </SignOutButton>
+                    </div>
                 </nav>
             </aside>
 
             {/* Main Content Area */}
             <div className="flex-grow lg:ml-64 flex flex-col transition-all duration-300">
+                {/* Debug Info */}
+                {user && (
+                    <div className="bg-yellow-100 p-2 text-xs text-center border-b border-yellow-200 text-yellow-800">
+                        DEBUG: Role = {String((user.publicMetadata as any)?.role)} | Metadata = {JSON.stringify(user.publicMetadata)}
+                    </div>
+                )}
                 {/* Top Header */}
                 <header className="h-20 bg-white border-b border-zinc-200 sticky top-0 z-40 flex items-center justify-between px-6 lg:px-10">
                     <div className="flex items-center gap-4">
@@ -178,12 +203,14 @@ export default function AdminLayout({
 
                             <div className="flex items-center gap-3 pl-4 border-l border-zinc-200">
                                 <div className="text-right hidden sm:block">
-                                    <p className="text-sm font-bold text-zinc-800 leading-none">Admin User</p>
-                                    <p className="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider mt-1">Super Admin</p>
+                                    <p className="text-sm font-bold text-zinc-800 leading-none">
+                                        {user?.fullName || user?.firstName || 'Admin User'}
+                                    </p>
+                                    <p className="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider mt-1">
+                                        {(user?.publicMetadata?.role as string)?.replace('_', ' ') || 'Admin'}
+                                    </p>
                                 </div>
-                                <div className="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold shadow-inner">
-                                    AD
-                                </div>
+                                <UserButton afterSignOutUrl="/" />
                             </div>
                         </div>
                     </div>

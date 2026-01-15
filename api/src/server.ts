@@ -7,6 +7,7 @@ import announcementRoutes from './routes/announcementRoutes';
 import galleryRoutes from './routes/galleryRoutes';
 import imagekitRoutes from './routes/imagekitRoutes';
 import pageRoutes from './routes/pageRoutes';
+import userRoutes from './routes/userRoutes';
 
 // Load environment variables
 dotenv.config();
@@ -26,6 +27,7 @@ app.use('/api/announcements', announcementRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/imagekit', imagekitRoutes);
 app.use('/api/pages', pageRoutes);
+app.use('/api/users', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('School API is running');

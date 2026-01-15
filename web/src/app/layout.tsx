@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BottomTicker from "@/components/BottomTicker";
 import AdmissionPopup from "@/components/AdmissionPopup";
+import UserSync from "@/components/UserSync";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
           <Footer />
           <BottomTicker />
           <AdmissionPopup />
+          <UserSync />
         </body>
       </html>
     </ClerkProvider>
