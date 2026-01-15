@@ -64,7 +64,7 @@ export default function AdmissionPopup() {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="fixed z-[100] bg-white rounded-2xl shadow-2xl overflow-hidden
+                        className="fixed z-[100] bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden
                        top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
                        w-[calc(100%-2rem)] sm:w-full sm:max-w-lg border border-emerald-100"
                     >
