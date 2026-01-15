@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '@clerk/nextjs';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Trash2, Edit2, X, Image as ImageIcon, Loader2 } from 'lucide-react';
@@ -23,9 +23,7 @@ export default function AdminNewsPage() {
     const [showModal, setShowModal] = useState(false);
     const [editingItem, setEditingItem] = useState<NewsItem | null>(null);
     const { getToken } = useAuth();
-    const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<NewsItem>();
-
-    const imageUrl = watch('image');
+    const { register, handleSubmit, reset, setValue, control, formState: { errors } } = useForm<NewsItem>();
 
     const fetchNews = async () => {
         try {
@@ -165,91 +163,122 @@ export default function AdminNewsPage() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-md"
                     >
                         <motion.div
-                            initial={{ scale: 0.95, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            className="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-xl"
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="bg-white rounded-[32px] w-full max-w-2xl shadow-2xl border border-white/20 relative flex flex-col max-h-[90vh]"
                         >
-                            <div className="p-4 border-b border-zinc-100 flex justify-between items-center">
-                                <h2 className="text-xl font-bold text-zinc-900">
-                                    {editingItem ? 'Edit News' : 'Add News'}
-                                </h2>
-                                <button onClick={() => setShowModal(false)} className="p-2 hover:bg-zinc-100 rounded-full">
-                                    <X size={20} />
+                            {/* Decorative Background Blob */}
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+
+                            <div className="p-8 border-b border-zinc-100 flex justify-between items-center relative z-10">
+                                <div>
+                                    <h2 className="text-2xl font-black text-zinc-900 tracking-tight">
+                                        {editingItem ? 'Edit News Event' : 'Create News Event'}
+                                    </h2>
+                                    <p className="text-zinc-500 text-sm font-medium mt-1">Share the latest highlights with the campus.</p>
+                                </div>
+                                <button
+                                    onClick={() => setShowModal(false)}
+                                    className="p-3 hover:bg-zinc-100 rounded-full transition-colors text-zinc-400 hover:text-zinc-600"
+                                >
+                                    <X size={24} />
                                 </button>
                             </div>
 
-                            <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-zinc-700 mb-1">Title</label>
-                                    <input
-                                        {...register('title', { required: true })}
-                                        className="w-full px-4 py-2 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                                        placeholder="Event Title"
-                                    />
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-zinc-700 mb-1">Date</label>
+                            <form onSubmit={handleSubmit(onSubmit)} className="p-8 space-y-6 relative z-10 overflow-y-auto">
+                                <div className="space-y-4">
+                                    <div className="group">
+                                        <label className="block text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 ml-1">Event Title</label>
                                         <input
-                                            type="date"
-                                            {...register('date', { required: true })}
-                                            className="w-full px-4 py-2 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                            {...register('title', { required: "Title is required" })}
+                                            className="w-full px-5 py-4 bg-zinc-50 border-2 border-zinc-100 rounded-2xl focus:outline-none focus:border-emerald-500 focus:bg-white transition-all font-semibold text-zinc-800 placeholder:text-zinc-400"
+                                            placeholder="e.g., Annual Sports Meet 2026"
+                                        />
+                                        {errors.title && <p className="text-red-500 text-xs mt-1 ml-1">{errors.title.message}</p>}
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="group">
+                                            <label className="block text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 ml-1">Event Date</label>
+                                            <input
+                                                type="date"
+                                                {...register('date', { required: "Date is required" })}
+                                                className="w-full px-5 py-4 bg-zinc-50 border-2 border-zinc-100 rounded-2xl focus:outline-none focus:border-emerald-500 focus:bg-white transition-all font-medium text-zinc-800"
+                                            />
+                                        </div>
+                                        <div className="group">
+                                            <label className="block text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 ml-1">Category Tag</label>
+                                            <div className="relative">
+                                                <select
+                                                    {...register('tag', { required: true })}
+                                                    className="w-full px-5 py-4 bg-zinc-50 border-2 border-zinc-100 rounded-2xl focus:outline-none focus:border-emerald-500 focus:bg-white transition-all font-medium text-zinc-800 appearance-none cursor-pointer"
+                                                >
+                                                    <option value="General">General</option>
+                                                    <option value="Seminar">Seminar</option>
+                                                    <option value="Sports">Sports</option>
+                                                    <option value="Cultural">Cultural</option>
+                                                    <option value="Academic">Academic</option>
+                                                    <option value="Workshop">Workshop</option>
+                                                    <option value="Events">Events</option>
+                                                </select>
+                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="group">
+                                        <label className="block text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 ml-1">Brief Description</label>
+                                        <textarea
+                                            {...register('description', { required: "Description is required" })}
+                                            rows={3}
+                                            className="w-full px-5 py-4 bg-zinc-50 border-2 border-zinc-100 rounded-2xl focus:outline-none focus:border-emerald-500 focus:bg-white transition-all font-medium text-zinc-800 placeholder:text-zinc-400 resize-none"
+                                            placeholder="Summarize the event in a few sentences..."
                                         />
                                     </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-zinc-700 mb-1">Tag</label>
-                                        <select
-                                            {...register('tag', { required: true })}
-                                            className="w-full px-4 py-2 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                                        >
-                                            <option value="General">General</option>
-                                            <option value="Seminar">Seminar</option>
-                                            <option value="Sports">Sports</option>
-                                            <option value="Cultural">Cultural</option>
-                                            <option value="Academic">Academic</option>
-                                            <option value="Workshop">Workshop</option>
-                                            <option value="Events">Events</option>
-                                        </select>
+
+                                    <div className="group">
+                                        <label className="block text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 ml-1">Cover Image</label>
+                                        <div className="bg-zinc-50 p-2 rounded-2xl border-2 border-zinc-100">
+                                            <Controller
+                                                name="image"
+                                                control={control}
+                                                rules={{ required: "Image is required" }}
+                                                render={({ field: { value, onChange } }) => (
+                                                    <ImageUpload
+                                                        currentImage={value}
+                                                        onUploadComplete={(url) => {
+                                                            onChange(url);
+                                                        }}
+                                                        folder="/news"
+                                                    />
+                                                )}
+                                            />
+                                        </div>
+                                        {errors.image && <p className="text-red-500 text-xs mt-1 ml-1">{errors.image.message}</p>}
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-zinc-700 mb-1">Description</label>
-                                    <textarea
-                                        {...register('description', { required: true })}
-                                        rows={3}
-                                        className="w-full px-4 py-2 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                                        placeholder="Short description..."
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-zinc-700 mb-2">Cover Image</label>
-                                    <ImageUpload
-                                        currentImage={imageUrl}
-                                        onUploadComplete={(url: string) => setValue('image', url)}
-                                        folder="/news"
-                                    />
-                                    <input type="hidden" {...register('image', { required: true })} />
-                                </div>
-
-                                <div className="flex gap-3 pt-4">
+                                <div className="flex gap-4 pt-4 border-t border-zinc-100 mt-8">
                                     <button
                                         type="button"
                                         onClick={() => setShowModal(false)}
-                                        className="flex-1 px-4 py-2 border border-zinc-200 text-zinc-700 font-medium rounded-lg hover:bg-zinc-50"
+                                        className="flex-1 px-6 py-4 border-2 border-zinc-100 text-zinc-600 font-bold rounded-2xl hover:bg-zinc-50 hover:text-zinc-900 transition-all active:scale-95"
                                     >
                                         Cancel
                                     </button>
                                     <button
                                         type="submit"
-                                        className="flex-1 px-4 py-2 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700"
+                                        className="flex-[2] px-6 py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 active:scale-95 flex items-center justify-center gap-2"
                                     >
-                                        {editingItem ? 'Update' : 'Create'}
+                                        {editingItem ? 'Save Updates' : 'Publish Event'}
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                                     </button>
                                 </div>
                             </form>
