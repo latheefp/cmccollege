@@ -55,7 +55,7 @@ export default function AdmissionPopup() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={handleClose}
-                        className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 sm:p-0"
+                        className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 sm:p-0"
                     />
 
                     {/* Modal Container */}
@@ -64,9 +64,9 @@ export default function AdmissionPopup() {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="fixed z-50 w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden
+                        className="fixed z-[100] bg-white rounded-2xl shadow-2xl overflow-hidden
                        top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                       mx-4 sm:mx-auto border border-emerald-100"
+                       w-[calc(100%-2rem)] sm:w-full sm:max-w-lg border border-emerald-100"
                     >
                         {/* Decorative Header Bar */}
                         <div className="h-2 bg-gradient-to-r from-emerald-800 to-emerald-600 w-full" />

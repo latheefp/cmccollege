@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 interface Enquiry {
     _id: string;
@@ -120,10 +121,10 @@ export default function AdminDashboardPage() {
     ].sort((a, b) => b.date.getTime() - a.date.getTime());
 
     const stats = [
-        { name: 'Total Enquiries', value: enquiries.length.toString(), icon: '✉️', color: 'bg-blue-50 text-blue-600', trend: `${enquiries.filter(e => e.status === 'Pending').length} pending` },
-        { name: 'Announcements', value: announcements.length.toString(), icon: '📢', color: 'bg-emerald-50 text-emerald-600', trend: `${announcements.filter(a => a.isImportant).length} important` },
-        { name: 'Gallery Images', value: gallery.length.toString(), icon: '🖼️', color: 'bg-purple-50 text-purple-600', trend: 'Latest upload ' + (gallery[0] ? getTimeAgo(gallery[0].createdAt) : 'N/A') },
-        { name: 'Campus Visitors', value: '82', icon: '📍', color: 'bg-orange-50 text-orange-600', trend: 'Upcoming: 4 tours' },
+        { name: 'Total Enquiries', value: enquiries.length.toString(), icon: '✉️', color: 'bg-blue-50 text-blue-600', trend: `${enquiries.filter(e => e.status === 'Pending').length} pending`, href: '/admin/enquiries' },
+        { name: 'Announcements', value: announcements.length.toString(), icon: '📢', color: 'bg-emerald-50 text-emerald-600', trend: `${announcements.filter(a => a.isImportant).length} important`, href: '/admin/announcements' },
+        { name: 'Gallery Images', value: gallery.length.toString(), icon: '🖼️', color: 'bg-purple-50 text-purple-600', trend: 'Latest upload ' + (gallery[0] ? getTimeAgo(gallery[0].createdAt) : 'N/A'), href: '/admin/gallery' },
+        { name: 'Campus Visitors', value: '82', icon: '📍', color: 'bg-orange-50 text-orange-600', trend: 'Upcoming: 4 tours', href: '#' },
     ];
 
     if (loading) {
@@ -162,20 +163,22 @@ export default function AdminDashboardPage() {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map((stat) => (
-                    <div key={stat.name} className="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 hover:shadow-md transition-shadow">
-                        <div className="flex justify-between items-start mb-4">
-                            <div className={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center text-2xl shadow-sm italic`}>
-                                {stat.icon}
+                    <Link key={stat.name} href={stat.href} className="block transition-transform hover:-translate-y-1">
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 hover:shadow-md transition-shadow h-full">
+                            <div className="flex justify-between items-start mb-4">
+                                <div className={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center text-2xl shadow-sm italic`}>
+                                    {stat.icon}
+                                </div>
+                            </div>
+                            <div>
+                                <p className="text-zinc-500 text-sm font-medium">{stat.name}</p>
+                                <h3 className="text-3xl font-bold text-zinc-900 mt-1">{stat.value}</h3>
+                                <p className="text-[11px] text-zinc-400 font-medium mt-3 flex items-center gap-1 uppercase tracking-wider">
+                                    {stat.trend}
+                                </p>
                             </div>
                         </div>
-                        <div>
-                            <p className="text-zinc-500 text-sm font-medium">{stat.name}</p>
-                            <h3 className="text-3xl font-bold text-zinc-900 mt-1">{stat.value}</h3>
-                            <p className="text-[11px] text-zinc-400 font-medium mt-3 flex items-center gap-1 uppercase tracking-wider">
-                                {stat.trend}
-                            </p>
-                        </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
 

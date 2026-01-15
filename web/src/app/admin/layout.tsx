@@ -56,11 +56,11 @@ export default function AdminLayout({
                 </svg>
             )
         },
-        {
-            name: 'Pages', href: '/admin/pages', icon: (
-                <FileText className="w-5 h-5" />
-            )
-        },
+        // {
+        //     name: 'Pages', href: '/admin/pages', icon: (
+        //         <FileText className="w-5 h-5" />
+        //     )
+        // },
         // {
         //     name: 'Users', href: '/admin/users', icon: (
         //         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
