@@ -115,13 +115,13 @@ export default function ClubsCarousel() {
                     {displayClubs.map((club, index) => (
                         <motion.div
                             key={`${club.id}-${index}`}
-                            className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 w-64 h-64 flex flex-col items-center justify-center border border-zinc-100 group cursor-pointer"
+                            className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 w-32 h-32 md:w-64 md:h-64 flex flex-col items-center justify-center border border-zinc-100 group cursor-pointer"
                             whileHover={{ y: -8 }}
                         >
-                            <div className="text-6xl mb-6 bg-zinc-50 p-6 rounded-full group-hover:scale-110 transition-transform duration-300">
+                            <div className="text-3xl md:text-6xl mb-3 md:mb-6 bg-zinc-50 p-3 md:p-6 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 {club.icon}
                             </div>
-                            <h3 className="text-lg font-bold text-zinc-800 text-center px-4 group-hover:text-emerald-700 transition-colors">
+                            <h3 className="text-xs md:text-lg font-bold text-zinc-800 text-center px-1 md:px-4 group-hover:text-emerald-700 transition-colors leading-tight">
                                 {club.name}
                             </h3>
                         </motion.div>
