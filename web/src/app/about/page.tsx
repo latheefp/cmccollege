@@ -92,72 +92,56 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* 3. GUIDED BY VISIONARIES */}
+            {/* 3. CHAIRMAN'S MESSAGE */}
             <section className="py-20 bg-emerald-50">
                 <div className="container mx-auto px-4 md:px-6">
                     <ScrollReveal>
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold font-serif text-zinc-900 mb-4">Guided by Visionaries</h2>
-                            <p className="text-zinc-500 max-w-2xl mx-auto">Leadership that inspires excellence and integrity in every endeavor.</p>
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-4xl font-bold font-serif text-zinc-900 mb-4">Chairman's Message</h2>
+                            <p className="text-zinc-500 max-w-2xl mx-auto">Guiding our institution with wisdom and foresight.</p>
                         </div>
                     </ScrollReveal>
 
-                    <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <ScrollReveal delay={100}>
+                        <div className="max-w-5xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-emerald-100/50 flex flex-col md:flex-row gap-10 items-start hover:shadow-xl transition-shadow duration-300">
 
-                        {/* Principal's Message Card */}
-                        <ScrollReveal delay={100}>
-                            <div className="group bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-emerald-100/50 h-full flex flex-col">
-                                <div className="flex items-center gap-6 mb-6">
-                                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-emerald-100 relative shrink-0">
-                                        <Image
-                                            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
-                                            alt="Principal"
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-zinc-900">Principal's Message</h3>
-                                        <p className="text-emerald-600/80 text-sm font-medium">Leading with Heart</p>
+                            {/* Chairman Image */}
+                            <div className="shrink-0 mx-auto md:mx-0">
+                                <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden border-4 border-emerald-50 shadow-inner relative group">
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
+                                        alt="Dr. Abdul Rahman"
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                </div>
+                                <div className="mt-4 text-center">
+                                    <h3 className="text-xl font-bold text-zinc-900">Dr. Abdul Rahman</h3>
+                                    <span className="inline-block mt-1 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-bold uppercase tracking-wider rounded-full">
+                                        Chairman
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Message Content */}
+                            <div className="flex-1 space-y-6 text-center md:text-left">
+                                <div className="relative">
+                                    <Quote className="absolute -top-4 -left-4 md:-left-8 text-emerald-100 w-16 h-16 -z-10 opacity-50" />
+                                    <div className="prose prose-lg text-zinc-600 leading-relaxed text-justify">
+                                        <p>
+                                            "The CM Centre has had a successful journey spanning three decades, during which it has established educational institutions in various locations in Kozhikode and Wayanad. The organization has also undertaken charitable initiatives across Kerala, providing educational opportunities to people of all ages, from primary school to post-graduation, as well as conducting research. Through its efforts, the CM Centre has helped hundreds of students from disadvantaged financial and social backgrounds to pursue successful careers in fields such as Islamic Studies, Medicine, Engineering, Teaching, and Management. Students studying at the CM Centre’s campuses have achieved remarkable academic success, scoring high ranks in a variety of exams and setting new records. The CM Centre’s contributions to society are significant, as it has helped individuals improve their educational and social standing."
+                                        </p>
                                     </div>
                                 </div>
-                                <blockquote className="text-zinc-600 italic mb-8 flex-1 leading-relaxed">
-                                    "Education is the kindling of a flame, not the filling of a vessel. At CM College, we strive to ignite the passion for learning in every student..."
-                                </blockquote>
-                                <Link
-                                    href="/principal-message"
-                                    className="inline-flex items-center text-emerald-800 font-bold text-sm tracking-wide hover:gap-2 transition-all group-hover:text-emerald-600"
-                                >
-                                    Read Full Message <ArrowRight size={16} className="ml-2" />
-                                </Link>
-                            </div>
-                        </ScrollReveal>
 
-                        {/* Administrative Council Card */}
-                        <ScrollReveal delay={200}>
-                            <div className="group bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-emerald-100/50 h-full flex flex-col">
-                                <div className="flex items-center gap-6 mb-6">
-                                    <div className="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-800 border-2 border-emerald-100 shrink-0">
-                                        <Quote size={32} />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-zinc-900">Administrative Council</h3>
-                                        <p className="text-emerald-600/80 text-sm font-medium">Governance & Vision</p>
-                                    </div>
+                                <div className="pt-6 border-t border-emerald-50 flex items-center justify-center md:justify-start gap-4">
+                                    <div className="h-1 w-20 bg-emerald-800 rounded-full"></div>
+                                    <p className="text-sm font-serif italic text-emerald-700">In Service of Education</p>
                                 </div>
-                                <p className="text-zinc-600 mb-8 flex-1 leading-relaxed">
-                                    Meet the distinguished members of our board who guide the strategic direction and policy of our institution, ensuring we stay true to our mission.
-                                </p>
-                                <Link
-                                    href="/administration"
-                                    className="inline-flex items-center text-emerald-800 font-bold text-sm tracking-wide hover:gap-2 transition-all group-hover:text-emerald-600"
-                                >
-                                    Meet the Council <ArrowRight size={16} className="ml-2" />
-                                </Link>
                             </div>
-                        </ScrollReveal>
 
-                    </div>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
 
