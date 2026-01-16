@@ -2,23 +2,23 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { 
-    BookOpen, 
-    Target, 
-    Heart, 
-    Leaf, 
-    Microscope, 
-    Library, 
-    Monitor, 
-    ArrowRight, 
-    Quote 
+import {
+    BookOpen,
+    Target,
+    Heart,
+    Leaf,
+    Microscope,
+    Library,
+    Monitor,
+    ArrowRight,
+    Quote
 } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function AboutPage() {
     return (
         <main className="min-h-screen bg-white">
-            
+
             {/* 1. HERO SECTION - Institutional Identity */}
             <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-emerald-50/50 to-white overflow-hidden">
                 <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
@@ -34,7 +34,7 @@ export default function AboutPage() {
                         </p>
                     </ScrollReveal>
                 </div>
-                
+
                 {/* Decorative Background Elements */}
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
                     <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full bg-emerald-100/30 blur-3xl"></div>
@@ -43,7 +43,7 @@ export default function AboutPage() {
             </section>
 
             {/* 2. OUR STORY SECTION - Split Layout */}
-            <section className="py-20 md:py-32">
+            <section className="py-20 md:py-32 bg-white">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
                         {/* Left: Image with Floating Badge */}
@@ -70,12 +70,12 @@ export default function AboutPage() {
                             <div className="space-y-6 md:pl-10">
                                 <span className="text-emerald-600 font-bold tracking-widest text-sm uppercase">Our Story</span>
                                 <h2 className="text-3xl md:text-5xl font-bold font-serif text-zinc-900 leading-tight">
-                                    A Tradition of <br/> Intellectual Growth
+                                    A Tradition of <br /> Intellectual Growth
                                 </h2>
                                 <p className="text-zinc-600 text-lg leading-relaxed">
                                     Founded with a vision to bridge the gap between traditional values and modern education, CM College has grown into a premier institution. We believe in nurturing not just students, but future leaders who are grounded in ethics and skilled for the global stage.
                                 </p>
-                                
+
                                 <div className="grid grid-cols-2 gap-8 pt-6 border-t border-zinc-100">
                                     <div>
                                         <div className="text-3xl font-bold text-zinc-900 mb-1">A+</div>
@@ -93,7 +93,7 @@ export default function AboutPage() {
             </section>
 
             {/* 3. GUIDED BY VISIONARIES */}
-            <section className="py-20 bg-emerald-50/30">
+            <section className="py-20 bg-emerald-50">
                 <div className="container mx-auto px-4 md:px-6">
                     <ScrollReveal>
                         <div className="text-center mb-16">
@@ -103,7 +103,7 @@ export default function AboutPage() {
                     </ScrollReveal>
 
                     <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                        
+
                         {/* Principal's Message Card */}
                         <ScrollReveal delay={100}>
                             <div className="group bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-emerald-100/50 h-full flex flex-col">
@@ -124,8 +124,8 @@ export default function AboutPage() {
                                 <blockquote className="text-zinc-600 italic mb-8 flex-1 leading-relaxed">
                                     "Education is the kindling of a flame, not the filling of a vessel. At CM College, we strive to ignite the passion for learning in every student..."
                                 </blockquote>
-                                <Link 
-                                    href="/principal-message" 
+                                <Link
+                                    href="/principal-message"
                                     className="inline-flex items-center text-emerald-800 font-bold text-sm tracking-wide hover:gap-2 transition-all group-hover:text-emerald-600"
                                 >
                                     Read Full Message <ArrowRight size={16} className="ml-2" />
@@ -148,8 +148,8 @@ export default function AboutPage() {
                                 <p className="text-zinc-600 mb-8 flex-1 leading-relaxed">
                                     Meet the distinguished members of our board who guide the strategic direction and policy of our institution, ensuring we stay true to our mission.
                                 </p>
-                                <Link 
-                                    href="/administration" 
+                                <Link
+                                    href="/administration"
                                     className="inline-flex items-center text-emerald-800 font-bold text-sm tracking-wide hover:gap-2 transition-all group-hover:text-emerald-600"
                                 >
                                     Meet the Council <ArrowRight size={16} className="ml-2" />
@@ -162,7 +162,7 @@ export default function AboutPage() {
             </section>
 
             {/* 4. VISION · MISSION · CORE VALUES */}
-            <section className="py-20 md:py-32">
+            <section className="py-20 md:py-32 bg-white">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="grid md:grid-cols-3 gap-8">
                         {/* Vision */}
@@ -208,13 +208,13 @@ export default function AboutPage() {
             </section>
 
             {/* 5. WORLD-CLASS HIGHLIGHTS */}
-            <section className="py-20 border-t border-zinc-100">
+            <section className="py-20 bg-emerald-50">
                 <div className="container mx-auto px-4 md:px-6">
                     <ScrollReveal>
                         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                             <div>
                                 <h2 className="text-3xl md:text-4xl font-bold font-serif text-zinc-900 mb-2">World-Class Highlights</h2>
-                                <p className="text-zinc-500">Facilities designed to inspire and enable learning.</p>
+                                <p className="text-zinc-600">Facilities designed to inspire and enable learning.</p>
                             </div>
                         </div>
                     </ScrollReveal>
@@ -227,8 +227,8 @@ export default function AboutPage() {
                             { icon: Monitor, title: "Digital Classrooms", desc: "Smart learning enabled" },
                         ].map((item, idx) => (
                             <ScrollReveal key={idx} delay={idx * 100}>
-                                <div className="group p-6 rounded-2xl border border-zinc-100 hover:border-emerald-100 hover:bg-emerald-50/20 hover:shadow-lg transition-all duration-300 text-center cursor-default">
-                                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-zinc-50 text-zinc-400 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 mb-4">
+                                <div className="group p-6 rounded-2xl border border-zinc-100 bg-white hover:border-emerald-100 hover:shadow-lg transition-all duration-300 text-center cursor-default">
+                                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 mb-4">
                                         <item.icon size={24} />
                                     </div>
                                     <h3 className="font-bold text-zinc-900 mb-1">{item.title}</h3>
@@ -250,14 +250,14 @@ export default function AboutPage() {
                             Join a community dedicated to excellence. Apply today or request a prospectus to learn more about our programs.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link 
-                                href="/admissions" 
+                            <Link
+                                href="/admissions"
                                 className="w-full sm:w-auto px-8 py-4 bg-white text-emerald-950 font-bold rounded-xl hover:bg-emerald-50 transition-colors shadow-lg hover:shadow-xl hover:scale-105 transform duration-200"
                             >
                                 Apply Now
                             </Link>
-                            <Link 
-                                href="/prospectus" 
+                            <Link
+                                href="/prospectus"
                                 className="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-emerald-800 text-white font-bold rounded-xl hover:bg-emerald-900 transition-colors"
                             >
                                 Request Prospectus
