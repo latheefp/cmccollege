@@ -52,7 +52,7 @@ export default function AboutPage() {
                             <div className="relative">
                                 <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl">
                                     <Image
-                                        src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2586&auto=format&fit=crop"
+                                        src="https://ik.imagekit.io/5c6j602yp/Banner/Untitled%20design.png?updatedAt=1768553045031"
                                         alt="Campus Life"
                                         fill
                                         className="object-cover hover:scale-105 transition-transform duration-700"

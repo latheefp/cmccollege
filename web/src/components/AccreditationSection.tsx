@@ -29,15 +29,15 @@ export default function AccreditationSection() {
                                 </span>
                             </div>
 
-                            <div className="prose prose-lg text-zinc-600 max-w-none text-justify leading-relaxed">
+                            <div className="prose prose-xl max-w-none text-justify leading-relaxed text-zinc-900 font-medium">
                                 <p>
                                     Our college has been recognized by the <strong>University Grants Commission (UGC)</strong> under <strong>Section 2(f) of the Act 1957</strong>. This recognition signifies that our college is eligible to receive central funding and participate in various central government schemes and initiatives related to higher education.
                                 </p>
-                                <p className="text-sm text-zinc-500 bg-emerald-50/50 p-6 rounded-xl border border-emerald-100/50 italic">
-                                    "Section 2(f) of the UGC Act 1957 defines a university as a university established or incorporated by or under a Central Act, a Provincial Act or a State Act..."
+                                <p className="text-lg text-emerald-900 bg-emerald-50 p-6 rounded-xl border border-emerald-200 font-semibold italic shadow-sm">
+                                    "Section 2(f) of the UGC Act 1957 defines a university as “a university established or incorporated by or under a Central Act, a Provincial Act or a State Act, and includes any such institution as may, in consultation with the University concerned, be recognized by the Commission in accordance with the regulations made in this behalf under this Act.”"
                                 </p>
                                 <p>
-                                    In summary, our college's recognition by the UGC under Section 2(f) of the Act 1957 is a testament to our commitment to providing quality education and our dedication to meeting the standards set by the regulatory body.
+                                    In summary, our college’s recognition by the UGC under Section 2(f) of the Act 1957 is a testament to our commitment to providing quality education and our dedication to meeting the standards set by the regulatory body. It provides us with access to central funding and other government schemes, thereby enabling us to enhance the overall educational experience for our students.
                                 </p>
                             </div>
                         </div>
