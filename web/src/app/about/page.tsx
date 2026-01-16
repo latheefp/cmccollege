@@ -1,308 +1,271 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-    ChevronRight,
-    Target,
-    Lightbulb,
-    Award,
-    Layout,
-    History,
-    UserCheck,
-    Quote,
-    Menu,
-    X,
-    ShieldCheck
+import { 
+    BookOpen, 
+    Target, 
+    Heart, 
+    Leaf, 
+    Microscope, 
+    Library, 
+    Monitor, 
+    ArrowRight, 
+    Quote 
 } from "lucide-react";
-import ScrollReveal from "@/components/ScrollReveal"; // Ensure we use the shared component if available, or keep using similar logic
-import AccreditationSection from "@/components/AccreditationSection";
-
-// --- SIDEBAR NAVIGATION ITEMS ---
-const navItems = [
-    { id: "history", label: "History", icon: <History size={18} /> },
-    { id: "about-college", label: "About College", icon: <Layout size={18} /> },
-    { id: "accreditation", label: "Accreditation", icon: <ShieldCheck size={18} /> },
-    { id: "vision-mission", label: "Vision & Mission", icon: <Target size={18} /> },
-    { id: "chairman-message", label: "Chairman's Message", icon: <UserCheck size={18} /> },
-];
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function AboutPage() {
-    const [activeSection, setActiveSection] = useState("history");
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    // Scroll Spy & Header Offset Calculation
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY + 200; // Increased offset for better triggers
-
-            for (const item of navItems) {
-                const section = document.getElementById(item.id);
-                if (section && section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
-                    setActiveSection(item.id);
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    const scrollToSection = (id: string) => {
-        setIsMobileMenuOpen(false);
-        const element = document.getElementById(id);
-        if (element) {
-            // Adjust offset based on screen size (header height)
-            const headerOffset = window.innerWidth < 1024 ? 180 : 180;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
-        }
-    };
-
     return (
-        <main className="min-h-screen bg-zinc-50 font-sans text-zinc-900 pt-[120px] lg:pt-[140px]">
-
-            {/* --- HERO HEADER (Condensed) --- */}
-            <section className="relative bg-[#7B0046] text-white py-12 md:py-20 overflow-hidden">
-                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] animate-pulse"></div>
-                <div className="container mx-auto px-4 relative z-10 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold font-serif mb-4">About Us</h1>
-                    <nav className="flex items-center justify-center gap-2 text-sm font-medium text-rose-100/80">
-                        <Link href="/" className="hover:text-white transition-colors">Home</Link>
-                        <ChevronRight size={14} />
-                        <span className="text-white">About</span>
-                    </nav>
+        <main className="min-h-screen bg-white">
+            
+            {/* 1. HERO SECTION - Institutional Identity */}
+            <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-emerald-50/50 to-white overflow-hidden">
+                <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
+                    <ScrollReveal>
+                        <span className="inline-block py-1 px-3 rounded-full bg-emerald-100/50 text-emerald-800 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-emerald-200/50">
+                            Est. 2010
+                        </span>
+                        <h1 className="text-5xl md:text-7xl font-bold font-serif text-zinc-900 mb-6 tracking-tight leading-tight">
+                            Institutional <span className="text-emerald-800 italic">Excellence</span>
+                        </h1>
+                        <p className="text-lg md:text-2xl text-zinc-600 max-w-3xl mx-auto font-light leading-relaxed">
+                            Fostering a legacy of academic rigor, moral integrity, and relentless innovation in a world-class learning environment.
+                        </p>
+                    </ScrollReveal>
+                </div>
+                
+                {/* Decorative Background Elements */}
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
+                    <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full bg-emerald-100/30 blur-3xl"></div>
+                    <div className="absolute top-[20%] -left-[10%] w-[400px] h-[400px] rounded-full bg-rose-100/30 blur-3xl"></div>
                 </div>
             </section>
 
-            {/* --- MOBILE STICKY NAV (Horizontal Scroll) --- */}
-            <div className="lg:hidden sticky top-[100px] z-30 bg-white/95 backdrop-blur-md border-b border-zinc-200 shadow-sm overflow-x-auto no-scrollbar">
-                <div className="flex items-center px-4 h-14 min-w-max gap-4">
-                    {navItems.map((item) => (
-                        <button
-                            key={item.id}
-                            onClick={() => scrollToSection(item.id)}
-                            className={`text-sm font-semibold whitespace-nowrap px-3 py-1.5 rounded-full transition-all
-                                ${activeSection === item.id
-                                    ? "bg-[#7B0046] text-white shadow-md"
-                                    : "text-zinc-500 hover:text-[#7B0046] hover:bg-rose-50"
-                                }`}
-                        >
-                            {item.label}
-                        </button>
-                    ))}
-                </div>
-            </div>
-
-            {/* --- MAIN CONTENT GRID --- */}
-            <div className="container mx-auto px-4 py-8 md:py-16">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-
-                    {/* --- DESKTOP SIDEBAR (Col 3) --- */}
-                    <div className="hidden lg:block lg:col-span-3">
-                        <div className="sticky top-44 space-y-6">
-                            <div className="bg-white rounded-2xl shadow-lg shadow-zinc-200/50 border border-zinc-100 overflow-hidden">
-                                <div className="bg-[#7B0046] px-6 py-5">
-                                    <h3 className="text-white font-bold text-lg tracking-wide">Quick Links</h3>
+            {/* 2. OUR STORY SECTION - Split Layout */}
+            <section className="py-20 md:py-32">
+                <div className="container mx-auto px-4 md:px-6">
+                    <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+                        {/* Left: Image with Floating Badge */}
+                        <ScrollReveal>
+                            <div className="relative">
+                                <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl">
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2586&auto=format&fit=crop"
+                                        alt="Campus Life"
+                                        fill
+                                        className="object-cover hover:scale-105 transition-transform duration-700"
+                                    />
                                 </div>
-                                <nav className="flex flex-col p-2">
-                                    {navItems.map((item) => (
-                                        <button
-                                            key={item.id}
-                                            onClick={() => scrollToSection(item.id)}
-                                            className={`flex items-center gap-3 px-4 py-3.5 text-sm font-medium rounded-xl transition-all mb-1
-                                                ${activeSection === item.id
-                                                    ? "bg-rose-50 text-[#7B0046] translate-x-1 font-bold"
-                                                    : "text-zinc-600 hover:bg-zinc-50 hover:pl-6"
-                                                }`}
-                                        >
-                                            <span className={`${activeSection === item.id ? "text-[#7B0046]" : "text-zinc-400"}`}>
-                                                {item.icon}
-                                            </span>
-                                            {item.label}
-                                        </button>
-                                    ))}
-                                </nav>
+                                {/* Floating Badge */}
+                                <div className="absolute -bottom-8 -right-4 md:-right-8 bg-white p-6 rounded-xl shadow-xl border border-emerald-50 max-w-[200px] animate-fade-in-up">
+                                    <div className="text-4xl font-bold text-emerald-800 mb-1">15+</div>
+                                    <div className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Years of Academic Excellence</div>
+                                </div>
                             </div>
+                        </ScrollReveal>
 
-                            {/* Contact Widget */}
-                            <div className="bg-zinc-900 text-white p-6 rounded-2xl shadow-xl relative overflow-hidden group">
-                                <div className="absolute inset-0 bg-[#7B0046] opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div className="relative z-10 space-y-4">
-                                    <h4 className="font-bold text-lg">Admissions Open</h4>
-                                    <p className="text-zinc-400 text-sm leading-relaxed">Join our vibrant community for the upcoming academic year.</p>
-                                    <Link href="/admissions" className="inline-block w-full text-center px-4 py-3 bg-white text-zinc-900 text-sm font-bold rounded-lg hover:bg-rose-50 transition-all transform hover:scale-105">
-                                        Apply Now
-                                    </Link>
+                        {/* Right: Text Block */}
+                        <ScrollReveal delay={200}>
+                            <div className="space-y-6 md:pl-10">
+                                <span className="text-emerald-600 font-bold tracking-widest text-sm uppercase">Our Story</span>
+                                <h2 className="text-3xl md:text-5xl font-bold font-serif text-zinc-900 leading-tight">
+                                    A Tradition of <br/> Intellectual Growth
+                                </h2>
+                                <p className="text-zinc-600 text-lg leading-relaxed">
+                                    Founded with a vision to bridge the gap between traditional values and modern education, CM College has grown into a premier institution. We believe in nurturing not just students, but future leaders who are grounded in ethics and skilled for the global stage.
+                                </p>
+                                
+                                <div className="grid grid-cols-2 gap-8 pt-6 border-t border-zinc-100">
+                                    <div>
+                                        <div className="text-3xl font-bold text-zinc-900 mb-1">A+</div>
+                                        <div className="text-sm text-zinc-500 font-medium">Accreditation Score</div>
+                                    </div>
+                                    <div>
+                                        <div className="text-3xl font-bold text-zinc-900 mb-1">5k+</div>
+                                        <div className="text-sm text-zinc-500 font-medium">Alumni Network</div>
+                                    </div>
                                 </div>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. GUIDED BY VISIONARIES */}
+            <section className="py-20 bg-emerald-50/30">
+                <div className="container mx-auto px-4 md:px-6">
+                    <ScrollReveal>
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold font-serif text-zinc-900 mb-4">Guided by Visionaries</h2>
+                            <p className="text-zinc-500 max-w-2xl mx-auto">Leadership that inspires excellence and integrity in every endeavor.</p>
+                        </div>
+                    </ScrollReveal>
+
+                    <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        
+                        {/* Principal's Message Card */}
+                        <ScrollReveal delay={100}>
+                            <div className="group bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-emerald-100/50 h-full flex flex-col">
+                                <div className="flex items-center gap-6 mb-6">
+                                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-emerald-100 relative shrink-0">
+                                        <Image
+                                            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
+                                            alt="Principal"
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-bold text-zinc-900">Principal's Message</h3>
+                                        <p className="text-emerald-600/80 text-sm font-medium">Leading with Heart</p>
+                                    </div>
+                                </div>
+                                <blockquote className="text-zinc-600 italic mb-8 flex-1 leading-relaxed">
+                                    "Education is the kindling of a flame, not the filling of a vessel. At CM College, we strive to ignite the passion for learning in every student..."
+                                </blockquote>
+                                <Link 
+                                    href="/principal-message" 
+                                    className="inline-flex items-center text-emerald-800 font-bold text-sm tracking-wide hover:gap-2 transition-all group-hover:text-emerald-600"
+                                >
+                                    Read Full Message <ArrowRight size={16} className="ml-2" />
+                                </Link>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Administrative Council Card */}
+                        <ScrollReveal delay={200}>
+                            <div className="group bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-emerald-100/50 h-full flex flex-col">
+                                <div className="flex items-center gap-6 mb-6">
+                                    <div className="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-800 border-2 border-emerald-100 shrink-0">
+                                        <Quote size={32} />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-bold text-zinc-900">Administrative Council</h3>
+                                        <p className="text-emerald-600/80 text-sm font-medium">Governance & Vision</p>
+                                    </div>
+                                </div>
+                                <p className="text-zinc-600 mb-8 flex-1 leading-relaxed">
+                                    Meet the distinguished members of our board who guide the strategic direction and policy of our institution, ensuring we stay true to our mission.
+                                </p>
+                                <Link 
+                                    href="/administration" 
+                                    className="inline-flex items-center text-emerald-800 font-bold text-sm tracking-wide hover:gap-2 transition-all group-hover:text-emerald-600"
+                                >
+                                    Meet the Council <ArrowRight size={16} className="ml-2" />
+                                </Link>
+                            </div>
+                        </ScrollReveal>
+
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. VISION · MISSION · CORE VALUES */}
+            <section className="py-20 md:py-32">
+                <div className="container mx-auto px-4 md:px-6">
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {/* Vision */}
+                        <ScrollReveal delay={0}>
+                            <div className="bg-emerald-50/50 rounded-2xl p-8 hover:bg-emerald-50 transition-colors duration-300">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-emerald-800 mb-6">
+                                    <Target size={24} />
+                                </div>
+                                <h3 className="text-xl font-bold font-serif text-zinc-900 mb-3">Our Vision</h3>
+                                <p className="text-zinc-600 leading-relaxed text-sm">
+                                    To be a center of excellence that empowers students with knowledge, skills, and values to contribute meaningfully to society and the nation.
+                                </p>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Mission */}
+                        <ScrollReveal delay={100}>
+                            <div className="bg-emerald-50/50 rounded-2xl p-8 hover:bg-emerald-50 transition-colors duration-300">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-emerald-800 mb-6">
+                                    <BookOpen size={24} />
+                                </div>
+                                <h3 className="text-xl font-bold font-serif text-zinc-900 mb-3">Our Mission</h3>
+                                <p className="text-zinc-600 leading-relaxed text-sm">
+                                    To provide holistic education that balances academic excellence with moral uprightness, fostering innovation, critical thinking, and social responsibility.
+                                </p>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Values */}
+                        <ScrollReveal delay={200}>
+                            <div className="bg-emerald-50/50 rounded-2xl p-8 hover:bg-emerald-50 transition-colors duration-300">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-emerald-800 mb-6">
+                                    <Heart size={24} />
+                                </div>
+                                <h3 className="text-xl font-bold font-serif text-zinc-900 mb-3">Core Values</h3>
+                                <p className="text-zinc-600 leading-relaxed text-sm">
+                                    Integrity, Excellence, Inclusivity, and Service. We nurture a community where every individual is respected and encouraged to reach their potential.
+                                </p>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </section>
+
+            {/* 5. WORLD-CLASS HIGHLIGHTS */}
+            <section className="py-20 border-t border-zinc-100">
+                <div className="container mx-auto px-4 md:px-6">
+                    <ScrollReveal>
+                        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                            <div>
+                                <h2 className="text-3xl md:text-4xl font-bold font-serif text-zinc-900 mb-2">World-Class Highlights</h2>
+                                <p className="text-zinc-500">Facilities designed to inspire and enable learning.</p>
                             </div>
                         </div>
-                    </div>
+                    </ScrollReveal>
 
-                    {/* --- CONTENT AREA (Col 9) --- */}
-                    <div className="lg:col-span-9 space-y-16">
-
-                        {/* 1. HISTORY SECTION */}
-                        <section id="history" className="scroll-mt-32">
-                            <ScrollReveal>
-                                <div className="bg-white rounded-2xl shadow-sm border border-zinc-100 p-6 md:p-10 relative overflow-hidden">
-                                    <div className="absolute top-0 left-0 w-1 h-full bg-[#7B0046]"></div>
-                                    <div className="mb-6">
-                                        <h2 className="text-2xl md:text-3xl font-bold text-[#7B0046] mb-2">History</h2>
-                                        <div className="h-1 w-20 bg-rose-100 rounded-full"></div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {[
+                            { icon: Leaf, title: "Eco-friendly Campus", desc: "Sustainable green environment" },
+                            { icon: Microscope, title: "Advanced Labs", desc: "State-of-the-art research" },
+                            { icon: Library, title: "Rich Library", desc: "Extensive digital resources" },
+                            { icon: Monitor, title: "Digital Classrooms", desc: "Smart learning enabled" },
+                        ].map((item, idx) => (
+                            <ScrollReveal key={idx} delay={idx * 100}>
+                                <div className="group p-6 rounded-2xl border border-zinc-100 hover:border-emerald-100 hover:bg-emerald-50/20 hover:shadow-lg transition-all duration-300 text-center cursor-default">
+                                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-zinc-50 text-zinc-400 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 mb-4">
+                                        <item.icon size={24} />
                                     </div>
-                                    <div className="prose prose-lg text-zinc-600 max-w-none text-justify space-y-4">
-                                        <p className="indent-8 first-letter:text-3xl first-letter:font-bold first-letter:text-[#7B0046] first-letter:mr-1">
-                                            Responding to the call and understanding of the formidable challenges that may have to be faced in the future, visionaries and social engineers shared the idea of establishing an educational cluster to facilitate the upliftment of the minority community.
-                                        </p>
-                                        <p>
-                                            In pursuance of this, CM College of Arts and Science was established with a vision to create leaders in different fields and promote higher education in emerging areas of arts, science, and humanities. The institution was founded on the principles of academic discipline and spiritual growth, serving as a cornerstone for students pursuing their +1 and +2 education since 2010.
-                                        </p>
-                                        <p>
-                                            Over the years, the college has grown into a premier institution in Wayanad, providing an integrated environment where the curriculum is meticulously designed to meet modern educational standards while remaining deeply rooted in moral values.
-                                        </p>
-                                    </div>
+                                    <h3 className="font-bold text-zinc-900 mb-1">{item.title}</h3>
+                                    <p className="text-xs text-zinc-500">{item.desc}</p>
                                 </div>
                             </ScrollReveal>
-                        </section>
-
-                        {/* 2. ABOUT COLLEGE SECTION */}
-                        <section id="about-college" className="scroll-mt-32">
-                            <ScrollReveal>
-                                <div className="bg-white rounded-2xl shadow-sm border border-zinc-100 p-6 md:p-10 relative overflow-hidden">
-                                    <div className="absolute top-0 left-0 w-1 h-full bg-[#7B0046]"></div>
-                                    <div className="mb-8">
-                                        <h2 className="text-2xl md:text-3xl font-bold text-[#7B0046] mb-2">About College</h2>
-                                        <div className="h-1 w-20 bg-rose-100 rounded-full"></div>
-                                    </div>
-
-                                    <div className="relative h-[250px] md:h-[400px] w-full rounded-xl overflow-hidden shadow-md mb-8 group">
-                                        <Image
-                                            src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2572&auto=format&fit=crop"
-                                            alt="College Campus View"
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
-                                    </div>
-
-                                    <div className="prose prose-lg text-zinc-600 max-w-none text-justify space-y-4">
-                                        <p>
-                                            CM College of Arts and Science offers a unique blend of modern education and traditional values. Located in the serene landscape of Nadavayal, Wayanad, our campus provides an ideal atmosphere for academic pursuits. The institution is affiliated with the state education board and offers specialized coaching for competitive exams like NEET, JEE, and KEAM.
-                                        </p>
-                                        <p>
-                                            Our approach goes beyond traditional teaching; we focus on the holistic development of every student. We have state-of-the-art laboratories, a well-stocked library, and smart classrooms that enhance the learning experience. The campus culture is vibrant, inclusive, and discipline-oriented.
-                                        </p>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                        </section>
-
-                        {/* 3. ACCREDITATION SECTION */}
-                        <section id="accreditation" className="scroll-mt-32">
-                            <AccreditationSection />
-                        </section>
-
-                        {/* 4. VISION & MISSION SECTION */}
-                        <section id="vision-mission" className="scroll-mt-32">
-                            <ScrollReveal>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {/* Vision Card */}
-                                    <div className="group bg-white p-8 rounded-2xl border-l-4 border-l-[#7B0046] shadow-sm hover:shadow-xl transition-all duration-300">
-                                        <div className="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center text-[#7B0046] mb-6 group-hover:bg-[#7B0046] group-hover:text-white transition-colors">
-                                            <Lightbulb size={28} />
-                                        </div>
-                                        <h3 className="text-xl font-bold text-zinc-900 mb-4">Our Vision</h3>
-                                        <p className="text-zinc-600 leading-relaxed">
-                                            "To be a center of excellence in higher education, fostering intellectual growth, ethical values, and social responsibility, thereby creating enlightened individuals capable of contributing positively to society."
-                                        </p>
-                                    </div>
-
-                                    {/* Mission Card */}
-                                    <div className="group bg-white p-8 rounded-2xl border-l-4 border-l-zinc-800 shadow-sm hover:shadow-xl transition-all duration-300">
-                                        <div className="w-14 h-14 bg-zinc-100 rounded-2xl flex items-center justify-center text-zinc-800 mb-6 group-hover:bg-zinc-800 group-hover:text-white transition-colors">
-                                            <Award size={28} />
-                                        </div>
-                                        <h3 className="text-xl font-bold text-zinc-900 mb-4">Our Mission</h3>
-                                        <ul className="space-y-3 text-zinc-600">
-                                            <li className="flex items-start gap-3">
-                                                <div className="min-w-[6px] h-1.5 mt-2 rounded-full bg-[#7B0046]" />
-                                                <span className="text-sm">Provide accessible, high-quality education.</span>
-                                            </li>
-                                            <li className="flex items-start gap-3">
-                                                <div className="min-w-[6px] h-1.5 mt-2 rounded-full bg-[#7B0046]" />
-                                                <span className="text-sm">Inculcate moral and ethical values alongside academics.</span>
-                                            </li>
-                                            <li className="flex items-start gap-3">
-                                                <div className="min-w-[6px] h-1.5 mt-2 rounded-full bg-[#7B0046]" />
-                                                <span className="text-sm">Foster innovation and critical thinking.</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                        </section>
-
-                        {/* 5. CHAIRMAN'S MESSAGE SECTION */}
-                        <section id="chairman-message" className="scroll-mt-32">
-                            <ScrollReveal>
-                                <div className="bg-[#50002d] rounded-2xl p-8 md:p-14 text-white relative overflow-hidden shadow-xl">
-                                    {/* Quote Icon Background */}
-                                    <div className="absolute top-10 right-10 opacity-10 pointer-events-none">
-                                        <Quote size={180} />
-                                    </div>
-
-                                    <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-center relative z-10">
-                                        {/* Profile Image */}
-                                        <div className="shrink-0 relative">
-                                            <div className="w-48 h-48 md:w-60 md:h-60 rounded-full border-[6px] border-white/10 shadow-2xl overflow-hidden relative">
-                                                <Image
-                                                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
-                                                    alt="Honorable Chairman"
-                                                    fill
-                                                    className="object-cover"
-                                                />
-                                            </div>
-                                            {/* Decorative Circle */}
-                                            <div className="absolute -inset-4 border border-white/10 rounded-full -z-10 scale-90"></div>
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="text-center md:text-left space-y-8 flex-1">
-                                            <div>
-                                                <h2 className="text-3xl md:text-4xl font-bold font-serif mb-2 tracking-wide">Chairman's Message</h2>
-                                                <div className="flex items-center justify-center md:justify-start gap-3">
-                                                    <div className="h-0.5 w-12 bg-rose-400/50"></div>
-                                                    <p className="text-rose-200/90 font-medium text-sm uppercase tracking-wider">Leading with Vision</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="relative">
-                                                <p className="text-rose-50/90 leading-loose text-base md:text-lg text-justify font-light">
-                                                    "The CM Centre has had a successful journey spanning three decades, during which it has established educational institutions in various locations in Kozhikode and Wayanad. The organization has also undertaken charitable initiatives across Kerala, providing educational opportunities to people of all ages, from primary school to post-graduation, as well as conducting research. Through its efforts, the CM Centre has helped hundreds of students from disadvantaged financial and social backgrounds to pursue successful careers in fields such as Islamic Studies, Medicine, Engineering, Teaching, and Management. Students studying at the CM Centre’s campuses have achieved remarkable academic success, scoring high ranks in a variety of exams and setting new records. The CM Centre’s contributions to society are significant, as it has helped individuals improve their educational and social standing."
-                                                </p>
-                                            </div>
-
-                                            <div className="pt-4 border-t border-white/10 flex flex-col items-center md:items-start">
-                                                <p className="font-bold text-2xl tracking-tight">Dr. Abdul Rahman</p>
-                                                <p className="text-rose-200/80 text-sm font-medium uppercase tracking-wide mt-1">Chairman, CM College</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                        </section>
-
+                        ))}
                     </div>
                 </div>
-            </div>
+            </section>
+
+            {/* 6. CALL TO ACTION - Strong Ending */}
+            <section className="py-24 bg-emerald-950 text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+                <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
+                    <ScrollReveal>
+                        <h2 className="text-4xl md:text-5xl font-bold font-serif mb-6 tracking-tight">Ready to begin your journey?</h2>
+                        <p className="text-emerald-200/80 text-lg mb-10 max-w-2xl mx-auto">
+                            Join a community dedicated to excellence. Apply today or request a prospectus to learn more about our programs.
+                        </p>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <Link 
+                                href="/admissions" 
+                                className="w-full sm:w-auto px-8 py-4 bg-white text-emerald-950 font-bold rounded-xl hover:bg-emerald-50 transition-colors shadow-lg hover:shadow-xl hover:scale-105 transform duration-200"
+                            >
+                                Apply Now
+                            </Link>
+                            <Link 
+                                href="/prospectus" 
+                                className="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-emerald-800 text-white font-bold rounded-xl hover:bg-emerald-900 transition-colors"
+                            >
+                                Request Prospectus
+                            </Link>
+                        </div>
+                    </ScrollReveal>
+                </div>
+            </section>
 
         </main>
     );
