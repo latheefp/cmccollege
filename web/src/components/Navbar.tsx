@@ -23,7 +23,7 @@ export default function Navbar() {
                 <div className="w-full px-4 xl:px-8">
                     <div className="flex justify-between items-center h-22 py-2">
                         {/* Logo (Left) */}
-                        <Link href="/" className="flex items-center">
+                        <Link href="/" className="flex items-center ml-[50px]">
                             <div className="relative w-36 lg:w-40 2xl:w-56 h-12 2xl:h-18">
                                 <Image
                                     src="/images/logo.png"
@@ -50,10 +50,12 @@ export default function Navbar() {
                                     <Link
                                         key={link.name}
                                         href={link.href}
-                                        className="text-[10px] lg:text-[11px] 2xl:text-[13px] font-black text-zinc-800 hover:text-[#5D1035] transition-colors uppercase tracking-widest relative group whitespace-nowrap"
+                                        className={`text-[10px] lg:text-[11px] 2xl:text-[13px] font-black uppercase tracking-widest relative group whitespace-nowrap transition-colors
+                                            ${pathname === link.href ? "text-[#5D1035]" : "text-zinc-800 hover:text-[#5D1035]"}`}
                                     >
                                         {link.name}
-                                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5D1035] transition-all duration-300 group-hover:w-full"></span>
+                                        <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#5D1035] transition-all duration-300 
+                                            ${pathname === link.href ? "w-full" : "w-0 group-hover:w-full"}`}></span>
                                     </Link>
                                 ))}
 
@@ -68,7 +70,7 @@ export default function Navbar() {
                             </div>
 
                             {/* Separator */}
-                            <div className="h-6 w-px bg-zinc-200"></div>
+                            <div className="h-6 w-[2px] bg-emerald-900"></div>
 
                             {/* Social Icons & Search */}
                             <div className="flex items-center gap-3">
@@ -135,7 +137,7 @@ export default function Navbar() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-lg font-bold text-zinc-800 hover:text-emerald-800 transition-colors px-2 uppercase"
+                                    className={`text-lg font-bold transition-colors px-2 uppercase ${pathname === link.href ? "text-[#5D1035]" : "text-zinc-800 hover:text-emerald-800"}`}
                                 >
                                     {link.name}
                                 </Link>
