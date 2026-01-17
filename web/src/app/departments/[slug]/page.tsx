@@ -1,0 +1,345 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import {
+    ArrowRight,
+    Download,
+    ChevronLeft,
+    ChevronRight,
+    CheckCircle2,
+    Cpu,
+    Users,
+    Building2,
+    Mail,
+    Phone,
+    GraduationCap,
+    Lightbulb,
+    Target
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, use } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
+
+const FACULTY = [
+    { name: "Dr. Sarah Chen", role: "Professor & Senior Lead", spec: "Artificial Intelligence", img: "/images/Principal.jpeg" },
+    { name: "Prof. James Wilson", role: "Assistant Professor", spec: "Cyber Security", img: "/images/Principal.jpeg" },
+    { name: "Dr. Emily Rodriguez", role: "Lecturer", spec: "Data Science", img: "/images/Principal.jpeg" },
+    { name: "Prof. Michael Zhang", role: "Industry Expert", spec: "Software Architecture", img: "/images/Principal.jpeg" },
+];
+
+const FACILITIES = [
+    { name: "Advanced Robotics Lab", category: "FUTURE READY", img: "/images/modern_science_lab_1768116682208.png" },
+    { name: "Collaborative Workspace", category: "INNOVATION HUB", img: "/images/classroom_learning_1768115518451.png" },
+    { name: "Cloud Computing Center", category: "ENTERPRISE GRADE", img: "/images/science_exhibition_project_1768117868795.png" },
+];
+
+export default function DepartmentDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [[page, direction], setPage] = useState([0, 0]);
+    const { slug } = use(params);
+    const deptName = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+    const paginate = (newDirection: number) => {
+        setPage([page + newDirection, newDirection]);
+        setCurrentSlide(Math.abs((page + newDirection) % FACILITIES.length));
+    };
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            paginate(1);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [page]);
+
+    return (
+        <main className="min-h-screen bg-[#FDFCFB] text-zinc-900 pt-[112px]">
+            {/* --- HERO / HEADER SECTION --- */}
+            <section className="relative py-16 md:py-24 px-6 lg:px-24 bg-white border-b border-zinc-100 overflow-hidden">
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-2 text-sm text-zinc-400 mb-8 font-medium"
+                    >
+                        <Link href="/" className="hover:text-[#5D1035] transition-colors">Home</Link>
+                        <span>/</span>
+                        <Link href="/departments" className="hover:text-[#5D1035] transition-colors">Departments</Link>
+                        <span>/</span>
+                        <span className="text-zinc-900">{deptName}</span>
+                    </motion.div>
+
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                        <div className="max-w-3xl">
+                            <motion.h1
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 }}
+                                className="text-4xl md:text-6xl lg:text-7xl font-bold font-serif text-zinc-900 mb-6 leading-tight"
+                            >
+                                Department of <br />
+                                <span className="text-[#5D1035] italic relative inline-block">
+                                    {deptName}
+                                    <div className="absolute -bottom-2 left-0 w-full h-1.5 bg-[#5D1035]/20 rounded-full" />
+                                </span>
+                            </motion.h1>
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="text-lg md:text-xl text-zinc-600 font-light leading-relaxed"
+                            >
+                                Empowering students through innovation, rigorous research, and total career readiness for the global landscape.
+                            </motion.p>
+                        </div>
+
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="flex items-center gap-3 px-8 py-4 bg-[#5D1035] text-white font-bold rounded-xl shadow-xl shadow-[#5D1035]/20 hover:bg-[#4a0d2a] transition-all duration-300 self-start md:self-end group"
+                        >
+                            <Download className="w-5 h-5 group-hover:animate-bounce" />
+                            Download Curriculum
+                        </motion.button>
+                    </div>
+                </div>
+
+                {/* Background decorative elements */}
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-zinc-50 to-transparent pointer-events-none" />
+            </section>
+
+            {/* --- OVERVIEW SECTION --- */}
+            <section className="py-20 px-6 lg:px-24">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                        {/* Left Column - Content Cards */}
+                        <div className="lg:col-span-7 space-y-8">
+                            <ScrollReveal>
+                                <div className="bg-white p-10 rounded-[2rem] border border-zinc-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] transition-all duration-500 group">
+                                    <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6 text-[#5D1035]">
+                                        <Target className="w-6 h-6" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold mb-4 font-serif">Mission Statement</h3>
+                                    <p className="text-zinc-600 leading-relaxed text-lg font-light">
+                                        To produce globally competent professionals by providing high-quality education, encouraging research mindset, and instilling strong ethical values tailored to meet industrial demands.
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+
+                            <ScrollReveal delay={100}>
+                                <div className="bg-white p-10 rounded-[2rem] border border-zinc-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] transition-all duration-500">
+                                    <div className="w-12 h-12 bg-[#5D1035]/5 rounded-xl flex items-center justify-center mb-6 text-[#5D1035]">
+                                        <Lightbulb className="w-6 h-6" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold mb-6 font-serif">Academic Strengths</h3>
+                                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        {[
+                                            { icon: Cpu, text: "AI & Robotics Labs", sub: "Cutting-edge infrastructure" },
+                                            { icon: Users, text: "Industry Partnerships", sub: "MOU with tech giants" },
+                                            { icon: GraduationCap, text: "Placement Highlights", sub: "95% success rate" },
+                                            { icon: Building2, text: "Innovation Hub", sub: "Entrepreneurship cell" }
+                                        ].map((item, idx) => (
+                                            <li key={idx} className="flex gap-4 group/item">
+                                                <div className="shrink-0 w-10 h-10 rounded-lg bg-zinc-50 flex items-center justify-center text-[#5D1035] group-hover/item:bg-[#5D1035] group-hover/item:text-white transition-colors">
+                                                    <item.icon className="w-5 h-5" />
+                                                </div>
+                                                <div>
+                                                    <p className="font-bold text-zinc-900">{item.text}</p>
+                                                    <p className="text-sm text-zinc-400">{item.sub}</p>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </ScrollReveal>
+                        </div>
+
+                        {/* Right Column - HOD Card */}
+                        <div className="lg:col-span-5 lg:sticky lg:top-32">
+                            <ScrollReveal delay={200}>
+                                <div className="bg-white rounded-[2.5rem] overflow-hidden border border-zinc-100 shadow-2xl shadow-zinc-200/50">
+                                    <div className="relative h-80 w-full overflow-hidden group">
+                                        <Image
+                                            src="/images/Principal.jpeg"
+                                            alt="HOD Portrait"
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#5D1035]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                    </div>
+                                    <div className="p-10 text-center relative">
+                                        <span className="inline-block py-1 px-4 rounded-full bg-[#5D1035]/10 text-[#5D1035] text-[10px] font-black tracking-widest uppercase mb-4">
+                                            Head of Department
+                                        </span>
+                                        <h3 className="text-3xl font-bold text-zinc-900 mb-1">Dr. Abdul Rasheed</h3>
+                                        <p className="text-[#5D1035] font-medium mb-6 italic text-sm">Ph.D in Cloud Architectures</p>
+
+                                        <div className="relative mb-8">
+                                            <span className="text-5xl text-[#5D1035]/10 font-serif absolute -top-10 left-1/2 -translate-x-1/2">&quot;</span>
+                                            <p className="text-zinc-600 font-light leading-relaxed italic relative z-10">
+                                                &quot;Our goal is to transcend traditional learning and build a bridge between academia and the ever-evolving tech industry.&quot;
+                                            </p>
+                                        </div>
+
+                                        <button className="w-full py-4 border border-zinc-200 rounded-xl font-bold text-zinc-900 hover:bg-zinc-50 hover:border-[#5D1035] transition-all duration-300 flex items-center justify-center gap-2 group">
+                                            View Full Profile
+                                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* --- FACULTY SECTION --- */}
+            <section className="py-24 px-6 lg:px-24 bg-zinc-50/50">
+                <div className="max-w-7xl mx-auto">
+                    <ScrollReveal className="mb-16">
+                        <span className="text-[#5D1035] text-sm font-black tracking-widest uppercase mb-4 block">Mentorship</span>
+                        <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">Our Distinguished Faculty</h2>
+                        <div className="w-20 h-1 bg-[#5D1035] rounded-full" />
+                    </ScrollReveal>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {FACULTY.map((member, idx) => (
+                            <ScrollReveal key={idx} delay={idx * 100}>
+                                <div className="group bg-white p-8 rounded-[2rem] border border-zinc-100 hover:border-[#5D1035]/30 transition-all duration-500 text-center hover:shadow-xl hover:shadow-[#5D1035]/5">
+                                    <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-zinc-50 group-hover:border-[#5D1035]/20 transition-all">
+                                        <Image
+                                            src={member.img}
+                                            alt={member.name}
+                                            fill
+                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                        />
+                                    </div>
+                                    <h4 className="text-xl font-bold text-zinc-900 mb-1">{member.name}</h4>
+                                    <p className="text-[#5D1035] text-xs font-bold uppercase tracking-wider mb-2">{member.role}</p>
+                                    <p className="text-zinc-400 text-sm font-light">{member.spec}</p>
+                                </div>
+                            </ScrollReveal>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* --- LEARNING FACILITIES --- */}
+            <section className="py-24 px-6 lg:px-24">
+                <div className="max-w-7xl mx-auto">
+                    <ScrollReveal className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-bold font-serif mb-6 text-zinc-900">Department Gallery</h2>
+                        <p className="text-zinc-400 max-w-2xl mx-auto font-light">
+                            A visual journey through our specialized labs, collaborative spaces, and the vibrant academic life within the department.
+                        </p>
+                    </ScrollReveal>
+
+                    <div className="relative h-[600px] md:h-[700px] rounded-[3rem] overflow-hidden shadow-2xl group">
+                        <AnimatePresence initial={false} custom={direction}>
+                            <motion.div
+                                key={page}
+                                custom={direction}
+                                variants={{
+                                    enter: (direction: number) => ({
+                                        x: direction > 0 ? 1000 : -1000,
+                                        opacity: 0
+                                    }),
+                                    center: {
+                                        zIndex: 1,
+                                        x: 0,
+                                        opacity: 1
+                                    },
+                                    exit: (direction: number) => ({
+                                        zIndex: 0,
+                                        x: direction < 0 ? 1000 : -1000,
+                                        opacity: 0
+                                    })
+                                }}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{
+                                    x: { type: "spring", stiffness: 300, damping: 30 },
+                                    opacity: { duration: 0.2 }
+                                }}
+                                className="absolute inset-0"
+                            >
+                                <Image
+                                    src={FACILITIES[currentSlide].img}
+                                    alt={FACILITIES[currentSlide].name}
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                            </motion.div>
+                        </AnimatePresence>
+
+                        {/* Navigation Arrows */}
+                        <div className="absolute bottom-10 right-10 flex gap-4 z-20">
+                            <button
+                                onClick={() => paginate(-1)}
+                                className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-[#5D1035] transition-all"
+                            >
+                                <ChevronLeft className="w-6 h-6" />
+                            </button>
+                            <button
+                                onClick={() => paginate(1)}
+                                className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-[#5D1035] transition-all"
+                            >
+                                <ChevronRight className="w-6 h-6" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* --- CTA SECTION (BOTTOM) --- */}
+            <section className="py-20 px-6 lg:px-24 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <ScrollReveal>
+                        <div className="relative bg-gradient-to-br from-[#5D1035] to-[#1A0410] rounded-[3rem] p-12 md:p-24 text-center overflow-hidden group">
+                            {/* Animated Background Gradients */}
+                            <div className="absolute top-0 left-0 w-full h-full opacity-30">
+                                <div className="absolute -top-1/2 -left-1/4 w-[100%] h-[150%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_50%)] from-white/20 animate-pulse" />
+                            </div>
+
+                            <div className="relative z-10 max-w-3xl mx-auto">
+                                <motion.h2
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    className="text-4xl md:text-6xl font-bold font-serif text-white mb-8 leading-tight"
+                                >
+                                    Ready to start your journey?
+                                </motion.h2>
+                                <p className="text-white/70 text-lg md:text-xl mb-12 font-light">
+                                    Join a community of innovators and leaders. Admissions are currently open for the academic year 2026.
+                                </p>
+
+                                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                                    <Link
+                                        href="/admissions"
+                                        className="w-full sm:w-auto px-10 py-5 bg-white text-[#5D1035] font-black rounded-xl shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 uppercase tracking-widest text-sm"
+                                    >
+                                        Apply for Admission
+                                    </Link>
+                                    <Link
+                                        href="/contact"
+                                        className="w-full sm:w-auto px-10 py-5 bg-transparent border-2 border-white/20 text-white font-black rounded-xl hover:bg-white/5 transition-all duration-300 uppercase tracking-widest text-sm"
+                                    >
+                                        Inquiry Form
+                                    </Link>
+                                </div>
+                            </div>
+
+                            {/* Decorative Icon */}
+                            <div className="absolute -bottom-20 -right-20 text-white/5 rotate-12 scale-150">
+                                <GraduationCap className="w-96 h-96" />
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </div>
+            </section>
+        </main>
+    );
+}
