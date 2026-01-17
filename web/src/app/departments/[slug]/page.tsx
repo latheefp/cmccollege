@@ -21,28 +21,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, use } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const FACULTY = [
-    { name: "Dr. Sarah Chen", role: "Professor & Senior Lead", spec: "Artificial Intelligence", img: "/images/Principal.jpeg" },
-    { name: "Prof. James Wilson", role: "Assistant Professor", spec: "Cyber Security", img: "/images/Principal.jpeg" },
-    { name: "Dr. Emily Rodriguez", role: "Lecturer", spec: "Data Science", img: "/images/Principal.jpeg" },
-    { name: "Prof. Michael Zhang", role: "Industry Expert", spec: "Software Architecture", img: "/images/Principal.jpeg" },
-];
-
-const FACILITIES = [
-    { name: "Advanced Robotics Lab", category: "FUTURE READY", img: "/images/modern_science_lab_1768116682208.png" },
-    { name: "Collaborative Workspace", category: "INNOVATION HUB", img: "/images/classroom_learning_1768115518451.png" },
-    { name: "Cloud Computing Center", category: "ENTERPRISE GRADE", img: "/images/science_exhibition_project_1768117868795.png" },
-];
+import { DEPARTMENT_DATA } from "@/data/departments";
 
 export default function DepartmentDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = use(params);
+    const data = DEPARTMENT_DATA[slug] || DEPARTMENT_DATA["computer-science"];
     const [currentSlide, setCurrentSlide] = useState(0);
     const [[page, direction], setPage] = useState([0, 0]);
-    const { slug } = use(params);
     const deptName = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
     const paginate = (newDirection: number) => {
         setPage([page + newDirection, newDirection]);
-        setCurrentSlide(Math.abs((page + newDirection) % FACILITIES.length));
+        setCurrentSlide(Math.abs((page + newDirection) % data.gallery.length));
     };
 
     useEffect(() => {
@@ -123,7 +113,7 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                                     </div>
                                     <h3 className="text-2xl font-bold mb-4 font-serif">Mission Statement</h3>
                                     <p className="text-zinc-600 leading-relaxed text-lg font-light">
-                                        To produce globally competent professionals by providing high-quality education, encouraging research mindset, and instilling strong ethical values tailored to meet industrial demands.
+                                        {data.mission}
                                     </p>
                                 </div>
                             </ScrollReveal>
@@ -135,12 +125,7 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                                     </div>
                                     <h3 className="text-2xl font-bold mb-6 font-serif">Academic Strengths</h3>
                                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                        {[
-                                            { icon: Cpu, text: "AI & Robotics Labs", sub: "Cutting-edge infrastructure" },
-                                            { icon: Users, text: "Industry Partnerships", sub: "MOU with tech giants" },
-                                            { icon: GraduationCap, text: "Placement Highlights", sub: "95% success rate" },
-                                            { icon: Building2, text: "Innovation Hub", sub: "Entrepreneurship cell" }
-                                        ].map((item, idx) => (
+                                        {data.strengths.map((item, idx) => (
                                             <li key={idx} className="flex gap-4 group/item">
                                                 <div className="shrink-0 w-10 h-10 rounded-lg bg-zinc-50 flex items-center justify-center text-[#5D1035] group-hover/item:bg-[#5D1035] group-hover/item:text-white transition-colors">
                                                     <item.icon className="w-5 h-5" />
@@ -173,13 +158,13 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                                         <span className="inline-block py-1 px-4 rounded-full bg-[#5D1035]/10 text-[#5D1035] text-[10px] font-black tracking-widest uppercase mb-4">
                                             Head of Department
                                         </span>
-                                        <h3 className="text-3xl font-bold text-zinc-900 mb-1">Dr. Abdul Rasheed</h3>
-                                        <p className="text-[#5D1035] font-medium mb-6 italic text-sm">Ph.D in Cloud Architectures</p>
+                                        <h3 className="text-3xl font-bold text-zinc-900 mb-1">{data.hod.name}</h3>
+                                        <p className="text-[#5D1035] font-medium mb-6 italic text-sm">{data.hod.qualification}</p>
 
                                         <div className="relative mb-8">
                                             <span className="text-5xl text-[#5D1035]/10 font-serif absolute -top-10 left-1/2 -translate-x-1/2">&quot;</span>
                                             <p className="text-zinc-600 font-light leading-relaxed italic relative z-10">
-                                                &quot;Our goal is to transcend traditional learning and build a bridge between academia and the ever-evolving tech industry.&quot;
+                                                &quot;{data.hod.quote}&quot;
                                             </p>
                                         </div>
 
@@ -205,7 +190,7 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                     </ScrollReveal>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {FACULTY.map((member, idx) => (
+                        {data.faculty.map((member, idx) => (
                             <ScrollReveal key={idx} delay={idx * 100}>
                                 <div className="group bg-white p-8 rounded-[2rem] border border-zinc-100 hover:border-[#5D1035]/30 transition-all duration-500 text-center hover:shadow-xl hover:shadow-[#5D1035]/5">
                                     <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-zinc-50 group-hover:border-[#5D1035]/20 transition-all">
@@ -267,8 +252,8 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                                 className="absolute inset-0"
                             >
                                 <Image
-                                    src={FACILITIES[currentSlide].img}
-                                    alt={FACILITIES[currentSlide].name}
+                                    src={data.gallery[currentSlide].img}
+                                    alt={`Gallery image ${currentSlide}`}
                                     fill
                                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
