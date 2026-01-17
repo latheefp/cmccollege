@@ -23,7 +23,7 @@ export default function AboutPage() {
         <main className="min-h-screen bg-white">
 
             {/* 1. HERO SECTION - Institutional Identity */}
-            <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-emerald-50/50 to-white overflow-hidden">
+            <section className="relative pt-24 pb-20 md:pt-28 md:pb-28 bg-gradient-to-b from-emerald-50/50 to-white overflow-hidden">
                 <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
                     <ScrollReveal>
                         <span className="inline-block py-1 px-3 rounded-full bg-emerald-100/50 text-emerald-800 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-emerald-200/50">

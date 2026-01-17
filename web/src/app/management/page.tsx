@@ -31,7 +31,7 @@ const managementMembers = [
 
 export default function ManagementPage() {
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white pt-[112px]">
 
             {/* 🔴 HERO SECTION - Full-width Maroon Gradient */}
             <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">

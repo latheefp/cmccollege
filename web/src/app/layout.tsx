@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import BottomTicker from "@/components/BottomTicker";
 import AdmissionPopup from "@/components/AdmissionPopup";
 import UserSync from "@/components/UserSync";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,7 +95,9 @@ export default function RootLayout({
             }}
           />
           <main className="min-h-screen">
-            {children}
+            <SmoothScroll>
+              {children}
+            </SmoothScroll>
           </main>
           <Footer />
           <BottomTicker />

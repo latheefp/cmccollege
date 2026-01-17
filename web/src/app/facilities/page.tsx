@@ -9,7 +9,7 @@ export default function FacilitiesPage() {
     const { getText, getImage } = usePageContent("facilities");
 
     return (
-        <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-20">
+        <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[112px]">
             {/* Page Header */}
             <section className="relative py-24 px-6 bg-emerald-900 text-white overflow-hidden">
                 <div className="absolute inset-0 opacity-10 pointer-events-none">

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function TopBar() {
     return (
-        <div className="w-full bg-[#5D1035] text-white py-2.5 px-6 border-b border-white/10 relative overflow-hidden">
+        <div className="w-full bg-[#5D1035] text-white py-1.5 px-6 border-b border-white/10 relative overflow-hidden">
             {/* Glossy overlay effect */}
             <div className="absolute inset-0 bg-white/5 pointer-events-none"></div>
 
