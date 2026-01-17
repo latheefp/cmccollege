@@ -48,7 +48,7 @@ export default function Navbar() {
                                 {[
                                     { name: "HOME", href: "/" },
                                     { name: "ABOUT US", href: "/about" },
-                                    { name: "DEPARTMENTS", href: "/academics" },
+                                    { name: "DEPARTMENTS", href: "/departments" },
                                     { name: "CAMPUS LIFE", href: "/campus-life" },
                                     { name: "AMENITIES", href: "/facilities" },
                                     { name: "GALLERY", href: "/gallery" },
