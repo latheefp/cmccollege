@@ -1,8 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState, useEffect } from 'react';
-import { motion, useAnimation, useMotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const clubs = [
     {
@@ -43,43 +42,7 @@ const clubs = [
 ];
 
 export default function ClubsCarousel() {
-    const carouselRef = useRef<HTMLDivElement>(null);
-    const [width, setWidth] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
-    const controls = useAnimation();
-    const x = useMotionValue(0);
-
-    useEffect(() => {
-        if (carouselRef.current) {
-            setWidth(carouselRef.current.scrollWidth / 2);
-        }
-    }, []);
-
-    useEffect(() => {
-        const startAnimation = async () => {
-            if (!isHovered && width > 0) {
-                try {
-                    await controls.start({
-                        x: -width,
-                        transition: {
-                            duration: 25,
-                            ease: "linear",
-                            repeat: Infinity,
-                            repeatType: "loop"
-                        }
-                    });
-                } catch (e) {
-                    // Animation stopped
-                }
-            } else {
-                controls.stop();
-            }
-        };
-
-        startAnimation();
-    }, [isHovered, width, controls]);
-
-    // Duplicate clubs for seamless loop
+    // Triplicate for seamless loop
     const displayClubs = [...clubs, ...clubs, ...clubs];
 
     return (
@@ -107,38 +70,38 @@ export default function ClubsCarousel() {
             </div>
 
             {/* Carousel */}
-            <motion.div
-                ref={carouselRef}
-                className="pl-4 md:pl-6"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-            >
+            <div className="w-full overflow-hidden mask-gradient-x">
                 <motion.div
-                    animate={controls}
-                    style={{ x }}
                     className="flex gap-4 md:gap-6 w-max"
+                    animate={{ x: "-33.333%" }}
+                    transition={{
+                        duration: 15,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatType: "loop"
+                    }}
                 >
                     {displayClubs.map((club, index) => (
-                        <motion.div
+                        <div // Changed from motion.div for better performance
                             key={`${club.id}-${index}`}
-                            className="bg-white rounded-2xl md:rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 w-28 h-28 md:w-48 md:h-48 flex flex-col items-center justify-center border border-zinc-100 group cursor-pointer relative overflow-hidden"
-                            whileHover={{ y: -8 }}
+                            className="bg-white rounded-xl md:rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 w-24 h-24 md:w-40 md:h-40 flex flex-col items-center justify-center border border-zinc-100 group relative overflow-hidden flex-shrink-0"
                         >
-                            <div className="relative w-12 h-12 md:w-24 md:h-24 mb-2 md:mb-4 transition-transform duration-500 group-hover:scale-110">
+                            <div className="relative w-10 h-10 md:w-20 md:h-20 mb-1 md:mb-3 transition-transform duration-500 group-hover:scale-105">
                                 <Image
                                     src={club.image}
                                     alt={club.name}
                                     fill
                                     className="object-contain"
+                                    sizes="(max-width: 768px) 100px, 160px"
                                 />
                             </div>
-                            <h3 className="text-[10px] md:text-sm font-bold text-zinc-800 text-center px-1 md:px-4 group-hover:text-emerald-700 transition-colors leading-tight line-clamp-2">
+                            <h3 className="text-[9px] md:text-xs font-bold text-zinc-800 text-center px-1 md:px-2 group-hover:text-emerald-700 transition-colors leading-tight line-clamp-2">
                                 {club.name}
                             </h3>
-                        </motion.div>
+                        </div>
                     ))}
                 </motion.div>
-            </motion.div>
+            </div>
 
         </section>
     );
