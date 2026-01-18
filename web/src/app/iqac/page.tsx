@@ -75,7 +75,7 @@ const IQAC_TABS: IacTab[] = [
         content: (
             <div className="space-y-6 text-zinc-600 leading-relaxed">
                 <p>The core functions of the IQAC include:</p>
-                <ul className="grid gap-4">
+                <ul className="grid md:grid-cols-2 gap-4">
                     {[
                         "Development and application of quality benchmarks/parameters for the various Academic and Administrative activities for quality assurance.",
                         "Review the teaching, learning process, structure and methodology of operations and learning outcome of all the programmes at periodic intervals",
@@ -161,7 +161,7 @@ export default function IQACPage() {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 md:px-6">
+            <div className="w-full px-[30px]">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
                     {/* LEFT SIDEBAR NAVIGATION */}
