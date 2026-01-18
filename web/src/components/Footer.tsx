@@ -27,7 +27,9 @@ export default function Footer() {
                         </div>
                     </div>
                     <p className="text-emerald-200/80 leading-relaxed mb-6">
-                        Providing high-quality integrated education with strong Islamic values to nurture the leaders of tomorrow.
+                        Affiliated to The University Of Calicut Recognized by UGC under Section 2(f)
+                        of the Act 1957 <br />
+                        <span className="text-gray-200 font-bold">Unit of CM Centre Madavoor</span>
                     </p>
                     <div className="flex gap-4">
                         <a href="#" className="w-10 h-10 rounded-full bg-emerald-900/50 flex items-center justify-center hover:bg-emerald-800 transition-all hover:scale-110" aria-label="Facebook">
