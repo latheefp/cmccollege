@@ -68,56 +68,65 @@ export default function NewsSection() {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-                    {newsItems.map((item, index) => (
-                        <motion.div
-                            key={item._id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="group bg-white rounded-xl overflow-hidden shadow-sm border border-zinc-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col h-full"
-                        >
-                            {/* Image */}
-                            <div className="relative h-48 overflow-hidden bg-zinc-100">
-                                <Image
-                                    src={item.image || '/images/college.png'}
-                                    alt={item.title}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-[10px] font-bold text-emerald-800 uppercase tracking-wider shadow-sm">
-                                    {item.tag}
-                                </div>
-                            </div>
-
-                            {/* Content */}
-                            <div className="p-5 flex flex-col flex-grow">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <svg className="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    <span className="text-xs font-medium text-zinc-500">{formatDate(item.date)}</span>
+                {isLoading ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 min-h-[400px]">
+                        {[1, 2, 3].map((i) => (
+                            <div key={i} className="bg-zinc-100 rounded-xl h-[400px] animate-pulse" />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 min-h-[400px]">
+                        {newsItems.map((item, index) => (
+                            <motion.div
+                                key={item._id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className="group bg-white rounded-xl overflow-hidden shadow-sm border border-zinc-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col h-full"
+                            >
+                                {/* Image */}
+                                <div className="relative h-48 overflow-hidden bg-zinc-100">
+                                    <Image
+                                        src={item.image || '/images/college.png'}
+                                        alt={item.title}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-[10px] font-bold text-emerald-800 uppercase tracking-wider shadow-sm">
+                                        {item.tag}
+                                    </div>
                                 </div>
 
-                                <h3 className="text-lg font-bold text-zinc-900 mb-2 group-hover:text-emerald-700 transition-colors line-clamp-2 leading-tight">
-                                    {item.title}
-                                </h3>
+                                {/* Content */}
+                                <div className="p-5 flex flex-col flex-grow">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <svg className="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        <span className="text-xs font-medium text-zinc-500">{formatDate(item.date)}</span>
+                                    </div>
 
-                                <p className="text-zinc-600 mb-4 text-xs md:text-sm leading-relaxed line-clamp-3">
-                                    {item.description}
-                                </p>
+                                    <h3 className="text-lg font-bold text-zinc-900 mb-2 group-hover:text-emerald-700 transition-colors line-clamp-2 leading-tight">
+                                        {item.title}
+                                    </h3>
 
-                                <div className="mt-auto flex items-center text-emerald-700 font-bold text-xs group-hover:gap-1.5 transition-all duration-300">
-                                    <span>Read more</span>
-                                    <svg className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
+                                    <p className="text-zinc-600 mb-4 text-xs md:text-sm leading-relaxed line-clamp-3">
+                                        {item.description}
+                                    </p>
+
+                                    <div className="mt-auto flex items-center text-emerald-700 font-bold text-xs group-hover:gap-1.5 transition-all duration-300">
+                                        <span>Read more</span>
+                                        <svg className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                        </svg>
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+                            </motion.div>
+                        ))}
+
+                    </div>
+                )}
 
                 {/* View All Button */}
                 <div className="mt-10 text-center">

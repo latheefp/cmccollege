@@ -61,7 +61,7 @@ const GalleryCard = ({ item, index, featured }: { item: any, index: number, feat
   return (
     <ScrollReveal
       delay={index * 100}
-      className={`group relative overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 h-full border border-emerald-50/10
+      className={`group relative overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-700 h-full border border-emerald-50/10
         ${featured ? "md:col-span-2 md:row-span-2 min-h-[450px]" : "min-h-[300px] md:min-h-0"}
         ${getRoundedClass(index, featured)}
       `}
@@ -198,6 +198,7 @@ export default function Home() {
                 alt={`Hero Slide ${currentSlide + 1}`}
                 fill
                 className="object-cover"
+                sizes="100vw"
                 priority
               />
             </motion.div>
@@ -232,12 +233,12 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/admissions">
-                <button className="px-8 py-4 bg-white text-emerald-900 font-semibold rounded-lg shadow-lg hover:bg-emerald-50 transition-all text-lg hover:scale-105 active:scale-95 cursor-pointer">
+                <button className="px-8 py-4 bg-white text-emerald-900 font-semibold rounded-lg shadow-lg hover:bg-emerald-50 transition-transform text-lg hover:scale-105 active:scale-95 cursor-pointer">
                   Admissions Open
                 </button>
               </Link>
               <Link href="/about">
-                <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all text-lg hover:scale-105 active:scale-95 cursor-pointer">
+                <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-lg hover:scale-105 active:scale-95 cursor-pointer">
                   Learn More
                 </button>
               </Link>
@@ -272,7 +273,7 @@ export default function Home() {
 
               <div className="mt-8">
                 <Link href="/about">
-                  <button className="px-8 py-3 bg-[#7B0046] text-white font-medium text-lg rounded-lg hover:bg-[#600036] transition-all shadow-sm hover:shadow-md active:scale-95 cursor-pointer">
+                  <button className="px-8 py-3 bg-[#7B0046] text-white font-medium text-lg rounded-lg hover:bg-[#600036] transition-colors shadow-sm hover:shadow-md active:scale-95 cursor-pointer">
                     Know More
                   </button>
                 </Link>
@@ -311,6 +312,7 @@ export default function Home() {
                   alt="Principal"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, 40vw"
                 />
               </div>
             </ScrollReveal>
@@ -354,7 +356,7 @@ export default function Home() {
                   </div>
 
                   <Link href="/about">
-                    <button className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full border border-zinc-200 text-emerald-800 hover:bg-emerald-50 hover:border-emerald-200 transition-all">
+                    <button className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full border border-zinc-200 text-emerald-800 hover:bg-emerald-50 hover:border-emerald-200 transition-colors">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                     </button>
                   </Link>
@@ -396,6 +398,7 @@ export default function Home() {
                       alt={dept.name}
                       fill
                       className="object-cover transform scale-100 group-hover:scale-110 transition-transform duration-700 ease-out"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     />
                     {/* Dark Gradient Overlay for readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30"></div>
@@ -442,6 +445,7 @@ export default function Home() {
                       alt={facility.name}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 20vw"
                     />
                     {/* Overlay removed */}
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
@@ -454,7 +458,7 @@ export default function Home() {
           </div>
           <div className="mt-16 text-center">
             <Link href="/facilities">
-              <button className="px-8 py-4 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+              <button className="px-8 py-4 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-transform hover:scale-105 active:scale-95 cursor-pointer">
                 Explore All Facilities
               </button>
             </Link>
@@ -490,7 +494,7 @@ export default function Home() {
           <h2 className="text-3xl md:text-5xl font-bold mb-8" data-editable="cta-heading" data-page="home">Admissions Now Open</h2>
           <p className="text-emerald-100 text-xl mb-12 max-w-2xl mx-auto" data-editable="cta-description" data-page="home">Start your journey towards academic excellence and strong moral values today.</p>
           <Link href="/contact">
-            <button className="px-12 py-5 bg-white text-emerald-900 font-bold rounded-lg shadow-2xl hover:bg-emerald-50 hover:scale-105 active:scale-95 transition-all text-xl cursor-pointer">
+            <button className="px-12 py-5 bg-white text-emerald-900 font-bold rounded-lg shadow-2xl hover:bg-emerald-50 hover:scale-105 active:scale-95 transition-transform text-xl cursor-pointer">
               Enquire Now
             </button>
           </Link>

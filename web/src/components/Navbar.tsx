@@ -145,7 +145,7 @@ export default function Navbar() {
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                                 className="lg:hidden overflow-hidden"
                             >
-                                <div className="py-6 px-4 bg-white/90 backdrop-blur-2xl border-t border-emerald-50 rounded-b-[2.5rem] shadow-2xl mb-6">
+                                <div className="py-6 px-4 bg-white/95 backdrop-blur-md border-t border-emerald-50 rounded-b-[2.5rem] shadow-2xl mb-6">
                                     <div className="grid grid-cols-2 gap-3">
                                         {[
                                             { name: "Home", href: "/", icon: Home },

@@ -76,7 +76,7 @@ function Counter({ value }: { value: number }) {
         return unsubscribe;
     }, [springValue]);
 
-    return <span ref={ref} className="tabular-nums">0</span>;
+    return <span ref={ref} className="tabular-nums will-change-transform">0</span>;
 }
 
 export default function StatsSection() {
