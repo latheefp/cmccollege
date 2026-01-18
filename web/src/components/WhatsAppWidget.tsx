@@ -6,7 +6,7 @@ import { Send, X, MessageCircle } from "lucide-react";
 import Image from "next/image";
 
 // Replace with actual college number
-const WHATSAPP_NUMBER = "919072462310";
+const WHATSAPP_NUMBER = "916282592895";
 const DEFAULT_MESSAGE = "Hi, I would like to know more about admissions.";
 
 export default function WhatsAppWidget() {
@@ -52,14 +52,16 @@ export default function WhatsAppWidget() {
                         {/* Header */}
                         <div className="bg-[#075E54] p-4 flex items-center justify-between text-white">
                             <div className="flex items-center gap-3">
-                                <div className="relative w-10 h-10 rounded-full overflow-hidden bg-white border border-white/20">
-                                    <Image
-                                        src="/favicon.png" // Using logo as avatar
-                                        alt="Support"
-                                        fill
-                                        className="object-contain p-1"
-                                    />
-                                    <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-[#075E54]"></div>
+                                <div className="relative">
+                                    <div className="w-10 h-10 rounded-full overflow-hidden bg-white border border-white/20">
+                                        <Image
+                                            src="/favicon.png" // Using logo as avatar
+                                            alt="Support"
+                                            fill
+                                            className="object-contain p-1"
+                                        />
+                                    </div>
+                                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#075E54]"></div>
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-sm leading-tight">CM College Support</h3>
