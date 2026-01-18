@@ -8,6 +8,7 @@ import BottomTicker from "@/components/BottomTicker";
 import AdmissionPopup from "@/components/AdmissionPopup";
 import UserSync from "@/components/UserSync";
 import SmoothScroll from "@/components/SmoothScroll";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -102,6 +103,7 @@ export default function RootLayout({
           <Footer />
           <BottomTicker />
           <AdmissionPopup />
+          <WhatsAppWidget />
           <UserSync />
         </body>
       </html>
