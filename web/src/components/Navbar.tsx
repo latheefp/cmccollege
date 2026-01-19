@@ -85,16 +85,16 @@ export default function Navbar() {
                                     <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
                                     <Facebook className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </Link>
-                                <Link href="https://instagram.com" target="_blank" className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden">
+                                <Link href="https://www.instagram.com/cm_college_official?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden">
                                     <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
                                     <Instagram className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </Link>
                                 <button
                                     onClick={() => setIsSearchOpen(true)}
-                                    className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden"
+                                    className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden hover:cursor-pointer"
                                 >
-                                    <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                                    <Search className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white" />
+                                    <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out " />
+                                    <Search className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white " />
                                 </button>
                             </div>
                         </div>

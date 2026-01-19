@@ -7,26 +7,26 @@ export default function AlumniPage() {
     return (
         <main className="min-h-screen bg-emerald-50 pt-24 md:pt-28 pb-12 md:pb-20">
 
-            {/* HERO AREA - Matching Research/IQAC style */}
-            <div className="pt-10 pb-12 px-6">
-                <div className="max-w-7xl mx-auto text-center">
+            {/* Page Header */}
+            <section className="relative py-24 px-6 bg-[#5D1035] text-white overflow-hidden mb-12">
+                <div className="absolute inset-0 opacity-10 pointer-events-none">
+                    <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
+                </div>
+                <div className="relative z-10 max-w-5xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-block py-1 px-3 rounded-full bg-emerald-100/50 text-emerald-800 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-4 md:mb-6 border border-emerald-200/50">
-                            Community & Legacy
-                        </span>
-                        <h1 className="text-4xl md:text-6xl font-bold font-serif text-zinc-900 mb-6 tracking-tight leading-tight">
-                            Alumni <span className="text-[#7B0046] italic">Association</span>
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                            Alumni Association
                         </h1>
-                        <p className="text-base md:text-xl text-zinc-600 leading-relaxed font-light max-w-3xl mx-auto">
+                        <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed">
                             Celebrating the lifelong bond between CM College and its graduates.
                         </p>
                     </motion.div>
                 </div>
-            </div>
+            </section>
 
             <div className="w-full px-4 md:px-[30px] max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
