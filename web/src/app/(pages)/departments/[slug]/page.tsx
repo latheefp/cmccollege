@@ -337,60 +337,64 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                         </p>
                     </ScrollReveal>
 
-                    <div className="relative h-[400px] md:h-[600px] lg:h-[700px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl group bg-zinc-900">
-                        <AnimatePresence initial={false} custom={direction}>
-                            <motion.div
-                                key={page}
-                                custom={direction}
-                                variants={{
-                                    enter: (direction: number) => ({
-                                        x: direction > 0 ? 1000 : -1000,
-                                        opacity: 0
-                                    }),
-                                    center: {
-                                        zIndex: 1,
-                                        x: 0,
-                                        opacity: 1
-                                    },
-                                    exit: (direction: number) => ({
-                                        zIndex: 0,
-                                        x: direction < 0 ? 1000 : -1000,
-                                        opacity: 0
-                                    })
-                                }}
-                                initial="enter"
-                                animate="center"
-                                exit="exit"
-                                transition={{
-                                    x: { type: "spring", stiffness: 300, damping: 30 },
-                                    opacity: { duration: 0.2 }
-                                }}
-                                className="absolute inset-0"
-                            >
-                                <Image
-                                    src={data.gallery[currentSlide].img}
-                                    alt={`Gallery image ${currentSlide}`}
-                                    fill
-                                    className="object-contain md:object-cover transition-transform duration-700 group-hover:scale-105"
-                                    priority
-                                />
-                            </motion.div>
-                        </AnimatePresence>
+                    <div className="relative mx-auto max-w-4xl">
+                        <div className="aspect-[4/3] md:aspect-[16/9] w-full bg-zinc-900 rounded-[2.5rem] p-3 md:p-4 shadow-2xl overflow-hidden relative border border-zinc-800/50">
+                            <div className="w-full h-full relative rounded-[2rem] overflow-hidden bg-black/50">
+                                <AnimatePresence initial={false} custom={direction}>
+                                    <motion.div
+                                        key={page}
+                                        custom={direction}
+                                        variants={{
+                                            enter: (direction: number) => ({
+                                                x: direction > 0 ? 1000 : -1000,
+                                                opacity: 0
+                                            }),
+                                            center: {
+                                                zIndex: 1,
+                                                x: 0,
+                                                opacity: 1
+                                            },
+                                            exit: (direction: number) => ({
+                                                zIndex: 0,
+                                                x: direction < 0 ? 1000 : -1000,
+                                                opacity: 0
+                                            })
+                                        }}
+                                        initial="enter"
+                                        animate="center"
+                                        exit="exit"
+                                        transition={{
+                                            x: { type: "spring", stiffness: 300, damping: 30 },
+                                            opacity: { duration: 0.2 }
+                                        }}
+                                        className="absolute inset-0"
+                                    >
+                                        <Image
+                                            src={data.gallery[currentSlide].img}
+                                            alt={`Gallery image ${currentSlide}`}
+                                            fill
+                                            className="object-contain transition-transform duration-700 hover:scale-105"
+                                            priority
+                                        />
+                                    </motion.div>
+                                </AnimatePresence>
 
-                        {/* Navigation Arrows - Repositioned for mobile */}
-                        <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 flex gap-3 md:gap-4 z-20">
-                            <button
-                                onClick={() => paginate(-1)}
-                                className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/20 md:bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-[#5D1035] transition-all"
-                            >
-                                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-                            </button>
-                            <button
-                                onClick={() => paginate(1)}
-                                className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/20 md:bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-[#5D1035] transition-all"
-                            >
-                                <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-                            </button>
+                                {/* Navigation Arrows */}
+                                <div className="absolute bottom-4 right-4 flex gap-3 z-20">
+                                    <button
+                                        onClick={() => paginate(-1)}
+                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/90 hover:bg-white hover:text-zinc-900 transition-all active:scale-95"
+                                    >
+                                        <ChevronLeft className="w-5 h-5" />
+                                    </button>
+                                    <button
+                                        onClick={() => paginate(1)}
+                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/90 hover:bg-white hover:text-zinc-900 transition-all active:scale-95"
+                                    >
+                                        <ChevronRight className="w-5 h-5" />
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
