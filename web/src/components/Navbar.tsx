@@ -13,6 +13,7 @@ import {
 
 import TopBar from "./TopBar";
 import SearchOverlay from "./SearchOverlay";
+import { useAdmissionStatus } from "@/hooks/useAdmissionStatus";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -66,14 +67,8 @@ export default function Navbar() {
                                     </Link>
                                 ))}
 
-                                {/* Admission Button with Shine Effect */}
-                                <Link href="/admissions">
-                                    <button className="relative px-5 py-2.5 bg-[#5D1035] text-white text-[10px] lg:text-[10px] 2xl:text-[13px] font-black uppercase tracking-widest rounded overflow-hidden group hover:bg-[#4a0d2a] transition-colors shadow-sm hover:cursor-pointer">
-                                        <span className="relative z-10">Admissions</span>
-                                        {/* Shine Effect */}
-                                        <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine" />
-                                    </button>
-                                </Link>
+                                {/* Admission Button with Dynamic Status */}
+                                <AdmissionButton />
                             </div>
 
                             {/* Separator */}
@@ -209,5 +204,30 @@ export default function Navbar() {
             </nav>
             <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </header>
+    );
+}
+
+function AdmissionButton() {
+    const { isAdmissionOpen } = useAdmissionStatus();
+
+    if (isAdmissionOpen) {
+        return (
+            <Link href="/admissions">
+                <button className="relative px-5 py-2.5 bg-[#5D1035] text-white text-[10px] lg:text-[10px] 2xl:text-[13px] font-black uppercase tracking-widest rounded overflow-hidden group hover:bg-[#4a0d2a] transition-colors shadow-sm hover:cursor-pointer">
+                    <span className="relative z-10">Admissions Open</span>
+                    {/* Shine Effect */}
+                    <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 animate-shine" />
+                </button>
+            </Link>
+        );
+    }
+
+    // Closed State - Regular Button
+    return (
+        <Link href="/admissions">
+            <button className="relative px-5 py-2.5 bg-[#5D1035] text-white text-[10px] lg:text-[10px] 2xl:text-[13px] font-black uppercase tracking-widest rounded overflow-hidden group hover:bg-[#4a0d2a] transition-colors shadow-sm hover:cursor-pointer">
+                <span className="relative z-10">Admissions</span>
+            </button>
+        </Link>
     );
 }

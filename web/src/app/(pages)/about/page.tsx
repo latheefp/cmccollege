@@ -289,7 +289,7 @@ export default function AboutPage() {
             </section>
 
             {/* 6. CALL TO ACTION - Strong Ending */}
-            <section className="py-24 bg-emerald-900 text-white relative overflow-hidden mb-1 border-b border-white/10">
+            <section className="py-24 bg-emerald-900 text-white relative overflow-hidden border-b border-white/10">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
                 <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
                     <ScrollReveal>

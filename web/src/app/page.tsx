@@ -13,6 +13,8 @@ import StatsSection from "@/components/StatsSection";
 import Collaborations from "@/components/Collaborations";
 import Testimonials from "@/components/Testimonials";
 import { usePageContent } from "@/hooks/usePageContent";
+import { useAdmissionStatus } from "@/hooks/useAdmissionStatus";
+import DynamicCTA from "@/components/DynamicCTA";
 
 
 interface GalleryImage {
@@ -138,8 +140,9 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [isPaused, heroImages.length, currentSlide]);
 
-  // Fetch dynamic page content removed as per request
+  // Fetch dynamic page content
   const { getImage } = usePageContent("home");
+  const { isAdmissionOpen } = useAdmissionStatus();
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -173,32 +176,7 @@ export default function Home() {
       variant: i === 3
     }));
 
-  // Admission visibility state
-  const [isAdmissionOpen, setIsAdmissionOpen] = useState(false);
-
-  useEffect(() => {
-    const checkAdmissionStatus = async () => {
-      try {
-        const rawUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
-        const apiUrl = rawUrl.endsWith('/api') ? rawUrl : `${rawUrl.replace(/\/$/, '')}/api`;
-
-        const res = await fetch(`${apiUrl}/admission/settings`);
-        if (res.ok) {
-          const data = await res.json();
-          const now = new Date();
-          const startDate = new Date(data.startDate);
-          const endDate = new Date(data.endDate);
-
-          if (data.isActive && now >= startDate && now <= endDate) {
-            setIsAdmissionOpen(true);
-          }
-        }
-      } catch (error) {
-        console.error("Failed to check admission status", error);
-      }
-    };
-    checkAdmissionStatus();
-  }, []);
+  // Admission visibility state removed (handled in DynamicCTA)
 
   return (
     <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[104px] lg:pt-[112px] bg-[#7B0046]/[0.03]">
@@ -516,22 +494,10 @@ export default function Home() {
       {/* Gallery Preview Section */}
 
       <Gallery />
-      {/* Call to Action Section */}
-      <section className="py-24 px-6 bg-emerald-900 text-white text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
-        </div>
-        <ScrollReveal className="relative z-10 max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-agency font-bold mb-8 uppercase" data-editable="cta-heading" data-page="home">Admissions Now Open</h2>
-          <p className="text-emerald-100 text-xl mb-12 max-w-2xl mx-auto" data-editable="cta-description" data-page="home">Start your journey towards academic excellence and strong moral values today.</p>
-          <Link href="/contact">
-            <button className="px-12 py-5 bg-white text-emerald-900 font-bold rounded-lg shadow-2xl hover:bg-emerald-50 hover:scale-105 active:scale-95 transition-transform text-xl cursor-pointer">
-              Enquire Now
-            </button>
-          </Link>
-        </ScrollReveal>
-      </section>
 
-    </div >
+      {/* Call to Action Section - Dynamic & Themed */}
+      <DynamicCTA className="py-24 px-6 bg-emerald-900 text-white text-center relative overflow-hidden" />
+
+    </div>
   );
 }

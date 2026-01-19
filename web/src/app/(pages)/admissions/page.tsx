@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import { usePageContent } from "@/hooks/usePageContent";
+import { useAdmissionStatus } from "@/hooks/useAdmissionStatus";
 
 export default function AdmissionsPage() {
     const { getText, getImage } = usePageContent("admissions");
+    const { isAdmissionOpen } = useAdmissionStatus();
 
     return (
         <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[112px]">
@@ -189,13 +192,21 @@ export default function AdmissionsPage() {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <ScrollReveal>
-                            <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-8" data-editable="final-cta-heading" data-page="admissions">{getText("final-cta-heading", "Ready to Start Your Journey?")}</h2>
+                            <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-8" data-editable="final-cta-heading" data-page="admissions">
+                                {isAdmissionOpen
+                                    ? getText("final-cta-heading", "Ready to Start Your Journey?")
+                                    : "Admissions Currently Closed"}
+                            </h2>
                             <p className="text-xl text-zinc-600 mb-10 leading-relaxed" data-editable="final-cta-desc" data-page="admissions">
-                                {getText("final-cta-desc", "Admissions are currently open for the current academic session. Join a community where your academic potential and character are nurtured together.")}
+                                {isAdmissionOpen
+                                    ? getText("final-cta-desc", "Admissions are currently open for the current academic session. Join a community where your academic potential and character are nurtured together.")
+                                    : "Thank you for your interest. Admissions for the current academic year are closed. Please contact us for information regarding the next academic session."}
                             </p>
-                            <button className="px-12 py-5 bg-emerald-800 text-white font-bold rounded-xl shadow-xl hover:bg-emerald-900 hover:scale-105 active:scale-95 transition-all text-xl">
-                                Enquire Now
-                            </button>
+                            <a href={isAdmissionOpen ? "#enquire" : "/contact"}>
+                                <button className="px-12 py-5 bg-emerald-800 text-white font-bold rounded-xl shadow-xl hover:bg-emerald-900 hover:scale-105 active:scale-95 transition-all text-xl cursor-pointer">
+                                    {isAdmissionOpen ? "Enquire Now" : "Contact Us"}
+                                </button>
+                            </a>
                         </ScrollReveal>
                         <ScrollReveal delay={200} className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border-2 border-emerald-50">
                             <Image
@@ -209,8 +220,16 @@ export default function AdmissionsPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/60 to-transparent" />
                             <div className="absolute bottom-10 left-10 right-10">
                                 <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-emerald-100 shadow-xl">
-                                    <p className="text-emerald-900 font-bold text-xl mb-2 italic" data-editable="final-cta-card-title" data-page="admissions">{getText("final-cta-card-title", "\"A New Beginning Awaits!\"")}</p>
-                                    <p className="text-zinc-600" data-editable="final-cta-card-desc" data-page="admissions">{getText("final-cta-card-desc", "Limited seats available for the upcoming session.")}</p>
+                                    <p className="text-emerald-900 font-bold text-xl mb-2 italic" data-editable="final-cta-card-title" data-page="admissions">
+                                        {isAdmissionOpen
+                                            ? getText("final-cta-card-title", "\"A New Beginning Awaits!\"")
+                                            : "\"Plan Your Future Today!\""}
+                                    </p>
+                                    <p className="text-zinc-600" data-editable="final-cta-card-desc" data-page="admissions">
+                                        {isAdmissionOpen
+                                            ? getText("final-cta-card-desc", "Limited seats available for the upcoming session.")
+                                            : "Connect with us to stay updated on future openings."}
+                                    </p>
                                 </div>
                             </div>
                         </ScrollReveal>

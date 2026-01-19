@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import { usePageContent } from "@/hooks/usePageContent";
+import DynamicCTA from "@/components/DynamicCTA";
 
 export default function FacilitiesPage() {
     const { getText, getImage } = usePageContent("facilities");
@@ -160,26 +161,8 @@ export default function FacilitiesPage() {
             </section>
 
             {/* Final Call to Action */}
-            <section className="py-20 px-6 bg-emerald-900 text-white text-center">
-                <ScrollReveal className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6" data-editable="cta-heading" data-page="facilities">{getText("cta-heading", "Experience our Infrastructure")}</h2>
-                    <p className="text-emerald-100 text-lg mb-10" data-editable="cta-desc" data-page="facilities">{getText("cta-desc", "Visit our campus to see our facilities firsthand and start your journey today.")}</p>
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <Link
-                            href="/admissions"
-                            className="px-10 py-5 bg-white text-emerald-900 font-bold rounded-xl shadow-xl hover:scale-105 transition-transform text-lg text-center"
-                        >
-                            Start Admission Process
-                        </Link>
-                        <Link
-                            href="/contact"
-                            className="px-10 py-5 bg-emerald-800 text-white font-bold rounded-xl border border-emerald-700 hover:bg-emerald-700 transition-colors text-lg text-center"
-                        >
-                            Enquire for Details
-                        </Link>
-                    </div>
-                </ScrollReveal>
-            </section>
+            {/* Final Call to Action */}
+            <DynamicCTA className="py-20 px-6 bg-emerald-900 text-white text-center" />
         </div>
     );
 }

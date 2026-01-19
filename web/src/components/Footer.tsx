@@ -17,12 +17,12 @@ export default function Footer() {
                 {/* School Info */}
                 <div className="col-span-1 md:col-span-1">
                     <div className="flex items-center gap-2 mb-6">
-                        <div className="relative w-16 h-16">
+                        <div className="relative w-64 h-24 bg-white rounded-xl px-4 flex items-center justify-center shadow-lg">
                             <Image
                                 src="https://ik.imagekit.io/5c6j602yp/Home/images/logo2.png"
                                 alt="College Logo"
                                 fill
-                                className="object-contain brightness-0 invert scale-[3] origin-left"
+                                className="object-contain p-2 scale-110"
                             />
                         </div>
                     </div>
@@ -112,7 +112,7 @@ export default function Footer() {
                     <ul className="space-y-4 text-emerald-200/80">
                         <li className="flex gap-3">
                             <span className="text-white">📍</span>
-                            Mount Razi. Nadavayal (P.O)
+                            Mount Razi, Nadavayal (P.O) <br />
                             Wayanad-670646
                         </li>
                         <li className="flex gap-3">
@@ -129,7 +129,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="max-w-7xl mx-auto mt-10 pt-8 border-t border-emerald-900/50 text-center text-sm text-emerald-200/40">
+            <div className="max-w-7xl mx-auto mt-10 pt-8 border-t border-white/10 text-center text-sm text-emerald-100/60">
                 <p>&copy; {new Date().getFullYear()} CM College. All rights reserved.</p>
             </div>
         </footer>

@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
+import DynamicCTA from "@/components/DynamicCTA";
 
 interface GalleryItem {
     _id: string;
@@ -123,17 +125,7 @@ export default function GalleryPage() {
             </section>
 
             {/* Final CTA */}
-            <section className="py-20 px-6 bg-emerald-900 text-white text-center">
-                <ScrollReveal>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Want to see more?</h2>
-                    <p className="text-emerald-100 text-lg mb-10 max-w-2xl mx-auto">Visit our school to experience our vibrant campus life firsthand. Our doors are always open for parents and students.</p>
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <a href="/contact" className="px-10 py-5 bg-white text-emerald-900 font-bold rounded-xl shadow-xl hover:scale-105 transition-transform text-lg">
-                            Book a Campus Visit
-                        </a>
-                    </div>
-                </ScrollReveal>
-            </section>
+            <DynamicCTA className="py-20 px-6 bg-emerald-900 text-white text-center" />
         </div>
     );
 }
