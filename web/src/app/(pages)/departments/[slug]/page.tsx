@@ -229,10 +229,10 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                                         <h3 className="text-xl font-bold mb-4 font-serif text-[#5D1035] flex items-center gap-2">
                                             <TrendingUp className="w-5 h-5" /> Key Highlights
                                         </h3>
-                                        <ul className={`grid gap-4 ${Array.isArray(data.courses) ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-4" : "space-y-3"}`}>
+                                        <ul className={`grid gap-6 ${Array.isArray(data.courses) ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-4" : "space-y-4"}`}>
                                             {data.highlights.map((item, idx) => (
-                                                <li key={idx} className="flex items-center gap-3 text-sm font-semibold text-zinc-700">
-                                                    <div className="w-2 h-2 rounded-full bg-[#5D1035] shrink-0" />
+                                                <li key={idx} className="flex items-start gap-4 text-base font-bold text-zinc-700 leading-snug">
+                                                    <div className="w-2.5 h-2.5 rounded-full bg-[#5D1035] shrink-0 mt-1.5" />
                                                     {item}
                                                 </li>
                                             ))}
