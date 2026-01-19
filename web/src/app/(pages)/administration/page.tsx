@@ -25,12 +25,12 @@ const councilMembers = [
     {
         name: "Uvais T K",
         role: "Administrative Officer – CM College of Arts and Science",
-        image: "https://ui-avatars.com/api/?name=Uvais+T+K&background=0D8ABC&color=fff&size=500"
+        image: "/images/default-user-placeholder.png"
     },
     {
         name: "Jabir Ali P P",
         role: "IQAC Director, CM College of Arts and Science",
-        image: "https://ui-avatars.com/api/?name=Jabir+Ali+P+P&background=0D8ABC&color=fff&size=500"
+        image: "/images/default-user-placeholder.png"
     }
 ];
 
