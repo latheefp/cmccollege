@@ -412,9 +412,9 @@ export default function Home() {
               { name: "Department Of Computer Science", slug: "computer-science", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/Cs-bg.png" },
               { name: "Department Of Management", slug: "management", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Management/Management-bg.png" },
               { name: "Department Of Mass Communication And Journalism", slug: "mass-communication", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Masscom/masscom-bg.png" },
-              { name: "Department Of Economics", slug: "economics", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Ecnomics/ecnomics-bg.png?updatedAt=1768827559859" },
-              { name: "Department Of English", slug: "english", img: "/images/classroom_learning_1768115518451.png" },
-              { name: "Department Of Commerce", slug: "commerce", img: "/images/document_verification_office_1768116391105.png" },
+              { name: "Department Of Economics", slug: "economics", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Ecnomics/ecnomics-bg.png?updatedAt=1768828596627" },
+              { name: "Department Of English", slug: "english", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/English/english-bg.jpg" },
+              { name: "Department Of Commerce", slug: "commerce", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Commerce/commerce-bg.jpg" },
               { name: "Department Of Statistics", slug: "statistics", img: "/images/modern_science_lab_1768116682208.png" },
               { name: "Department Of Psychology", slug: "psychology", img: "/images/science_exhibition_project_1768117868795.png" }
             ].map((dept, i) => (
