@@ -15,6 +15,7 @@ import Testimonials from "@/components/Testimonials";
 import { usePageContent } from "@/hooks/usePageContent";
 import { useAdmissionStatus } from "@/hooks/useAdmissionStatus";
 import DynamicCTA from "@/components/DynamicCTA";
+import HomeMap from "@/components/HomeMap";
 
 
 interface GalleryImage {
@@ -495,8 +496,12 @@ export default function Home() {
 
       <Gallery />
 
+      {/* Map Section */}
+      <HomeMap />
+
       {/* Call to Action Section - Dynamic & Themed */}
       <DynamicCTA className="py-24 px-6 bg-emerald-900 text-white text-center relative overflow-hidden" />
+
 
     </div>
   );
