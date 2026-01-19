@@ -76,13 +76,13 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             name: "Rajitha P",
             qualification: "Master of Computer Applications",
             quote: "Our goal is to transcend traditional learning and build a bridge between academia and the ever-evolving tech industry.",
-            img: "/images/Principal.jpeg"
+            img: "/images/default-user-placeholder.png"
         },
         faculty: [
             { name: "Sumayya U", role: "Academic Coordinator", spec: "Artificial Intelligence", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/sumayya-u.jpg" },
             { name: "Rijilanadh", role: "Assistant Professor", spec: "Cyber Security", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/rijila-nath.jpg" },
             { name: "Vivek M V", role: "Lab Assistant", spec: "Data Science", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/vivek-mv-200x250.jpg" },
-            { name: "Asliya A", role: "Assistant Professor", spec: "Software Architecture", img: "/images/Principal.jpeg" },
+            { name: "Asliya A", role: "Assistant Professor", spec: "Software Architecture", img: "/images/default-user-placeholder.png" },
         ],
         gallery: [
             { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/Gallery/image1?updatedAt=1768829462746", category: "" },
@@ -122,17 +122,17 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             name: "Athira P",
             qualification: "MBA, Ph.D in Strategic Management",
             quote: "Management is about more than just business; it is about leading with integrity and vision in a complex world.",
-            img: "/images/Principal.jpeg"
+            img: "/images/default-user-placeholder.png"
         },
         faculty: [
-            { name: "Jaseela C M", role: "Assistant Professor", spec: "Finance", img: "/images/Principal.jpeg" },
-            { name: "Aysha K P", role: "Assistant Professor", spec: "HR Management", img: "/images/Principal.jpeg" },
-            { name: "Sini John", role: "Assistant Professor", spec: "Operations", img: "/images/Principal.jpeg" },
+            { name: "Jaseela C M", role: "Assistant Professor", spec: "Finance", img: "/images/default-user-placeholder.png" },
+            { name: "Aysha K P", role: "Assistant Professor", spec: "HR Management", img: "/images/default-user-placeholder.png" },
+            { name: "Sini John", role: "Assistant Professor", spec: "Operations", img: "/images/default-user-placeholder.png" },
         ],
         gallery: [
-            { img: "/images/clg_1.png", category: "CONFERENCE ROOM" },
-            { img: "/images/Principal.jpeg", category: "SEMINAR HALL" },
-            { img: "/images/academic_excellence_1768115933614.png", category: "LIBRARY" }
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Management/New%20Folder/image1", category: "CONFERENCE ROOM" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Management/New%20Folder/image2", category: "SEMINAR HALL" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Management/New%20Folder/image3", category: "LIBRARY" }
         ]
     },
     "mass-communication": {
@@ -284,14 +284,32 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         ]
     },
     "commerce": {
-        about: "Building the financial backbone of the future.",
+        about: "PG Department of Commerce offers students a comprehensive academic experience for the ever changing needs of the financial world. Our three distinctive programmes – BCom in Computer Applications, BCom in finance and MCom in Finance – equip the students for a variety of career choices and provide focused mentoring and specialized training in accounting, finance, technology and business. Through the inclusion of advanced teaching methodologies and industrial linkages, we aim to improve the overall professional development of students specific to the industrial requirements.",
         vision: "Excellence in commerce and financial education.",
         mission: [
-            "To produce ethical business professionals equipped with modern accounting, taxation, and financial management skills for the corporate world."
+            "To produce ethical business professionals equipped with modern accounting, taxation, and financial management skills for the corporate world.",
+            "To improve the overall professional development of students specific to the industrial requirements through advanced teaching methodologies."
         ],
-        objectives: "To prepare students for professional careers in finance and commerce.",
-        courses: "B.Com Finance, B.Com Co-operation",
-        highlights: ["Tally & GST Training", "Investment Workshops"],
+        objectives: "To prepare students for professional careers in finance, commerce, and digital business.",
+        courses: [
+            { title: "B.Com Computer Applications (Honours)", description: "Four years honours degree with specialization in Computer Application." },
+            { title: "B.Com Finance (Honours)", description: "Four years honours degree with specialization in Finance." },
+            { title: "M.Com Finance", description: "Master’s Degree in Commerce with specialization in Finance." },
+            { title: "Certification program in Supply Chain Management", description: "Students can work for decades in SCM and still learn new things every day. The field of SCM expands and changes every day. Whether it is new technologies, new management methodologies, new firms and products – the one constant in SCM is 'change'." },
+            { title: "Certification Program in Master Mind Accounting", description: "Mastermind Accounting Programme provides services that are meant to fulfill the extensive and wide-ranging need for accountancy specialists with up to date and sound fundamental knowledge of the subject apart from a superior technical understanding of all facets of accountancy." },
+            { title: "GST using Tally", description: "This course has modules ranging from the fundamentals of GST to practical of GST using Tally and from workplace communication. The program is enriched with varied business scenarios, charts, observations, solved illustrations, and practice scenarios on Tally." },
+            { title: "Certification program in Digital Marketing", description: "Comprehensive training on online marketing strategies, analytics, SEO, social media, and content marketing to enhance skills and career prospects in the digital realm." }
+        ],
+        highlights: [
+            "Placement Drives",
+            "Internship Programs for Industry Exposure",
+            "Commerce Fest",
+            "Business Expo",
+            "Well-equipped Computer Lab",
+            "Students and Faculty exchange programme",
+            "Entrepreneurship Development and startup Initiatives",
+            "Add on Programmes"
+        ],
         strengths: [
             { icon: TrendingUp, text: "Accounting Tally", sub: "Industry standard training" },
             { icon: Scale, text: "Taxation Laws", sub: "Direct & Indirect tax focus" },
@@ -299,21 +317,21 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             { icon: Building2, text: "Corporate Tie-ups", sub: "Trained by CA/CS experts" }
         ],
         hod: {
-            name: "Prof. Mohammed Iqbal",
-            qualification: "M.Com, M.Phil, Ph.D",
+            name: "Shibu Krishnan",
+            qualification: "M.Com, M.Phil",
             quote: "In commerce, ethics is the foundation of trust, and skill is the engine of growth.",
-            img: "/images/Principal.jpeg"
+            img: "/images/default-user-placeholder.png"
         },
         faculty: [
-            { name: "Mr. Faisal Rahman", role: "Assistant Professor", spec: "Audit & Tax", img: "/images/Principal.jpeg" },
-            { name: "Ms. Reena George", role: "Lecturer", spec: "Corporate Law", img: "/images/Principal.jpeg" },
-            { name: "Dr. James Bond", role: "Professor", spec: "Strategic Finance", img: "/images/Principal.jpeg" },
-            { name: "Mr. Tony Stark", role: "Industry Lead", spec: "Business Analytics", img: "/images/Principal.jpeg" },
+            { name: "Bindu S.G", role: "Assistant Professor", spec: "Commerce", img: "/images/default-user-placeholder.png" },
+            { name: "Shefeena K.T", role: "Assistant Professor", spec: "Commerce", img: "/images/default-user-placeholder.png" },
+            { name: "Jamsheena", role: "Assistant Professor", spec: "Commerce", img: "/images/default-user-placeholder.png" },
         ],
         gallery: [
-            { img: "/images/science_exhibition_project_1768117868795.png", category: "BUSINESS LAB" },
-            { img: "/images/clg_1.png", category: "SEMINAR HALL" },
-            { img: "/images/Principal.jpeg", category: "MAIN HALL" }
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Commerce/Gallery/image1", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Commerce/Gallery/image2", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Commerce/Gallery/image3", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Commerce/Gallery/image4", category: "" },
         ]
     },
     "statistics": {
