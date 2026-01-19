@@ -138,8 +138,8 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [isPaused, heroImages.length, currentSlide]);
 
-  // Fetch dynamic page content
-  const { content, getImage, getText } = usePageContent("home");
+  // Fetch dynamic page content removed as per request
+  const { getImage } = usePageContent("home");
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -255,10 +255,10 @@ export default function Home() {
           <div className="relative z-10 max-w-5xl mx-auto text-center">
             <ScrollReveal>
               <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                {getText("hero-title", "CM College of Arts and Science")}
+                CM College of Arts and Science
               </h1>
               <p className="text-xl md:text-2xl text-emerald-100 mb-10 max-w-2xl mx-auto">
-                {getText("hero-subtitle", "Academic Excellence with Islamic Values")}
+                Academic Excellence with Islamic Values
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/admissions">
