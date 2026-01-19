@@ -126,7 +126,7 @@ export default function Home() {
 
   const heroImages = [
     "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
-    "/images/school_sports_day_1768117809679.png",
+    "https://ik.imagekit.io/5c6j602yp/Banner/DSC_1852.JPG",
     "/images/school_library_1768115599802.png"
   ];
 
