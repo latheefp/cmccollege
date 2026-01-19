@@ -263,7 +263,7 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                         <div className="w-20 h-1 bg-[#5D1035] rounded-full" />
                     </ScrollReveal>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="flex flex-wrap justify-center gap-8">
                         {data.faculty.map((member, idx) => (
                             <ScrollReveal key={idx} delay={idx * 100}>
                                 <div className="group bg-white p-8 rounded-[2rem] border border-zinc-100 hover:border-[#5D1035]/30 transition-all duration-500 text-center hover:shadow-xl hover:shadow-[#5D1035]/5">

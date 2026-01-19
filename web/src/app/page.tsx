@@ -410,8 +410,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { name: "Department Of Computer Science", slug: "computer-science", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/Cs-bg.png" },
-              { name: "Department Of Management", slug: "management", img: "/images/admission_counseling_session_1768116369318.png" },
-              { name: "Department Of Mass Communication And Journalism", slug: "mass-communication", img: "/images/cultural_fest_performance_1768117835053.png" },
+              { name: "Department Of Management", slug: "management", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Management/Management-bg.png" },
+              { name: "Department Of Mass Communication And Journalism", slug: "mass-communication", img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Masscom/masscom-bg.png" },
               { name: "Department Of Economics", slug: "economics", img: "/images/school_library_1768115599802.png" },
               { name: "Department Of English", slug: "english", img: "/images/classroom_learning_1768115518451.png" },
               { name: "Department Of Commerce", slug: "commerce", img: "/images/document_verification_office_1768116391105.png" },
