@@ -57,7 +57,7 @@ export default function Navbar() {
                                     <Link
                                         key={link.name}
                                         href={link.href}
-                                        className={`text-[10px] lg:text-[11px] 2xl:text-[13px] font-black uppercase tracking-widest relative group whitespace-nowrap transition-colors
+                                        className={`text-[11px] lg:text-[11px] 2xl:text-[14px] font-black uppercase tracking-widest relative group whitespace-nowrap transition-colors
                                             ${pathname === link.href ? "text-[#5D1035]" : "text-zinc-800 hover:text-[#5D1035]"}`}
                                     >
                                         {link.name}
@@ -68,7 +68,7 @@ export default function Navbar() {
 
                                 {/* Admission Button with Shine Effect */}
                                 <Link href="/admissions">
-                                    <button className="relative px-5 py-2.5 bg-[#5D1035] text-white text-[10px] lg:text-[11px] 2xl:text-[13px] font-bold uppercase tracking-widest rounded overflow-hidden group hover:bg-[#4a0d2a] transition-colors shadow-sm hover:cursor-pointer">
+                                    <button className="relative px-5 py-2.5 bg-[#5D1035] text-white text-[11px] lg:text-[11px] 2xl:text-[14px] font-black uppercase tracking-widest rounded overflow-hidden group hover:bg-[#4a0d2a] transition-colors shadow-sm hover:cursor-pointer">
                                         <span className="relative z-10">Admissions</span>
                                         {/* Shine Effect */}
                                         <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine" />
