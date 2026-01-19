@@ -195,14 +195,23 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         ]
     },
     "economics": {
-        about: "Analyzing the forces that shape our world.",
-        vision: "To create economic thinkers for a better tomorrow.",
+        about: "The department of economics is an academic unit focuses on the study of Economics system, theories and policies. Typically offers undergraduate programmes, conducting research and contributing to the understanding of economic phenomenon.",
+        vision: "Bachelor of Arts (BA) in Economics programme is to equip students with a strong foundation in economic theory, analytical thinking, and practical problem-solving skills. It aims to develop graduates who can understand and interpret economic issues, contribute to policy-making, and address real-world challenges in both local and global contexts. The program envisions producing well-rounded individuals who are capable of using economic knowledge ethically and effectively to foster sustainable development, social equity, and economic progress.",
         mission: [
-            "To analyze and interpret complex economic phenomena, fostering a deep understanding of market dynamics and social welfare policies."
+            "To provide a strong foundation in economic theory and quantitative analysis for understanding real-world economic issues.",
+            "To develop critical thinking and problem-solving skills that enable students to analyze and interpret economic data effectively.",
+            "To prepare students for diverse career paths in government, business, research, and academia by equipping them with relevant knowledge and skills.",
+            "To promote ethical and socially responsible decision-making in economic policy and business practices.",
+            "To encourage lifelong learning and research by fostering intellectual curiosity and an understanding of global economic systems and trends."
         ],
         objectives: "To provide deep insights into economic theories and policies.",
-        courses: "BA Economics",
-        highlights: ["Economic Forum", "Budget Analysis Sessions"],
+        courses: "Bachelor of Arts (BA) in Economics",
+        highlights: [
+            "Annual Econ-Fest",
+            "Economic Startup",
+            "Exhibition",
+            "Financial Literary class"
+        ],
         strengths: [
             { icon: PieChart, text: "Statistical Analysis", sub: "Advanced econometrics" },
             { icon: TrendingUp, text: "Policy Research", sub: "Global economic trends" },
@@ -219,7 +228,10 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             { name: "Anna Biju", role: "Assistant Professor", spec: "Development Economics", img: "/images/default-user-placeholder.png" }
         ],
         gallery: [
-            { img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX9R9qeanfxjMODGRgK_Lx9pgzgwgZ7zEmwQ&s", category: "RESEARCH WING" }
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Ecnomics/image1.jpg", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Ecnomics/image2", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Ecnomics/image3", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Ecnomics/image4", category: "" },
         ]
     },
     "english": {

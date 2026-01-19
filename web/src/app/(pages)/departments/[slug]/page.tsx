@@ -242,7 +242,7 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                             </ScrollReveal>
 
                             {/* Academic Strengths (Previously existed, keeping relevant parts) */}
-                            <ScrollReveal delay={300}>
+                            {/* <ScrollReveal delay={300}>
                                 <div>
                                     <h3 className="text-xl font-bold mb-6 font-serif text-zinc-900">Core Competencies</h3>
                                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -259,7 +259,7 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                                         ))}
                                     </ul>
                                 </div>
-                            </ScrollReveal>
+                            </ScrollReveal> */}
 
                         </div>
 
@@ -369,11 +369,23 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                                         }}
                                         className="absolute inset-0"
                                     >
+                                        {/* Ambient Background Blur */}
+                                        <div className="absolute inset-0 z-0">
+                                            <Image
+                                                src={data.gallery[currentSlide].img}
+                                                alt="Background blur"
+                                                fill
+                                                className="object-cover blur-md scale-110 opacity-40 grayscale-[20%]"
+                                                priority
+                                            />
+                                        </div>
+
+                                        {/* Main Image */}
                                         <Image
                                             src={data.gallery[currentSlide].img}
                                             alt={`Gallery image ${currentSlide}`}
                                             fill
-                                            className="object-contain transition-transform duration-700 hover:scale-105"
+                                            className="object-contain z-10 relative transition-transform duration-700 hover:scale-105 drop-shadow-2xl"
                                             priority
                                         />
                                     </motion.div>
