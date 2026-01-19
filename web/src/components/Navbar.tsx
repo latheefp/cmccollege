@@ -42,7 +42,7 @@ export default function Navbar() {
                         </Link>
 
                         {/* Right Section: Navigation & Socials */}
-                        <div className="hidden lg:flex items-center gap-4 2xl:gap-12">
+                        <div className="hidden lg:flex items-center gap-3 2xl:gap-6">
                             {/* Desktop Navigation */}
                             <div className="flex items-center gap-2 lg:gap-3 2xl:gap-8">
                                 {[
@@ -80,31 +80,27 @@ export default function Navbar() {
                             <div className="h-6 w-[2px] bg-emerald-900"></div>
 
                             {/* Social Icons & Search */}
-                            <div className="flex items-center gap-3">
-                                <Link href="https://facebook.com" target="_blank" className="text-[#5D1035] hover:opacity-80 transition-opacity">
-                                    <Facebook className="w-5 h-5" />
+                            <div className="flex items-center gap-1">
+                                <Link href="https://facebook.com" target="_blank" className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden">
+                                    <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                    <Facebook className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </Link>
-                                <Link href="https://instagram.com" target="_blank" className="text-[#5D1035] hover:opacity-80 transition-opacity">
-                                    <Instagram className="w-5 h-5" />
+                                <Link href="https://instagram.com" target="_blank" className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden">
+                                    <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                    <Instagram className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </Link>
                                 <button
                                     onClick={() => setIsSearchOpen(true)}
-                                    className="text-[#5D1035] hover:opacity-80 transition-opacity"
+                                    className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden"
                                 >
-                                    <Search className="w-5 h-5" />
+                                    <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                    <Search className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </button>
                             </div>
                         </div>
 
                         {/* Mobile Buttons */}
                         <div className="lg:hidden flex items-center gap-2">
-                            <button
-                                onClick={() => setIsSearchOpen(true)}
-                                className="p-2 text-zinc-600 hover:text-[#5D1035] transition-colors"
-                                aria-label="Search"
-                            >
-                                <Search className="w-6 h-6" />
-                            </button>
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
                                 className="p-2 text-zinc-600 hover:text-emerald-800 transition-colors"
@@ -189,17 +185,19 @@ export default function Navbar() {
                                     >
                                         <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Connect with us</span>
                                         <div className="flex items-center gap-4">
-                                            <Link href="https://instagram.com" target="_blank" className="p-3 bg-emerald-50 rounded-xl text-[#5D1035]">
-                                                <Instagram className="w-6 h-6" />
+                                            <Link href="https://instagram.com" target="_blank" className="group relative flex items-center justify-center p-3 w-12 h-12 rounded-xl bg-emerald-50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden">
+                                                <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                                <Instagram className="w-6 h-6 relative z-10 transition-colors duration-300 group-hover:text-white" />
                                             </Link>
                                             <button
                                                 onClick={() => {
                                                     setIsOpen(false);
                                                     setIsSearchOpen(true);
                                                 }}
-                                                className="p-3 bg-emerald-50 rounded-xl text-[#5D1035]"
+                                                className="group relative flex items-center justify-center p-3 w-12 h-12 rounded-xl bg-emerald-50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden"
                                             >
-                                                <Search className="w-6 h-6" />
+                                                <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                                <Search className="w-6 h-6 relative z-10 transition-colors duration-300 group-hover:text-white" />
                                             </button>
                                         </div>
                                     </motion.div>
