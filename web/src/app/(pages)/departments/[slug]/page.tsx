@@ -338,8 +338,8 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                     </ScrollReveal>
 
                     <div className="relative mx-auto max-w-4xl">
-                        <div className="aspect-[4/3] md:aspect-[16/9] w-full bg-zinc-900 rounded-[2.5rem] p-3 md:p-4 shadow-2xl overflow-hidden relative border border-zinc-800/50">
-                            <div className="w-full h-full relative rounded-[2rem] overflow-hidden bg-black/50">
+                        <div className="aspect-[4/3] md:aspect-[16/9] w-full bg-white rounded-[2.5rem] p-3 md:p-4 shadow-2xl overflow-hidden relative border border-zinc-200">
+                            <div className="w-full h-full relative rounded-[2rem] overflow-hidden bg-zinc-50">
                                 <AnimatePresence initial={false} custom={direction}>
                                     <motion.div
                                         key={page}
@@ -383,13 +383,13 @@ export default function DepartmentDetailPage({ params }: { params: Promise<{ slu
                                 <div className="absolute bottom-4 right-4 flex gap-3 z-20">
                                     <button
                                         onClick={() => paginate(-1)}
-                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/90 hover:bg-white hover:text-zinc-900 transition-all active:scale-95"
+                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-zinc-800 transition-all active:scale-95"
                                     >
                                         <ChevronLeft className="w-5 h-5" />
                                     </button>
                                     <button
                                         onClick={() => paginate(1)}
-                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/90 hover:bg-white hover:text-zinc-900 transition-all active:scale-95"
+                                        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-zinc-800 transition-all active:scale-95"
                                     >
                                         <ChevronRight className="w-5 h-5" />
                                     </button>

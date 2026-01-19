@@ -85,9 +85,12 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             { name: "Asliya A", role: "Assistant Professor", spec: "Software Architecture", img: "/images/Principal.jpeg" },
         ],
         gallery: [
-            { img: "/images/modern_science_lab_1768116682208.png", category: "AI LAB" },
-            { img: "/images/classroom_learning_1768115518451.png", category: "DEBATE HALL" },
-            { img: "/images/science_exhibition_project_1768117868795.png", category: "PROJECT HUB" }
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/Gallery/image1?updatedAt=1768829462746", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/Gallery/image3?updatedAt=1768830080087", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/Gallery/image2?updatedAt=1768830059492", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/Gallery/image5", category: "" },
+            { img: "https://ik.imagekit.io/5c6j602yp/Departments%20/Computer%20Science/Gallery/image4", category: "" },
+
         ]
     },
     "management": {
