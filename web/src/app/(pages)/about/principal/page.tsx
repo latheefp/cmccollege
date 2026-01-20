@@ -167,9 +167,9 @@ export default function PrincipalProfile() {
             </section>
 
             {/* 3. Academic Journey & Experience Grid - Refined */}
-            <section className="py-20 px-6 bg-stone-50/50">
+            <section className="py-12 md:py-20 px-4 md:px-6 bg-stone-50/50">
                 <div className="container mx-auto max-w-6xl">
-                    <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
+                    <div className="grid md:grid-cols-2 gap-10 md:gap-16">
 
                         {/* Education - Left Column */}
                         <motion.div
@@ -178,11 +178,11 @@ export default function PrincipalProfile() {
                             viewport={{ once: true }}
                             variants={stagger}
                         >
-                            <h3 className="text-2xl font-playfair font-bold text-stone-900 mb-10 flex items-center gap-3">
+                            <h3 className="text-xl md:text-2xl font-playfair font-bold text-stone-900 mb-8 md:mb-10 flex items-center gap-3">
                                 <span className="w-8 h-[2px] bg-rose-400"></span>
                                 Academic Background
                             </h3>
-                            <div className="relative ml-16 md:ml-20 space-y-10">
+                            <div className="relative ml-4 md:ml-20 space-y-8 md:space-y-10">
                                 {/* Vertical Line */}
                                 <div className="absolute left-[0px] top-2 bottom-4 w-[1px] bg-rose-200"></div>
 
@@ -193,20 +193,24 @@ export default function PrincipalProfile() {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1 }}
-                                        className="relative"
+                                        className="relative pl-6 md:pl-8"
                                     >
                                         {/* Hollow Dot */}
                                         <div className="absolute -left-[5px] top-2 w-3 h-3 rounded-full bg-white border-2 border-emerald-800 z-10"></div>
 
-                                        {/* Year Label - Left */}
-                                        <div className="absolute -left-20 md:-left-24 top-1 w-16 text-right">
+                                        {/* Year Label - Desktop (Absolute Left) */}
+                                        <div className="hidden md:block absolute -left-20 md:-left-24 top-1 w-16 text-right">
                                             <span className="text-base font-bold text-emerald-800 font-oswald tracking-wide">
                                                 {edu.year}
                                             </span>
                                         </div>
 
                                         {/* Content - Right */}
-                                        <div className="pl-8">
+                                        <div>
+                                            {/* Year Label - Mobile (Inline) */}
+                                            <span className="md:hidden block text-xs font-bold text-emerald-800 font-oswald tracking-wide mb-1">
+                                                {edu.year}
+                                            </span>
                                             <h4 className="text-lg font-bold text-stone-900 font-playfair leading-tight">{edu.degree}</h4>
                                             <p className="text-stone-500 text-xs font-bold uppercase tracking-wider mt-1.5">{edu.institution}</p>
                                         </div>
@@ -222,7 +226,7 @@ export default function PrincipalProfile() {
                             viewport={{ once: true }}
                             variants={stagger}
                         >
-                            <h3 className="text-2xl font-playfair font-bold text-stone-900 mb-10 flex items-center gap-3">
+                            <h3 className="text-xl md:text-2xl font-playfair font-bold text-stone-900 mb-8 md:mb-10 flex items-center gap-3">
                                 <span className="w-8 h-[2px] bg-rose-400"></span>
                                 Professional Roles
                             </h3>
@@ -231,15 +235,15 @@ export default function PrincipalProfile() {
                                     <motion.div
                                         key={i}
                                         variants={fadeIn}
-                                        className="bg-white p-6 rounded-xl border border-stone-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow group"
+                                        className="bg-white p-5 md:p-6 rounded-xl border border-stone-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow group"
                                     >
-                                        <div className="flex justify-between items-start gap-4">
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4">
                                             <div>
-                                                <h4 className="font-bold text-stone-900 text-lg group-hover:text-rose-900 transition-colors">{exp.role}</h4>
+                                                <h4 className="font-bold text-stone-900 text-base md:text-lg group-hover:text-rose-900 transition-colors">{exp.role}</h4>
                                                 <p className="text-stone-500 text-sm mt-1">{exp.institution}</p>
                                             </div>
                                             {exp.duration && (
-                                                <span className="shrink-0 px-3 py-1 bg-stone-100 text-stone-500 text-xs font-bold rounded-md">
+                                                <span className="self-start shrink-0 px-3 py-1 bg-stone-100 text-stone-500 text-[10px] md:text-xs font-bold rounded-md whitespace-nowrap">
                                                     {exp.duration}
                                                 </span>
                                             )}
