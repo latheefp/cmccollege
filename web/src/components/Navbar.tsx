@@ -47,7 +47,14 @@ export default function Navbar() {
                 { name: "Psychology", href: "/departments/psychology" },
             ]
         },
-        { name: "Academics", href: "/academics" },
+        {
+            name: "Academics", href: "/academics",
+            dropdown: [
+                { name: "Syllabus", href: "https://docs.uoc.ac.in/website/Syll/" },
+                { name: "Time Table", href: "https://pareekshabhavan.uoc.ac.in/index.php/examination/timetable" },
+                { name: "Academic Calendar", href: "abo/academic-calender" },
+            ]
+        },
         { name: "Students Zone", href: "/students-zone" },
         { name: "Campus Life", href: "/campus-life" },
         { name: "Amenities", href: "/amenities" },
