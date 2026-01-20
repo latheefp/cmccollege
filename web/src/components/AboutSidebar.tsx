@@ -15,8 +15,8 @@ const sidebarItems = [
         name: "Administration",
         href: "#",
         subItems: [
-            { name: "Principal", href: "/about/administration/principal" },
-            { name: "Vice Principal", href: "/about/administration/vice-principal" },
+            { name: "Principal", href: "/about/principal" },
+            { name: "Vice Principal", href: "/about/vice-principal" },
             { name: "Administrative Council", href: "/about/administration/council" },
             { name: "Office Administration", href: "/about/administration/office" },
         ]

@@ -48,6 +48,8 @@ export const metadata: Metadata = {
   },
 };
 
+import SiteLayout from "@/components/SiteLayout";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -59,7 +61,9 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${oswald.variable} antialiased pt-[var(--ticker-height,0px)]`}
         >
-          {children}
+          <SiteLayout>
+            {children}
+          </SiteLayout>
         </body>
       </html>
     </ClerkProvider>
