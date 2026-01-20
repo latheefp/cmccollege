@@ -6,7 +6,7 @@ import Link from "next/link";
 import EditorModal from "../_components/EditorModal";
 
 // Import Page Components
-import HomePage from "@/app/page";
+import HomePage from "@/app/(pages)/page";
 import AboutPage from "@/app/(pages)/about/page";
 import AcademicsPage from "@/app/(pages)/academics/page";
 import AdmissionsPage from "@/app/(pages)/admissions/page";

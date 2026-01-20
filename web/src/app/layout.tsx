@@ -2,13 +2,6 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono, Playfair_Display, Oswald } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import BottomTicker from "@/components/BottomTicker";
-import AdmissionPopup from "@/components/AdmissionPopup";
-import UserSync from "@/components/UserSync";
-import SmoothScroll from "@/components/SmoothScroll";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,52 +59,10 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${oswald.variable} antialiased pt-[var(--ticker-height,0px)]`}
         >
-          <Navbar />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "EducationalOrganization",
-                "name": "CM College of Art and Science",
-                "alternateName": "CM College",
-                "url": "https://cmcollege.edu.in",
-                "logo": "https://cmcollege.edu.in/favicon.png",
-                "description": "Welcome to CM College of Arts and Science, a premier institution for higher education in Wayanad.",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Nadavayal",
-                  "addressLocality": "Wayanad",
-                  "addressRegion": "Kerala",
-                  "postalCode": "670721",
-                  "addressCountry": "IN"
-                },
-                "contactPoint": {
-                  "@type": "ContactPoint",
-                  "telephone": "+91-9072462310",
-                  "contactType": "admissions",
-                  "areaServed": "IN",
-                  "availableLanguage": ["English", "Malayalam"]
-                },
-                "sameAs": [
-                  "https://www.facebook.com/cmcollege",
-                  "https://www.instagram.com/cmcollege"
-                ]
-              })
-            }}
-          />
-          <main className="min-h-screen">
-            <SmoothScroll>
-              {children}
-            </SmoothScroll>
-          </main>
-          <Footer />
-          <BottomTicker />
-          <AdmissionPopup />
-          <WhatsAppWidget />
-          <UserSync />
+          {children}
         </body>
       </html>
     </ClerkProvider>
   );
 }
+
