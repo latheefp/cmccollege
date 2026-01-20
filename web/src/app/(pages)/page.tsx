@@ -127,19 +127,34 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const heroImages = [
+  // Hero Slider Configuration
+  const desktopImages = [
     "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
     "https://ik.imagekit.io/5c6j602yp/Banner/Banner1?updatedAt=1768811009859",
     "https://ik.imagekit.io/5c6j602yp/Banner/Banner2"
   ];
 
+  const tabletImages = [
+    "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
+    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile1",
+    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile2",
+    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile"
+  ];
+
+  const mobileImages = [
+    "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
+    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile1",
+    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile2",
+    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile"
+  ];
+
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+      setCurrentSlide((prev) => (prev + 1) % desktopImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [isPaused, heroImages.length, currentSlide]);
+  }, [isPaused, desktopImages.length, currentSlide]);
 
   // Fetch dynamic page content
   const { getImage } = usePageContent("home");
@@ -199,15 +214,41 @@ export default function Home() {
               }}
               className="absolute inset-0"
             >
-              using {heroImages[currentSlide]}
-              <Image
-                src={heroImages[currentSlide]}
-                alt={`Hero Slide ${currentSlide + 1}`}
-                fill
-                className="object-cover"
-                sizes="100vw"
-                priority
-              />
+              {/* Desktop Image (LG+) */}
+              <div className="hidden lg:block w-full h-full relative">
+                <Image
+                  src={desktopImages[currentSlide]}
+                  alt={`Hero Slide ${currentSlide + 1} Desktop`}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                  priority
+                />
+              </div>
+
+              {/* Tablet Image (MD to LG) */}
+              <div className="hidden md:block lg:hidden w-full h-full relative">
+                <Image
+                  src={tabletImages[currentSlide]}
+                  alt={`Hero Slide ${currentSlide + 1} Tablet`}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                  priority
+                />
+              </div>
+
+              {/* Mobile Image (<MD) */}
+              <div className="block md:hidden w-full h-full relative">
+                <Image
+                  src={mobileImages[currentSlide]}
+                  alt={`Hero Slide ${currentSlide + 1} Mobile`}
+                  fill
+                  className="object-cover object-center"
+                  sizes="100vw"
+                  priority
+                />
+              </div>
             </motion.div>
           </AnimatePresence>
 
@@ -217,7 +258,7 @@ export default function Home() {
 
         {/* Navigation Dots */}
         <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-3">
-          {heroImages.map((_, index) => (
+          {desktopImages.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
