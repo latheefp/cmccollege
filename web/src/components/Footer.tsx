@@ -19,7 +19,7 @@ export default function Footer() {
                     <div className="flex items-center gap-2 mb-6">
                         <div className="relative w-64 h-24 bg-white rounded-xl px-4 flex items-center justify-center shadow-lg">
                             <Image
-                                src="https://ik.imagekit.io/5c6j602yp/Home/images/logo2.png"
+                                src="https://ik.imagekit.io/5c6j602yp/Home/images/PNG%20CM%20COLLEGE.png"
                                 alt="College Logo"
                                 fill
                                 className="object-contain p-2 scale-110"

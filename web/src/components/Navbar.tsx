@@ -29,7 +29,7 @@ export default function Navbar() {
             href: "/about",
             dropdown: [
                 { name: "Management", href: "/about/management" },
-                { name: "Administrative Council", href: "/about/council" },
+                { name: "Administrative Council", href: "/about/administration" },
                 { name: "Principal", href: "/about/principal" },
             ]
         },
@@ -65,10 +65,10 @@ export default function Navbar() {
                         <Link href="/" className="flex items-center ml-0 lg:ml-[50px]">
                             <div className="relative w-44 lg:w-52 2xl:w-64 h-16 lg:h-20 2xl:h-24">
                                 <Image
-                                    src="https://ik.imagekit.io/5c6j602yp/Home/images/logo2.png"
+                                    src="https://ik.imagekit.io/5c6j602yp/Home/images/PNG%20CM%20COLLEGE.png"
                                     alt="College Logo"
                                     fill
-                                    className="object-contain scale-[1.7]"
+                                    className="object-contain scale-[2.5]"
                                 />
                             </div>
                         </Link>

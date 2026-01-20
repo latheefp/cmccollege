@@ -12,7 +12,7 @@ export default function AboutLayout({
                 <div className="absolute inset-0 opacity-10 pointer-events-none">
                     <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
                 </div>
-                <div className="container mx-auto relative z-10">
+                <div className="container mx-auto relative z-10 mt-[112px]">
                     <h1 className="text-4xl md:text-5xl font-bold font-serif mb-2">About Us</h1>
                     <div className="flex items-center gap-2 text-sm text-white/70">
                         <span>Home</span>
