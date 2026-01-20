@@ -11,7 +11,6 @@ import {
 
 import TopBar from "./TopBar";
 import SearchOverlay from "./SearchOverlay";
-import { useAdmissionStatus } from "@/hooks/useAdmissionStatus";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -125,6 +124,9 @@ export default function Navbar() {
                                         )}
                                     </div>
                                 ))}
+                                <div className="ml-1">
+                                    <AdmissionButton />
+                                </div>
                             </div>
 
                             {/* Divider */}
@@ -152,15 +154,11 @@ export default function Navbar() {
 
                                 <button
                                     onClick={() => setIsSearchOpen(true)}
-                                    className="group relative flex items-center justify-center w-9 h-9 rounded-full bg-zinc-50 text-[#7a0b3a] hover:shadow-md hover:shadow-[#7a0b3a]/10 transition-all duration-300 overflow-hidden ml-1"
+                                    className="group relative flex items-center justify-center w-9 h-9 rounded-full bg-zinc-50 text-[#7a0b3a] hover:shadow-md hover:shadow-[#7a0b3a]/10 transition-all duration-300 overflow-hidden ml-1 cursor-pointer"
                                 >
                                     <div className="absolute inset-0 bg-[#7a0b3a] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
                                     <Search size={18} className="relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </button>
-
-                                <div className="ml-2">
-                                    <AdmissionButton />
-                                </div>
                             </div>
                         </div>
 
@@ -260,17 +258,18 @@ export default function Navbar() {
 }
 
 function AdmissionButton({ fullWidth = false }: { fullWidth?: boolean }) {
-    const { isAdmissionOpen } = useAdmissionStatus();
+    // const { isAdmissionOpen } = useAdmissionStatus(); // No longer needed as text is fixed
 
     return (
         <Link href="/admissions" className={fullWidth ? "block w-full" : "block"}>
             <button className={`
-                relative bg-[#7a0b3a] text-white font-bold uppercase tracking-widest rounded-md overflow-hidden group hover:bg-[#60082d] transition-colors shadow-md hover:shadow-lg
+                relative bg-[#7a0b3a] text-white font-bold uppercase tracking-widest rounded-md overflow-hidden group transition-all duration-300
+                hover:bg-[#60082d] hover:shadow-[0_0_20px_rgba(122,11,58,0.5)] hover:-translate-y-0.5 cursor-pointer
                 ${fullWidth ? "w-full py-4 text-sm" : "px-6 py-2.5 text-xs"}
             `}>
-                <span className="relative z-10">{isAdmissionOpen ? "Admissions Open" : "Admission"}</span>
+                <span className="relative z-10">Admission</span>
                 {/* Shine Effect */}
-                <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shine" />
+                <div className="absolute top-0 -left-[100%] h-full w-full z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-shine" />
             </button>
         </Link>
     );

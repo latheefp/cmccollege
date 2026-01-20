@@ -54,9 +54,24 @@ body {
   animation: marquee 35s linear infinite;
 }
 
-/* .animate-marquee:hover {
-  animation-play-state: paused;
-} */
+/* Shine Animation */
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 200%;
+  }
+}
+
+.animate-shine {
+  animation: shine 1.5s linear infinite;
+}
+
+.group:hover .group-hover\:animate-shine {
+  animation: shine 1.5s linear infinite;
+}
 
 html.lenis,
 html.lenis body {
