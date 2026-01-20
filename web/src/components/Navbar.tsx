@@ -6,9 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import {
-    Instagram, Search, Menu, X, Facebook, Youtube,
-    Home, Info, LayoutGrid, GraduationCap, UserPlus,
-    Users, Sparkles, Building2, Image as ImageIcon, Phone
+    Search, Menu, X, ChevronDown, Facebook, Instagram
 } from "lucide-react";
 
 import TopBar from "./TopBar";
@@ -18,19 +16,52 @@ import { useAdmissionStatus } from "@/hooks/useAdmissionStatus";
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const pathname = usePathname();
-    const { isAdmissionOpen } = useAdmissionStatus();
 
     if (pathname === '/admin' || pathname.startsWith('/admin/')) {
         return null;
     }
 
+    const navigation = [
+        { name: "Home", href: "/" },
+        {
+            name: "About Us",
+            href: "/about",
+            dropdown: [
+                { name: "Management", href: "/about/management" },
+                { name: "Administrative Council", href: "/about/council" },
+                { name: "Principal", href: "/about/principal" },
+            ]
+        },
+        {
+            name: "Departments",
+            href: "/departments",
+            dropdown: [
+                { name: "Computer Science", href: "/departments/computer-science" },
+                { name: "Management", href: "/departments/management" },
+                { name: "Mass Communication", href: "/departments/mass-communication" },
+                { name: "Economics", href: "/departments/economics" },
+                { name: "English", href: "/departments/english" },
+                { name: "Commerce", href: "/departments/commerce" },
+                { name: "Statistics", href: "/departments/statistics" },
+                { name: "Psychology", href: "/departments/psychology" },
+            ]
+        },
+        { name: "Academics", href: "/academics" },
+        { name: "Students Zone", href: "/students-zone" },
+        { name: "Campus Life", href: "/campus-life" },
+        { name: "Amenities", href: "/amenities" },
+        { name: "Gallery", href: "/gallery" },
+        { name: "Contact", href: "/contact" },
+    ];
+
     return (
-        <header className="fixed w-full z-50 top-[var(--ticker-height,0px)] flex flex-col shadow-lg">
+        <header className="fixed w-full z-50 top-[var(--ticker-height,0px)] flex flex-col shadow-sm">
             <TopBar />
-            <nav className="w-full bg-gradient-to-r from-white via-white to-blue-50 border-b border-zinc-100">
+            <nav className="w-full bg-white/95 backdrop-blur-md border-b border-zinc-100">
                 <div className="w-full px-4 lg:px-8">
-                    <div className="flex justify-between items-center h-16 lg:h-22 py-2">
+                    <div className="flex justify-between items-center h-20 lg:h-24">
                         {/* Logo (Left) */}
                         <Link href="/" className="flex items-center ml-0 lg:ml-[50px]">
                             <div className="relative w-44 lg:w-52 2xl:w-64 h-16 lg:h-20 2xl:h-24">
@@ -44,85 +75,108 @@ export default function Navbar() {
                         </Link>
 
                         {/* Right Section: Navigation & Socials */}
-                        <div className="hidden lg:flex items-center gap-3 2xl:gap-6">
+                        <div className="hidden lg:flex items-center gap-4 xl:gap-6">
                             {/* Desktop Navigation */}
-                            <div className="flex items-center gap-2 lg:gap-3 2xl:gap-8">
-                                {[
-                                    { name: "HOME", href: "/" },
-                                    { name: "ABOUT US", href: "/about" },
-                                    { name: "DEPARTMENTS", href: "/departments" },
-                                    { name: "CAMPUS LIFE", href: "/campus-life" },
-                                    { name: "AMENITIES", href: "/facilities" },
-                                    { name: "GALLERY", href: "/gallery" },
-                                    { name: "CONTACT", href: "/contact" },
-                                ].map((link) => (
-                                    <Link
+                            <div className="flex items-center gap-0.5 xl:gap-1">
+                                {navigation.map((link) => (
+                                    <div
                                         key={link.name}
-                                        href={link.href}
-                                        className={`text-[10px] lg:text-[10px] 2xl:text-[13px] font-black uppercase tracking-widest relative group whitespace-nowrap transition-colors
-                                            ${pathname === link.href ? "text-[#5D1035]" : "text-zinc-800 hover:text-[#5D1035]"}`}
+                                        className="relative group h-24 flex items-center"
+                                        onMouseEnter={() => link.dropdown && setActiveDropdown(link.name)}
+                                        onMouseLeave={() => link.dropdown && setActiveDropdown(null)}
                                     >
-                                        {link.name}
-                                        <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#5D1035] transition-all duration-300 
-                                            ${pathname === link.href ? "w-full" : "w-0 group-hover:w-full"}`}></span>
-                                    </Link>
-                                ))}
+                                        <Link
+                                            href={link.href}
+                                            className={`px-2 py-2 text-[13px] xl:text-[14px] font-bold uppercase tracking-wide transition-colors relative z-10 flex items-center gap-1
+                                                ${pathname === link.href || (link.dropdown && pathname.startsWith(link.href)) ? "text-[#7a0b3a]" : "text-zinc-700 hover:text-[#7a0b3a]"}`}
+                                        >
+                                            {link.name}
+                                            {link.dropdown && <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === link.name ? "rotate-180" : ""}`} />}
+                                        </Link>
 
-                                {/* Admission Button with Dynamic Status */}
-                                <AdmissionButton />
+                                        {/* Hover Underline */}
+                                        <span className={`absolute bottom-6 left-3 right-3 h-0.5 bg-[#7a0b3a] transition-all duration-300 origin-left scale-x-0 
+                                            ${(pathname === link.href || activeDropdown === link.name) ? "scale-x-100" : "group-hover:scale-x-100"}`}
+                                        />
+
+                                        {/* Dropdown Menu */}
+                                        {link.dropdown && (
+                                            <AnimatePresence>
+                                                {activeDropdown === link.name && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 10, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
+                                                        animate={{ opacity: 1, y: 0, clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
+                                                        exit={{ opacity: 0, y: 10, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
+                                                        transition={{ duration: 0.2, ease: "easeOut" }}
+                                                        className="absolute top-full left-0 min-w-[200px] bg-[#7a0b3a] rounded-lg shadow-xl overflow-hidden py-2"
+                                                    >
+                                                        {link.dropdown.map((subItem) => (
+                                                            <Link
+                                                                key={subItem.name}
+                                                                href={subItem.href}
+                                                                className="block px-4 py-2.5 text-sm text-white/90 hover:text-white hover:bg-white/10 transition-colors font-medium border-l-2 border-transparent hover:border-white"
+                                                            >
+                                                                {subItem.name}
+                                                            </Link>
+                                                        ))}
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
 
-                            {/* Separator */}
-                            <div className="h-6 w-[2px] bg-emerald-900"></div>
+                            {/* Divider */}
+                            <div className="h-8 w-px bg-zinc-200"></div>
 
-                            {/* Social Icons & Search */}
+                            {/* Search & Socials */}
                             <div className="flex items-center gap-1">
-                                <Link href="https://facebook.com" target="_blank" className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden">
-                                    <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                                    <Facebook className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white" />
+                                <Link
+                                    href="https://facebook.com"
+                                    target="_blank"
+                                    className="group relative flex items-center justify-center w-9 h-9 rounded-full bg-zinc-50 text-[#7a0b3a] hover:shadow-md hover:shadow-[#7a0b3a]/10 transition-all duration-300 overflow-hidden"
+                                >
+                                    <div className="absolute inset-0 bg-[#7a0b3a] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                    <Facebook size={18} className="relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </Link>
-                                <Link href="https://www.instagram.com/cm_college_official?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden">
-                                    <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                                    <Instagram className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white" />
+
+                                <Link
+                                    href="https://www.instagram.com/cm_college_official?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                                    target="_blank"
+                                    className="group relative flex items-center justify-center w-9 h-9 rounded-full bg-zinc-50 text-[#7a0b3a] hover:shadow-md hover:shadow-[#7a0b3a]/10 transition-all duration-300 overflow-hidden"
+                                >
+                                    <div className="absolute inset-0 bg-[#7a0b3a] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                    <Instagram size={18} className="relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </Link>
+
                                 <button
                                     onClick={() => setIsSearchOpen(true)}
-                                    className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50/50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden hover:cursor-pointer"
+                                    className="group relative flex items-center justify-center w-9 h-9 rounded-full bg-zinc-50 text-[#7a0b3a] hover:shadow-md hover:shadow-[#7a0b3a]/10 transition-all duration-300 overflow-hidden ml-1"
                                 >
-                                    <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out " />
-                                    <Search className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-white " />
+                                    <div className="absolute inset-0 bg-[#7a0b3a] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                    <Search size={18} className="relative z-10 transition-colors duration-300 group-hover:text-white" />
                                 </button>
+
+                                <div className="ml-2">
+                                    <AdmissionButton />
+                                </div>
                             </div>
                         </div>
 
-                        {/* Mobile Buttons */}
-                        <div className="lg:hidden flex items-center gap-2">
+                        {/* Mobile Toggle */}
+                        <div className="lg:hidden flex items-center gap-4">
+                            <button
+                                onClick={() => setIsSearchOpen(true)}
+                                className="p-2 text-zinc-600 hover:text-[#7a0b3a] transition-colors"
+                            >
+                                <Search size={22} />
+                            </button>
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="p-2 text-zinc-600 hover:text-emerald-800 transition-colors"
+                                className="p-2 text-zinc-800 hover:text-[#7a0b3a] transition-colors"
                             >
-                                <svg
-                                    className="w-6 h-6"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    {isOpen ? (
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M6 18L18 6M6 6l12 12"
-                                        />
-                                    ) : (
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M4 6h16M4 12h16M4 18h16"
-                                        />
-                                    )}
-                                </svg>
+                                {isOpen ? <X size={28} /> : <Menu size={28} />}
                             </button>
                         </div>
                     </div>
@@ -135,68 +189,65 @@ export default function Navbar() {
                                 animate={{ opacity: 1, height: "auto" }}
                                 exit={{ opacity: 0, height: 0 }}
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                                className="lg:hidden overflow-hidden"
+                                className="lg:hidden overflow-hidden border-t border-zinc-100"
                             >
-                                <div className="py-6 px-4 bg-white/95 backdrop-blur-md border-t border-emerald-50 rounded-b-[2.5rem] shadow-2xl mb-6">
-                                    <div className="grid grid-cols-2 gap-3">
-                                        {[
-                                            { name: "Home", href: "/", icon: Home },
-                                            { name: "About", href: "/about", icon: Info },
-                                            { name: "Academics", href: "/academics", icon: GraduationCap },
-                                            { name: isAdmissionOpen ? "Admissions Open" : "Admission", href: "/admissions", icon: UserPlus },
-                                            { name: "Departments", href: "/departments", icon: LayoutGrid },
-                                            { name: "Campus Life", href: "/campus-life", icon: Sparkles },
-                                            { name: "Students", href: "/students-zone", icon: Users },
-                                            { name: "Amenities", href: "/facilities", icon: Building2 },
-                                            { name: "Gallery", href: "/gallery", icon: ImageIcon },
-                                            { name: "Contact", href: "/contact", icon: Phone },
-                                        ].map((link, index) => (
-                                            <motion.div
-                                                key={link.name}
-                                                initial={{ opacity: 0, scale: 0.9 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ delay: index * 0.03 }}
-                                            >
-                                                <Link
-                                                    href={link.href}
-                                                    onClick={() => setIsOpen(false)}
-                                                    className={`flex flex-col items-center justify-center p-4 rounded-2xl transition-all border ${pathname === link.href
-                                                        ? "bg-[#5D1035] border-[#5D1035] text-white shadow-lg"
-                                                        : "bg-emerald-50/50 border-emerald-100/50 text-zinc-600 active:bg-emerald-100"
-                                                        }`}
-                                                >
-                                                    <link.icon className={`w-6 h-6 mb-2 ${pathname === link.href ? "text-white" : "text-[#5D1035]"}`} />
-                                                    <span className="text-[11px] font-bold uppercase tracking-wider text-center">{link.name}</span>
-                                                </Link>
-                                            </motion.div>
-                                        ))}
-                                    </div>
+                                <div className="py-6 space-y-1">
+                                    {navigation.map((link) => (
+                                        <div key={link.name}>
+                                            <div className="flex flex-col">
+                                                {link.dropdown ? (
+                                                    // Mobile Dropdown Toggle
+                                                    <div className="overflow-hidden">
+                                                        <button
+                                                            onClick={() => activeDropdown === link.name ? setActiveDropdown(null) : setActiveDropdown(link.name)}
+                                                            className={`flex items-center justify-between w-full px-4 py-3 text-sm font-bold uppercase tracking-wider transition-colors
+                                                                ${pathname.startsWith(link.href) ? "text-[#7a0b3a] bg-[#7a0b3a]/5" : "text-zinc-600 hover:bg-zinc-50"}`}
+                                                        >
+                                                            <span>{link.name}</span>
+                                                            <ChevronDown size={16} className={`transition-transform duration-300 ${activeDropdown === link.name ? "rotate-180" : ""}`} />
+                                                        </button>
 
-                                    {/* Mobile Social Icons */}
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.6 }}
-                                        className="mt-8 pt-8 border-t border-zinc-100 flex items-center justify-between px-2"
-                                    >
-                                        <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Connect with us</span>
-                                        <div className="flex items-center gap-4">
-                                            <Link href="https://instagram.com" target="_blank" className="group relative flex items-center justify-center p-3 w-12 h-12 rounded-xl bg-emerald-50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden">
-                                                <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                                                <Instagram className="w-6 h-6 relative z-10 transition-colors duration-300 group-hover:text-white" />
-                                            </Link>
-                                            <button
-                                                onClick={() => {
-                                                    setIsOpen(false);
-                                                    setIsSearchOpen(true);
-                                                }}
-                                                className="group relative flex items-center justify-center p-3 w-12 h-12 rounded-xl bg-emerald-50 text-[#5D1035] hover:shadow-lg hover:shadow-[#5D1035]/20 transition-all duration-300 overflow-hidden"
-                                            >
-                                                <div className="absolute inset-0 bg-[#5D1035] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                                                <Search className="w-6 h-6 relative z-10 transition-colors duration-300 group-hover:text-white" />
-                                            </button>
+                                                        {/* Nested Mobile Links */}
+                                                        <AnimatePresence>
+                                                            {activeDropdown === link.name && (
+                                                                <motion.div
+                                                                    initial={{ height: 0 }}
+                                                                    animate={{ height: "auto" }}
+                                                                    exit={{ height: 0 }}
+                                                                    className="bg-[#7a0b3a]/5"
+                                                                >
+                                                                    {link.dropdown.map(subItem => (
+                                                                        <Link
+                                                                            key={subItem.name}
+                                                                            href={subItem.href}
+                                                                            onClick={() => setIsOpen(false)}
+                                                                            className="block px-8 py-3 text-sm text-[#7a0b3a] font-medium border-l-2 border-[#7a0b3a]/20 ml-4 hover:border-[#7a0b3a] transition-colors"
+                                                                        >
+                                                                            {subItem.name}
+                                                                        </Link>
+                                                                    ))}
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
+                                                    </div>
+                                                ) : (
+                                                    <Link
+                                                        href={link.href}
+                                                        onClick={() => setIsOpen(false)}
+                                                        className={`block px-4 py-3 text-sm font-bold uppercase tracking-wider transition-colors
+                                                            ${pathname === link.href ? "text-[#7a0b3a] bg-[#7a0b3a]/5 border-r-4 border-[#7a0b3a]" : "text-zinc-600 hover:bg-zinc-50"}`}
+                                                    >
+                                                        {link.name}
+                                                    </Link>
+                                                )}
+                                            </div>
                                         </div>
-                                    </motion.div>
+                                    ))}
+
+                                    {/* Mobile Admission Button */}
+                                    <div className="p-4 mt-4">
+                                        <AdmissionButton fullWidth />
+                                    </div>
                                 </div>
                             </motion.div>
                         )}
@@ -208,26 +259,18 @@ export default function Navbar() {
     );
 }
 
-function AdmissionButton() {
+function AdmissionButton({ fullWidth = false }: { fullWidth?: boolean }) {
     const { isAdmissionOpen } = useAdmissionStatus();
 
-    if (isAdmissionOpen) {
-        return (
-            <Link href="/admissions">
-                <button className="relative px-5 py-2.5 bg-[#5D1035] text-white text-[10px] lg:text-[10px] 2xl:text-[13px] font-black uppercase tracking-widest rounded overflow-hidden group hover:bg-[#4a0d2a] transition-colors shadow-sm hover:cursor-pointer">
-                    <span className="relative z-10">Admissions Open</span>
-                    {/* Shine Effect */}
-                    <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 animate-shine" />
-                </button>
-            </Link>
-        );
-    }
-
-    // Closed State - Regular Button
     return (
-        <Link href="/admissions">
-            <button className="relative px-5 py-2.5 bg-[#5D1035] text-white text-[10px] lg:text-[10px] 2xl:text-[13px] font-black uppercase tracking-widest rounded overflow-hidden group hover:bg-[#4a0d2a] transition-colors shadow-sm hover:cursor-pointer">
-                <span className="relative z-10">Admissions</span>
+        <Link href="/admissions" className={fullWidth ? "block w-full" : "block"}>
+            <button className={`
+                relative bg-[#7a0b3a] text-white font-bold uppercase tracking-widest rounded-md overflow-hidden group hover:bg-[#60082d] transition-colors shadow-md hover:shadow-lg
+                ${fullWidth ? "w-full py-4 text-sm" : "px-6 py-2.5 text-xs"}
+            `}>
+                <span className="relative z-10">{isAdmissionOpen ? "Admissions Open" : "Admission"}</span>
+                {/* Shine Effect */}
+                <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shine" />
             </button>
         </Link>
     );
