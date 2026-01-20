@@ -163,33 +163,35 @@ export default function Navbar() {
                         </div>
 
                         {/* Mobile Toggle */}
-                        <div className="lg:hidden flex items-center gap-4">
+                        <div className="lg:hidden flex items-center gap-2">
                             <button
                                 onClick={() => setIsSearchOpen(true)}
-                                className="p-2 text-zinc-600 hover:text-[#7a0b3a] transition-colors"
+                                className="p-3 text-zinc-600 hover:text-[#7a0b3a] transition-colors active:scale-95 touch-manipulation"
+                                aria-label="Search"
                             >
                                 <Search size={22} />
                             </button>
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="p-2 text-zinc-800 hover:text-[#7a0b3a] transition-colors"
+                                className="p-3 text-zinc-800 hover:text-[#7a0b3a] transition-colors active:scale-95 touch-manipulation"
+                                aria-label="Toggle Menu"
                             >
                                 {isOpen ? <X size={28} /> : <Menu size={28} />}
                             </button>
                         </div>
                     </div>
 
-                    {/* Mobile Navigation Drawer */}
+                    {/* Mobile Navigation Drawer - Overlay to prevent layout shift lag */}
                     <AnimatePresence>
                         {isOpen && (
                             <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.3, ease: "easeInOut" }}
-                                className="lg:hidden overflow-hidden border-t border-zinc-100"
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2, ease: "easeOut" }}
+                                className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-zinc-100 shadow-xl max-h-[80vh] overflow-y-auto"
                             >
-                                <div className="py-6 space-y-1">
+                                <div className="py-2 space-y-1">
                                     {navigation.map((link) => (
                                         <div key={link.name}>
                                             <div className="flex flex-col">
@@ -197,8 +199,11 @@ export default function Navbar() {
                                                     // Mobile Dropdown Toggle
                                                     <div className="overflow-hidden">
                                                         <button
-                                                            onClick={() => activeDropdown === link.name ? setActiveDropdown(null) : setActiveDropdown(link.name)}
-                                                            className={`flex items-center justify-between w-full px-4 py-3 text-sm font-bold uppercase tracking-wider transition-colors
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                activeDropdown === link.name ? setActiveDropdown(null) : setActiveDropdown(link.name);
+                                                            }}
+                                                            className={`flex items-center justify-between w-full px-6 py-4 text-sm font-bold uppercase tracking-wider transition-colors border-b border-zinc-50
                                                                 ${pathname.startsWith(link.href) ? "text-[#7a0b3a] bg-[#7a0b3a]/5" : "text-zinc-600 hover:bg-zinc-50"}`}
                                                         >
                                                             <span>{link.name}</span>
@@ -206,34 +211,27 @@ export default function Navbar() {
                                                         </button>
 
                                                         {/* Nested Mobile Links */}
-                                                        <AnimatePresence>
-                                                            {activeDropdown === link.name && (
-                                                                <motion.div
-                                                                    initial={{ height: 0 }}
-                                                                    animate={{ height: "auto" }}
-                                                                    exit={{ height: 0 }}
-                                                                    className="bg-[#7a0b3a]/5"
-                                                                >
-                                                                    {link.dropdown.map(subItem => (
-                                                                        <Link
-                                                                            key={subItem.name}
-                                                                            href={subItem.href}
-                                                                            onClick={() => setIsOpen(false)}
-                                                                            className="block px-8 py-3 text-sm text-[#7a0b3a] font-medium border-l-2 border-[#7a0b3a]/20 ml-4 hover:border-[#7a0b3a] transition-colors"
-                                                                        >
-                                                                            {subItem.name}
-                                                                        </Link>
-                                                                    ))}
-                                                                </motion.div>
-                                                            )}
-                                                        </AnimatePresence>
+                                                        {activeDropdown === link.name && (
+                                                            <div className="bg-zinc-50/50">
+                                                                {link.dropdown.map(subItem => (
+                                                                    <Link
+                                                                        key={subItem.name}
+                                                                        href={subItem.href}
+                                                                        onClick={() => setIsOpen(false)}
+                                                                        className="block px-10 py-3 text-sm text-zinc-600 hover:text-[#7a0b3a] font-medium border-l-[3px] border-transparent hover:border-[#7a0b3a] transition-colors"
+                                                                    >
+                                                                        {subItem.name}
+                                                                    </Link>
+                                                                ))}
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 ) : (
                                                     <Link
                                                         href={link.href}
                                                         onClick={() => setIsOpen(false)}
-                                                        className={`block px-4 py-3 text-sm font-bold uppercase tracking-wider transition-colors
-                                                            ${pathname === link.href ? "text-[#7a0b3a] bg-[#7a0b3a]/5 border-r-4 border-[#7a0b3a]" : "text-zinc-600 hover:bg-zinc-50"}`}
+                                                        className={`block px-6 py-4 text-sm font-bold uppercase tracking-wider transition-colors border-b border-zinc-50
+                                                            ${pathname === link.href ? "text-[#7a0b3a] bg-[#7a0b3a]/5 border-l-[3px] border-l-[#7a0b3a]" : "text-zinc-600 hover:bg-zinc-50"}`}
                                                     >
                                                         {link.name}
                                                     </Link>
@@ -243,7 +241,7 @@ export default function Navbar() {
                                     ))}
 
                                     {/* Mobile Admission Button */}
-                                    <div className="p-4 mt-4">
+                                    <div className="p-6">
                                         <AdmissionButton fullWidth />
                                     </div>
                                 </div>

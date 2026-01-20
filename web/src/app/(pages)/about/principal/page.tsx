@@ -183,8 +183,15 @@ export default function PrincipalProfile() {
                                 Academic Background
                             </h3>
                             <div className="relative ml-4 md:ml-20 space-y-8 md:space-y-10">
-                                {/* Vertical Line */}
-                                <div className="absolute left-[0px] top-2 bottom-4 w-[1px] bg-rose-200"></div>
+                                {/* Animated Vertical Line - Optimized with scaleY */}
+                                <motion.div
+                                    initial={{ scaleY: 0 }}
+                                    whileInView={{ scaleY: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                                    className="absolute left-[0px] top-2 bottom-4 w-[1px] bg-rose-200 origin-top"
+                                    style={{ willChange: "transform" }}
+                                />
 
                                 {ACADEMIC_BACKGROUND.map((edu, i) => (
                                     <motion.div
