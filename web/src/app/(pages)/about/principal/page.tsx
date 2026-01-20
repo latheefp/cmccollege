@@ -166,58 +166,83 @@ export default function PrincipalProfile() {
                 </div>
             </section>
 
-            {/* 3. Academic Journey & Experience Grid */}
+            {/* 3. Academic Journey & Experience Grid - Refined */}
             <section className="py-20 px-6 bg-stone-50/50">
                 <div className="container mx-auto max-w-6xl">
-                    <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
+                    <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
 
-                        {/* Education */}
+                        {/* Education - Left Column */}
                         <motion.div
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={stagger}
                         >
-                            <h3 className="text-2xl font-playfair font-bold text-stone-900 mb-8 flex items-center gap-3">
-                                <span className="w-8 h-[1px] bg-emerald-500"></span>
+                            <h3 className="text-2xl font-playfair font-bold text-stone-900 mb-10 flex items-center gap-3">
+                                <span className="w-8 h-[2px] bg-rose-400"></span>
                                 Academic Background
                             </h3>
-                            <div className="relative border-l border-emerald-200 ml-[calc(3rem+7px)] space-y-8 pl-8 py-2">
+                            <div className="relative ml-16 md:ml-20 space-y-10">
+                                {/* Vertical Line */}
+                                <div className="absolute left-[0px] top-2 bottom-4 w-[1px] bg-rose-200"></div>
+
                                 {ACADEMIC_BACKGROUND.map((edu, i) => (
-                                    <motion.div key={i} variants={fadeIn} className="relative group">
-                                        <div className="absolute -left-[41px] top-1 w-2.5 h-2.5 rounded-full bg-white border-[2.5px] border-emerald-300 group-hover:border-emerald-500 group-hover:scale-125 transition-all z-10"></div>
-                                        <div className="absolute -left-28 top-0.5 w-16 text-right">
-                                            <span className="text-sm font-bold text-emerald-600/60 font-mono group-hover:text-emerald-600 transition-colors">
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1 }}
+                                        className="relative"
+                                    >
+                                        {/* Hollow Dot */}
+                                        <div className="absolute -left-[5px] top-2 w-3 h-3 rounded-full bg-white border-2 border-emerald-800 z-10"></div>
+
+                                        {/* Year Label - Left */}
+                                        <div className="absolute -left-20 md:-left-24 top-1 w-16 text-right">
+                                            <span className="text-base font-bold text-emerald-800 font-oswald tracking-wide">
                                                 {edu.year}
                                             </span>
                                         </div>
-                                        <div>
-                                            <h4 className="text-lg font-bold text-stone-900 group-hover:text-emerald-800 transition-colors">{edu.degree}</h4>
-                                            <p className="text-stone-500 text-sm mt-1">{edu.institution}</p>
+
+                                        {/* Content - Right */}
+                                        <div className="pl-8">
+                                            <h4 className="text-lg font-bold text-stone-900 font-playfair leading-tight">{edu.degree}</h4>
+                                            <p className="text-stone-500 text-xs font-bold uppercase tracking-wider mt-1.5">{edu.institution}</p>
                                         </div>
                                     </motion.div>
                                 ))}
                             </div>
                         </motion.div>
 
-                        {/* Experience */}
+                        {/* Experience - Right Column */}
                         <motion.div
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={stagger}
                         >
-                            <h3 className="text-2xl font-playfair font-bold text-stone-900 mb-8 flex items-center gap-3">
-                                <span className="w-8 h-[1px] bg-emerald-500"></span>
+                            <h3 className="text-2xl font-playfair font-bold text-stone-900 mb-10 flex items-center gap-3">
+                                <span className="w-8 h-[2px] bg-rose-400"></span>
                                 Professional Roles
                             </h3>
                             <div className="space-y-4">
                                 {EXPERIENCE_TEACHING.map((exp, i) => (
-                                    <motion.div key={i} variants={fadeIn} className="bg-white p-5 rounded-lg border border-stone-100 hover:border-emerald-100 hover:shadow-sm transition-all">
-                                        <h4 className="font-bold text-stone-800">{exp.role}</h4>
-                                        <div className="flex justify-between items-center mt-1">
-                                            <p className="text-stone-500 text-sm">{exp.institution}</p>
-                                            {exp.duration && <span className="text-xs bg-stone-100 px-2 py-1 rounded text-stone-500 font-medium">{exp.duration}</span>}
+                                    <motion.div
+                                        key={i}
+                                        variants={fadeIn}
+                                        className="bg-white p-6 rounded-xl border border-stone-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.02)] hover:shadow-md transition-shadow group"
+                                    >
+                                        <div className="flex justify-between items-start gap-4">
+                                            <div>
+                                                <h4 className="font-bold text-stone-900 text-lg group-hover:text-rose-900 transition-colors">{exp.role}</h4>
+                                                <p className="text-stone-500 text-sm mt-1">{exp.institution}</p>
+                                            </div>
+                                            {exp.duration && (
+                                                <span className="shrink-0 px-3 py-1 bg-stone-100 text-stone-500 text-xs font-bold rounded-md">
+                                                    {exp.duration}
+                                                </span>
+                                            )}
                                         </div>
                                     </motion.div>
                                 ))}
