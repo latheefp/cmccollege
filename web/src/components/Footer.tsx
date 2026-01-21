@@ -16,12 +16,12 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
                 {/* College Info */}
                 <div className="col-span-1 md:col-span-1 flex flex-col items-center text-center">
-                    <div className="relative md:w-64 w-32 h-24 mb-4">
+                    <div className="relative w-48 md:w-64 h-24 mb-4">
                         <Image
                             src="https://ik.imagekit.io/5c6j602yp/Home/images/Logo-footer"
                             alt="College Logo"
                             fill
-                            className="object-contain scale-[2.7]"
+                            className="object-contain scale-[1.5] md:scale-[2.7]"
                         />
                     </div>
                     <p className="text-white/90 leading-relaxed mb-6 text-sm font-light">
@@ -43,7 +43,7 @@ export default function Footer() {
                 </div>
 
                 {/* Quick Links */}
-                <div className="mt-3">
+                <div className="mt-3 flex flex-col items-center md:items-start text-center md:text-left">
                     <h4 className="text-white font-bold mb-6">Quick Links</h4>
                     <ul className="space-y-4">
                         <li>
@@ -75,7 +75,7 @@ export default function Footer() {
                 </div>
 
                 {/* Resources */}
-                <div className="mt-3">
+                <div className="mt-3 flex flex-col items-center md:items-start text-center md:text-left">
                     <h4 className="text-white font-bold mb-6">Resources</h4>
                     <ul className="space-y-4">
                         <li>
@@ -102,22 +102,24 @@ export default function Footer() {
                 </div>
 
                 {/* Contact Info */}
-                <div className="mt-3">
+                <div className="mt-3 flex flex-col items-center md:items-start text-center md:text-left">
                     <h4 className="text-white font-bold mb-6">Contact Us</h4>
                     <ul className="space-y-4 text-emerald-200/80">
-                        <li className="flex gap-3">
+                        <li className="flex gap-3 justify-center md:justify-start">
                             <span className="text-white">📍</span>
-                            Mount Razi, Nadavayal (P.O) <br />
-                            Wayanad-670646
+                            <span>
+                                Mount Razi, Nadavayal (P.O) <br />
+                                Wayanad-670646
+                            </span>
                         </li>
-                        <li className="flex gap-3">
+                        <li className="flex gap-3 justify-center md:justify-start">
                             <span className="text-white">📞</span>
-                            +91 7594 888 203
+                            <span>+91 7594 888 203</span>
                         </li>
                         <a href="mailto:info@cmcollege.edu.in">
-                            <li className="flex gap-3">
+                            <li className="flex gap-3 justify-center md:justify-start">
                                 <span className="text-white">✉️</span>
-                                info@cmcollege.edu.in
+                                <span>info@cmcollege.edu.in</span>
                             </li>
                         </a>
                     </ul>
