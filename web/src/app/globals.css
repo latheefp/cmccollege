@@ -69,6 +69,23 @@ body {
   animation: shine 1.5s linear infinite;
 }
 
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
 .group:hover .group-hover\:animate-shine {
   animation: shine 1.5s linear infinite;
 }
@@ -98,6 +115,7 @@ html.lenis body {
   font-family: var(--font-oswald), sans-serif;
   letter-spacing: 0.05em;
 }
+
 @media print {
   @page {
     margin: 2cm;
@@ -129,9 +147,11 @@ html.lenis body {
     margin: 1cm;
     size: landscape;
   }
+
   .print-full {
-     max-width: none !important;
+    max-width: none !important;
   }
+
   .no-break-inside {
     break-inside: avoid;
   }

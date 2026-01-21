@@ -46,24 +46,28 @@ export default function DepartmentSidebar() {
 
             {/* Sidebar Content */}
             <div className={`lg:block ${isMobileOpen ? "block" : "hidden"}`}>
-                <div className="bg-[#fcf9f5] rounded-xl border border-[#e5e0d8] overflow-hidden shadow-sm">
-                    <div className="p-6 bg-[#5D1035] text-white">
-                        <h3 className="font-bold font-serif text-xl tracking-wide">In this Section</h3>
+                <div className="bg-white rounded-2xl p-2 border border-zinc-100 shadow-xl shadow-zinc-200/50">
+                    <div className="px-5 py-4 border-b border-zinc-50 mb-2">
+                        <h3 className="font-bold font-serif text-lg text-zinc-800 tracking-tight">In this Section</h3>
                     </div>
-                    <nav className="p-3">
+                    <nav className="space-y-1">
                         <ul className="space-y-1">
                             {sidebarItems.map((item) => (
                                 <li key={item.name}>
                                     <Link
                                         href={item.href}
-                                        className={`block px-4 py-3.5 text-sm font-semibold rounded-lg transition-all duration-200 border-l-4 
+                                        className={`group relative block px-5 py-4 text-sm font-medium rounded-xl transition-all duration-300 overflow-hidden
                                             ${isActive(item.href, item.exact)
-                                                ? "bg-white border-[#5D1035] text-[#5D1035] shadow-sm"
-                                                : "border-transparent text-zinc-700 hover:bg-zinc-100 hover:text-[#5D1035]"
+                                                ? "bg-[#5D1035] text-white shadow-lg shadow-[#5D1035]/20 translate-x-1"
+                                                : "text-zinc-600 hover:bg-[#5D1035]/5 hover:text-[#5D1035] hover:pl-7"
                                             }`}
                                         onClick={() => setIsMobileOpen(false)}
                                     >
-                                        {item.name}
+                                        <span className="relative z-10">{item.name}</span>
+                                        {/* Hover Indicator */}
+                                        {!isActive(item.href, item.exact) && (
+                                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#5D1035] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        )}
                                     </Link>
                                 </li>
                             ))}
