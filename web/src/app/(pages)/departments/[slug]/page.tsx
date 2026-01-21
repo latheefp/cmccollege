@@ -10,9 +10,10 @@ export default function DepartmentAboutPage({ params }: { params: Promise<{ slug
     const { slug } = use(params);
     const data = DEPARTMENT_DATA[slug] || DEPARTMENT_DATA["computer-science"];
 
+
     return (
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 items-start opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]">
             {/* Center Column - Content & Message */}
             <div className="lg:col-span-2 space-y-12">
                 <ScrollReveal>
@@ -55,7 +56,7 @@ export default function DepartmentAboutPage({ params }: { params: Promise<{ slug
             </div>
 
             {/* Right Column - HOD Card (Elevated) */}
-            <div className="lg:col-span-1 sticky top-32 max-w-sm mx-auto w-full lg:w-auto">
+            <div className="lg:col-span-1 sticky top-32 max-w-sm md:max-w-none mx-auto md:mx-0 w-full lg:w-auto">
                 <ScrollReveal delay={200}>
                     <div className="group relative">
                         {/* Card Backdrop/Decoration */}
