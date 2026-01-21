@@ -21,9 +21,10 @@ export default function DepartmentSidebar() {
     const sidebarItems = [
         { name: "About the Department", href: baseUrl, exact: true },
         { name: "Vision & Mission", href: `${baseUrl}/vision-mission` },
+        { name: "Key Highlights", href: `${baseUrl}/key-highlights` },
         { name: "Courses Offered", href: `${baseUrl}/courses` },
         { name: "Faculty", href: `${baseUrl}/faculty` },
-        { name: "Gallery", href: `${baseUrl}/gallery` },
+        { name: "Gallery", href: `${baseUrl}/gallery` }
     ];
 
     const isActive = (href: string, exact = false) => {

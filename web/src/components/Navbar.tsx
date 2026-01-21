@@ -47,11 +47,6 @@ export default function Navbar() {
         {
             name: "About Us",
             href: "/about",
-            dropdown: [
-                { name: "Management", href: "/about/management" },
-                { name: "Administrative Council", href: "/about/administration" },
-                { name: "Principal", href: "/about/principal" },
-            ]
         },
         {
             name: "Departments",
