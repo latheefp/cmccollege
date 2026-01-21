@@ -79,7 +79,6 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                 {data.description}
                             </p>
 
-                            <h3 className="text-2xl font-bold text-zinc-800 mb-6 font-serif">Key Features</h3>
                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {data.features.map((feature, idx) => (
                                     <li key={idx} className="flex items-start gap-4 p-4 bg-zinc-50 rounded-xl border border-zinc-100/50">
@@ -90,6 +89,46 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                     </li>
                                 ))}
                             </ul>
+
+                            {data.busSchedules && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
+                                    {data.busSchedules.map((schedule, sIdx) => (
+                                        <div key={sIdx}>
+                                            <h3 className="text-2xl font-bold text-zinc-800 mb-8 font-serif">{schedule.busName} Schedule</h3>
+                                            <div className="relative">
+                                                {/* Vertical Guide Line */}
+                                                <div className="absolute left-[6.5rem] top-2 bottom-2 w-0.5 bg-[#5D1035]/20 hidden md:block" />
+
+                                                <div className="space-y-8">
+                                                    {schedule.stops.map((item, idx) => (
+                                                        <div key={idx} className="flex flex-col md:flex-row gap-6 relative group">
+                                                            {/* Time (Left) */}
+                                                            <div className="w-full md:w-24 shrink-0 md:text-right pt-0.5">
+                                                                <span className="text-xl font-bold text-[#5D1035]">{item.time}</span>
+                                                            </div>
+
+                                                            {/* Dot (Center) */}
+                                                            <div className="hidden md:flex flex-col items-center">
+                                                                <div className="w-4 h-4 rounded-full border-[3px] border-[#5D1035] bg-white z-10 group-hover:scale-125 transition-transform duration-300" />
+                                                            </div>
+
+                                                            {/* Details (Right) */}
+                                                            <div className="flex-1 pb-2">
+                                                                <h4 className="text-lg font-bold text-zinc-800 mb-1">{item.route}</h4>
+                                                                {item.driver && (
+                                                                    <p className="text-sm text-zinc-500 font-medium uppercase tracking-wide">
+                                                                        DRIVER: {item.driver}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </ScrollReveal>
                     </div>
                 </div>

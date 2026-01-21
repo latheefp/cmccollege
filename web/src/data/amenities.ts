@@ -7,6 +7,7 @@ export interface AmenityData {
     image: string;
     icon?: any;
     gallery?: string[];
+    busSchedules?: { busName: string; stops: { route: string; time: string; driver?: string }[] }[];
 }
 
 export const AMENITIES_DATA: Record<string, AmenityData> = {
@@ -25,6 +26,26 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
         gallery: [
             "/images/school_bus_1768115663740.png",
             "/images/school_bus_1768115663740.png"
+        ],
+        busSchedules: [
+            {
+                busName: "Bus 1",
+                stops: [
+                    { route: "City Centre", time: "7:30 AM", driver: "Mr. Rajan" },
+                    { route: "North Junction", time: "7:40 AM" },
+                    { route: "East End", time: "7:45 AM" },
+                    { route: "College Campus", time: "8:00 AM" }
+                ]
+            },
+            {
+                busName: "Bus 2",
+                stops: [
+                    { route: "West Gate", time: "7:30 AM", driver: "Mr. Babu" },
+                    { route: "South Avenue", time: "7:40 AM" },
+                    { route: "Green Park", time: "7:50 AM" },
+                    { route: "College Campus", time: "8:05 AM" }
+                ]
+            }
         ]
     },
     "hostel": {
