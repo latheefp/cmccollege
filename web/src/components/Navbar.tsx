@@ -43,8 +43,8 @@ export default function Navbar() {
                 { name: "Economics", href: "/departments/economics" },
                 { name: "English", href: "/departments/english" },
                 { name: "Commerce", href: "/departments/commerce" },
-                { name: "Statistics", href: "/departments/statistics" },
-                { name: "Psychology", href: "/departments/psychology" },
+                { name: "Human Resource Management", href: "/departments/human-resource-management" },
+                { name: "Sociology", href: "/departments/sociology" },
             ]
         },
         {
