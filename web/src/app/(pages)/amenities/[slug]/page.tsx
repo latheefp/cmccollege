@@ -4,7 +4,7 @@ import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CheckCircle2, ArrowLeft, ArrowRight, Bus, MapPin, Play, Flag, Timer, Users, Bed, Cpu, Layers, AlertCircle } from "lucide-react";
+import { CheckCircle2, ArrowLeft, ArrowRight, Bus, MapPin, Play, Flag, Timer, Users, Bed, Cpu, Layers, AlertCircle, ChevronDown, ChevronUp, Clock } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { AMENITIES_DATA } from "@/data/amenities";
 import AmenitiesSidebar from "@/components/AmenitiesSidebar";
@@ -13,6 +13,15 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
     const { slug } = use(params);
     const data = AMENITIES_DATA[slug];
     const [activeHostelTab, setActiveHostelTab] = useState<'boys' | 'girls'>('boys');
+    const [expandedRoutes, setExpandedRoutes] = useState<number[]>([]);
+
+    const toggleRoute = (index: number) => {
+        setExpandedRoutes(prev =>
+            prev.includes(index)
+                ? prev.filter(i => i !== index)
+                : [...prev, index]
+        );
+    };
 
     if (!data) {
         return notFound();
@@ -118,7 +127,6 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                             </ScrollReveal>
                         </div>
 
-                        {/* Transportation Schedule UI (Enhanced) */}
                         {data.busSchedules && (
                             <ScrollReveal delay={300}>
                                 <div className="bg-[#5D1035] rounded-[2.5rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl shadow-[#5D1035]/20">
@@ -137,81 +145,107 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                             </button>
                                         </div>
 
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-                                            {data.busSchedules.map((schedule, idx) => (
-                                                <div key={idx} className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-white/15 transition-all group">
-                                                    <div className="flex items-start justify-between mb-4">
-                                                        <div className="w-10 h-10 rounded-full bg-white text-[#5D1035] flex items-center justify-center shadow-lg font-bold">
-                                                            {idx + 1}
-                                                        </div>
-                                                        <div className="text-right">
-                                                            <div className="text-2xl font-bold font-serif">{schedule.stops.length}</div>
-                                                            <div className="text-xs text-white/60 uppercase tracking-widest font-medium">Stops</div>
-                                                        </div>
-                                                    </div>
-                                                    <h4 className="text-lg font-bold mb-1">{schedule.busName}</h4>
-                                                    <div className="flex items-center gap-2 text-white/70 text-sm">
-                                                        <Timer className="w-4 h-4" />
-                                                        <span>{schedule.stops[0].time} - {schedule.stops[schedule.stops.length - 1].time}</span>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
+                                        <div className="space-y-6">
+                                            {data.busSchedules.map((schedule, idx) => {
+                                                const isExpanded = expandedRoutes.includes(idx);
+                                                const startStop = schedule.stops[0];
+                                                const endStop = schedule.stops[schedule.stops.length - 1];
 
-                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                                            {data.busSchedules.map((schedule, sIdx) => (
-                                                <div key={sIdx} className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/5">
-                                                    <div className="flex items-center gap-4 mb-8 pb-4 border-b border-white/10">
-                                                        <div className="w-12 h-12 rounded-2xl bg-[#5D1035] text-white flex items-center justify-center shadow-lg ring-4 ring-[#5D1035]/20">
-                                                            <Bus className="w-6 h-6" />
-                                                        </div>
-                                                        <div>
-                                                            <h3 className="text-xl font-bold">{schedule.busName} Route</h3>
-                                                            <p className="text-white/60 text-sm font-medium">via {schedule.stops[1].route}</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="space-y-0 relative ml-2">
-                                                        {/* Dashed Journey Line */}
-                                                        <div className="absolute left-[19px] top-6 bottom-6 w-0.5 border-l-2 border-dashed border-white/20" />
-
-                                                        {schedule.stops.map((item, idx) => {
-                                                            const isFirst = idx === 0;
-                                                            const isLast = idx === schedule.stops.length - 1;
-
-                                                            return (
-                                                                <div key={idx} className="relative pl-12 py-3 group cursor-default">
-                                                                    {/* Timeline Node */}
-                                                                    <div
-                                                                        className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border-[3px] border-[#5D1035] shadow-lg transition-all duration-300 z-10 group-hover:scale-110 group-hover:border-white
-                                                                        ${isFirst ? "bg-emerald-500 text-white" : isLast ? "bg-rose-500 text-white" : "bg-white text-[#5D1035] w-3 h-3 left-[14px]"}`}
-                                                                    >
-                                                                        {isFirst ? <Play className="w-4 h-4 fill-current ml-0.5" /> :
-                                                                            isLast ? <Flag className="w-4 h-4 fill-current ml-0.5" /> : null}
+                                                return (
+                                                    <div
+                                                        key={idx}
+                                                        className={`bg-white/10 backdrop-blur-md rounded-3xl border transition-all duration-300 overflow-hidden ${isExpanded ? "border-white/20 bg-white/15" : "border-white/10 hover:bg-white/15"}`}
+                                                    >
+                                                        {/* Card Header / Summary View */}
+                                                        <div
+                                                            onClick={() => toggleRoute(idx)}
+                                                            className="p-6 cursor-pointer"
+                                                        >
+                                                            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                                                                {/* Bus Info */}
+                                                                <div className="flex items-center gap-4 w-full md:w-auto">
+                                                                    <div className="w-14 h-14 rounded-2xl bg-white text-[#5D1035] flex items-center justify-center shadow-lg shrink-0">
+                                                                        <Bus className="w-7 h-7" />
                                                                     </div>
-
-                                                                    {/* Clean Content Item */}
-                                                                    <div className="flex items-center justify-between gap-4 p-3 rounded-lg hover:bg-white/10 transition-colors border border-transparent hover:border-white/5">
-                                                                        <div>
-                                                                            <span className={`text-lg block mb-0.5 ${isFirst || isLast ? "font-bold text-white" : "font-medium text-white/90"}`}>
-                                                                                {item.time}
-                                                                            </span>
-                                                                            <div className="flex items-center gap-2 text-white/70 text-sm group-hover:text-white transition-colors">
-                                                                                {item.route}
-                                                                            </div>
+                                                                    <div className="text-left">
+                                                                        <h3 className="text-xl font-bold">{schedule.busName}</h3>
+                                                                        <div className="flex items-center gap-3 text-sm text-white/70">
+                                                                            <span className="bg-black/20 px-2 py-0.5 rounded text-xs font-mono">ID: {101 + idx}</span>
+                                                                            {schedule.stops[0].driver && (
+                                                                                <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {schedule.stops[0].driver.split(' ')[1]}</span>
+                                                                            )}
                                                                         </div>
-                                                                        {item.driver && (
-                                                                            <div className="hidden sm:block text-[10px] font-bold bg-[#5D1035] px-3 py-1 rounded-full border border-white/10 shadow-sm whitespace-nowrap uppercase tracking-wider text-white/80">
-                                                                                Driver: {item.driver.split(' ')[1]}
-                                                                            </div>
-                                                                        )}
                                                                     </div>
                                                                 </div>
-                                                            );
-                                                        })}
+
+                                                                {/* Route Summary (Collapsed) */}
+                                                                <div className="flex-1 w-full md:w-auto flex items-center justify-between md:justify-center gap-4 md:gap-12 px-4">
+                                                                    <div className="text-center">
+                                                                        <div className="text-xl font-bold">{startStop.time}</div>
+                                                                        <div className="text-xs text-white/60 font-medium uppercase tracking-wide truncate max-w-[100px]">{startStop.route}</div>
+                                                                    </div>
+
+                                                                    <div className="flex-1 md:flex-none flex flex-col items-center px-4 relative">
+                                                                        <div className="h-0.5 w-full md:w-24 bg-white/20 relative">
+                                                                            <div className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-white"></div>
+                                                                            <div className="absolute -top-1 left-0 w-2 h-2 rounded-full bg-white"></div>
+                                                                        </div>
+                                                                        <div className="text-[10px] text-white/50 mt-1">{schedule.stops.length} Stops</div>
+                                                                    </div>
+
+                                                                    <div className="text-center">
+                                                                        <div className="text-xl font-bold">{endStop.time}</div>
+                                                                        <div className="text-xs text-white/60 font-medium uppercase tracking-wide truncate max-w-[100px]">{endStop.route}</div>
+                                                                    </div>
+                                                                </div>
+
+                                                                {/* Expand Action */}
+                                                                <div className={`w-10 h-10 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 ${isExpanded ? "bg-white text-[#5D1035] rotate-180" : "bg-transparent text-white hover:bg-white/10"}`}>
+                                                                    <ChevronDown className="w-5 h-5" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Expanded Timeline View */}
+                                                        <div className={`grid transition-[grid-template-rows] duration-500 ease-out ${isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                                                            <div className="overflow-hidden">
+                                                                <div className="p-6 md:p-8 pt-0 border-t border-white/10 mt-2">
+                                                                    <div className="relative pl-4 md:pl-8 space-y-0 mt-6">
+                                                                        {/* Vertical Line */}
+                                                                        <div className="absolute left-[27px] md:left-[43px] top-2 bottom-4 w-0.5 border-l-2 border-dashed border-white/20"></div>
+
+                                                                        {schedule.stops.map((stop, sIdx) => {
+                                                                            const isStart = sIdx === 0;
+                                                                            const isEnd = sIdx === schedule.stops.length - 1;
+
+                                                                            return (
+                                                                                <div key={sIdx} className="relative flex items-center gap-6 md:gap-10 py-3 group">
+                                                                                    {/* Time */}
+                                                                                    <div className={`w-16 text-right text-sm md:text-base font-mono ${isStart || isEnd ? "text-white font-bold" : "text-white/60"}`}>
+                                                                                        {stop.time}
+                                                                                    </div>
+
+                                                                                    {/* Node */}
+                                                                                    <div className="relative z-10 flex items-center justify-center text-[#5D1035]">
+                                                                                        <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 transition-all duration-300 ${isStart || isEnd ? "bg-white border-white scale-125 shadow-[0_0_15px_rgba(255,255,255,0.5)]" : "bg-[#5D1035] border-white/50 group-hover:bg-white group-hover:border-white"}`}></div>
+                                                                                    </div>
+
+                                                                                    {/* Stop Detail */}
+                                                                                    <div className={`px-4 py-2 rounded-lg transition-colors flex-1 ${isStart || isEnd ? "bg-white/10 border border-white/10" : "hover:bg-white/5"}`}>
+                                                                                        <span className={`text-sm md:text-base block ${isStart || isEnd ? "font-bold text-white" : "font-medium text-white/90"}`}>
+                                                                                            {stop.route}
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )
+                                                                        })}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            ))}
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 </div>
@@ -365,7 +399,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
             </div>
 
             {/* Other Amenities Navigation (Footer Style) */}
-            <section className="bg-white py-20 px-6 border-t border-zinc-100">
+            {/* <section className="bg-white py-20 px-6 border-t border-zinc-100">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex items-center justify-between mb-10">
                         <h3 className="text-2xl font-bold text-zinc-900 font-serif">More to Explore</h3>
@@ -395,7 +429,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                             ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
         </div>
     );
 }
