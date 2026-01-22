@@ -50,6 +50,7 @@ export const metadata: Metadata = {
 };
 
 import SiteLayout from "@/components/SiteLayout";
+import UserSync from "@/components/UserSync";
 
 export default function RootLayout({
   children,
@@ -63,6 +64,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${oswald.variable} antialiased pt-[var(--ticker-height,0px)]`}
         >
           <SiteLayout>
+            <UserSync />
             {children}
           </SiteLayout>
         </body>

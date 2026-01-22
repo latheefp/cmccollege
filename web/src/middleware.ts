@@ -1,13 +1,39 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isAdminRoute = createRouteMatcher(["/admin"]);
+declare global {
+    interface CustomJwtSessionClaims {
+        metadata: {
+            role?: string;
+        };
+    }
+}
+
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
+const isSyncRoute = createRouteMatcher(["/api/sync-user"]);
 
 export default clerkMiddleware(async (auth, req) => {
+    console.log('Middleware Request:', req.url);
+
+    // Log all requests for debugging
+    if (isSyncRoute(req)) {
+        console.log('>>> [Middleware] Sync route detected');
+    }
+
     // Protect all routes starting with `/admin`
     if (isAdminRoute(req)) {
         // Redirect to sign-in if not authenticated
-        await auth.protect();
+        const session = await auth();
+
+        if (!session.userId) {
+            return session.redirectToSignIn();
+        }
+
+        // Check for admin role in metadata
+        const role = session.sessionClaims?.metadata?.role;
+        if (role !== 'admin') {
+            return NextResponse.redirect(new URL('/', req.url));
+        }
     }
 });
 
