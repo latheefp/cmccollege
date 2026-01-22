@@ -21,7 +21,7 @@ export default function EnquiriesAdminPage() {
 
     const fetchEnquiries = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/enquiries`);
+            const response = await fetch("/api/enquiries");
             const data = await response.json();
             if (response.ok) {
                 setEnquiries(data.data);
@@ -41,7 +41,7 @@ export default function EnquiriesAdminPage() {
 
     const handleUpdateStatus = async (id: string, newStatus: 'Pending' | 'Read') => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/enquiries/${id}`, {
+            const response = await fetch(`/api/enquiries/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus }),

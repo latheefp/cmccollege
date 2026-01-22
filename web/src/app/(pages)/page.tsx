@@ -179,7 +179,7 @@ export default function Home() {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery`);
+        const response = await fetch("/api/gallery");
         const data = await response.json();
         if (data.success && data.data) {
           setGalleryImages(data.data);

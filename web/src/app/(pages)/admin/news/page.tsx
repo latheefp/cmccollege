@@ -27,7 +27,7 @@ export default function AdminNewsPage() {
 
     const fetchNews = async () => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/news`);
+            const res = await fetch("/api/news");
             const data = await res.json();
             if (data.success) setNews(data.data);
         } catch (error) {
@@ -46,8 +46,8 @@ export default function AdminNewsPage() {
             const token = await getToken();
             const method = editingItem ? 'PUT' : 'POST';
             const url = editingItem
-                ? `${process.env.NEXT_PUBLIC_API_URL}/api/news/${editingItem._id}`
-                : `${process.env.NEXT_PUBLIC_API_URL}/api/news`;
+                ? `/api/news/${editingItem._id}`
+                : `/api/news`;
 
             const res = await fetch(url, {
                 method,
@@ -73,7 +73,7 @@ export default function AdminNewsPage() {
         if (!confirm('Are you sure you want to delete this item?')) return;
         try {
             const token = await getToken();
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/news/${id}`, {
+            const res = await fetch(`/api/news/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

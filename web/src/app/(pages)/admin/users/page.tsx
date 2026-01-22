@@ -19,8 +19,7 @@ export default function AdminUsersPage() {
     const fetchUsers = async () => {
         try {
             const token = await getToken();
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-            const res = await fetch(`${apiUrl}/api/users`, {
+            const res = await fetch("/api/users", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -45,9 +44,7 @@ export default function AdminUsersPage() {
     const handlePromote = async (userId: string) => {
         try {
             const token = await getToken();
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
-            const res = await fetch(`${apiUrl}/api/users/promote`, {
+            const res = await fetch("/api/users/promote", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

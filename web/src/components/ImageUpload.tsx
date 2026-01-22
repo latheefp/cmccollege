@@ -10,7 +10,7 @@ const urlEndpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT;
 
 const authenticator = async () => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/imagekit/auth`);
+        const response = await fetch("/api/imagekit/auth");
         if (!response.ok) throw new Error('Authentication failed');
         return await response.json();
     } catch (error) {

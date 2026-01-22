@@ -30,7 +30,7 @@ export default function BottomTicker() {
     useEffect(() => {
         const fetchAnnouncements = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/announcements`);
+                const response = await fetch("/api/announcements");
                 const data = await response.json();
                 if (data.success && data.data && data.data.length > 0) {
                     // Filter for important announcements, or take the latest 5 if none important

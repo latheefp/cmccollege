@@ -7,10 +7,7 @@ export function useAdmissionStatus() {
     useEffect(() => {
         const checkAdmissionStatus = async () => {
             try {
-                const rawUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
-                const apiUrl = rawUrl.endsWith('/api') ? rawUrl : `${rawUrl.replace(/\/$/, '')}/api`;
-
-                const res = await fetch(`${apiUrl}/admission/settings`);
+                const res = await fetch("/api/admission/settings");
                 if (res.ok) {
                     const data = await res.json();
                     const now = new Date();

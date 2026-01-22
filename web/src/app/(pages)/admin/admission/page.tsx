@@ -8,8 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const getApiUrl = () => {
-    const url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
-    return url.endsWith('/api') ? url : `${url.replace(/\/$/, '')}/api`;
+    return "/api";
 };
 const API_URL = getApiUrl();
 

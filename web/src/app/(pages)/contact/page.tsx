@@ -28,7 +28,7 @@ export default function ContactPage() {
         setStatusMessage("");
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/enquiries`, {
+            const response = await fetch("/api/enquiries", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

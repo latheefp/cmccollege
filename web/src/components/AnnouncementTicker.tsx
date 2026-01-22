@@ -21,7 +21,7 @@ export default function AnnouncementTicker() {
     useEffect(() => {
         const fetchAnnouncements = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/announcements`);
+                const response = await fetch("/api/announcements");
                 const data = await response.json();
                 if (data.success && data.data) {
                     const important = data.data.filter((a: Announcement) => a.isImportant);

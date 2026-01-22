@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path((?!announcements|test).*)',
+        destination: 'http://localhost:5000/api/:path*',
+      },
+    ];
+  },
 };
 
 

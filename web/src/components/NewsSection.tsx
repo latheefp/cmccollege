@@ -21,7 +21,7 @@ export default function NewsSection() {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/news`);
+                const res = await fetch("/api/news");
                 const data = await res.json();
                 if (data.success) {
                     setNewsItems(data.data.slice(0, 3)); // Show only latest 3

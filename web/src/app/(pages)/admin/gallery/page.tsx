@@ -10,7 +10,7 @@ const urlEndpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT;
 
 const authenticator = async () => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/imagekit/auth`);
+        const response = await fetch("/api/imagekit/auth");
         if (!response.ok) throw new Error('Authentication failed');
         return await response.json();
     } catch (error) {
@@ -57,7 +57,7 @@ export default function GalleryAdminPage() {
 
     const fetchGallery = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery`);
+            const response = await fetch("/api/gallery");
             const data = await response.json();
             if (response.ok) {
                 setItems(data.data);
@@ -150,7 +150,7 @@ export default function GalleryAdminPage() {
 
         setIsSubmitting(true);
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery`, {
+            const response = await fetch("/api/gallery", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -173,7 +173,7 @@ export default function GalleryAdminPage() {
     const handleDelete = async (id: string) => {
         if (!confirm("Remove this image from gallery?")) return;
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery/${id}`, {
+            const response = await fetch(`/api/gallery/${id}`, {
                 method: 'DELETE',
             });
             if (response.ok) {

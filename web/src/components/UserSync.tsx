@@ -14,9 +14,7 @@ export default function UserSync() {
             if (isSignedIn && user && !hasSynced.current) {
                 try {
                     const token = await getToken();
-                    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
-                    await fetch(`${apiUrl}/api/users/sync`, {
+                    await fetch("/api/users/sync", {
                         method: "POST",
                         headers: {
                             Authorization: `Bearer ${token}`,

@@ -23,10 +23,7 @@ export default function AdmissionPopup() {
         const fetchSettingsAndCheckVisibility = async () => {
             try {
                 // Fetch settings from API
-                const rawUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
-                const apiUrl = rawUrl.endsWith('/api') ? rawUrl : `${rawUrl.replace(/\/$/, '')}/api`;
-
-                const res = await fetch(`${apiUrl}/admission/settings`);
+                const res = await fetch("/api/admission/settings");
                 if (!res.ok) return;
 
                 const data = await res.json();

@@ -19,7 +19,7 @@ export default function AnnouncementsPage() {
     useEffect(() => {
         const fetchAnnouncements = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/announcements`);
+                const response = await fetch("/api/announcements");
                 if (response.ok) {
                     const data = await response.json();
                     setAnnouncements(data.data);

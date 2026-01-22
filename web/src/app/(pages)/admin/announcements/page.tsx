@@ -26,7 +26,7 @@ export default function AnnouncementsAdminPage() {
 
     const fetchAnnouncements = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/announcements`);
+            const response = await fetch("/api/announcements");
             const data = await response.json();
             if (response.ok) {
                 setAnnouncements(data.data);
@@ -54,7 +54,7 @@ export default function AnnouncementsAdminPage() {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/announcements`, {
+            const response = await fetch("/api/announcements", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -78,7 +78,7 @@ export default function AnnouncementsAdminPage() {
         if (!confirm("Are you sure you want to delete this notice?")) return;
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/announcements/${id}`, {
+            const response = await fetch(`/api/announcements/${id}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
