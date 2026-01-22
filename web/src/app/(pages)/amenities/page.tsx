@@ -1,191 +1,144 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { Book, Monitor, Wifi, Bus, Home, Coffee } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { Book, Wifi, Coffee, Monitor, Dumbbell, Bus, Stethoscope, Home, Music, Drama } from "lucide-react";
-import ScrollReveal from "@/components/ScrollReveal";
-import DynamicCTA from "@/components/DynamicCTA";
+
+// Styled placeholders matching the theme since image generation is currently limited
+const AMENITIES = [
+    {
+        id: "library",
+        title: "Central Library",
+        icon: Book,
+        image: "https://placehold.co/800x1200/2A0818/FFFFFF?text=Central+Library",
+        colSpan: 1,
+    },
+    {
+        id: "computer-lab",
+        title: "Computer Labs",
+        icon: Monitor,
+        image: "https://placehold.co/800x1200/3B0A22/FFFFFF?text=Computer+Labs",
+        colSpan: 1,
+    },
+    {
+        id: "wifi",
+        title: "Wi-Fi Campus",
+        icon: Wifi,
+        image: "https://placehold.co/800x1200/4C0D2C/FFFFFF?text=Wi-Fi+Enabled",
+        colSpan: 1,
+    },
+    {
+        id: "transport",
+        title: "Transportation",
+        icon: Bus,
+        image: "https://placehold.co/800x1200/5D1035/FFFFFF?text=Transportation",
+        colSpan: 1,
+    },
+    {
+        id: "girls-hostel",
+        title: "Girls Hotel",
+        icon: Home,
+        image: "https://placehold.co/800x1200/6E133F/FFFFFF?text=Girls+Hostel",
+        colSpan: 1,
+    },
+    {
+        id: "boys-hostel",
+        title: "Boys Hostel",
+        icon: Home,
+        image: "https://placehold.co/800x1200/7F1649/FFFFFF?text=Boys+Hostel",
+        colSpan: 1,
+    },
+];
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,
+        },
+    },
+};
+
+const cardVariants: any = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.6,
+            ease: "easeInOut",
+        },
+    },
+};
 
 export default function AmenitiesPage() {
     return (
-        <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[112px]">
-            {/* Page Header */}
-            <section className="relative py-20 px-6 bg-[#5D1035] text-white overflow-hidden">
-                <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
-                </div>
-                <div className="relative z-10 max-w-5xl mx-auto text-center">
-                    <ScrollReveal>
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 font-serif">
-                            Campus Amenities
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light">
-                            World-class infrastructure designed to support your academic journey and holistic development.
-                        </p>
-                    </ScrollReveal>
-                </div>
+        <div className="min-h-screen bg-[#FDFCFB] text-zinc-900 pt-[112px]">
+            {/* --- Hero Section --- */}
+            <section className="relative py-24 px-6 bg-gradient-to-b from-[#5D1035] to-[#3d0a23] text-white overflow-hidden">
+                <div className="absolute inset-0 opacity-20"
+                    style={{ backgroundImage: "radial-gradient(#ffffff 1px, transparent 1px)", backgroundSize: "32px 32px" }}
+                />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="relative z-10 max-w-4xl mx-auto text-center"
+                >
+                    <h1 className="text-4xl md:text-6xl font-bold font-serif mb-4 tracking-tight">
+                        Campus Amenities
+                    </h1>
+                    <p className="text-lg md:text-xl font-light text-white/80 tracking-wide">
+                        Designed for learning, living, and growth.
+                    </p>
+                </motion.div>
             </section>
 
-            {/* Academic Amenities */}
-            <section className="py-24 px-6 max-w-7xl mx-auto">
-                <ScrollReveal className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#5D1035] mb-4 font-serif">Academic Infrastructure</h2>
-                    <p className="text-zinc-600 text-lg">State-of-the-art learning environments for students.</p>
-                </ScrollReveal>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {[
-                        {
-                            slug: "central-library",
-                            title: "Central Library",
-                            desc: "A vast storehouse of knowledge with thousands of books, journals, and digital resources.",
-                            icon: Book,
-                            image: "/images/school_library_1768115599802.png"
-                        },
-                        {
-                            slug: "computer-labs",
-                            title: "Computer Labs",
-                            desc: "High-tech computer labs with high-speed internet to keep you connected with the digital world.",
-                            icon: Monitor,
-                            image: "/images/science_lab_1768115578614.png"
-                        },
-                        {
-                            slug: "wifi-campus", // Note: This slug might not exist in data yet, need to check or handle 404. Let's assume we stick to ones we have data for or just generic.
-                            // Actually, I only added transportation, hostel, central-library, computer-labs, cafeteria, sports-complex, medical-care.
-                            // I will map wifi-campus to computer-labs or create data for it? For now let's leave link but user might see 404 if data missing.
-                            // Correction: I should ensure slug exists. I didn't add wifi-campus in AMENITIES_DATA. I'll stick to non-link for Wifi if data missing, OR add data.
-                            // Let's add data for wifi next or just generic link.
-                            title: "Wi-Fi Campus",
-                            desc: "Seamless connectivity across the campus to facilitate e-learning and research.",
-                            icon: Wifi,
-                            image: "/images/classroom_learning_1768115518451.png"
-                        }
-                    ].map((item, i) => (
-                        <ScrollReveal key={i} delay={i * 100} className="group bg-zinc-50 rounded-2xl overflow-hidden border border-zinc-100 hover:shadow-lg transition-all">
-                            {/* Functional Link only if slug provided and data likely exists. For Wifi, I'll allow link but it might 404 if data not added. */}
-                            <Link href={item.slug ? `/amenities/${item.slug}` : "#"} className={!item.slug ? "cursor-default" : ""}>
-                                <div className="relative h-48 overflow-hidden">
-                                    <Image
-                                        src={item.image}
-                                        alt={item.title}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                                    <div className="absolute bottom-4 left-4 text-white flex items-center gap-2">
-                                        <item.icon className="w-5 h-5" />
-                                    </div>
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-zinc-900 mb-2 font-serif group-hover:text-[#5D1035] transition-colors">{item.title}</h3>
-                                    <p className="text-zinc-600 leading-relaxed text-sm">{item.desc}</p>
-                                </div>
-                            </Link>
-                        </ScrollReveal>
-                    ))}
-                </div>
-            </section>
-
-            {/* Student Well-being */}
-            <section className="py-24 px-6 bg-[#5D1035]/5">
-                <div className="max-w-7xl mx-auto">
-                    <ScrollReveal className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-[#5D1035] mb-4 font-serif">Student Life & Well-being</h2>
-                        <p className="text-zinc-600 text-lg">Facilities that ensure a comfortable and active campus life.</p>
-                    </ScrollReveal>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            {
-                                slug: "hostel",
-                                title: "Hostel Facility",
-                                desc: "Secure and homely accommodation for both boys and girls.",
-                                icon: Home,
-                                color: "bg-emerald-100 text-emerald-700"
-                            },
-                            {
-                                slug: "cafeteria",
-                                title: "Cafeteria",
-                                desc: "Hygienic and nutritious food options for students and staff.",
-                                icon: Coffee,
-                                color: "bg-orange-100 text-orange-700"
-                            },
-                            {
-                                slug: "transportation",
-                                title: "Transportation",
-                                desc: "Safe and convenient bus services covering major routes.",
-                                icon: Bus,
-                                color: "bg-blue-100 text-blue-700"
-                            },
-                            {
-                                slug: "medical-care",
-                                title: "Medical Care",
-                                desc: "First-aid center and on-call medical assistance for emergencies.",
-                                icon: Stethoscope,
-                                color: "bg-red-100 text-red-700"
-                            }
-                        ].map((item, i) => (
-                            <ScrollReveal key={i} delay={i * 100}>
-                                <Link href={`/amenities/${item.slug}`}>
-                                    <div className="h-full bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center group">
-                                        <div className={`w-14 h-14 rounded-full ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                            <item.icon className="w-7 h-7" />
-                                        </div>
-                                        <h3 className="text-lg font-bold text-zinc-900 mb-2 group-hover:text-[#5D1035] transition-colors">{item.title}</h3>
-                                        <p className="text-zinc-600 text-sm leading-relaxed">{item.desc}</p>
-                                    </div>
-                                </Link>
-                            </ScrollReveal>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Cultural & Sports */}
-            <section className="py-24 px-6 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <ScrollReveal>
-                        <h2 className="text-3xl md:text-4xl font-bold text-[#5D1035] mb-6 font-serif">Sports & Culture</h2>
-                        <p className="text-lg text-zinc-600 mb-8 leading-relaxed">
-                            We believe in the holistic development of our students. Our campus provides ample opportunities for sports, fitness, and artistic expression.
-                        </p>
-                        <ul className="space-y-4">
-                            {[
-                                { text: "Spacious Playground for Outdoor Sports", icon: Dumbbell, slug: "sports-complex" },
-                                { text: "Indoor Games & Recreational Areas", icon: Drama },
-                                { text: "Auditorium for Cultural Events", icon: Music },
-                                { text: "Gymnasium & Fitness Center", icon: Dumbbell, slug: "sports-complex" }
-                            ].map((item, i) => (
-                                <li key={i} className="flex">
-                                    <Link
-                                        href={item.slug ? `/amenities/${item.slug}` : "#"}
-                                        className={`flex items-center gap-3 text-zinc-700 font-medium ${item.slug ? "hover:text-[#5D1035] transition-colors" : ""}`}
-                                    >
-                                        <div className="w-8 h-8 rounded-full bg-[#5D1035]/10 flex items-center justify-center text-[#5D1035]">
-                                            <item.icon className="w-4 h-4" />
-                                        </div>
-                                        {item.text}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </ScrollReveal>
-                    <ScrollReveal delay={200} className="relative h-[400px] rounded-[2rem] overflow-hidden shadow-2xl">
-                        <Link href="/amenities/sports-complex">
+            {/* --- Amenities Grid --- */}
+            <section className="py-20 px-6 max-w-7xl mx-auto">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                >
+                    {AMENITIES.map((item) => (
+                        <motion.div
+                            key={item.id}
+                            variants={cardVariants}
+                            className="group relative h-[400px] md:h-[500px] rounded-[20px] overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-shadow duration-500"
+                        >
+                            {/* Background Image */}
                             <Image
-                                src="/images/school_sports_ground_1768117765955.png"
-                                alt="Sports Facilities"
+                                src={item.image}
+                                alt={item.title}
                                 fill
-                                className="object-cover hover:scale-105 transition-transform duration-700"
+                                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-tr from-[#5D1035]/40 to-transparent pointer-events-none" />
-                        </Link>
-                    </ScrollReveal>
-                </div>
-            </section>
 
-            {/* Final Call to Action */}
-            <DynamicCTA className="py-20 px-6 bg-[#5D1035] text-white text-center" />
+                            {/* Gradient Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+
+                            {/* Content */}
+                            <div className="absolute bottom-0 left-0 p-8 w-full transform transition-transform duration-500 group-hover:-translate-y-2">
+                                <div className="flex flex-col gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/10 opacity-80 group-hover:opacity-100 transition-opacity">
+                                        <item.icon strokeWidth={1.5} className="w-5 h-5" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold font-serif text-white tracking-wide">
+                                        {item.title}
+                                    </h3>
+                                    <div className="h-0.5 w-12 bg-[#5D1035] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </section>
         </div>
     );
 }

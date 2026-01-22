@@ -561,7 +561,8 @@ export default function Home() {
       <HomeMap />
 
       {/* Call to Action Section - Dynamic & Themed */}
-      <DynamicCTA className="py-24 px-6 bg-emerald-900 text-white text-center relative overflow-hidden" />
+      {/* Call to Action Section - Dynamic & Themed */}
+      <DynamicCTA variant="glass" />
 
 
     </div>

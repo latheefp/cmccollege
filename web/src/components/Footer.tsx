@@ -12,7 +12,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className="bg-[#7B0046] text-white py-15 px-6">
+        <footer className="bg-emerald-900 text-white py-15 px-6">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
                 {/* College Info */}
                 <div className="col-span-1 md:col-span-1 flex flex-col items-center text-center">
