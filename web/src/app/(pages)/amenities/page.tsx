@@ -4,58 +4,17 @@ import { motion } from "framer-motion";
 import { Book, Monitor, Wifi, Bus, Home, Coffee } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { AMENITIES_DATA } from "@/data/amenities";
 
-// Styled placeholders matching the theme since image generation is currently limited
-const AMENITIES = [
-    {
-        id: "library",
-        title: "Central Library",
-        slug: "central-library",
-        icon: Book,
-        image: "https://placehold.co/800x1200/2A0818/FFFFFF?text=Central+Library",
-        colSpan: 1,
-    },
-    {
-        id: "computer-lab",
-        title: "Computer Labs",
-        slug: "computer-labs",
-        icon: Monitor,
-        image: "https://placehold.co/800x1200/3B0A22/FFFFFF?text=Computer+Labs",
-        colSpan: 1,
-    },
-    {
-        id: "wifi",
-        title: "Wi-Fi Campus",
-        slug: "wifi-campus",
-        icon: Wifi,
-        image: "https://placehold.co/800x1200/4C0D2C/FFFFFF?text=Wi-Fi+Enabled",
-        colSpan: 1,
-    },
-    {
-        id: "transport",
-        title: "Transportation",
-        slug: "transportation",
-        icon: Bus,
-        image: "https://placehold.co/800x1200/5D1035/FFFFFF?text=Transportation",
-        colSpan: 1,
-    },
-    {
-        id: "girls-hostel",
-        title: "Girls Hostel",
-        slug: "girls-hostel",
-        icon: Home,
-        image: "https://placehold.co/800x1200/6E133F/FFFFFF?text=Girls+Hostel",
-        colSpan: 1,
-    },
-    {
-        id: "boys-hostel",
-        title: "Boys Hostel",
-        slug: "boys-hostel",
-        icon: Home,
-        image: "https://placehold.co/800x1200/7F1649/FFFFFF?text=Boys+Hostel",
-        colSpan: 1,
-    },
-];
+// Derive the list from our single source of truth to ensure consistency
+const amenitiesList = Object.entries(AMENITIES_DATA).map(([slug, data]) => ({
+    id: slug,
+    title: data.title,
+    slug: slug,
+    icon: data.icon || Book, // Fallback icon if missing
+    image: data.image,
+    colSpan: 1,
+}));
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -112,7 +71,7 @@ export default function AmenitiesPage() {
                     viewport={{ once: true, margin: "-100px" }}
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
                 >
-                    {AMENITIES.map((item) => (
+                    {amenitiesList.map((item) => (
                         <motion.div
                             key={item.id}
                             variants={cardVariants}
