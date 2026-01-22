@@ -5,13 +5,15 @@ import {
     deleteAnnouncement,
 } from '../controllers/announcementController';
 
+import { requireAdmin } from '../middleware/authMiddleware';
+
 const router = Router();
 
 router.route('/')
-    .post(createAnnouncement)
+    .post(requireAdmin, createAnnouncement)
     .get(getAnnouncements);
 
 router.route('/:id')
-    .delete(deleteAnnouncement);
+    .delete(requireAdmin, deleteAnnouncement);
 
 export default router;

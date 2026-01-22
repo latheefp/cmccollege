@@ -8,10 +8,10 @@ const router = Router();
 // Route to sync user (UPSERT)
 router.post('/sync', requireAuth(), syncUser);
 
-// Route to get all users (TEMPORARILY PUBLIC for debugging)
-router.get('/', getUsers);
+// Route to get all users
+router.get('/', requireAdmin, getUsers);
 
-// Route to promote user (TEMPORARILY PUBLIC for debugging)
-router.post('/promote', promoteUserToAdmin);
+// Route to promote user
+router.post('/promote', requireAdmin, promoteUserToAdmin);
 
 export default router;

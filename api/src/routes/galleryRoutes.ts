@@ -5,13 +5,15 @@ import {
     deleteImage,
 } from '../controllers/galleryController';
 
+import { requireAdmin } from '../middleware/authMiddleware';
+
 const router = Router();
 
 router.route('/')
-    .post(createImage)
+    .post(requireAdmin, createImage)
     .get(getImages);
 
 router.route('/:id')
-    .delete(deleteImage);
+    .delete(requireAdmin, deleteImage);
 
 export default router;
