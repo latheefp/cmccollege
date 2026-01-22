@@ -91,6 +91,7 @@ export default function Navbar() {
                                     src="https://ik.imagekit.io/5c6j602yp/Home/images/PNG%20CM%20COLLEGE.png"
                                     alt="College Logo"
                                     fill
+                                    priority
                                     className="object-contain scale-[2.5]"
                                 />
                             </div>

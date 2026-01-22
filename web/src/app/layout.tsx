@@ -25,6 +25,7 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cmcollege.edu.in"),
   title: "CM College of Art and Science – Nadavayal, Wayanad",
   description: "Welcome to CM College of Arts and Science, I am proud to lead an institution that stands for better quality education, good discipline, and strong human values.",
   keywords: ["CM College", "Arts and Science", "Nadavayal", "Wayanad", "Education", "Kerala College", "Higher Education"],

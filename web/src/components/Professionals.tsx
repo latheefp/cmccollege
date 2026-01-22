@@ -10,28 +10,28 @@ const alumni = [
         role: "Software Engineer",
         company: "TCS, Bangalore",
         graduation: "BCA · 2022",
-        image: "/images/principal_portrait_placeholder_1768116114971.png"
+        image: "/images/default-user-placeholder.png"
     },
     {
         name: "Ayesha Rahman",
         role: "Data Analyst",
         company: "Infosys",
         graduation: "BSc Computer Science · 2021",
-        image: "/images/principal_portrait_placeholder_1768116114971.png"
+        image: "/images/default-user-placeholder.png"
     },
     {
         name: "Salman P",
         role: "Business Executive",
         company: "HDFC Bank",
         graduation: "BCom · 2020",
-        image: "/images/principal_portrait_placeholder_1768116114971.png"
+        image: "/images/default-user-placeholder.png"
     },
     {
         name: "Fathima K",
         role: "UI/UX Designer",
         company: "Startup Studio",
         graduation: "BCA · 2023",
-        image: "/images/principal_portrait_placeholder_1768116114971.png"
+        image: "/images/default-user-placeholder.png"
     }
 ];
 

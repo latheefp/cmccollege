@@ -15,10 +15,10 @@ async function checkAdmin() {
 
 export async function GET(
     req: Request,
-    { params }: { params: { slug: string } }
+    { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
-        const { slug } = params;
+        const { slug } = await params;
         await connectDB();
         const pageContent = await PageContent.findOne({ slug });
 
@@ -44,7 +44,7 @@ export async function GET(
 
 export async function POST(
     req: Request,
-    { params }: { params: { slug: string } }
+    { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
         if (!(await checkAdmin())) {
@@ -54,7 +54,7 @@ export async function POST(
             );
         }
 
-        const { slug } = params;
+        const { slug } = await params;
         const body = await req.json();
 
         await connectDB();

@@ -13,10 +13,13 @@ export function usePageContent(pageName: string) {
                 const response = await fetch(url);
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("Fetched content:", data);
-                    setContent(data || {});
+                    setContent(data.success ? data.data : {});
+                } else if (response.status === 404) {
+                    console.warn(`Page content for "${pageName}" not found. Using defaults.`);
+                    setContent({});
                 } else {
                     console.error("Fetch failed:", response.status);
+                    setContent({});
                 }
             } catch (error) {
                 console.error(`Error fetching content for ${pageName}:`, error);
