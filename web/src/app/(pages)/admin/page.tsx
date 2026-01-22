@@ -30,36 +30,31 @@ interface Announcement {
     createdAt: string;
 }
 
-interface GalleryImage {
-    _id: string;
-    createdAt: string;
+interface Stats {
+    counts: {
+        enquiries: number;
+        announcements: number;
+        gallery: number;
+        news: number;
+        users: number;
+    };
+    enquiriesThisMonth: number;
+    pendingEnquiries: Enquiry[];
+    recentAnnouncements: Announcement[];
 }
 
 export default function AdminDashboardPage() {
-    const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
-    const [announcements, setAnnouncements] = useState<Announcement[]>([]);
-    const [gallery, setGallery] = useState<GalleryImage[]>([]);
+    const [statsData, setStatsData] = useState<Stats | null>(null);
     const [loading, setLoading] = useState(true);
-
-    const API_URL = '/api';
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const baseUrl = API_URL.endsWith('/api') ? API_URL : `${API_URL.replace(/\/$/, '')}/api`;
-                const [enqRes, annRes, galRes] = await Promise.all([
-                    fetch(`${baseUrl}/enquiries`),
-                    fetch(`${baseUrl}/announcements`),
-                    fetch(`${baseUrl}/gallery`)
-                ]);
-
-                const [enqData, annData, galData] = await Promise.all([
-                    enqRes.json(), annRes.json(), galRes.json()
-                ]);
-
-                if (enqData.success) setEnquiries(enqData.data);
-                if (annData.success) setAnnouncements(annData.data);
-                if (galData.success) setGallery(galData.data);
+                const res = await fetch('/api/admin/stats');
+                const data = await res.json();
+                if (data.success) {
+                    setStatsData(data.data);
+                }
             } catch (err) {
                 console.error('Data fetch error:', err);
             } finally {
@@ -67,7 +62,7 @@ export default function AdminDashboardPage() {
             }
         };
         fetchData();
-    }, [API_URL]);
+    }, []);
 
     const getTimeAgo = (dateStr: string) => {
         const days = Math.floor((new Date().getTime() - new Date(dateStr).getTime()) / (1000 * 3600 * 24));
@@ -77,8 +72,8 @@ export default function AdminDashboardPage() {
     const stats = [
         {
             label: 'Total Enquiries',
-            val: enquiries.length,
-            trend: `+${enquiries.filter(e => new Date(e.createdAt).getMonth() === new Date().getMonth()).length} this month`,
+            val: statsData?.counts.enquiries || 0,
+            trend: `+${statsData?.enquiriesThisMonth || 0} this month`,
             icon: Users,
             color: 'from-blue-600 to-blue-400',
             bg: 'bg-blue-50',
@@ -87,7 +82,7 @@ export default function AdminDashboardPage() {
         },
         {
             label: 'Announcements',
-            val: announcements.length,
+            val: statsData?.counts.announcements || 0,
             trend: 'Active',
             icon: Megaphone,
             color: 'from-emerald-600 to-emerald-400',
@@ -97,7 +92,7 @@ export default function AdminDashboardPage() {
         },
         {
             label: 'Gallery Assets',
-            val: gallery.length,
+            val: statsData?.counts.gallery || 0,
             trend: 'Images',
             icon: ImageIcon,
             color: 'from-purple-600 to-purple-400',
@@ -117,7 +112,7 @@ export default function AdminDashboardPage() {
         }
     ];
 
-    const pendingEnquiries = enquiries.filter(e => e.status === 'Pending').slice(0, 4);
+    const pendingEnquiries = statsData?.pendingEnquiries || [];
 
     if (loading) return (
         <div className="flex h-96 items-center justify-center">
@@ -233,9 +228,8 @@ export default function AdminDashboardPage() {
                         </h3>
                         <div className="space-y-6 relative before:absolute before:left-2 before:top-0 before:bottom-0 before:w-0.5 before:bg-zinc-100">
                             {[
-                                ...enquiries.slice(0, 2).map(e => ({ type: 'Enquiry', msg: `New enquiry from ${e.name}`, time: getTimeAgo(e.createdAt) })),
-                                ...announcements.slice(0, 1).map(a => ({ type: 'Notice', msg: `Posted "${a.title}"`, time: getTimeAgo(a.createdAt) })),
-                                ...gallery.slice(0, 1).map(g => ({ type: 'Upload', msg: 'New gallery image added', time: getTimeAgo(g.createdAt) }))
+                                ...(statsData?.pendingEnquiries || []).slice(0, 2).map(e => ({ type: 'Enquiry', msg: `New enquiry from ${e.name}`, time: getTimeAgo(e.createdAt) })),
+                                ...(statsData?.recentAnnouncements || []).slice(0, 1).map(a => ({ type: 'Notice', msg: `Posted "${a.title}"`, time: getTimeAgo(a.createdAt) })),
                             ].map((item, i) => (
                                 <div key={i} className="relative pl-8 cursor-pointer hover:bg-zinc-50/50 p-2 rounded-lg transition-colors">
                                     <div className="absolute left-0 top-3 w-4 h-4 rounded-full border-2 border-white bg-blue-500 shadow-sm z-10" />
