@@ -3,12 +3,14 @@
 import { motion } from "framer-motion";
 import { Book, Monitor, Wifi, Bus, Home, Coffee } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Styled placeholders matching the theme since image generation is currently limited
 const AMENITIES = [
     {
         id: "library",
         title: "Central Library",
+        slug: "central-library",
         icon: Book,
         image: "https://placehold.co/800x1200/2A0818/FFFFFF?text=Central+Library",
         colSpan: 1,
@@ -16,6 +18,7 @@ const AMENITIES = [
     {
         id: "computer-lab",
         title: "Computer Labs",
+        slug: "computer-labs",
         icon: Monitor,
         image: "https://placehold.co/800x1200/3B0A22/FFFFFF?text=Computer+Labs",
         colSpan: 1,
@@ -23,6 +26,7 @@ const AMENITIES = [
     {
         id: "wifi",
         title: "Wi-Fi Campus",
+        slug: "wifi-campus",
         icon: Wifi,
         image: "https://placehold.co/800x1200/4C0D2C/FFFFFF?text=Wi-Fi+Enabled",
         colSpan: 1,
@@ -30,13 +34,15 @@ const AMENITIES = [
     {
         id: "transport",
         title: "Transportation",
+        slug: "transportation",
         icon: Bus,
         image: "https://placehold.co/800x1200/5D1035/FFFFFF?text=Transportation",
         colSpan: 1,
     },
     {
         id: "girls-hostel",
-        title: "Girls Hotel",
+        title: "Girls Hostel",
+        slug: "girls-hostel",
         icon: Home,
         image: "https://placehold.co/800x1200/6E133F/FFFFFF?text=Girls+Hostel",
         colSpan: 1,
@@ -44,6 +50,7 @@ const AMENITIES = [
     {
         id: "boys-hostel",
         title: "Boys Hostel",
+        slug: "boys-hostel",
         icon: Home,
         image: "https://placehold.co/800x1200/7F1649/FFFFFF?text=Boys+Hostel",
         colSpan: 1,
@@ -111,30 +118,32 @@ export default function AmenitiesPage() {
                             variants={cardVariants}
                             className="group relative h-[400px] md:h-[500px] rounded-[20px] overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-shadow duration-500"
                         >
-                            {/* Background Image */}
-                            <Image
-                                src={item.image}
-                                alt={item.title}
-                                fill
-                                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
+                            <Link href={`/amenities/${item.slug}`} className="block h-full w-full">
+                                {/* Background Image */}
+                                <Image
+                                    src={item.image}
+                                    alt={item.title}
+                                    fill
+                                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                />
 
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
-                            {/* Content */}
-                            <div className="absolute bottom-0 left-0 p-8 w-full transform transition-transform duration-500 group-hover:-translate-y-2">
-                                <div className="flex flex-col gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/10 opacity-80 group-hover:opacity-100 transition-opacity">
-                                        <item.icon strokeWidth={1.5} className="w-5 h-5" />
+                                {/* Content */}
+                                <div className="absolute bottom-0 left-0 p-8 w-full transform transition-transform duration-500 group-hover:-translate-y-2">
+                                    <div className="flex flex-col gap-3">
+                                        <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/10 opacity-80 group-hover:opacity-100 transition-opacity">
+                                            <item.icon strokeWidth={1.5} className="w-5 h-5" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold font-serif text-white tracking-wide">
+                                            {item.title}
+                                        </h3>
+                                        <div className="h-0.5 w-12 bg-[#5D1035] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                                     </div>
-                                    <h3 className="text-2xl font-bold font-serif text-white tracking-wide">
-                                        {item.title}
-                                    </h3>
-                                    <div className="h-0.5 w-12 bg-[#5D1035] rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                                 </div>
-                            </div>
+                            </Link>
                         </motion.div>
                     ))}
                 </motion.div>
