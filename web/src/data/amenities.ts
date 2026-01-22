@@ -30,9 +30,9 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Whiteboards and Audio Systems",
             "High-Speed Wi-Fi Access"
         ],
-        image: "/images/classroom_learning_1768115518451.png",
+        image: "https://i.pinimg.com/736x/5f/23/29/5f23298cabac68d068fb1b69bd928adb.jpg",
         icon: Users,
-        gallery: ["/images/classroom_learning_1768115518451.png"]
+        gallery: []
     },
     "seminar-hall": {
         title: "Seminar Hall",
@@ -44,7 +44,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Air-Conditioned Environment",
             "Acoustically Treated Walls"
         ],
-        image: "https://placehold.co/1200x800/5D1035/FFFFFF?text=Seminar+Hall", // Placeholder
+        image: "https://i.pinimg.com/736x/2a/fc/e5/2afce510dee43dad6085a5052be4fbbc.jpg", // Placeholder
         icon: Mic2,
         gallery: []
     },
@@ -58,7 +58,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Green Rooms and Backstage Area",
             "Balcony Seating Available"
         ],
-        image: "https://placehold.co/1200x800/2A0818/FFFFFF?text=Auditorium", // Placeholder
+        image: "https://i.pinimg.com/736x/65/4d/8b/654d8bc2c4dc40f32657363ef7dc846e.jpg", // Placeholder
         icon: Layout,
         gallery: []
     },
@@ -72,7 +72,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Quiet and spacious reading rooms",
             "Computer terminals for research"
         ],
-        image: "/images/school_library_1768115599802.png",
+        image: "https://i.pinimg.com/736x/20/de/63/20de632725a99c24e39073079918ebcc.jpg",
         icon: Book
     },
     "computer-lab": {
@@ -85,7 +85,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Expert lab assistants",
             "Project work support"
         ],
-        image: "/images/science_lab_1768115578614.png",
+        image: "https://i.pinimg.com/736x/ec/03/10/ec03109be16ffeec998f861abc22e414.jpg",
         icon: Monitor,
         labDetails: {
             specs: [
@@ -107,7 +107,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Separate Staff Restrooms",
             "Disability-Friendly Access"
         ],
-        image: "https://placehold.co/1200x800/E5E5E5/333333?text=Rest+Rooms", // Placeholder
+        image: "https://i.pinimg.com/736x/fa/39/2d/fa392deb75e8ad9505997b353b9bedb9.jpg", // Placeholder
         icon: Coffee // Using coffee as a generic 'break' icon for now, or could use generic
     },
     "prayer-hall": {
@@ -120,7 +120,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Open During College Hours",
             "Spiritual Literature Available"
         ],
-        image: "https://placehold.co/1200x800/FFF8E1/5D1035?text=Prayer+Hall", // Placeholder
+        image: "https://i.pinimg.com/736x/e9/d8/6d/e9d86db7f4999574afe0f77f870f1724.jpg", // Placeholder
         icon: Flower,
         gallery: []
     },
@@ -135,7 +135,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Study halls and recreation rooms",
             "Wi-Fi connectivity"
         ],
-        image: "/images/school_hostel_1768115536813.png",
+        image: "https://i.pinimg.com/1200x/e9/71/7a/e9717a4cb87d9195d68057b2dfe7c22f.jpg",
         icon: Home,
         gallery: [
             "/images/school_hostel_1768115536813.png"
@@ -162,7 +162,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Variety of cuisines",
             "Spacious seating arrangement"
         ],
-        image: "/images/school_dining_hall_1768116701071.png",
+        image: "https://i.pinimg.com/736x/65/26/d0/6526d01da9d8ec18ec434d2dc943f3e4.jpg",
         icon: Utensils
     },
     "bus-facility": {
@@ -175,11 +175,11 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Separate seating for staff and students",
             "Affordable pass rates"
         ],
-        image: "/images/school_bus_1768115663740.png",
+        image: "https://i.pinimg.com/1200x/53/c8/22/53c8226ccd05c5c9778be4b931e82e75.jpg",
         icon: Bus,
         gallery: [
-            "/images/school_bus_1768115663740.png",
-            "/images/school_bus_1768115663740.png"
+            "https://i.pinimg.com/1200x/53/c8/22/53c8226ccd05c5c9778be4b931e82e75.jpg",
+            "https://i.pinimg.com/1200x/53/c8/22/53c8226ccd05c5c9778be4b931e82e75.jpg"
         ],
         busSchedules: [
             {
@@ -224,7 +224,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Well-equipped Gymnasium",
             "Annual Sports Meet"
         ],
-        image: "/images/school_sports_ground_1768117765955.png",
+        image: "https://i.pinimg.com/736x/eb/d9/86/ebd986bdea50b13bb15f3b8c5bf4fc57.jpg",
         icon: Dumbbell
     }
 };
