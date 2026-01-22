@@ -75,7 +75,7 @@ export default function AmenitiesPage() {
                         <motion.div
                             key={item.id}
                             variants={cardVariants}
-                            className="group relative h-[260px] md:h-[300px] rounded-[32px] overflow-hidden cursor-pointer bg-zinc-900 shadow-xl hover:shadow-2xl hover:shadow-[#5D1035]/20 transition-all duration-500"
+                            className="group relative h-[260px] md:h-[300px] rounded-[32px] overflow-hidden cursor-pointer bg-zinc-900 shadow-xl hover:shadow-2xl hover:shadow-[#5D1035]/20 transition-all duration-500 sm:first:col-span-2"
                         >
                             <Link href={`/amenities/${item.slug}`} className="block h-full w-full relative">
                                 {/* Background Image */}
