@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import PageContent from '@/models/PageContent';
 import User from '@/models/User';
@@ -14,7 +14,7 @@ async function checkAdmin() {
 }
 
 export async function GET(
-    req: Request,
+    req: NextRequest,
     { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
@@ -43,7 +43,7 @@ export async function GET(
 }
 
 export async function POST(
-    req: Request,
+    req: NextRequest,
     { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
