@@ -1,17 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import AdmissionSettings from '@/models/AdmissionSettings';
-import User from '@/models/User';
-import { auth } from '@clerk/nextjs/server';
-
-async function checkAdmin() {
-    const { userId } = await auth();
-    if (!userId) return false;
-
-    await connectDB();
-    const user = await User.findOne({ clerkId: userId });
-    return user?.role === 'admin';
-}
+import { ensureAdmin } from '@/lib/ensureAdmin';
 
 export async function GET() {
     try {
@@ -41,14 +31,9 @@ export async function GET() {
     }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
     try {
-        if (!(await checkAdmin())) {
-            return NextResponse.json(
-                { message: 'Forbidden: Admin access required' },
-                { status: 403 }
-            );
-        }
+        await ensureAdmin();
 
         const body = await req.json();
         await connectDB();

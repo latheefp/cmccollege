@@ -1,17 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Announcement from '@/models/Announcements';
-import User from '@/models/User';
-import { auth } from '@clerk/nextjs/server';
-
-async function checkAdmin() {
-    const { userId } = await auth();
-    if (!userId) return false;
-
-    await connectDB();
-    const user = await User.findOne({ clerkId: userId });
-    return user?.role === 'admin';
-}
+import { ensureAdmin } from '@/lib/ensureAdmin';
 
 export async function GET() {
     try {
@@ -30,13 +20,12 @@ export async function GET() {
     }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     try {
-        if (!(await checkAdmin())) {
-            return NextResponse.json({ message: 'Forbidden: Admin access required' }, { status: 403 });
-        }
+        await ensureAdmin();
 
         const body = await req.json();
+        await connectDB();
         const announcement = await Announcement.create(body);
 
         return NextResponse.json({
@@ -44,6 +33,9 @@ export async function POST(req: Request) {
             data: announcement,
         });
     } catch (error: any) {
+        if (error.message === "Unauthorized" || error.message === "Forbidden") {
+            return NextResponse.json({ message: error.message }, { status: error.message === "Unauthorized" ? 401 : 403 });
+        }
         console.error('Error creating announcement:', error);
         return NextResponse.json(
             { success: false, error: 'Failed to create announcement' },

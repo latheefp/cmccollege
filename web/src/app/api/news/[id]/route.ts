@@ -1,29 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import News from '@/models/News';
-import User from '@/models/User';
-import { auth } from '@clerk/nextjs/server';
-
-async function checkAdmin() {
-    const { userId } = await auth();
-    if (!userId) return false;
-
-    await connectDB();
-    const user = await User.findOne({ clerkId: userId });
-    return user?.role === 'admin';
-}
+import { ensureAdmin } from '@/lib/ensureAdmin';
 
 export async function PUT(
     req: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        if (!(await checkAdmin())) {
-            return NextResponse.json(
-                { message: 'Forbidden: Admin access required' },
-                { status: 403 }
-            );
-        }
+        await ensureAdmin();
 
         const { id } = await params;
         const body = await req.json();
@@ -52,12 +37,7 @@ export async function DELETE(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        if (!(await checkAdmin())) {
-            return NextResponse.json(
-                { message: 'Forbidden: Admin access required' },
-                { status: 403 }
-            );
-        }
+        await ensureAdmin();
 
         const { id } = await params;
         await connectDB();

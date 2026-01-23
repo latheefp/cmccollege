@@ -1,26 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Enquiry from '@/models/Enquiry';
-import User from '@/models/User';
-import { auth } from '@clerk/nextjs/server';
-
-async function checkAdmin() {
-    const { userId } = await auth();
-    if (!userId) return false;
-
-    await connectDB();
-    const user = await User.findOne({ clerkId: userId });
-    return user?.role === 'admin';
-}
+import { ensureAdmin } from '@/lib/ensureAdmin';
 
 export async function GET() {
     try {
-        if (!(await checkAdmin())) {
-            return NextResponse.json(
-                { message: 'Forbidden: Admin access required' },
-                { status: 403 }
-            );
-        }
+        await ensureAdmin();
 
         await connectDB();
         const enquiries = await Enquiry.find({}).sort({ createdAt: -1 });
@@ -29,6 +14,9 @@ export async function GET() {
             data: enquiries,
         });
     } catch (error: any) {
+        if (error.message === "Unauthorized" || error.message === "Forbidden") {
+            return NextResponse.json({ message: error.message }, { status: error.message === "Unauthorized" ? 401 : 403 });
+        }
         console.error('Error fetching enquiries:', error);
         return NextResponse.json(
             { success: false, error: 'Failed to fetch enquiries' },
@@ -37,7 +25,7 @@ export async function GET() {
     }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
         await connectDB();

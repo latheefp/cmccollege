@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 import { auth, currentUser, clerkClient, verifyToken } from '@clerk/nextjs/server';
@@ -7,7 +7,7 @@ export async function GET() {
     return NextResponse.json({ message: 'Sync API is alive' });
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     console.log('>>> [Sync API] POST request received');
     const authHeader = req.headers.get('authorization');
 

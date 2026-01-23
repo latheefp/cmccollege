@@ -1,24 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
-import { auth, createClerkClient } from '@clerk/nextjs/server';
+import { clerkClient } from '@clerk/nextjs/server';
+import { ensureAdmin } from '@/lib/ensureAdmin';
 
-const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
-
-async function checkAdmin() {
-    const { userId } = await auth();
-    if (!userId) return false;
-
-    await connectDB();
-    const user = await User.findOne({ clerkId: userId });
-    return user?.role === 'admin';
-}
-
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     try {
-        if (!(await checkAdmin())) {
-            return NextResponse.json({ message: 'Forbidden: Admin access required' }, { status: 403 });
-        }
+        await ensureAdmin();
 
         const { userId: targetUserId } = await req.json();
 
@@ -39,7 +27,8 @@ export async function POST(req: Request) {
         }
 
         // 2. Update Clerk Metadata
-        await clerkClient.users.updateUserMetadata(targetUserId, {
+        const client = await clerkClient();
+        await client.users.updateUserMetadata(targetUserId, {
             publicMetadata: {
                 role: 'admin',
             },
