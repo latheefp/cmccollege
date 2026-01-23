@@ -67,39 +67,28 @@ export async function POST(req: Request) {
 
         // Now we definitely have a userId
         const client = await clerkClient();
+        const fullUser = await client.users.getUser(userId);
 
-        // Find email: use body fallback or fetch from Clerk
-        let email = bodyEmail;
-        if (!email) {
-            try {
-                const fullUser = await client.users.getUser(userId);
-                email = fullUser.emailAddresses[0]?.emailAddress;
-            } catch (err) {
-                console.error('>>> [Sync API] Failed to fetch user from Clerk:', err);
-            }
-        }
+        // Fetch email and role from Clerk
+        const email = bodyEmail || fullUser.emailAddresses[0]?.emailAddress;
+        const role = (fullUser.publicMetadata as any)?.role || 'user';
 
         if (!email) {
             return NextResponse.json({ error: 'Email not found' }, { status: 400 });
         }
 
-        console.log('>>> [Sync API] Synchronizing user records for:', email);
+        console.log('>>> [Sync API] Synchronizing user records for:', email, '| Role:', role);
+
+        // Update DB with the role from Clerk
         const dbUser = await User.findOneAndUpdate(
             { clerkId: userId },
             {
                 clerkId: userId,
                 email: email,
-                $setOnInsert: { role: 'user' }
+                role: role // Clerk is the source of truth
             },
             { upsert: true, new: true, setDefaultsOnInsert: true }
         );
-
-        console.log('>>> [Sync API] Syncing role to Clerk metadata:', dbUser.role);
-        await client.users.updateUserMetadata(userId, {
-            publicMetadata: {
-                role: dbUser.role,
-            },
-        });
 
         return NextResponse.json({
             message: 'User synced successfully',
