@@ -3,26 +3,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
-import { usePageContent } from "@/hooks/usePageContent";
 import DynamicCTA from "@/components/DynamicCTA";
 
 export default function FacilitiesPage() {
-    const { getText, getImage } = usePageContent("facilities");
-
     return (
         <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[112px]">
             {/* Page Header */}
             <section className="relative py-24 px-6 bg-[#7B0046] text-white overflow-hidden">
                 <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
+                    <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] bg-size-[30px_30px]" />
                 </div>
                 <div className="relative z-10 max-w-5xl mx-auto text-center">
                     <ScrollReveal>
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6" data-editable="header-title" data-page="facilities">
-                            {getText("header-title", "Our Facilities")}
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                            Our Facilities
                         </h1>
-                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto" data-editable="header-subtitle" data-page="facilities">
-                            {getText("header-subtitle", "Modern infrastructure designed to foster academic excellence and moral growth.")}
+                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto">
+                            Modern infrastructure designed to foster academic excellence and moral growth.
                         </p>
                     </ScrollReveal>
                 </div>
@@ -31,8 +28,8 @@ export default function FacilitiesPage() {
             {/* Academic Facilities */}
             <section className="py-24 px-6 max-w-7xl mx-auto">
                 <ScrollReveal className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="academic-heading" data-page="facilities">{getText("academic-heading", "Academic Infrastructure")}</h2>
-                    <p className="text-zinc-600 text-lg" data-editable="academic-desc" data-page="facilities">{getText("academic-desc", "State-of-the-art learning environments for students.")}</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Academic Infrastructure</h2>
+                    <p className="text-zinc-600 text-lg">State-of-the-art learning environments for students.</p>
                 </ScrollReveal>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -74,8 +71,8 @@ export default function FacilitiesPage() {
             <section className="py-24 px-6 bg-emerald-900/5">
                 <div className="max-w-7xl mx-auto">
                     <ScrollReveal className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4" data-editable="residential-heading" data-page="facilities">{getText("residential-heading", "Residential & Support")}</h2>
-                        <p className="text-zinc-600 text-lg" data-editable="residential-desc" data-page="facilities">{getText("residential-desc", "A home away from home with essential support systems.")}</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Residential & Support</h2>
+                        <p className="text-zinc-600 text-lg">A home away from home with essential support systems.</p>
                     </ScrollReveal>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -110,7 +107,7 @@ export default function FacilitiesPage() {
                                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
                                 </div>
-                                <div className="p-8 flex-grow flex flex-col justify-center">
+                                <div className="p-8 grow flex flex-col justify-center">
                                     <h3 className="text-2xl font-bold text-emerald-900 mb-4">{facility.title}</h3>
                                     <p className="text-zinc-600 text-lg leading-relaxed">{facility.desc}</p>
                                 </div>
@@ -125,9 +122,9 @@ export default function FacilitiesPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                     <div className="lg:col-span-7">
                         <ScrollReveal>
-                            <h2 className="text-3xl md:text-5xl font-bold text-emerald-900 mb-8" data-editable="safety-heading" data-page="facilities">{getText("safety-heading", "Safety & Discipline")}</h2>
-                            <p className="text-xl text-zinc-600 mb-10 leading-relaxed" data-editable="safety-desc" data-page="facilities">
-                                {getText("safety-desc", "We prioritize a safe and orderly environment. Our campus is monitored around the clock to ensure student security and maintain the high standards of discipline our institution is known for.")}
+                            <h2 className="text-3xl md:text-5xl font-bold text-emerald-900 mb-8">Safety & Discipline</h2>
+                            <p className="text-xl text-zinc-600 mb-10 leading-relaxed">
+                                We prioritize a safe and orderly environment. Our campus is monitored around the clock to ensure student security and maintain the high standards of discipline our institution is known for.
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 {[
@@ -147,20 +144,17 @@ export default function FacilitiesPage() {
                     <div className="lg:col-span-5">
                         <ScrollReveal delay={200} className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border-2 border-emerald-50">
                             <Image
-                                src={getImage("safety-image", "/images/school_security_surveillance_1768116718250.png")}
+                                src="/images/school_security_surveillance_1768116718250.png"
                                 alt="Security and Safety"
                                 fill
                                 className="object-cover"
-                                data-editable="safety-image"
-                                data-page="facilities"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/40 to-transparent" />
+                            <div className="absolute inset-0 bg-linear-to-t from-emerald-950/40 to-transparent" />
                         </ScrollReveal>
                     </div>
                 </div>
             </section>
 
-            {/* Final Call to Action */}
             {/* Final Call to Action */}
             <DynamicCTA className="py-20 px-6 bg-emerald-900 text-white text-center" />
         </div>

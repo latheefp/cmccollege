@@ -79,7 +79,7 @@ export default function Navbar() {
     ];
 
     return (
-        <header className="fixed w-full z-50 top-[var(--ticker-height,0px)] flex flex-col shadow-sm">
+        <header className="fixed w-full z-50 top-(--ticker-height,0px) flex flex-col shadow-sm">
             <TopBar />
             <nav className="w-full bg-white/95 backdrop-blur-md border-b border-zinc-100">
                 <div className="w-full px-4 lg:px-8">
@@ -110,7 +110,7 @@ export default function Navbar() {
                                     >
                                         <Link
                                             href={link.href}
-                                            className={`px-2 py-2 text-[13px] xl:text-[14px] font-bold uppercase tracking-wide transition-colors relative z-10 flex items-center gap-1
+                                            className={`px-2 py-2 text-[13px] xl:text-[13px] font-bold uppercase tracking-wide transition-colors relative z-10 flex items-center gap-1
                                                 ${pathname === link.href || (link.dropdown && pathname.startsWith(link.href)) ? "text-[#7a0b3a]" : "text-zinc-700 hover:text-[#7a0b3a]"}`}
                                         >
                                             {link.name}
@@ -292,7 +292,7 @@ function AdmissionButton({ fullWidth = false }: { fullWidth?: boolean }) {
             `}>
                 <span className="relative z-10">Admission</span>
                 {/* Shine Effect */}
-                <div className="absolute top-0 -left-[100%] h-full w-full z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-shine" />
+                <div className="absolute top-0 -left-full h-full w-full z-5 block transform -skew-x-12 bg-linear-to-r from-transparent via-white/30 to-transparent group-hover:animate-shine" />
             </button>
         </Link>
     );

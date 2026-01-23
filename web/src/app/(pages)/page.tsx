@@ -12,7 +12,6 @@ import ClubsCarousel from "@/components/ClubsCarousel";
 import StatsSection from "@/components/StatsSection";
 import Collaborations from "@/components/Collaborations";
 import Testimonials from "@/components/Testimonials";
-import { usePageContent } from "@/hooks/usePageContent";
 import { useAdmissionStatus } from "@/hooks/useAdmissionStatus";
 import DynamicCTA from "@/components/DynamicCTA";
 import HomeMap from "@/components/HomeMap";
@@ -159,7 +158,6 @@ export default function Home() {
   }, [isPaused, desktopImages.length, currentSlide]);
 
   // Fetch dynamic page content
-  const { getImage } = usePageContent("home");
   const { isAdmissionOpen } = useAdmissionStatus();
 
   const handleDeptClick = (e: React.MouseEvent, slug: string) => {
@@ -321,7 +319,7 @@ export default function Home() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#7B0046]/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
 
             <div className="relative z-10 flex flex-col items-start text-left">
-              <h2 className="text-3xl md:text-4xl font-agency font-bold text-emerald-800 mb-6 uppercase" data-editable="about-heading" data-page="home">
+              <h2 className="text-3xl md:text-4xl font-agency font-bold text-emerald-800 mb-6 uppercase">
                 CM College
               </h2>
 
@@ -329,10 +327,10 @@ export default function Home() {
                 <p className="block md:hidden">
                   CM College of Arts and Science, Nadavayal, Wayanad, is a self-financing institution affiliated with the University of Calicut. Established in 2010 under the guidance of CM Center Madavoor, the college is set across 15 acres of serene campus, committed to providing quality higher education and empowering students.
                 </p>
-                <p data-editable="about-text-1" data-page="home" className="hidden md:block break-inside-avoid">
+                <p className="hidden md:block break-inside-avoid">
                   CM college of Arts and Science Nadavayal, Wayanad, Kerala is a self-financing college affiliated to the University of Calicut, run by CM center Madavoor, Calicut, Kerala. Established in the year April 2010, the college is situated in Panamaram, shares its 15 acres of beautiful land. Recognized by Government of kerala, the college is affiliated to the University of Calicut.
                 </p>
-                <p data-editable="about-text-2" data-page="home" className="hidden md:block break-inside-avoid">
+                <p className="hidden md:block break-inside-avoid">
                   In a short span of time, our college has achieved greater heights since its inception a decade ago by educating thousands of students from various parts of our states. Even though, Wayanad district has been little backward compared to many other districts of Kerala due to its geographical structure, we undertake the challenge to serve and provide better education for all the community.
                 </p>
               </div>
@@ -439,8 +437,8 @@ export default function Home() {
       <section className="py-12 md:py-24 px-4 md:px-6 bg-emerald-900/5">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-10 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-agency font-bold text-emerald-800 mb-4 uppercase" data-editable="academic-heading" data-page="home">Departments of Academic Studies</h2>
-            <p className="text-zinc-600 text-lg max-w-2xl mx-auto" data-editable="academic-description" data-page="home">Offering a wide range of undergraduate and postgraduate programs driven by excellence.</p>
+            <h2 className="text-3xl md:text-4xl font-agency font-bold text-emerald-800 mb-4 uppercase">Departments of Academic Studies</h2>
+            <p className="text-zinc-600 text-lg max-w-2xl mx-auto">Offering a wide range of undergraduate and postgraduate programs driven by excellence.</p>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -495,8 +493,8 @@ export default function Home() {
       <section className="py-12 md:py-24 px-4 md:px-6 bg-emerald-900/5">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal className="text-center mb-10 md:mb-16">
-            <h2 className="text-2xl md:text-4xl font-agency font-bold text-emerald-800 mb-3 md:mb-4 uppercase" data-editable="facilities-heading" data-page="home">Campus Facilities</h2>
-            <p className="text-zinc-600 text-sm md:text-lg" data-editable="facilities-description" data-page="home">Premium infrastructure providing a comfortable learning experience.</p>
+            <h2 className="text-2xl md:text-4xl font-agency font-bold text-emerald-800 mb-3 md:mb-4 uppercase">Campus Facilities</h2>
+            <p className="text-zinc-600 text-sm md:text-lg">Premium infrastructure providing a comfortable learning experience.</p>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 md:gap-8">

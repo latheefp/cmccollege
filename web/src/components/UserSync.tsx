@@ -14,9 +14,7 @@ export default function UserSync() {
             if (isLoaded && isSignedIn && user && !hasSynced.current) {
                 try {
                     const token = await getToken();
-                    console.log("Token obtained:", token ? token.substring(0, 20) + "..." : "null");
-                    console.log("Attempting sync to /api/sync-user...");
-                    const response = await fetch("/api/sync-user", {
+                    await fetch("/api/sync-user", {
                         method: "POST",
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -26,18 +24,15 @@ export default function UserSync() {
                             clerkId: user.id,
                             email: user.primaryEmailAddress?.emailAddress
                         })
+                    }).then(response => {
+                        if (response.ok) {
+                            hasSynced.current = true;
+                        }
+                    }).catch(() => {
+                        // Silent fail for sync
                     });
-
-                    if (response.ok) {
-                        hasSynced.current = true;
-                        console.log("User synced with backend successfully");
-                    } else {
-                        console.error("User sync failed with status:", response.status);
-                        const data = await response.json().catch(() => ({}));
-                        console.error("Sync error details:", data);
-                    }
                 } catch (error) {
-                    console.error("Failed to sync user due to network/parsing error:", error);
+                    // Silent fail for sync
                 }
             }
         };

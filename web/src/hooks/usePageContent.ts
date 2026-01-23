@@ -9,7 +9,6 @@ export function usePageContent(pageName: string) {
             try {
                 const baseUrl = '/api';
                 const url = `${baseUrl}/pages/${pageName}`;
-                console.log("Fetching content from:", url);
                 const response = await fetch(url);
                 if (response.ok) {
                     const data = await response.json();
