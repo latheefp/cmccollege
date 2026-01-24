@@ -16,13 +16,13 @@ export default function Footer() {
         <footer className="bg-emerald-900 text-white py-15 px-6">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
                 {/* College Info */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                    <div className="relative w-48 md:w-64 h-20 mb-6 flex items-center justify-center md:justify-start">
+                <div className="flex flex-col items-start text-left">
+                    <div className="relative w-48 md:w-64 h-20 mb-8 flex items-center justify-start -ml-36 md:-ml-24">
                         <Image
                             src="https://ik.imagekit.io/5c6j602yp/Home/images/Logo-footer"
                             alt="College Logo"
                             fill
-                            className="object-contain md:scale-[4] scale-[3]"
+                            className="object-contain md:scale-[4] scale-[3] origin-left"
                         />
                     </div>
                     <p className="text-white/80 leading-relaxed mb-6 text-sm font-medium">
@@ -44,7 +44,7 @@ export default function Footer() {
                 </div>
 
                 {/* Quick Links */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                <div className="flex flex-col items-start text-left">
                     <h4 className="text-white font-bold mb-6 text-lg tracking-tight">Navigation</h4>
                     <ul className="space-y-3 text-white/70">
                         <li>
@@ -76,7 +76,7 @@ export default function Footer() {
                 </div>
 
                 {/* Resources */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                <div className="flex flex-col items-start text-left">
                     <h4 className="text-white font-bold mb-6 text-lg tracking-tight">Portal</h4>
                     <ul className="space-y-3 text-white/70">
                         <li>
@@ -103,42 +103,42 @@ export default function Footer() {
                 </div>
 
                 {/* Contact Info */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                    <h4 className="text-white font-bold mb-6 text-lg tracking-tight">Get in Touch</h4>
+                <div className="flex flex-col items-start text-left uppercase">
+                    <h4 className="text-white font-bold mb-6 text-lg tracking-tight uppercase">Get in Touch</h4>
                     <ul className="space-y-5 text-white/70">
-                        <li className="flex gap-4 justify-center md:justify-start items-start">
+                        <li className="flex gap-4 items-start">
                             <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:bg-emerald-600/20 transition-colors">
-                                <MapPin size={18} className="text-emerald-400" />
+                                <MapPin size={18} className="text-emerald-400 font-bold" />
                             </div>
-                            <span className="text-sm">
+                            <span className="text-sm font-bold">
                                 Mount Razi, Nadavayal (P.O) <br />
                                 Wayanad-670646, Kerala
                             </span>
                         </li>
-                        <li className="flex gap-4 justify-center md:justify-start items-center">
+                        <li className="flex gap-4 items-center font-bold">
                             <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                                <Phone size={18} className="text-emerald-400" />
+                                <Phone size={18} className="text-emerald-400 font-bold" />
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-sm">04936 210 178</span>
-                                <span className="text-[11px] text-white/40 uppercase tracking-wider">Office Line</span>
+                            <div className="flex flex-col font-bold">
+                                <span className="text-sm font-bold">04936 210 178</span>
+                                <span className="text-[11px] text-white/40 uppercase tracking-wider font-bold">Office Line</span>
                             </div>
                         </li>
-                        <li className="flex gap-4 justify-center md:justify-start items-start">
+                        <li className="flex gap-4 items-start font-bold">
                             <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                                <Smartphone size={18} className="text-emerald-400" />
+                                <Smartphone size={18} className="text-emerald-400 font-bold" />
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-sm">+91 7594 888 203</span>
-                                <span className="text-sm">+91 7594 888 202</span>
+                            <div className="flex flex-col font-bold">
+                                <span className="text-sm font-bold text-white">+91 7594 888 203</span>
+                                <span className="text-sm font-bold text-white">+91 7594 888 202</span>
                                 <span className="text-[11px] text-white/40 uppercase tracking-wider font-bold">Mobile Support</span>
                             </div>
                         </li>
-                        <li className="flex gap-4 justify-center md:justify-start items-center">
+                        <li className="flex gap-4 items-center">
                             <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                                <Mail size={18} className="text-emerald-400" />
+                                <Mail size={18} className="text-emerald-400 font-bold" />
                             </div>
-                            <a href="mailto:info@cmcollege.edu.in" className="text-sm hover:text-emerald-300 transition-colors">info@cmcollege.edu.in</a>
+                            <a href="mailto:info@cmcollege.edu.in" className="text-sm hover:text-emerald-300 transition-colors font-bold lowercase">info@cmcollege.edu.in</a>
                         </li>
                     </ul>
                 </div>
