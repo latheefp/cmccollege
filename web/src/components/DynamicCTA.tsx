@@ -44,7 +44,7 @@ export default function DynamicCTA({
                 <p className={`${descColor} text-base md:text-lg mb-8 md:mb-10 max-w-2xl mx-auto font-light leading-relaxed`}>
                     {isAdmissionOpen
                         ? "Join a community dedicated to excellence. Apply today or request a prospectus to learn more about our programs."
-                        : (description || "Explore our academic programs and facilities. Contact us to know about the next admission cycle.")}
+                        : (description || "Explore our academic programs and amenities. Contact us to know about the next admission cycle.")}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link href={isAdmissionOpen ? "/admissions" : "/contact"}>

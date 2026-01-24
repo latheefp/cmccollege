@@ -499,15 +499,15 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 md:gap-8">
             {[
-              { name: "Hostel", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_hostel_1768115536813.png" },
-              { name: "Masjid", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_masjid_1768115559090.png" },
-              { name: "Labs", img: "https://images.unsplash.com/photo-1636036766419-4e0e3e628acc?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-              { name: "Library", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_library_1768115599802.png" },
-              { name: "Bus", img: "https://plus.unsplash.com/premium_photo-1765918653607-eb9aeeb61327?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+              { name: "Hostel", slug: "hostels", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_hostel_1768115536813.png" },
+              { name: "Masjid", slug: "prayer-hall", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_masjid_1768115559090.png" },
+              { name: "Labs", slug: "computer-lab", img: "https://images.unsplash.com/photo-1636036766419-4e0e3e628acc?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+              { name: "Library", slug: "library", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_library_1768115599802.png" },
+              { name: "Bus", slug: "bus-facility", img: "https://plus.unsplash.com/premium_photo-1765918653607-eb9aeeb61327?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 
             ].map((facility, i) => (
               <ScrollReveal key={i} delay={i * 100} className="group cursor-pointer">
-                <Link href="/facilities">
+                <Link href={`/amenities/${facility.slug}`}>
                   <div className="relative h-64 rounded-xl overflow-hidden shadow-lg border border-white">
                     <Image
                       src={facility.img}
@@ -526,7 +526,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-16 text-center">
-            <Link href="/facilities">
+            <Link href="/amenities">
               <button className="px-8 py-4 bg-emerald-800 text-white font-semibold rounded-lg hover:bg-emerald-900 transition-transform hover:scale-105 active:scale-95 cursor-pointer">
                 Explore All Facilities
               </button>
