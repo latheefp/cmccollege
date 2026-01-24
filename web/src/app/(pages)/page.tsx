@@ -387,72 +387,65 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Principal section - Redesigned */}
-      <section className="pb-16 md:pb-20 pt-8 px-4 md:px-6 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-stretch gap-6 md:gap-12">
-            {/* Left Side - Portrait Image */}
-            <ScrollReveal delay={200} className="w-full md:w-5/12 relative h-[400px] md:h-auto md:min-h-full">
-              <div className="absolute inset-0 bg-linear-to-tr from-emerald-100 to-transparent rounded-[32px] transform -rotate-2 scale-95 opacity-60"></div>
-              <div className="relative h-full w-full rounded-[24px] md:rounded-[32px] overflow-hidden shadow-2xl border-4 border-white">
+      <section className="pb-16 md:pb-24 pt-8 px-4 md:px-6 bg-white overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="flex flex-col md:flex-row bg-white rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100">
+
+              {/* Image Section - Top on mobile, Left on desktop */}
+              <div className="w-full md:w-5/12 relative h-[450px] md:h-auto">
                 <Image
                   src="https://ik.imagekit.io/5c6j602yp/About/principal.jpeg?updatedAt=1768826571745"
                   alt="Principal"
                   fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
+                  className="object-cover"
                   sizes="(max-width: 768px) 100vw, 40vw"
+                  priority
                 />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/40 to-transparent md:hidden" />
               </div>
-            </ScrollReveal>
 
-            {/* Right Side - Content Card */}
-            <ScrollReveal className="w-full md:w-7/12">
-              <div className="h-full bg-white rounded-[24px] md:rounded-[32px] p-6 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border-l-4 border-l-[#7B0046] border-t border-r border-b border-gray-100 flex flex-col justify-center relative overflow-hidden">
-                {/* Subtle background pattern */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-full blur-3xl -mr-16 -mt-16 opacity-50"></div>
-
+              {/* Content Section - Bottom on mobile, Right on desktop */}
+              <div className="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center border-l-0 md:border-l-4 border-l-[#7B0046]">
                 {/* Label */}
-                <div className="flex items-center gap-3 mb-6 relative z-10">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#7B0046] animate-pulse"></span>
-                  <span className="text-white text-base md:text-lg font-bold tracking-wide bg-emerald-700 px-4 py-2 md:px-6 md:py-3 rounded-xl backdrop-blur-sm border border-[#7B0046]/10">
+                <div className="flex items-center gap-3 mb-8">
+                  <span className="w-2 h-2 rounded-full bg-[#7B0046] animate-pulse"></span>
+                  <span className="text-white text-sm md:text-base font-bold tracking-widest bg-[#7B0046] px-5 py-2.5 rounded-full uppercase">
                     Principal&apos;s Message
                   </span>
                 </div>
 
                 {/* Text Content */}
-                <div className="relative mb-8 z-10 text-left md:text-justify">
-                  <span className="absolute -top-6 -left-4 text-8xl text-emerald-100/40 font-serif leading-none select-none">&quot;</span>
-                  <div className="relative z-10 space-y-4 text-zinc-600 leading-relaxed text-[15px] md:text-lg text-left md:text-justify">
-                    <p className="block">
+                <div className="relative mb-10">
+                  <span className="absolute -top-8 -left-2 text-7xl text-emerald-100/40 font-serif leading-none select-none">&quot;</span>
+                  <div className="relative z-10 space-y-4 text-zinc-600 leading-relaxed text-base md:text-lg text-left">
+                    <p className="block md:hidden font-medium">
+                      Welcome to CM College of Arts and Science. We offer quality education rooted in discipline and values, providing an ideal environment for your academic and holistic growth.
+                    </p>
+                    <p className="hidden md:block">
                       Welcome to CM College of Arts and Science. Located in the serene surroundings of Wayanad, our college offers quality education rooted in discipline and strong human values. We focus on academic excellence, practical skills, and holistic development guided by a dedicated faculty. With modern facilities, eco-friendly campus, active student life, and strong placement support, CM College provides the ideal environment for learning and growth. We warmly invite students from Kerala and beyond to join us and build a successful future.
                     </p>
                   </div>
                 </div>
 
                 {/* Signature Block */}
-                <div className="mt-auto pt-6 border-t border-dashed border-zinc-200 flex items-center gap-4 relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-linear-to-br from-emerald-700 to-emerald-900 flex items-center justify-center text-white shadow-lg shadow-emerald-900/20">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                <div className="mt-4 pt-8 border-t border-zinc-100 flex items-center gap-5">
+                  <div className="w-14 h-14 rounded-2xl bg-[#7B0046] flex items-center justify-center text-white shadow-lg shadow-[#7B0046]/20 shrink-0">
+                    <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-base font-bold text-zinc-900">Shafi Pulpara</h4>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-2">
-                      <p className="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">CM College of Arts & Science</p>
+                    <h4 className="text-lg font-bold text-zinc-900 leading-tight">Shafi Pulpara</h4>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1">
+                      <p className="text-xs font-bold text-[#7B0046] uppercase tracking-wider">Principal</p>
                       <span className="hidden sm:inline text-zinc-300">•</span>
-                      <p className="text-[11px] text-zinc-400">Wayanad, Kerala</p>
+                      <p className="text-xs text-zinc-500 font-medium">CM College of Arts & Science</p>
                     </div>
                   </div>
-
-                  <Link href="/about">
-                    <button className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full border border-zinc-200 text-emerald-800 hover:bg-emerald-50 hover:border-emerald-200 transition-colors">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                    </button>
-                  </Link>
                 </div>
-
               </div>
-            </ScrollReveal>
-          </div>
+
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 

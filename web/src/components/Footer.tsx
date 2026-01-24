@@ -13,16 +13,17 @@ export default function Footer() {
     }
 
     return (
-        <footer className="bg-emerald-900 text-white py-15 px-6">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+        <footer className="bg-emerald-900 text-white py-16 px-6 md:px-12">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 lg:gap-y-12">
                 {/* College Info */}
-                <div className="flex flex-col items-start text-left">
-                    <div className="relative w-48 md:w-64 h-20 mb-8 flex items-center justify-start sm:-ml-36 md:ml-3">
+                <div className="flex flex-col items-start text-left md:col-span-2 lg:col-span-1">
+                    <div className="relative w-48 lg:w-64 h-20 mb-10 flex items-center justify-start -ml-16 sm:-ml-20 lg:-ml-24">
                         <Image
                             src="https://ik.imagekit.io/5c6j602yp/Home/images/Logo-footer"
                             alt="College Logo"
                             fill
-                            className="object-contain md:scale-[4] scale-[3]"
+                            className="object-contain lg:scale-[4] scale-[3] origin-left"
+                            priority
                         />
                     </div>
                     <p className="text-white/80 leading-relaxed mb-6 text-sm font-medium">
@@ -103,7 +104,7 @@ export default function Footer() {
                 </div>
 
                 {/* Contact Info */}
-                <div className="flex flex-col items-start text-left uppercase">
+                <div className="flex flex-col items-start text-left uppercase md:col-span-2 lg:col-span-1">
                     <h4 className="text-white font-bold mb-6 text-lg tracking-tight uppercase">Get in Touch</h4>
                     <ul className="space-y-5 text-white/70">
                         <li className="flex gap-4 items-start">
