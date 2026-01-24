@@ -136,17 +136,14 @@ export default function Home() {
 
   const tabletImages = [
     "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile1",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile2",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile"
+    "https://ik.imagekit.io/5c6j602yp/Banner/Banner1?updatedAt=1768811009859",
+    "https://ik.imagekit.io/5c6j602yp/Banner/Banner2"
   ];
 
   const mobileImages = [
     "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile1",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile2",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile"
+    "https://ik.imagekit.io/5c6j602yp/Banner/Banner1?updatedAt=1768811009859",
+    "https://ik.imagekit.io/5c6j602yp/Banner/Banner2"
   ];
 
   useEffect(() => {
@@ -212,7 +209,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col text-zinc-900 font-sans pt-[104px] lg:pt-[112px] bg-[#7B0046]/3">
       {/* Hero Section */}
       <section
-        className="relative min-h-[70vh] md:min-h-[80vh] flex flex-col items-center justify-center py-16 px-4 md:py-32 text-white overflow-hidden"
+        className="relative min-h-[60vh] md:min-h-0 md:aspect-16/7 lg:aspect-auto lg:min-h-[80vh] flex flex-col items-center justify-center py-16 px-4 md:py-12 lg:py-32 text-white overflow-hidden"
       >
         {/* Hero Background Slider */}
         <div className="absolute inset-0 z-0 bg-black">
@@ -246,7 +243,7 @@ export default function Home() {
                   src={tabletImages[currentSlide]}
                   alt={`Hero Slide ${currentSlide + 1} Tablet`}
                   fill
-                  className="object-cover"
+                  className="object-contain object-center"
                   sizes="100vw"
                   priority
                 />
@@ -297,7 +294,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/admissions">
                   <button className="px-8 py-4 bg-white text-emerald-900 font-semibold rounded-lg shadow-lg hover:bg-emerald-50 transition-transform text-lg hover:scale-105 active:scale-95 cursor-pointer">
-                    Admissions Open
+                    Admission Open
                   </button>
                 </Link>
                 <Link href="/about">
