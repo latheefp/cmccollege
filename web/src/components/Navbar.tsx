@@ -191,14 +191,14 @@ export default function Navbar() {
                         <div className="lg:hidden flex items-center gap-2">
                             <button
                                 onClick={() => setIsSearchOpen(true)}
-                                className="p-3 text-zinc-600 hover:text-[#7a0b3a] transition-colors active:scale-95 touch-manipulation"
+                                className="text-zinc-600 hover:text-[#7a0b3a] transition-colors active:scale-95 touch-manipulation"
                                 aria-label="Search"
                             >
                                 <Search size={22} />
                             </button>
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="p-3 text-zinc-800 hover:text-[#7a0b3a] transition-colors active:scale-95 touch-manipulation"
+                                className="text-zinc-800 hover:text-[#7a0b3a] transition-colors active:scale-95 touch-manipulation"
                                 aria-label="Toggle Menu"
                             >
                                 {isOpen ? <X size={28} /> : <Menu size={28} />}
