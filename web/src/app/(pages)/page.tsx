@@ -147,15 +147,39 @@ export default function Home() {
     "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile",
   ];
 
-  const slideCount = Math.max(desktopImages.length, tabletImages.length, mobileImages.length);
+  // Track visible slide count based on viewport
+  const [deviceSlideCount, setDeviceSlideCount] = useState(desktopImages.length);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setDeviceSlideCount(mobileImages.length);
+      } else if (window.innerWidth < 1024) {
+        setDeviceSlideCount(tabletImages.length);
+      } else {
+        setDeviceSlideCount(desktopImages.length);
+      }
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [mobileImages.length, tabletImages.length, desktopImages.length]);
 
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slideCount);
+      setCurrentSlide((prev) => (prev + 1) % deviceSlideCount);
     }, 5000);
     return () => clearInterval(interval);
-  }, [isPaused, slideCount]);
+  }, [isPaused, deviceSlideCount]);
+
+  // Ensure currentSlide is within bounds when deviceSlideCount changes
+  useEffect(() => {
+    if (currentSlide >= deviceSlideCount) {
+      setCurrentSlide(0);
+    }
+  }, [deviceSlideCount, currentSlide]);
 
   // Fetch dynamic page content
   const { isAdmissionOpen } = useAdmissionStatus();
@@ -272,7 +296,7 @@ export default function Home() {
 
         {/* Navigation Dots */}
         <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-3">
-          {Array.from({ length: slideCount }).map((_, index) => (
+          {Array.from({ length: deviceSlideCount }).map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}

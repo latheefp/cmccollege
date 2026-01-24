@@ -91,8 +91,8 @@ export default function NewsPage() {
                                     key={tag}
                                     onClick={() => setSelectedTag(tag)}
                                     className={`px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all ${selectedTag === tag
-                                            ? 'bg-emerald-800 text-white shadow-md'
-                                            : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+                                        ? 'bg-emerald-800 text-white shadow-md'
+                                        : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
                                         }`}
                                 >
                                     {tag}
@@ -147,7 +147,7 @@ export default function NewsPage() {
                                         </div>
                                     </Link>
 
-                                    <div className="p-6 flex flex-col flex-grow">
+                                    <div className="p-6 flex flex-col grow">
                                         <div className="flex items-center gap-2 text-zinc-400 text-xs mb-3 font-medium">
                                             <Calendar className="w-3.5 h-3.5" />
                                             <span>{formatDate(item.date)}</span>
