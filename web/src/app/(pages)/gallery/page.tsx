@@ -15,7 +15,7 @@ interface GalleryItem {
     createdAt: string;
 }
 
-const CATEGORIES = ["All", "Campus", "Events", "Hostel", "Classroom"];
+const CATEGORIES = ["All", "Campus", "Events", "Sports", "Classroom", "Others"];
 
 export default function GalleryPage() {
     const [items, setItems] = useState<GalleryItem[]>([]);
@@ -74,35 +74,32 @@ export default function GalleryPage() {
     };
 
     return (
-        <div className="flex min-h-screen flex-col bg-white text-zinc-900 font-sans pt-[112px]">
+        <div className="flex min-h-screen flex-col bg-zinc-50 text-zinc-900 font-sans pt-[112px]">
             {/* Page Header */}
-            <section className="relative py-24 px-6 bg-[#7B0046] text-white overflow-hidden text-center">
-                <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] bg-size-[30px_30px]" />
-                </div>
-                <div className="relative z-10 max-w-5xl mx-auto">
+            <section className="py-20 px-6 bg-white border-b border-zinc-100">
+                <div className="max-w-7xl mx-auto text-center">
                     <ScrollReveal>
-                        <h1 className="text-4xl md:text-7xl font-agency font-bold tracking-tight mb-6 uppercase">
-                            Gallery <span className="text-emerald-400">Archives</span>
+                        <h1 className="text-4xl md:text-6xl font-agency font-bold text-emerald-900 mb-6 uppercase tracking-tight">
+                            Campus <span className="text-[#7B0046]">Gallery</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-emerald-100 max-w-2xl mx-auto italic font-medium">
-                            Explore the visual legacy of CM College through our curated archives.
+                        <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mx-auto font-medium leading-relaxed">
+                            Capturing the moments, achievements, and daily life at CM College.
                         </p>
                     </ScrollReveal>
                 </div>
             </section>
 
             {/* Gallery Section */}
-            <section className="py-24 px-6 max-w-7xl mx-auto grow">
+            <section className="py-16 px-4 md:px-8 max-w-[2000px] mx-auto grow w-full">
                 {/* Category Filters */}
-                <ScrollReveal className="flex flex-wrap justify-center gap-6 mb-20">
+                <ScrollReveal className="flex flex-wrap justify-center gap-3 mb-12">
                     {CATEGORIES.map((category) => (
                         <button
                             key={category}
                             onClick={() => setActiveCategory(category)}
-                            className={`px-10 py-4 rounded-3xl font-black uppercase tracking-widest text-xs transition-all duration-500 active:scale-95 ${activeCategory === category
-                                ? "bg-emerald-600 text-white shadow-[0_20px_40px_rgba(5,150,105,0.3)] scale-110"
-                                : "bg-zinc-50 text-zinc-400 hover:text-emerald-900 hover:bg-emerald-50"
+                            className={`px-6 py-2.5 rounded-full font-bold uppercase tracking-wider text-xs transition-all duration-300 active:scale-95 border ${activeCategory === category
+                                ? "bg-[#7B0046] text-white border-[#7B0046] shadow-lg shadow-[#7B0046]/20"
+                                : "bg-white text-zinc-500 border-zinc-200 hover:border-emerald-600 hover:text-emerald-700"
                                 }`}
                         >
                             {category}
@@ -113,24 +110,24 @@ export default function GalleryPage() {
                 {/* Image Grid */}
                 {loading ? (
                     <div className="py-24 text-center">
-                        <div className="w-16 h-16 border-4 border-emerald-100 border-t-emerald-600 rounded-full animate-spin mx-auto mb-6"></div>
-                        <p className="text-zinc-400 font-black italic tracking-[0.2em] uppercase text-xs">Accessing Archives...</p>
+                        <div className="w-12 h-12 border-4 border-emerald-100 border-t-emerald-600 rounded-full animate-spin mx-auto mb-4"></div>
+                        <p className="text-zinc-400 font-medium text-sm">Loading gallery...</p>
                     </div>
                 ) : error ? (
-                    <div className="text-center py-24 bg-red-50 rounded-[48px] border-4 border-red-100 max-w-2xl mx-auto">
-                        <h2 className="text-3xl font-black text-red-900 mb-4 uppercase tracking-tighter">System Notice</h2>
-                        <p className="text-red-600 font-medium">The digital gallery is temporarily offline. Please try again shortly.</p>
+                    <div className="text-center py-20 bg-white rounded-3xl border border-red-100 max-w-2xl mx-auto shadow-sm">
+                        <h2 className="text-2xl font-bold text-red-900 mb-2 uppercase">Notice</h2>
+                        <p className="text-red-600 font-medium">The digital gallery is temporarily offline.</p>
                     </div>
                 ) : filteredImages.length === 0 ? (
-                    <ScrollReveal className="text-center py-24 bg-zinc-50 rounded-[64px] border-4 border-dashed border-zinc-100 max-w-3xl mx-auto">
-                        <p className="text-zinc-400 text-2xl font-medium tracking-tight">No visuals found for this category yet.</p>
+                    <ScrollReveal className="text-center py-24 bg-white rounded-3xl border border-dashed border-zinc-200 max-w-3xl mx-auto">
+                        <p className="text-zinc-400 text-xl font-medium">No visuals found for this category.</p>
                     </ScrollReveal>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-6">
                         {filteredImages.map((image, i) => (
                             <ScrollReveal key={image._id} delay={i * 30}>
                                 <div
-                                    className="group relative aspect-4/5 rounded-[48px] overflow-hidden shadow-sm hover:shadow-[0_40px_100px_rgba(0,0,0,0.15)] transition-all duration-700 bg-zinc-100 border-8 border-white cursor-pointer"
+                                    className="group relative aspect-square md:aspect-4/3 rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 bg-white border border-zinc-100 cursor-pointer"
                                     onClick={() => openLightbox(i)}
                                 >
                                     <Image
@@ -138,17 +135,18 @@ export default function GalleryPage() {
                                         alt="Gallery entry"
                                         fill
                                         unoptimized
-                                        className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
                                     />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                                        <div className="w-20 h-20 rounded-4xl bg-white/20 backdrop-blur-xl flex items-center justify-center border border-white/30 transform scale-75 group-hover:scale-100 transition-all duration-500">
-                                            <Maximize2 className="text-white w-10 h-10" />
+                                    {/* Subtle Overlay */}
+                                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center text-white">
+                                            <span className="text-[10px] font-bold uppercase tracking-widest bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                                                {image.category}
+                                            </span>
+                                            <div className="w-10 h-10 rounded-full bg-white text-[#7B0046] flex items-center justify-center shadow-lg">
+                                                <Maximize2 size={18} />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="absolute top-8 left-8">
-                                        <span className="px-5 py-2.5 bg-white/20 backdrop-blur-xl rounded-full text-[10px] font-black uppercase text-white tracking-widest border border-white/20 group-hover:opacity-0 transition-opacity duration-300">
-                                            {image.category}
-                                        </span>
                                     </div>
                                 </div>
                             </ScrollReveal>
@@ -164,72 +162,67 @@ export default function GalleryPage() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-200 bg-black/95 backdrop-blur-3xl flex items-center justify-center p-4 md:p-12"
+                        className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
                         onClick={closeLightbox}
                     >
                         {/* Close button */}
-                        <motion.button
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="absolute top-10 right-10 text-white/50 hover:text-white transition-colors z-220 bg-white/10 p-5 rounded-4xl border border-white/10 hover:bg-white/20"
+                        <button
+                            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-[110] bg-white/10 p-3 rounded-full border border-white/10"
                             onClick={closeLightbox}
                         >
-                            <X className="w-12 h-12" />
-                        </motion.button>
+                            <X className="w-8 h-8" />
+                        </button>
 
-                        {/* Navigation buttons */}
-                        <div className="absolute inset-x-6 md:inset-x-12 top-1/2 -translate-y-1/2 flex justify-between z-220 pointer-events-none">
-                            <motion.button
-                                whileHover={{ scale: 1.1, x: -10 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="w-24 h-24 rounded-[2.5rem] bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all pointer-events-auto backdrop-blur-2xl shadow-2xl"
+                        {/* Navigation */}
+                        <div className="absolute inset-x-4 md:inset-x-8 top-1/2 -translate-y-1/2 flex justify-between z-[110] pointer-events-none">
+                            <button
+                                className="w-14 h-14 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all pointer-events-auto backdrop-blur-md"
                                 onClick={prevImage}
                             >
-                                <ChevronLeft className="w-12 h-12" />
-                            </motion.button>
-                            <motion.button
-                                whileHover={{ scale: 1.1, x: 10 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="w-24 h-24 rounded-[2.5rem] bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all pointer-events-auto backdrop-blur-2xl shadow-2xl"
+                                <ChevronLeft className="w-8 h-8" />
+                            </button>
+                            <button
+                                className="w-14 h-14 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all pointer-events-auto backdrop-blur-md"
                                 onClick={nextImage}
                             >
-                                <ChevronRight className="w-12 h-12" />
-                            </motion.button>
+                                <ChevronRight className="w-8 h-8" />
+                            </button>
                         </div>
 
                         {/* Image Container */}
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
+                            initial={{ scale: 0.95, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            transition={{ type: "spring", damping: 30, stiffness: 200 }}
-                            className="relative w-full h-full flex items-center justify-center pointer-events-none"
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            className="relative max-w-5xl w-full h-[80vh] flex items-center justify-center"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="relative w-full h-full max-w-7xl max-h-[85vh] pointer-events-auto shadow-[0_100px_200px_rgba(0,0,0,0.9)] rounded-[4rem] overflow-hidden border-12 border-white/5">
+                            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10">
                                 <Image
                                     src={items[selectedImageIndex].imageUrl}
                                     alt="Gallery Showcase"
                                     fill
                                     className="object-contain"
                                     priority
+                                    unoptimized
                                 />
-                                {/* Bottom Info Bar */}
-                                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 px-10 py-4 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-full flex gap-8 items-center">
-                                    <p className="text-white/80 font-black tracking-[0.4em] text-[10px] uppercase">
-                                        Frame <span className="text-emerald-400">{selectedImageIndex + 1}</span> of {items.length}
-                                    </p>
-                                    <div className="w-px h-4 bg-white/20" />
-                                    <span className="text-white font-bold text-[10px] uppercase tracking-widest">{items[selectedImageIndex].category}</span>
-                                </div>
+                            </div>
+                            {/* Meta Info */}
+                            <div className="absolute -bottom-16 left-0 right-0 text-center text-white">
+                                <p className="text-sm font-bold tracking-widest uppercase opacity-80 mb-1">
+                                    {items[selectedImageIndex].category}
+                                </p>
+                                <p className="text-xs opacity-50 uppercase tracking-widest">
+                                    {selectedImageIndex + 1} / {items.length}
+                                </p>
                             </div>
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Final CTA */}
-            <DynamicCTA className="py-24 px-6 bg-emerald-950 text-white text-center" />
+            {/* Footer CTA */}
+            <DynamicCTA className="py-20 px-6 bg-emerald-950 text-white text-center" />
         </div>
     );
 }
