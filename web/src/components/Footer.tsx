@@ -73,6 +73,11 @@ export default function Footer() {
                                 Amenities
                             </Link>
                         </li>
+                        <li>
+                            <Link href="/campus-life" className="hover:text-emerald-300 transition-colors inline-block py-0.5">
+                                Campus Life
+                            </Link>
+                        </li>
                     </ul>
                 </div>
 
