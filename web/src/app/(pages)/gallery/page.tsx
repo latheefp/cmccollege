@@ -173,8 +173,8 @@ export default function GalleryPage() {
                             <X className="w-8 h-8" />
                         </button>
 
-                        {/* Navigation */}
-                        <div className="absolute inset-x-4 md:inset-x-8 top-1/2 -translate-y-1/2 flex justify-between z-[110] pointer-events-none">
+                        {/* Navigation - Hidden on mobile/tablet */}
+                        <div className="absolute inset-x-4 md:inset-x-8 top-1/2 -translate-y-1/2 hidden lg:flex justify-between z-110 pointer-events-none">
                             <button
                                 className="w-14 h-14 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all pointer-events-auto backdrop-blur-md"
                                 onClick={prevImage}
@@ -189,15 +189,25 @@ export default function GalleryPage() {
                             </button>
                         </div>
 
-                        {/* Image Container */}
+                        {/* Image Container with Swipe Support */}
                         <motion.div
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            onDragEnd={(_, info) => {
+                                const swipeThreshold = 50;
+                                if (info.offset.x < -swipeThreshold) {
+                                    nextImage();
+                                } else if (info.offset.x > swipeThreshold) {
+                                    prevImage();
+                                }
+                            }}
                             initial={{ scale: 0.95, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.95, opacity: 0 }}
-                            className="relative max-w-5xl w-full h-[80vh] flex items-center justify-center"
+                            className="relative max-w-5xl w-full h-[70vh] md:h-[80vh] flex items-center justify-center cursor-grab active:cursor-grabbing"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10">
+                            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 select-none pointer-events-none">
                                 <Image
                                     src={items[selectedImageIndex].imageUrl}
                                     alt="Gallery Showcase"
@@ -207,14 +217,23 @@ export default function GalleryPage() {
                                     unoptimized
                                 />
                             </div>
-                            {/* Meta Info */}
+
+                            {/* Meta Info & Touch Indicator */}
                             <div className="absolute -bottom-16 left-0 right-0 text-center text-white">
                                 <p className="text-sm font-bold tracking-widest uppercase opacity-80 mb-1">
                                     {items[selectedImageIndex].category}
                                 </p>
-                                <p className="text-xs opacity-50 uppercase tracking-widest">
-                                    {selectedImageIndex + 1} / {items.length}
-                                </p>
+                                <div className="flex items-center justify-center gap-3">
+                                    <div className="h-0.5 w-8 bg-white/20 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-[#7B0046] transition-all duration-300"
+                                            style={{ width: `${((selectedImageIndex + 1) / items.length) * 100}%` }}
+                                        />
+                                    </div>
+                                    <p className="text-[10px] opacity-50 uppercase tracking-[0.2em] font-bold">
+                                        {selectedImageIndex + 1} / {items.length}
+                                    </p>
+                                </div>
                             </div>
                         </motion.div>
                     </motion.div>
