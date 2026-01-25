@@ -13,25 +13,25 @@ export default function Footer() {
     }
 
     return (
-        <footer className="bg-emerald-900 text-white py-16 px-6 md:px-12">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 lg:gap-y-12">
+        <footer className="bg-[#7B0046] text-white py-16 px-6 md:px-12">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-16">
                 {/* College Info */}
-                <div className="flex flex-col items-start text-left md:col-span-2 lg:col-span-1">
-                    <div className="relative w-48 lg:w-64 h-20 mb-10 flex items-center justify-start -ml-16 sm:-ml-20 lg:-ml-24">
+                <div className="flex flex-col items-start md:items-center lg:items-start text-left md:text-center lg:text-left md:col-span-2 lg:col-span-1">
+                    <div className="relative w-full max-w-[280px] h-24 mb-6 md:mx-auto lg:mx-0">
                         <Image
                             src="https://ik.imagekit.io/5c6j602yp/Home/images/Logo-footer"
                             alt="College Logo"
                             fill
-                            className="object-contain lg:scale-[4] scale-[3] origin-left"
+                            className="object-contain object-left md:object-center lg:object-left"
                             priority
                         />
                     </div>
-                    <p className="text-white/80 leading-relaxed mb-6 text-sm font-medium">
+                    <p className="text-white/80 leading-relaxed mb-8 text-sm font-medium max-w-sm md:mx-auto lg:mx-0">
                         Affiliated to The University Of Calicut <br />
                         Recognized by UGC under Section 2(f) of the Act 1957
                         <span className="block font-bold mt-2 text-white/90">Unit of CM Centre Madavoor</span>
                     </p>
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 md:justify-center lg:justify-start w-full">
                         <a href="https://www.facebook.com/cmcwayanad" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-emerald-700/50 hover:border-emerald-500/50 transition-all hover:-translate-y-1" aria-label="Facebook">
                             <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" /></svg>
                         </a>
@@ -108,38 +108,38 @@ export default function Footer() {
                     <h4 className="text-white font-bold mb-6 text-lg tracking-tight uppercase">Get in Touch</h4>
                     <ul className="space-y-5 text-white/70">
                         <li className="flex gap-4 items-start">
-                            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10 group-hover:bg-emerald-600/20 transition-colors">
+                            <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 border border-white/20 group-hover:bg-white/20 transition-colors">
                                 <MapPin size={18} className="text-emerald-400 font-bold" />
                             </div>
-                            <span className="text-sm font-bold">
+                            <span className="text-sm font-bold normal-case">
                                 Mount Razi, Nadavayal (P.O) <br />
                                 Wayanad-670646, Kerala
                             </span>
                         </li>
-                        <li className="flex gap-4 items-center font-bold">
-                            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                        <li className="flex gap-4 items-center">
+                            <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
                                 <Phone size={18} className="text-emerald-400 font-bold" />
                             </div>
-                            <div className="flex flex-col font-bold">
+                            <div className="flex flex-col normal-case">
                                 <span className="text-sm font-bold">04936 210 178</span>
                                 <span className="text-[11px] text-white/40 uppercase tracking-wider font-bold">Office Line</span>
                             </div>
                         </li>
-                        <li className="flex gap-4 items-start font-bold">
-                            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                        <li className="flex gap-4 items-start">
+                            <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
                                 <Smartphone size={18} className="text-emerald-400 font-bold" />
                             </div>
-                            <div className="flex flex-col font-bold">
-                                <span className="text-sm font-bold text-white">+91 7594 888 203</span>
-                                <span className="text-sm font-bold text-white">+91 7594 888 202</span>
+                            <div className="flex flex-col normal-case">
+                                <span className="text-sm font-bold text-white tracking-widest">+91 7594 888 203</span>
+                                <span className="text-sm font-bold text-white tracking-widest">+91 7594 888 202</span>
                                 <span className="text-[11px] text-white/40 uppercase tracking-wider font-bold">Mobile Support</span>
                             </div>
                         </li>
                         <li className="flex gap-4 items-center">
-                            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                            <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
                                 <Mail size={18} className="text-emerald-400 font-bold" />
                             </div>
-                            <a href="mailto:info@cmcollege.edu.in" className="text-sm hover:text-emerald-300 transition-colors font-bold lowercase">info@cmcollege.edu.in</a>
+                            <a href="mailto:info@cmcollege.edu.in" className="text-sm hover:text-emerald-300 transition-colors font-bold lowercase tracking-wide">info@cmcollege.edu.in</a>
                         </li>
                     </ul>
                 </div>
