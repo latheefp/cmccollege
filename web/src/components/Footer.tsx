@@ -22,7 +22,7 @@ export default function Footer() {
                             src="https://ik.imagekit.io/5c6j602yp/Home/images/Logo-footer"
                             alt="College Logo"
                             fill
-                            className="object-cover scale-[1.6] object-left md:object-center lg:object-left"
+                            className="object-cover scale-[1.3] md:scale-[1.6] object-left md:object-center lg:object-left"
                             priority
                         />
                     </div>
@@ -91,7 +91,7 @@ export default function Footer() {
                             </Link>
                         </li>
                         <li>
-                            <Link href="https://www.hsslive.in/2017/06/general-educational-calendar.html" target="_blank" className="hover:text-emerald-300 transition-colors inline-block py-0.5">
+                            <Link href="/academic-calender" target="_blank" className="hover:text-emerald-300 transition-colors inline-block py-0.5">
                                 Academic Calendar
                             </Link>
                         </li>

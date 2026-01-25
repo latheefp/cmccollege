@@ -429,7 +429,7 @@ export default function Home() {
                 </div>
 
                 {/* Signature Block */}
-                <div className="mt-4 pt-8 border-t border-zinc-100 flex items-center gap-5">
+                <div className="mt-4 pt-8 border-t border-zinc-100 flex items-center gap-5 relative z-10">
                   <div className="w-14 h-14 rounded-2xl bg-[#7B0046] flex items-center justify-center text-white shadow-lg shadow-[#7B0046]/20 shrink-0">
                     <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                   </div>
@@ -441,6 +441,12 @@ export default function Home() {
                       <p className="text-xs text-zinc-500 font-medium">CM College of Arts & Science</p>
                     </div>
                   </div>
+
+                  <Link href="/about/principal">
+                    <button className="flex items-center justify-center w-10 h-10 rounded-full border border-zinc-200 text-[#7B0046] hover:bg-[#7B0046]/5 hover:border-[#7B0046]/20 transition-all active:scale-95 cursor-pointer">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                  </Link>
                 </div>
               </div>
 

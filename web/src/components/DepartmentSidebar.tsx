@@ -47,7 +47,7 @@ export default function DepartmentSidebar() {
 
             {/* Sidebar Content */}
             <div className={`lg:block ${isMobileOpen ? "block" : "hidden"}`}>
-                <div className="bg-white rounded-2xl p-2 border border-zinc-100 shadow-xl shadow-zinc-200/50">
+                <div className="bg-white rounded-2xl p-2 border border-zinc-200 shadow-xl shadow-zinc-200/50 border-l-4 border-l-[#5D1035]">
                     <div className="px-5 py-4 border-b border-zinc-50 mb-2">
                         <h3 className="font-bold font-serif text-lg text-zinc-800 tracking-tight">In this Section</h3>
                     </div>
