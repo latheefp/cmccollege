@@ -33,7 +33,7 @@ export default function ManagementPage() {
     return (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header Section */}
-            <div className="relative rounded-[32px] overflow-hidden bg-linear-to-br from-[#7a0b3a] via-[#9f0f4e] to-[#7a0b3a] text-white p-8 md:p-16 shadow-2xl shadow-[#7a0b3a]/20">
+            <div className="relative rounded-[24px] md:rounded-[32px] overflow-hidden bg-linear-to-br from-[#7a0b3a] via-[#9f0f4e] to-[#7a0b3a] text-white p-6 md:p-16 shadow-xl md:shadow-2xl shadow-[#7a0b3a]/20">
                 {/* Decorative Background Elements */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none mix-blend-overlay"></div>
                 <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-black/20 rounded-full blur-[80px] -ml-32 -mb-32 pointer-events-none"></div>
@@ -49,7 +49,7 @@ export default function ManagementPage() {
                             <span className="w-1.5 h-1.5 rounded-full bg-[#0CA789] shadow-[0_0_10px_#0CA789]"></span>
                             <span className="text-sm font-bold tracking-widest text-[#0CA789] uppercase">Management</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold font-sans leading-tight tracking-wide drop-shadow-md">
+                        <h1 className="text-4xl md:text-7xl font-bold font-sans leading-tight tracking-wide drop-shadow-md">
                             CM Centre Madavoor
                         </h1>
                     </motion.div>
@@ -61,7 +61,7 @@ export default function ManagementPage() {
                         transition={{ duration: 0.8, delay: 0.1 }}
                         className="flex justify-center md:justify-end"
                     >
-                        <div className="relative w-64 h-64 md:w-96 md:h-96 bg-white/5 backdrop-blur-xl rounded-full p-10 border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.2)] flex items-center justify-center group hover:bg-white/10 transition-all duration-500 hover:scale-105">
+                        <div className="relative w-40 h-40 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-white/5 backdrop-blur-xl rounded-full p-6 md:p-10 border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.1)] md:shadow-[0_0_40px_rgba(0,0,0,0.2)] flex items-center justify-center group hover:bg-white/10 transition-all duration-500 hover:scale-105">
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
                             {/* Inner Glow Circle */}
                             <div className="absolute inset-4 rounded-full border border-white/5"></div>
@@ -79,7 +79,7 @@ export default function ManagementPage() {
 
             {/* Chairman Message Section */}
             <ScrollReveal>
-                <div className="flex flex-col md:flex-row gap-8 lg:gap-16 items-start py-8">
+                <div className="flex flex-col md:flex-row gap-6 md:gap-16 items-start py-4 md:py-8">
                     {/* Image Section - Floating & Clean */}
                     <div className="w-full md:w-5/12 lg:w-4/12 relative group pl-4">
                         <div className="absolute top-4 -right-4 w-full h-full border-2 border-[#7a0b3a]/10 rounded-2xl md:rounded-[32px] -z-10 group-hover:top-2 group-hover:-right-2 transition-all duration-500"></div>
@@ -127,12 +127,12 @@ export default function ManagementPage() {
             </ScrollReveal>
 
             {/* Members Grid Section */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 pt-8 px-2 md:px-0">
                 {managementMembers.map((member, idx) => (
                     <ScrollReveal key={idx} delay={idx * 100}>
                         <div className="group flex flex-col items-center">
                             {/* Portrait Image Container */}
-                            <div className="relative aspect-4/5 w-full bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-3 mb-6 border border-zinc-100/50">
+                            <div className="relative aspect-4/5 w-full bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-2 mb-3 md:mb-6 border border-zinc-100/50">
                                 <Image
                                     src={member.image}
                                     alt={member.name}
@@ -145,11 +145,11 @@ export default function ManagementPage() {
 
                             {/* Details */}
                             <div className="text-center w-full">
-                                <h3 className="text-lg font-bold text-zinc-900 transition-colors duration-300 group-hover:text-[#7B0046] mb-2 leading-tight">
+                                <h3 className="text-sm md:text-lg font-bold text-zinc-900 transition-colors duration-300 group-hover:text-[#7B0046] mb-1 md:mb-2 leading-tight px-1">
                                     {member.name}
                                 </h3>
                                 <div className="h-0.5 w-6 bg-[#7B0046]/20 mx-auto my-3 group-hover:w-16 transition-all duration-300"></div>
-                                <p className="text-[#7B0046] text-[10px] md:text-xs font-bold tracking-widest uppercase leading-relaxed max-w-[200px] mx-auto opacity-80 group-hover:opacity-100">
+                                <p className="text-[#7B0046] text-[9px] md:text-xs font-bold tracking-widest uppercase leading-relaxed max-w-[200px] mx-auto opacity-80 group-hover:opacity-100 px-1">
                                     {member.role}
                                 </p>
                             </div>

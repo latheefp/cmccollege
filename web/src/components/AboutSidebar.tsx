@@ -47,12 +47,12 @@ export default function AboutSidebar() {
     };
 
     return (
-        <aside className="w-full lg:w-72 flex-shrink-0 lg:sticky lg:top-32 lg:self-start h-fit">
+        <aside className="w-full lg:w-72 flex-shrink-0 sticky top-32 lg:top-32 z-40 self-start h-fit">
             {/* Mobile Toggle */}
             <div className="lg:hidden mb-6">
                 <button
                     onClick={() => setIsMobileOpen(!isMobileOpen)}
-                    className="w-full flex items-center justify-between bg-[#7a0b3a] text-white p-4 rounded-lg shadow-md font-bold uppercase tracking-wider"
+                    className="w-full flex items-center justify-between bg-[#7a0b3a] text-white p-4 rounded-lg shadow-md font-bold uppercase tracking-wider backdrop-blur-sm bg-opacity-95"
                 >
                     <span>In this section</span>
                     {isMobileOpen ? <X size={20} /> : <Menu size={20} />}
