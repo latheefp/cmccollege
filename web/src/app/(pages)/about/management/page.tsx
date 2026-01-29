@@ -31,65 +31,64 @@ const managementMembers = [
 
 export default function ManagementPage() {
     return (
-        <main className="min-h-screen bg-white pt-[112px]">
+        <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            {/* Header Section */}
+            <div className="relative rounded-3xl overflow-hidden bg-zinc-50 border border-zinc-100 p-8 md:p-12">
+                {/* Decorative Background */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#7a0b3a]/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-2xl -ml-24 -mb-24 pointer-events-none"></div>
 
-            {/* 🔴 PAGE HEADER - Research Style */}
-            <section className="relative py-24 px-6 bg-[#7B0046] text-white overflow-hidden mb-12">
-                <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
-                </div>
-                <div className="relative z-10 max-w-5xl mx-auto text-center">
+                <div className="relative z-10 max-w-3xl">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                            Management
+                        <div className="flex items-center gap-3 mb-4">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#7a0b3a]"></span>
+                            <span className="text-sm font-bold tracking-widest text-[#7a0b3a] uppercase">Management</span>
+                        </div>
+                        <h1 className="text-3xl md:text-5xl font-bold text-zinc-900 mb-6 font-agency">
+                            Advisory Board
                         </h1>
-                        <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-lg text-zinc-600 leading-relaxed">
                             Guided by a commitment to academic excellence and institutional integrity, our management
                             team ensures a nurturing environment where innovation and tradition coexist.
                         </p>
                     </motion.div>
                 </div>
-            </section>
+            </div>
 
-            {/* 👥 MANAGEMENT MEMBERS SECTION */}
-            <section className="py-24 bg-stone-50/30">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-12 max-w-7xl mx-auto">
-                        {managementMembers.map((member, idx) => (
-                            <ScrollReveal key={idx} delay={idx * 100}>
-                                <div className="group flex flex-col items-center">
-                                    {/* 🪪 Portrait Image Container */}
-                                    <div className="relative aspect-[4/5] w-full bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-3 mb-8 border border-zinc-100/50">
-                                        <Image
-                                            src={member.image}
-                                            alt={member.name}
-                                            fill
-                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                        />
-                                        {/* Subtle Maroon Overlay on hover */}
-                                        <div className="absolute inset-0 bg-[#7B0046]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
+                {managementMembers.map((member, idx) => (
+                    <ScrollReveal key={idx} delay={idx * 100}>
+                        <div className="group flex flex-col items-center">
+                            {/* 🪪 Portrait Image Container */}
+                            <div className="relative aspect-[4/5] w-full bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-3 mb-6 border border-zinc-100/50">
+                                <Image
+                                    src={member.image}
+                                    alt={member.name}
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                                {/* Subtle Maroon Overlay on hover */}
+                                <div className="absolute inset-0 bg-[#7B0046]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            </div>
 
-                                    {/* Details */}
-                                    <div className="text-center space-y-2">
-                                        <h3 className="text-xl font-bold text-zinc-900 transition-colors duration-300 group-hover:text-[#7B0046]">
-                                            {member.name}
-                                        </h3>
-                                        <p className="text-[#7B0046] text-xs font-bold tracking-[0.2em] uppercase">
-                                            {member.role}
-                                        </p>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-        </main >
+                            {/* Details */}
+                            <div className="text-center w-full">
+                                <h3 className="text-lg font-bold text-zinc-900 transition-colors duration-300 group-hover:text-[#7B0046] mb-2 leading-tight">
+                                    {member.name}
+                                </h3>
+                                <div className="h-0.5 w-6 bg-[#7B0046]/20 mx-auto my-3 group-hover:w-16 transition-all duration-300"></div>
+                                <p className="text-[#7B0046] text-[10px] md:text-xs font-bold tracking-[0.1em] uppercase leading-relaxed max-w-[200px] mx-auto opacity-80 group-hover:opacity-100">
+                                    {member.role}
+                                </p>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                ))}
+            </div>
+        </div>
     );
 }
