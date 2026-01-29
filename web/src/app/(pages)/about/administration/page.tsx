@@ -9,27 +9,27 @@ import { motion } from "framer-motion";
 const councilMembers = [
     {
         name: "T K Abdu Rahman Baqavi",
-        role: "Chairman – CM College of Arts and Science and General Secretary – CM Centre.",
-        image: "https://ik.imagekit.io/5c6j602yp/About/chairman.jpg"
+        role: "Chairman - CM College",
+        image: "https://ik.imagekit.io/5c6j602yp/About/chairman"
     },
     {
         name: "Zainudheen T K",
-        role: "Director – CM College of Arts and Science",
+        role: "Director - CM College",
         image: "https://ik.imagekit.io/5c6j602yp/About/director.jpg"
     },
     {
         name: "Shafi Pulpara",
-        role: "Principal, CM College of Arts and Science",
+        role: "Principal - CM College",
         image: "https://ik.imagekit.io/5c6j602yp/About/principal.jpeg"
     },
     {
-        name: "Uvais T K",
-        role: "Administrative Officer – CM College of Arts and Science",
+        name: "Jabir Ali P P",
+        role: "Vice Principal - CM College",
         image: "/images/default-user-placeholder.png"
     },
     {
-        name: "Jabir Ali P P",
-        role: "IQAC Director, CM College of Arts and Science",
+        name: "Uvais T K",
+        role: "AO- CM College",
         image: "/images/default-user-placeholder.png"
     }
 ];
@@ -84,7 +84,7 @@ export default function AdministrationPage() {
                     </div>
 
                     {/* All Council Members in One Centered Row */}
-                    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-10">
+                    <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-5 xl:gap-8 overflow-visible max-w-[1400px] mx-auto">
                         {councilMembers.map((member, idx) => {
                             const isChairman = idx === 0;
                             return (
@@ -92,10 +92,10 @@ export default function AdministrationPage() {
                                     <div className={`group flex flex-col items-center transition-all duration-500 ${isChairman ? 'z-10' : 'z-0'}`}>
                                         {/* Card Container - Size varies based on role */}
                                         <div
-                                            className={`relative bg-white rounded-[24px] overflow-hidden shadow-lg border border-zinc-100 transition-all duration-500 
+                                            className={`relative bg-white rounded-[20px] lg:rounded-[24px] overflow-hidden shadow-lg border border-zinc-100 transition-all duration-500 
                                             ${isChairman
-                                                    ? 'w-[320px] md:w-[380px] aspect-4/5 shadow-2xl scale-105 border-[#7a0b3a]/10 ring-4 ring-[#7a0b3a]/5'
-                                                    : 'w-[260px] md:w-[280px] aspect-4/5 hover:-translate-y-2'
+                                                    ? 'w-[280px] lg:w-[300px] xl:w-[320px] aspect-4/5 shadow-2xl scale-105 border-[#7a0b3a]/10 ring-4 ring-[#7a0b3a]/5'
+                                                    : 'w-[220px] lg:w-[230px] xl:w-[240px] aspect-4/5 hover:-translate-y-2'
                                                 }`}
                                         >
                                             <Image
@@ -104,40 +104,24 @@ export default function AdministrationPage() {
                                                 fill
                                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                                             />
-                                            {/* Gradient Overlay for Chairman */}
-                                            {isChairman && (
-                                                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/60 to-transparent opacity-80"></div>
-                                            )}
-                                            {/* Lighter Gradient for others */}
-                                            {!isChairman && (
-                                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                            )}
-
-                                            {/* Name on Card for Chairman */}
-                                            {isChairman && (
-                                                <div className="absolute bottom-6 left-0 w-full text-center px-4">
-                                                    <h3 className="text-2xl font-bold text-white tracking-wide drop-shadow-md mb-1">{member.name}</h3>
-                                                    <p className="text-[#ffcbde] text-xs font-bold uppercase tracking-widest">{member.role.split('–')[0]}</p>
-                                                </div>
-                                            )}
+                                            {/* Unified Hover Gradient */}
+                                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                         </div>
 
-                                        {/* Name below card for others */}
-                                        {!isChairman && (
-                                            <div className="text-center mt-6 max-w-[260px]">
-                                                <h3 className="text-xl font-bold text-zinc-900 group-hover:text-[#7a0b3a] transition-colors duration-300">
-                                                    {member.name}
-                                                </h3>
-                                                <p className="text-[#7a0b3a]/80 text-[11px] font-bold tracking-wider uppercase mt-1 leading-relaxed">
-                                                    {member.role}
-                                                </p>
-                                            </div>
-                                        )}
+                                        {/* Name & Role below card for ALL members */}
+                                        <div className={`text-center mt-4 lg:mt-6 ${isChairman ? 'max-w-[280px] lg:max-w-[320px]' : 'max-w-[200px] lg:max-w-[230px]'}`}>
+                                            <h3 className={`font-bold text-zinc-900 group-hover:text-[#7a0b3a] transition-colors duration-300 leading-tight ${isChairman ? 'text-2xl lg:text-3xl tracking-tight' : 'text-lg lg:text-xl'}`}>
+                                                {member.name}
+                                            </h3>
+                                            <p className={`text-[#7a0b3a]/80 font-bold tracking-wider uppercase mt-1 leading-relaxed ${isChairman ? 'text-xs lg:text-sm mt-2' : 'text-[10px] line-clamp-2'}`}>
+                                                {member.role}
+                                            </p>
+                                        </div>
                                     </div>
 
                                     {isChairman && (
-                                        <div className="text-center mt-8 max-w-[320px] md:max-w-[360px]">
-                                            <p className="text-zinc-500 text-xs font-medium italic border-t border-zinc-100 pt-4">
+                                        <div className="text-center mt-4 lg:mt-6 max-w-[280px] lg:max-w-[320px]">
+                                            <p className="text-zinc-500 text-xs font-medium italic border-t border-zinc-100 pt-4 hidden md:block">
                                                 Leading with vision and integrity.
                                             </p>
                                         </div>
