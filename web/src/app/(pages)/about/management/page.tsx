@@ -166,6 +166,57 @@ export default function ManagementPage() {
                     </ScrollReveal>
                 ))}
             </div>
+
+            {/* Our Institutions Section */}
+            <div className="py-12 border-t border-zinc-100">
+                <div className="text-center mb-10">
+                    <span className="text-[#0CA789] font-bold tracking-widest uppercase text-sm">Network</span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#7a0b3a] mt-2 font-agency">Our Institutions</h2>
+                </div>
+
+                <div className="relative overflow-hidden group">
+                    {/* Gradient Masks */}
+                    <div className="absolute left-0 top-0 bottom-0 w-20 bg-linear-to-r from-white to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-20 bg-linear-to-l from-white to-transparent z-10 pointer-events-none" />
+
+                    <div className="flex items-center gap-8 md:gap-16 animate-marquee whitespace-nowrap min-w-full">
+                        {[
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/mmu-logo.png?updatedAt=1768844964283",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/oman-logo.png",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/tally-logo.png",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/keltron-logo.png",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/queens-drive.png",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/plant-up.png"
+                        ].map((logo, idx) => (
+                            <div key={idx} className="relative w-40 h-24 md:w-52 md:h-32 shrink-0 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-500 cursor-pointer">
+                                <Image
+                                    src={logo}
+                                    alt="Institution Logo"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        ))}
+                        {[
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/mmu-logo.png?updatedAt=1768844964283",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/oman-logo.png",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/tally-logo.png",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/keltron-logo.png",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/queens-drive.png",
+                            "https://ik.imagekit.io/5c6j602yp/Home/images/plant-up.png"
+                        ].map((logo, idx) => (
+                            <div key={`dup-${idx}`} className="relative w-40 h-24 md:w-52 md:h-32 shrink-0 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-500 cursor-pointer">
+                                <Image
+                                    src={logo}
+                                    alt="Institution Logo"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
