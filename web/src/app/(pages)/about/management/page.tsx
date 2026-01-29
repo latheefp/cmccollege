@@ -8,14 +8,14 @@ import { motion } from "framer-motion";
 
 const managementMembers = [
     {
-        name: "TK Abdu Rahman Baqavi",
-        role: "Chairman, CM College of Arts and Science and General Secretary, CM Centre, Madavoor",
-        image: "https://ik.imagekit.io/5c6j602yp/About/chairman.jpg"
+        name: "CM Ibrahim",
+        role: "President, CM Centre Madavoor",
+        image: "https://ik.imagekit.io/5c6j602yp/About/president.jpg"
     },
     {
-        name: "CM Ibrahim",
-        role: "President, President CM Centre Madavoor",
-        image: "https://ik.imagekit.io/5c6j602yp/About/president.jpg"
+        name: "TK Abdu Rahman Baqavi",
+        role: "General Secretary, CM Centre Madavoor",
+        image: "https://ik.imagekit.io/5c6j602yp/About/chairman"
     },
     {
         name: "NA Backer Haji",
@@ -23,8 +23,8 @@ const managementMembers = [
         image: "https://ik.imagekit.io/5c6j602yp/About/finance.jpg"
     },
     {
-        name: "Mr. Abdul Rasheed",
-        role: "TGeneral Manager, CM Centre Madavoor",
+        name: "Musthafa Saquafi",
+        role: "General Manager, CM Centre Madavoor",
         image: "https://ik.imagekit.io/5c6j602yp/About/General-manager.jpg"
     }
 ];
@@ -127,7 +127,16 @@ export default function ManagementPage() {
             </ScrollReveal>
 
             {/* Members Grid Section */}
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 pt-8 px-2 md:px-0">
+            <div className="pt-8 pb-4">
+                <div className="flex items-center justify-center gap-4 mb-8">
+                    <span className="h-px w-8 md:w-16 bg-[#7a0b3a]/20"></span>
+                    <h2 className="text-xl md:text-3xl font-bold text-[#7a0b3a] uppercase tracking-wide text-center drop-shadow-sm">
+                        Committee Advisory Board
+                    </h2>
+                    <span className="h-px w-8 md:w-16 bg-[#7a0b3a]/20"></span>
+                </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 px-2 md:px-0">
                 {managementMembers.map((member, idx) => (
                     <ScrollReveal key={idx} delay={idx * 100}>
                         <div className="group flex flex-col items-center">
