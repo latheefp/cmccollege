@@ -109,7 +109,8 @@ export default function InstitutionsCarousel({ items }: InstitutionsCarouselProp
                                         src={logo}
                                         alt={`Institution Logo`}
                                         fill
-                                        className="object-contain transition-all duration-500 opacity-70 group-hover/logo:opacity-100 scale-90 group-hover/logo:scale-100"
+                                        className={`object-contain transition-all duration-500 opacity-70 group-hover/logo:opacity-100 group-hover/logo:scale-110 ${logo.includes("CM%20COLLEGE") ? "scale-150 md:scale-200" : "scale-130"
+                                            }`}
                                     />
                                 </div>
                             </motion.div>
