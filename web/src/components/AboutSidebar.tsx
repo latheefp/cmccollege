@@ -7,8 +7,10 @@ import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const sidebarItems = [
+    { name: "Management", href: "/about/management" },
     { name: "About College", href: "/about", exact: true },
     { name: "Vision and Mission", href: "/about/vision" },
+    { name: "Chairman Message", href: "/about/chairman-message" },
     { name: "Institutional Distinctiveness", href: "/about/institutional-distinctiveness" },
     { name: "Growth and Expansion", href: "/about/growth-expansion" },
     {
@@ -16,12 +18,10 @@ const sidebarItems = [
         href: "#",
         subItems: [
             { name: "Principal", href: "/about/principal" },
-            { name: "Vice Principal", href: "/about/vice-principal" },
-            { name: "Administrative Council", href: "/about/administration/council" },
+            { name: "Administrative Council", href: "/about/administration" },
             { name: "Office Administration", href: "/about/administration/office" },
         ]
     },
-    { name: "Management", href: "/about/management" },
     { name: "Statutory Bodies", href: "/about/statutory-bodies" },
     { name: "College Committees", href: "/about/committees" },
     { name: "Accreditations & Ranking", href: "/about/accreditations" },

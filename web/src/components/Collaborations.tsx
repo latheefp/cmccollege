@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 const partners = [
-    { name: "MMU", logo: "https://ik.imagekit.io/5c6j602yp/Home/images/plant-up.png" },
+    { name: "MMU", logo: "https://ik.imagekit.io/5c6j602yp/Home/images/mmu-logo.png?updatedAt=1768844964283" },
     { name: "Oman", logo: "https://ik.imagekit.io/5c6j602yp/Home/images/oman-logo.png" },
     { name: "Tally", logo: "https://ik.imagekit.io/5c6j602yp/Home/images/tally-logo.png" },
     { name: "Keltron", logo: "https://ik.imagekit.io/5c6j602yp/Home/images/keltron-logo.png" },
@@ -16,7 +16,7 @@ const programs = [
     { name: "Chirakukal", logo: "https://ik.imagekit.io/5c6j602yp/Home/images/chirakukal.png" },
 ];
 
-const MarqueeRow = ({ title, items, reverse = false }: { title: string, items: typeof partners, reverse?: boolean }) => {
+const MarqueeRow = ({ title, items, reverse = false, fit = "contain" }: { title: string, items: typeof partners, reverse?: boolean, fit?: "contain" | "cover" }) => {
     return (
         <div className="flex flex-col md:flex-row items-stretch border-b border-zinc-100 last:border-b-0 py-8">
             {/* Side Label */}
@@ -56,7 +56,7 @@ const MarqueeRow = ({ title, items, reverse = false }: { title: string, items: t
                                     src={item.logo}
                                     alt={`${item.name} logo`}
                                     fill
-                                    className="object-cover filter grayscale-0 opacity-90 hover:opacity-100 transition-opacity"
+                                    className={`object-${fit} filter grayscale-0 opacity-90 hover:opacity-100 transition-opacity`}
                                 />
                             </div>
                         </div>
@@ -72,7 +72,7 @@ export default function Collaborations() {
         <section className="bg-white border-t border-zinc-100">
             <div className="max-w-7xl mx-auto">
                 <MarqueeRow title="Industry & Academic Partners" items={partners} />
-                <MarqueeRow title="College Programs" items={programs} reverse />
+                <MarqueeRow title="College Programs" items={programs} reverse fit="cover" />
             </div>
         </section>
     );

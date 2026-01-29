@@ -29,7 +29,7 @@ const placeholderImages = [
   { title: "Sports Day Excellence", src: "/images/school_sports_day_1768117809679.png", tag: "Sports" },
   { title: "Cultural Performance", src: "/images/cultural_fest_performance_1768117835053.png", tag: "Events" },
   { title: "Science Innovation", src: "/images/science_exhibition_project_1768117868795.png", tag: "Academic" },
-  { title: "College Library", src: "/images/school_library_1768115599802.png", tag: "Campus" },
+  { title: "College Library", src: "https://ik.imagekit.io/5c6j602yp/Home/images/library.jpeg", tag: "Campus" },
   { title: "Annual Awards", src: "/images/school_annual_award_ceremony_stage_1768117893644.png", tag: "Events" }
 ];
 
@@ -522,11 +522,11 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 md:gap-8">
             {[
-              { name: "Hostel", slug: "hostels", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_hostel_1768115536813.png" },
-              { name: "Masjid", slug: "prayer-hall", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_masjid_1768115559090.png" },
-              { name: "Labs", slug: "computer-lab", img: "https://images.unsplash.com/photo-1636036766419-4e0e3e628acc?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-              { name: "Library", slug: "library", img: "https://ik.imagekit.io/5c6j602yp/Home/images/school_library_1768115599802.png" },
-              { name: "Bus", slug: "bus-facility", img: "https://plus.unsplash.com/premium_photo-1765918653607-eb9aeeb61327?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+              { name: "Hostel", slug: "hostels", img: "https://ik.imagekit.io/5c6j602yp/Home/images/hostel.jpeg" },
+              { name: "Masjid", slug: "prayer-hall", img: "https://ik.imagekit.io/5c6j602yp/Home/images/masjid.jpeg" },
+              { name: "Labs", slug: "computer-lab", img: "https://ik.imagekit.io/5c6j602yp/Home/images/computer-lab.jpeg" },
+              { name: "Library", slug: "library", img: "https://ik.imagekit.io/5c6j602yp/Home/images/library.jpeg" },
+              { name: "Bus", slug: "bus-facility", img: "https://ik.imagekit.io/5c6j602yp/Home/images/buss.jpeg" }
 
             ].map((facility, i) => (
               <ScrollReveal key={i} delay={i * 100} className="group cursor-pointer">

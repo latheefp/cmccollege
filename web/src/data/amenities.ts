@@ -72,7 +72,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Quiet and spacious reading rooms",
             "Computer terminals for research"
         ],
-        image: "https://i.pinimg.com/736x/20/de/63/20de632725a99c24e39073079918ebcc.jpg",
+        image: "https://ik.imagekit.io/5c6j602yp/Home/images/library.jpeg",
         icon: Book
     },
     "computer-lab": {
@@ -85,7 +85,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Expert lab assistants",
             "Project work support"
         ],
-        image: "https://i.pinimg.com/736x/ec/03/10/ec03109be16ffeec998f861abc22e414.jpg",
+        image: "https://ik.imagekit.io/5c6j602yp/Home/images/computer-lab.jpeg",
         icon: Monitor,
         labDetails: {
             specs: [
@@ -120,7 +120,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Open During College Hours",
             "Spiritual Literature Available"
         ],
-        image: "https://i.pinimg.com/736x/e9/d8/6d/e9d86db7f4999574afe0f77f870f1724.jpg", // Placeholder
+        image: "https://ik.imagekit.io/5c6j602yp/Home/images/masjid.jpeg", // Placeholder
         icon: Flower,
         gallery: []
     },
@@ -135,10 +135,10 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Study halls and recreation rooms",
             "Wi-Fi connectivity"
         ],
-        image: "https://i.pinimg.com/1200x/e9/71/7a/e9717a4cb87d9195d68057b2dfe7c22f.jpg",
+        image: "https://ik.imagekit.io/5c6j602yp/Home/images/hostel.jpeg",
         icon: Home,
         gallery: [
-            "/images/school_hostel_1768115536813.png"
+            "https://ik.imagekit.io/5c6j602yp/Home/images/hostel.jpeg"
         ],
         hostelDetails: {
             boys: { capacity: 150, vacancies: 12, warden: "Mr. Thomas K." },
@@ -162,7 +162,7 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Variety of cuisines",
             "Spacious seating arrangement"
         ],
-        image: "https://i.pinimg.com/736x/65/26/d0/6526d01da9d8ec18ec434d2dc943f3e4.jpg",
+        image: "https://ik.imagekit.io/5c6j602yp/Home/images/canteen.jpeg",
         icon: Utensils
     },
     "bus-facility": {
@@ -175,11 +175,11 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Separate seating for staff and students",
             "Affordable pass rates"
         ],
-        image: "https://i.pinimg.com/1200x/53/c8/22/53c8226ccd05c5c9778be4b931e82e75.jpg",
+        image: "https://ik.imagekit.io/5c6j602yp/Home/images/buss.jpeg",
         icon: Bus,
         gallery: [
-            "https://i.pinimg.com/1200x/53/c8/22/53c8226ccd05c5c9778be4b931e82e75.jpg",
-            "https://i.pinimg.com/1200x/53/c8/22/53c8226ccd05c5c9778be4b931e82e75.jpg"
+            "https://ik.imagekit.io/5c6j602yp/Home/images/buss.jpeg",
+            "https://ik.imagekit.io/5c6j602yp/Home/images/buss.jpeg"
         ],
         busSchedules: [
             {
