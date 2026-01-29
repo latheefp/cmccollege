@@ -47,7 +47,7 @@ export default function ChairmanMessagePage() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="w-full lg:w-7/12 flex flex-col justify-center"
                     >
-                        <h4 className="text-zinc-500 font-bold tracking-[0.15em] uppercase text-sm mb-4">Chairman Message</h4>
+                        <h4 className="text-[#7a0b3a] font-extrabold tracking-[0.15em] uppercase text-xl mb-6">Chairman Message</h4>
 
                         <div className="text-zinc-600 leading-[1.8] text-base lg:text-lg text-justify font-light mb-6">
                             <p>
@@ -55,7 +55,7 @@ export default function ChairmanMessagePage() {
                             </p>
                             <button
                                 onClick={() => setIsExpanded(!isExpanded)}
-                                className="mt-2 inline-flex items-center gap-1 text-[#0EA5E9] font-semibold text-sm hover:underline focus:outline-hidden"
+                                className="mt-2 inline-flex items-center gap-1 text-[#7a0b3a] font-semibold text-sm hover:underline focus:outline-hidden"
                             >
                                 {isExpanded ? (
                                     <>Read Less <ChevronUp className="w-4 h-4" /></>
@@ -66,8 +66,8 @@ export default function ChairmanMessagePage() {
                         </div>
 
                         <div className="space-y-1">
-                            <h3 className="text-2xl md:text-3xl font-bold text-[#0EA5E9] tracking-tight">TK ABDURAHIMAN BAQUAVI</h3>
-                            <p className="text-[#0EA5E9]/80 font-medium text-sm">(General Secretary, CM Centre)</p>
+                            <h3 className="text-2xl md:text-3xl font-bold text-[#7a0b3a] tracking-tight">TK ABDURAHIMAN BAQUAVI</h3>
+                            <p className="text-[#7a0b3a]/80 font-medium text-sm">(General Secretary, CM Centre)</p>
                         </div>
                     </motion.div>
 
