@@ -65,7 +65,7 @@ export default function AlumniAchieversPage() {
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="bg-gradient-to-br from-zinc-50 to-white border border-zinc-100 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row gap-6 relative group hover:shadow-lg hover:shadow-emerald-900/5 transition-all"
+                                    className="bg-linear-to-br from-zinc-50 to-white border border-zinc-100 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row gap-6 relative group hover:shadow-lg hover:shadow-emerald-900/5 transition-all"
                                 >
                                     <div className="absolute top-6 right-6 text-amber-400 opacity-20 group-hover:opacity-100 transition-opacity">
                                         <Star size={24} fill="currentColor" />

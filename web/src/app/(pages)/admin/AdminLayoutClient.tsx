@@ -29,6 +29,14 @@ export default function AdminLayoutClient({
         await signOut(() => router.push('/'));
     };
 
+    const [expandedItems, setExpandedItems] = useState<string[]>(['Alumni']);
+
+    const toggleExpand = (name: string) => {
+        setExpandedItems(prev =>
+            prev.includes(name) ? prev.filter(item => item !== name) : [...prev, name]
+        );
+    };
+
     const navigation = [
         {
             name: 'Dashboard', href: '/admin', icon: (
@@ -69,29 +77,98 @@ export default function AdminLayoutClient({
             )
         },
         {
-            name: 'Alumni', href: '#', icon: (
+            name: 'Alumni',
+            href: '#',
+            icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14v5" />
                 </svg>
-            )
-        },
-        {
-            name: 'Alumni Achievers', href: '/admin/alumni/achievers', icon: (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
-            )
-        },
-        {
-            name: 'Alumni Reports', href: '/admin/alumni/reports', icon: (
-                <FileText className="w-5 h-5" />
-            )
+            ),
+            subItems: [
+                {
+                    name: 'Alumni Achievers', href: '/admin/alumni/achievers', icon: (
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        </svg>
+                    )
+                },
+                {
+                    name: 'Alumni Reports', href: '/admin/alumni/reports', icon: (
+                        <FileText className="w-4 h-4" />
+                    )
+                },
+            ]
         },
     ];
+
+    const renderLink = (item: any, isMobile = false) => {
+        const isExpanded = expandedItems.includes(item.name);
+        const hasSubItems = item.subItems && item.subItems.length > 0;
+        const isActive = pathname === item.href || (hasSubItems && item.subItems.some((sub: any) => pathname === sub.href));
+
+        return (
+            <div key={item.name}>
+                <Link
+                    href={item.href}
+                    onClick={(e) => {
+                        if (hasSubItems) {
+                            e.preventDefault();
+                            toggleExpand(item.name);
+                        } else if (isMobile) {
+                            setIsSidebarOpen(false);
+                        }
+                    }}
+                    className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all cursor-pointer ${isActive
+                        ? 'bg-emerald-600/10 text-emerald-500 font-semibold'
+                        : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                        }`}
+                >
+                    <div className="flex items-center gap-3">
+                        {item.icon}
+                        {item.name}
+                    </div>
+                    {hasSubItems && (
+                        <svg
+                            className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    )}
+                </Link>
+
+                <AnimatePresence>
+                    {hasSubItems && isExpanded && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden ml-4 pl-4 border-l border-zinc-800"
+                        >
+                            {item.subItems.map((sub: any) => (
+                                <Link
+                                    key={sub.name}
+                                    href={sub.href}
+                                    onClick={() => isMobile && setIsSidebarOpen(false)}
+                                    className={`flex items-center gap-3 px-4 py-2 mt-1 rounded-lg transition-all text-sm ${pathname === sub.href
+                                        ? 'text-emerald-500 font-semibold'
+                                        : 'text-zinc-500 hover:text-zinc-300'
+                                        }`}
+                                >
+                                    {sub.icon}
+                                    {sub.name}
+                                </Link>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        );
+    };
 
     return (
         <div className="min-h-screen bg-zinc-50 flex">
@@ -105,19 +182,7 @@ export default function AdminLayoutClient({
                 </div>
 
                 <nav className="grow py-8 px-4 space-y-2">
-                    {navigation.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${pathname === item.href
-                                ? 'bg-emerald-600/10 text-emerald-500 font-semibold'
-                                : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-                                }`}
-                        >
-                            {item.icon}
-                            {item.name}
-                        </Link>
-                    ))}
+                    {navigation.map((item) => renderLink(item))}
                 </nav>
 
                 <div className="p-4 border-t border-zinc-800">
@@ -159,20 +224,7 @@ export default function AdminLayoutClient({
                     </button>
                 </div>
                 <nav className="p-4 space-y-2">
-                    {navigation.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            onClick={() => setIsSidebarOpen(false)}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${pathname === item.href
-                                ? 'bg-emerald-600/10 text-emerald-500 font-semibold'
-                                : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-                                }`}
-                        >
-                            {item.icon}
-                            {item.name}
-                        </Link>
-                    ))}
+                    {navigation.map((item) => renderLink(item, true))}
                     <div className="mt-8 border-t border-zinc-800 pt-2">
                         <button
                             onClick={handleLogout}

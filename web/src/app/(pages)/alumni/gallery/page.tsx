@@ -71,7 +71,7 @@ export default function AlumniGalleryPage() {
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: idx * 0.1 }}
-                                    className="aspect-[4/3] bg-zinc-100 rounded-2xl overflow-hidden relative group cursor-pointer"
+                                    className="aspect-4/3 bg-zinc-100 rounded-2xl overflow-hidden relative group cursor-pointer"
                                 >
                                     <Image
                                         src={item.imageUrl}
