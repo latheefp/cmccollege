@@ -54,8 +54,8 @@ const EventTypeBadge = ({ type, className }: { type?: EventType; className?: str
     );
 };
 
-const EventModal = ({ event, onClose }: { event: CalendarEvent | null; onClose: () => void }) => {
-    if (!event) return null;
+const EventModal = ({ events, onClose }: { events: CalendarEvent[] | null; onClose: () => void }) => {
+    if (!events || events.length === 0) return null;
 
     return (
         <AnimatePresence>
@@ -71,9 +71,9 @@ const EventModal = ({ event, onClose }: { event: CalendarEvent | null; onClose: 
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     exit={{ scale: 0.95, opacity: 0, y: 20 }}
                     onClick={(e) => e.stopPropagation()}
-                    className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden"
+                    className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden max-h-[85vh] flex flex-col"
                 >
-                    <div className="relative h-32 bg-gradient-to-br from-emerald-900 to-emerald-800 p-6 flex items-end">
+                    <div className="relative h-32 bg-gradient-to-br from-emerald-900 to-emerald-800 p-6 flex items-end shrink-0">
                         <button
                             onClick={onClose}
                             className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors"
@@ -81,29 +81,44 @@ const EventModal = ({ event, onClose }: { event: CalendarEvent | null; onClose: 
                             <X size={20} />
                         </button>
                         <div>
-                            <EventTypeBadge type={event.type} className="bg-white/90 border-transparent shadow-sm mb-2" />
-                            <h3 className="text-2xl font-bold text-white leading-tight">{event.date}</h3>
+                            <div className="flex -space-x-2 mb-2 overflow-hidden">
+                                {events.map((e, i) => (
+                                    <EventTypeBadge key={i} type={e.type} className={`bg-white/90 border-transparent shadow-sm ring-2 ring-emerald-800`} />
+                                ))}
+                            </div>
+                            <h3 className="text-2xl font-bold text-white leading-tight">{events[0].date}</h3>
+                            {events.length > 1 && (
+                                <p className="text-emerald-200 text-sm font-medium mt-1">{events.length} Events</p>
+                            )}
                         </div>
                     </div>
-                    <div className="p-6 space-y-4">
-                        <div className="flex items-start gap-4">
-                            <div className="bg-emerald-50 p-2.5 rounded-xl text-emerald-700">
-                                <Info size={24} />
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-zinc-900 text-lg mb-1">Event Details</h4>
-                                <p className="text-zinc-600 leading-relaxed">{event.description}</p>
-                            </div>
-                        </div>
 
-                        {event.endDate && (
-                            <div className="flex items-center gap-3 text-sm text-zinc-500 bg-zinc-50 p-3 rounded-lg border border-zinc-100">
-                                <Clock size={16} />
-                                <span>Continues until <span className="font-semibold text-zinc-900">{event.endDate}</span></span>
+                    <div className="p-6 space-y-6 overflow-y-auto">
+                        {events.map((event, index) => (
+                            <div key={index} className={`relative ${index !== 0 ? 'pt-6 border-t border-zinc-100' : ''}`}>
+                                <div className="flex items-start gap-4">
+                                    <div className="bg-emerald-50 p-2.5 rounded-xl text-emerald-700 shrink-0">
+                                        <Info size={24} />
+                                    </div>
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <EventTypeBadge type={event.type} />
+                                        </div>
+                                        <h4 className="font-semibold text-zinc-900 text-lg mb-1 leading-snug">{event.description}</h4>
+                                    </div>
+                                </div>
+
+                                {event.endDate && (
+                                    <div className="flex items-center gap-3 text-sm text-zinc-500 bg-zinc-50 p-3 rounded-lg border border-zinc-100 mt-3 ml-14">
+                                        <Clock size={16} />
+                                        <span>Ends on <span className="font-semibold text-zinc-900">{event.endDate}</span></span>
+                                    </div>
+                                )}
                             </div>
-                        )}
+                        ))}
                     </div>
-                    <div className="p-4 bg-zinc-50 border-t border-zinc-100 flex justify-end">
+
+                    <div className="p-4 bg-zinc-50 border-t border-zinc-100 flex justify-end shrink-0">
                         <button
                             onClick={onClose}
                             className="px-5 py-2.5 bg-white border border-zinc-200 text-zinc-700 font-medium rounded-xl hover:bg-zinc-100 transition-colors"
@@ -119,7 +134,7 @@ const EventModal = ({ event, onClose }: { event: CalendarEvent | null; onClose: 
 
 export default function AcademicCalendarPage() {
     const [currentMonthIndex, setCurrentMonthIndex] = useState(0); // Index in calendarData array
-    const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
+    const [selectedEvents, setSelectedEvents] = useState<CalendarEvent[] | null>(null);
 
     const activeMonthData = calendarData[currentMonthIndex];
     if (!activeMonthData) return null;
@@ -141,7 +156,7 @@ export default function AcademicCalendarPage() {
         <div className="min-h-screen bg-zinc-50 font-sans print:bg-white pt-[100px] lg:pt-[110px]">
             {/* Print Styles */}
 
-            <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+            <EventModal events={selectedEvents} onClose={() => setSelectedEvents(null)} />
 
             {/* Header Section */}
             <section className="relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-950 text-white py-16 px-6 overflow-hidden print:hidden">
@@ -264,7 +279,7 @@ export default function AcademicCalendarPage() {
                                 return (
                                     <div
                                         key={day}
-                                        onClick={() => hasEvents && setSelectedEvent(activeEvents[0])}
+                                        onClick={() => hasEvents && setSelectedEvents(activeEvents)}
                                         className={`
                                             min-h-[100px] p-2 border-b border-r border-zinc-100 relative group transition-colors
                                             ${hasEvents ? "cursor-pointer hover:bg-emerald-50/30" : ""}
@@ -321,7 +336,7 @@ export default function AcademicCalendarPage() {
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: idx * 0.05 }}
-                                            onClick={() => setSelectedEvent(event)}
+                                            onClick={() => setSelectedEvents([event])}
                                             className="group cursor-pointer p-4 rounded-2xl border border-zinc-100 hover:border-emerald-200 hover:bg-emerald-50/30 transition-all bg-zinc-50/50"
                                         >
                                             <div className="flex justify-between items-start mb-2">
