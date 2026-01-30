@@ -13,11 +13,7 @@ interface Announcement {
 }
 
 const fallbackAnnouncements = [
-    "Odd Semester 2025 Examination Result Published",
-    "PG Scholarship 2025: Applications Open",
-    "UG Admission 2025 Batch: Apply Now",
-    "College Arts Fest '25 Registration Closing Soon",
-    "NSS Camp 2025: Volunteer Highlights",
+    ""
 ];
 
 export default function BottomTicker() {
@@ -87,12 +83,19 @@ export default function BottomTicker() {
                     <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-neutral-900 to-transparent z-10 pointer-events-none"></div>
 
                     {/* Dynamic duration based on content length (approx 8s per item for consistent speed) */}
+                    {/* Dynamic duration based on content length */}
+                    {/* Slower on mobile (2x duration) via responsive CSS variable usage */}
                     <div
-                        className="flex animate-marquee whitespace-nowrap w-max"
+                        key={displayList.join('')}
+                        // Use explicit animation property to override any global defaults and ensure variable usage
+                        // Mobile: 4x slower than base duration
+                        // Desktop: Base duration
+                        className="flex whitespace-nowrap w-max [animation:marquee_calc(var(--duration)*4)_linear_infinite] md:[animation:marquee_var(--duration)_linear_infinite]"
                         style={{
-                            animationDuration: `${Math.max(10, displayList.length * 8)}s`,
+                            // Base duration (Fast)
+                            '--duration': `${Math.max(12, displayList.join('').length * 0.1)}s`,
                             willChange: 'transform'
-                        }}
+                        } as React.CSSProperties}
                     >
                         {[0, 1].map((part) => (
                             <div key={part} className="flex items-center gap-12 pr-12">
