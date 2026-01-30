@@ -8,6 +8,7 @@ export interface ICareerApplication extends Document {
     qualification: string;
     experience: string;
     imageUrl: string;
+    fileId: string;
     seen: boolean;
     createdAt: Date;
     updatedAt: Date;
@@ -22,6 +23,7 @@ const CareerApplicationSchema: Schema = new Schema(
         qualification: { type: String, default: '' },
         experience: { type: String, default: '' },
         imageUrl: { type: String, required: true },
+        fileId: { type: String, required: true },
         seen: { type: Boolean, default: false },
     },
     {

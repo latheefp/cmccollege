@@ -164,7 +164,7 @@ export default function CareerApplication() {
                                                         name="fullName"
                                                         value={formData.fullName}
                                                         onChange={handleInputChange}
-                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all"
+                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
                                                         placeholder="John Doe"
                                                     />
                                                 </div>
@@ -180,7 +180,7 @@ export default function CareerApplication() {
                                                             name="email"
                                                             value={formData.email}
                                                             onChange={handleInputChange}
-                                                            className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all"
+                                                            className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
                                                             placeholder="john@example.com"
                                                         />
                                                     </div>
@@ -195,7 +195,7 @@ export default function CareerApplication() {
                                                             name="phone"
                                                             value={formData.phone}
                                                             onChange={handleInputChange}
-                                                            className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all"
+                                                            className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
                                                             placeholder="+91 9876543210"
                                                         />
                                                     </div>
@@ -210,7 +210,7 @@ export default function CareerApplication() {
                                                         name="applyingPosition"
                                                         value={formData.applyingPosition}
                                                         onChange={handleInputChange}
-                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all bg-white"
+                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all bg-white text-zinc-800"
                                                     >
                                                         <option value="">Select a Position</option>
                                                         <option value="Assistant Professor">Assistant Professor</option>
@@ -250,13 +250,13 @@ export default function CareerApplication() {
                                             <div>
                                                 <label className="block text-sm font-medium text-zinc-700 mb-1">Highest Qualification</label>
                                                 <div className="relative">
-                                                    <FileText className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-5 h-5" />
+                                                    <FileText className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-700 w-5 h-5" />
                                                     <input
                                                         type="text"
                                                         name="qualification"
                                                         value={formData.qualification}
                                                         onChange={handleInputChange}
-                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all"
+                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border text-zinc-700 placeholder:text-zinc-500 border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all"
                                                         placeholder="e.g., Ph.D. in Computer Science"
                                                     />
                                                 </div>
@@ -271,7 +271,7 @@ export default function CareerApplication() {
                                                         name="experience"
                                                         value={formData.experience}
                                                         onChange={handleInputChange}
-                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all"
+                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
                                                         placeholder="e.g., 5 Years"
                                                     />
                                                 </div>

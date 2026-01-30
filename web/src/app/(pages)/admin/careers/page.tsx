@@ -3,6 +3,7 @@ import CareerApplication, { ICareerApplication } from "@/models/CareerApplicatio
 import { format } from "date-fns";
 import { Briefcase, Mail, Phone, Calendar, Eye, Download } from "lucide-react";
 import Link from "next/link";
+import DeleteButton from "@/components/DeleteButton";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -31,7 +32,7 @@ export default async function AdminCareersPage() {
 
             <div className="bg-white rounded-xl shadow-sm border border-zinc-200 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left text-sm text-zinc-600">
+                    <table className="w-full text-left text-sm text-zinc-700">
                         <thead className="bg-zinc-50 text-zinc-900 font-semibold border-b border-zinc-200">
                             <tr>
                                 <th className="px-6 py-4">Applicant</th>
@@ -44,7 +45,7 @@ export default async function AdminCareersPage() {
                         <tbody className="divide-y divide-zinc-100">
                             {applications.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-12 text-center text-zinc-400">
+                                    <td colSpan={5} className="px-6 py-12 text-center text-zinc-700">
                                         No applications received yet.
                                     </td>
                                 </tr>
@@ -58,7 +59,7 @@ export default async function AdminCareersPage() {
                                                 </div>
                                                 <div>
                                                     <div className="font-semibold text-zinc-900">{app.fullName}</div>
-                                                    <div className="text-xs text-zinc-400 flex items-center gap-1">
+                                                    <div className="text-xs text-zinc-700 flex items-center gap-1">
                                                         {app.qualification}
                                                     </div>
                                                 </div>
@@ -66,13 +67,13 @@ export default async function AdminCareersPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2">
-                                                <Briefcase className="w-4 h-4 text-zinc-400" />
+                                                <Briefcase className="w-4 h-4 text-zinc-700" />
                                                 <span className="font-medium bg-zinc-100 px-2 py-0.5 rounded text-zinc-700">
                                                     {app.applyingPosition}
                                                 </span>
                                             </div>
                                             {app.experience && (
-                                                <div className="text-xs text-zinc-400 mt-1 pl-6">
+                                                <div className="text-xs text-zinc-700 mt-1 pl-6">
                                                     Exp: {app.experience}
                                                 </div>
                                             )}
@@ -92,7 +93,7 @@ export default async function AdminCareersPage() {
                                                 <Calendar className="w-4 h-4" />
                                                 {format(new Date(app.createdAt), "MMM d, yyyy")}
                                             </div>
-                                            <div className="text-xs text-zinc-400 pl-6">
+                                            <div className="text-xs text-zinc-700 pl-6">
                                                 {format(new Date(app.createdAt), "h:mm a")}
                                             </div>
                                         </td>
@@ -105,6 +106,7 @@ export default async function AdminCareersPage() {
                                                 <Eye className="w-4 h-4 text-emerald-600" />
                                                 <span>View Photo</span>
                                             </Link>
+                                            <DeleteButton id={app._id.toString()} endpoint="/api/admin/career" />
                                         </td>
                                     </tr>
                                 ))

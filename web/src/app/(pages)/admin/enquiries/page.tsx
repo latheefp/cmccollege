@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Inbox } from 'lucide-react';
+import DeleteButton from '@/components/DeleteButton';
 
 interface Enquiry {
     _id: string;
@@ -145,14 +146,20 @@ export default function EnquiriesAdminPage() {
                                         </td>
                                         <td className="px-8 py-6 text-right">
                                             {enquiry.status === 'Pending' ? (
-                                                <button
-                                                    onClick={() => handleUpdateStatus(enquiry._id, 'Read')}
-                                                    className="inline-flex items-center gap-2 text-emerald-600 font-bold text-sm bg-emerald-50 hover:bg-emerald-100 px-4 py-2 rounded-xl transition-all"
-                                                >
-                                                    Mark as Read
-                                                </button>
+                                                <div className="flex items-center justify-end gap-2">
+                                                    <button
+                                                        onClick={() => handleUpdateStatus(enquiry._id, 'Read')}
+                                                        className="inline-flex items-center gap-2 text-emerald-600 font-bold text-sm bg-emerald-50 hover:bg-emerald-100 px-4 py-2 rounded-xl transition-all"
+                                                    >
+                                                        Mark as Read
+                                                    </button>
+                                                    <DeleteButton id={enquiry._id} endpoint="/api/admin/enquiry" onDelete={fetchEnquiries} />
+                                                </div>
                                             ) : (
-                                                <span className="text-zinc-300 font-bold text-sm uppercase italic">Completed</span>
+                                                <div className="flex items-center justify-end gap-2">
+                                                    <span className="text-zinc-300 font-bold text-sm uppercase italic">Completed</span>
+                                                    <DeleteButton id={enquiry._id} endpoint="/api/admin/enquiry" onDelete={fetchEnquiries} />
+                                                </div>
                                             )}
                                         </td>
                                     </tr>

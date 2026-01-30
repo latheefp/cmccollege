@@ -56,6 +56,7 @@ export async function POST(req: NextRequest) {
         });
 
         const imageUrl = uploadResponse.url;
+        const fileId = uploadResponse.fileId;
 
         // 3. Save to Database (No WhatsApp)
         await connectDB();
@@ -67,6 +68,7 @@ export async function POST(req: NextRequest) {
             qualification,
             experience,
             imageUrl,
+            fileId,
             seen: false
         });
 
