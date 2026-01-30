@@ -24,6 +24,13 @@ export interface AmenityData {
         image: string;
         date: string;
     }[];
+    librarian?: {
+        name: string;
+        image: string;
+        designation: string;
+        qualification?: string;
+        message?: string;
+    };
 }
 
 export const AMENITIES_DATA: Record<string, AmenityData> = {
@@ -80,7 +87,14 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
             "Computer terminals for research"
         ],
         image: "https://ik.imagekit.io/5c6j602yp/Home/images/library.jpeg",
-        icon: Book
+        icon: Book,
+        librarian: {
+            name: "Dr. A. Rahman",
+            designation: "Chief Librarian",
+            qualification: "M.Li.Sc, Ph.D in Library Science",
+            image: "https://ui-avatars.com/api/?name=Dr+A+Rahman&background=5D1035&color=fff&size=256",
+            message: "Our library is not just a collection of books, but a gateway to knowledge and innovation. We strive to provide the best resources to nurture curious minds."
+        }
     },
     "computer-lab": {
         title: "Computer Lab",
