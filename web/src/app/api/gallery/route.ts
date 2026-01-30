@@ -3,10 +3,15 @@ import connectDB from '@/lib/mongodb';
 import Gallery from '@/models/Gallery';
 import { ensureAdmin } from '@/lib/ensureAdmin';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     try {
         await connectDB();
-        const gallery = await Gallery.find({}).sort({ createdAt: -1 });
+        const { searchParams } = new URL(req.url);
+        const category = searchParams.get('category');
+
+        const query = category && category !== 'All' ? { category } : {};
+        const gallery = await Gallery.find(query).sort({ createdAt: -1 });
+
         return NextResponse.json({
             success: true,
             data: gallery,
