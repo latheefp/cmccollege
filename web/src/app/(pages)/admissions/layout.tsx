@@ -7,7 +7,7 @@ export default function AdmissionsLayout({ children }: { children: React.ReactNo
     return (
         <main className="min-h-screen bg-zinc-50 text-zinc-900 pt-[112px]">
             {/* --- HEADER SECTION (Shared across all admissions pages) --- */}
-            <section className="relative py-24 px-6 bg-[#004d40] text-white overflow-hidden mb-12">
+            <section className="relative py-24 px-6 bg-emerald-900 text-white overflow-hidden mb-12">
                 <div className="absolute inset-0 opacity-10 pointer-events-none">
                     <div className="h-full w-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
                 </div>
@@ -23,9 +23,18 @@ export default function AdmissionsLayout({ children }: { children: React.ReactNo
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 font-serif">
                             Begin Your Journey With Us
                         </h1>
-                        <p className="text-xl md:text-2xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-xl md:text-2xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed mb-8">
                             Explore our diverse range of programs and take the first step towards a bright career. Apply to your preferred department today.
                         </p>
+
+                        <a
+                            href="https://cmc.embase.in/admission"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-8 py-3 bg-white text-emerald-900 font-bold rounded-xl hover:bg-emerald-50 transition-all hover:-translate-y-1 shadow-lg shadow-emerald-900/20"
+                        >
+                            Apply Now
+                        </a>
                     </motion.div>
                 </div>
             </section>

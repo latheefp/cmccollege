@@ -131,7 +131,8 @@ export default function Home() {
   const desktopImages = [
     "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
     "https://ik.imagekit.io/5c6j602yp/Banner/Banner1?updatedAt=1768811009859",
-    "https://ik.imagekit.io/5c6j602yp/Banner/Banner2"
+    "https://ik.imagekit.io/5c6j602yp/Banner/Banner2",
+    "https://ik.imagekit.io/5c6j602yp/Banner/Banner"
   ];
 
   const tabletImages = [
@@ -236,7 +237,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col text-zinc-900 font-sans pt-[104px] lg:pt-[112px] bg-[#7B0046]/3">
       {/* Hero Section */}
       <section
-        className="relative min-h-[80vh] md:min-h-0 md:aspect-16/7 lg:aspect-auto lg:min-h-[80vh] flex flex-col items-center justify-center py-16 px-4 md:py-12 lg:py-32 text-white overflow-hidden"
+        className="relative min-h-[60vh] md:min-h-0 md:aspect-16/7 lg:aspect-auto lg:min-h-[80vh] flex flex-col items-center justify-center py-16 px-4 md:py-12 lg:py-32 text-white overflow-hidden"
       >
         {/* Hero Background Slider */}
         <div className="absolute inset-0 z-0 bg-black">

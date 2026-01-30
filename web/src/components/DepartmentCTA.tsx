@@ -30,7 +30,9 @@ export default function DepartmentCTA() {
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                                 <Link
-                                    href="/admissions"
+                                    href="https://cmc.embase.in/admission"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="w-full sm:w-auto px-10 py-5 bg-white text-[#5D1035] font-black rounded-xl shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 uppercase tracking-widest text-sm"
                                 >
                                     Apply for Admission
