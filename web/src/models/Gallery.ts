@@ -15,7 +15,7 @@ const GallerySchema: Schema = new Schema({
     category: {
         type: String,
         required: true,
-        enum: ['Campus', 'Events', 'Hostel', 'Classroom'],
+        enum: ['Campus', 'Events', 'Hostel', 'Classroom', 'Alumni'],
     },
     createdAt: { type: Date, default: Date.now },
 });
