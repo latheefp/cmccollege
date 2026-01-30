@@ -337,7 +337,7 @@ export default function Home() {
       </section>
 
       {/* About Section - Premium Bordered Card */}
-      <section className="pt-14 pb-10 px-4 md:px-6 bg-emerald-50">
+      <section className="pt-8 pb-8 px-4 md:pt-14 md:pb-10 md:px-6 bg-emerald-50">
         <ScrollReveal>
           <div className="max-w-7xl mx-auto bg-white border-l-4 border-l-[#7B0046] border-t border-r border-b border-gray-100 shadow-xl shadow-[#7B0046]/5 p-6 md:p-14 rounded-r-2xl relative overflow-hidden">
             {/* Background decoration */}
@@ -460,7 +460,7 @@ export default function Home() {
       {/* Academic Programs Section */}
       <section className="py-12 md:py-24 px-4 md:px-6 bg-emerald-50">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal className="text-center mb-10 md:mb-16">
+          <ScrollReveal className="text-center mb-8 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-agency font-bold text-emerald-800 mb-4 uppercase">Departments of Academic Studies</h2>
             <p className="text-zinc-600 text-lg max-w-2xl mx-auto">Offering a wide range of undergraduate and postgraduate programs driven by excellence.</p>
           </ScrollReveal>
@@ -476,7 +476,7 @@ export default function Home() {
               { name: "Department Of Human Resource Management", slug: "human-resource-management", img: "/images/modern_science_lab_1768116682208.png" },
               { name: "Department Of Sociology", slug: "sociology", img: "/images/science_exhibition_project_1768117868795.png" }
             ].map((dept, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
+              <ScrollReveal key={i} delay={typeof window !== 'undefined' && window.innerWidth < 768 ? i * 50 : i * 100}>
                 <Link
                   href={`/departments/${dept.slug}`}
                   className="block h-full"
@@ -530,7 +530,7 @@ export default function Home() {
               { name: "Bus", slug: "bus-facility", img: "https://ik.imagekit.io/5c6j602yp/Home/images/buss.jpeg" }
 
             ].map((facility, i) => (
-              <ScrollReveal key={i} delay={i * 100} className="group cursor-pointer">
+              <ScrollReveal key={i} delay={typeof window !== 'undefined' && window.innerWidth < 768 ? i * 50 : i * 100} className="group cursor-pointer">
                 <Link href={`/amenities/${facility.slug}`}>
                   <div className="relative h-64 rounded-xl overflow-hidden shadow-lg border border-white">
                     <Image

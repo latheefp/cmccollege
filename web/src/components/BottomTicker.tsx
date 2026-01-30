@@ -90,7 +90,7 @@ export default function BottomTicker() {
                         // Use explicit animation property to override any global defaults and ensure variable usage
                         // Mobile: 4x slower than base duration
                         // Desktop: Base duration
-                        className="flex whitespace-nowrap w-max [animation:marquee_calc(var(--duration)*4)_linear_infinite] md:[animation:marquee_var(--duration)_linear_infinite]"
+                        className="flex items-center gap-4 shrink-0 animate-[marquee_calc(var(--duration)*4)_linear_infinite] md:animate-[marquee_var(--duration)_linear_infinite] hover:[animation-play-state:paused]"
                         style={{
                             // Base duration (Fast)
                             '--duration': `${Math.max(12, displayList.join('').length * 0.1)}s`,
