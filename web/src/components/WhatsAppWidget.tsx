@@ -40,7 +40,7 @@ export default function WhatsAppWidget() {
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-4 font-sans">
+        <div className="fixed bottom-6 right-6 z-9999 flex flex-col items-end gap-4 font-sans">
 
             {/* Chat Popup */}
             <AnimatePresence>
@@ -108,7 +108,7 @@ export default function WhatsAppWidget() {
                             />
                             <button
                                 onClick={handleSend}
-                                className="w-10 h-10 flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full transition-all shadow-sm flex-shrink-0"
+                                className="w-10 h-10 flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full transition-all shadow-sm shrink-0"
                             >
                                 <Send className="w-4 h-4 ml-0.5" />
                             </button>

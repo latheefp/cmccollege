@@ -1,11 +1,12 @@
 import connectDB from "@/lib/mongodb";
 import CareerApplication, { ICareerApplication } from "@/models/CareerApplication";
 import { format } from "date-fns";
-import { Briefcase, Mail, Phone, Calendar, Eye, Download } from "lucide-react";
+import { Briefcase, Mail, Phone, Calendar, Eye, Download, FileText } from "lucide-react";
 import Link from "next/link";
 import DeleteButton from "@/components/DeleteButton";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import CareerExportButton from "@/components/CareerExportButton";
 
 export const dynamic = "force-dynamic";
 
@@ -25,8 +26,11 @@ export default async function AdminCareersPage() {
                     <h1 className="text-2xl font-bold text-zinc-900">Career Applications</h1>
                     <p className="text-zinc-500">Manage job applications and resumes</p>
                 </div>
-                <div className="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-lg font-medium text-sm">
-                    Total Applications: {applications.length}
+                <div className="flex items-center gap-3">
+                    <div className="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-lg font-medium text-sm">
+                        Total Applications: {applications.length}
+                    </div>
+                    <CareerExportButton />
                 </div>
             </div>
 
@@ -104,7 +108,15 @@ export default async function AdminCareersPage() {
                                                 className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-700 hover:bg-zinc-50 hover:border-emerald-300 transition-all shadow-sm"
                                             >
                                                 <Eye className="w-4 h-4 text-emerald-600" />
-                                                <span>View Photo</span>
+                                                <span>Photo</span>
+                                            </Link>
+                                            <Link
+                                                href={app.cvUrl}
+                                                target="_blank"
+                                                className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-700 hover:bg-zinc-50 hover:border-blue-300 transition-all shadow-sm"
+                                            >
+                                                <FileText className="w-4 h-4 text-blue-600" />
+                                                <span>CV</span>
                                             </Link>
                                             <DeleteButton id={app._id.toString()} endpoint="/api/admin/career" />
                                         </td>

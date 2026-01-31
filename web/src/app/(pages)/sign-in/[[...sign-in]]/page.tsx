@@ -94,12 +94,12 @@ export default function SignInPage() {
         <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-[#0A0A0A] selection:bg-emerald-500/30 selection:text-emerald-400">
             {/* Background Effects */}
             <div className="absolute inset-0 w-full h-full">
-                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-emerald-900/20 rounded-full blur-[120px] animate-pulse"></div>
+                <div className="absolute -top-40 -left-40 w-96 h-96 bg-linear-to-tr from-[#5D1035]/30 to-purple-500/30 rounded-full blur-3xl animate-pulse"></div>
                 <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px] animate-pulse delay-1000"></div>
                 <div className="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-zinc-800/20 rounded-full blur-[100px] animate-pulse delay-700"></div>
 
                 {/* Grid Pattern Overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
+                <div className="absolute inset-0 bg-size-[4rem_4rem] pointer-events-none opacity-[0.03] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
             </div>
 
             <motion.div
@@ -114,12 +114,12 @@ export default function SignInPage() {
                         <div className="text-center space-y-6">
                             <div className="relative inline-flex mb-2">
                                 <div className="absolute inset-0 bg-emerald-500 blur-xl opacity-20 rounded-full"></div>
-                                <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 ring-1 ring-white/20">
+                                <div className="relative w-16 h-16 rounded-2xl bg-linear-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 ring-1 ring-white/20">
                                     <Lock className="w-7 h-7 text-white drop-shadow-md" />
                                 </div>
                             </div>
                             <div className="space-y-1.5">
-                                <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/60 tracking-tight">Welcome Back</h1>
+                                <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/60 tracking-tight">Welcome Back</h1>
                                 <p className="text-zinc-500 text-sm font-medium">Sign in to access the admin dashboard</p>
                             </div>
                         </div>
@@ -133,7 +133,7 @@ export default function SignInPage() {
                                     exit={{ opacity: 0, scale: 0.95, height: 0 }}
                                     className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-start gap-3 text-red-200 text-sm"
                                 >
-                                    <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-red-400" />
+                                    <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-red-400" />
                                     <p className="leading-snug">{error}</p>
                                 </motion.div>
                             )}
@@ -191,9 +191,9 @@ export default function SignInPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full relative group overflow-hidden bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-semibold py-4 rounded-xl shadow-lg transition-all duration-300 hover:shadow-emerald-500/25 disabled:opacity-70 disabled:cursor-not-allowed hover:cursor-pointer transform hover:scale-[1.01] active:scale-[0.99]"
+                                className="w-full relative group overflow-hidden bg-linear-to-br from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-semibold py-4 rounded-xl shadow-lg transition-all duration-300 hover:shadow-emerald-500/25 disabled:opacity-70 disabled:cursor-not-allowed hover:cursor-pointer transform hover:scale-[1.01] active:scale-[0.99]"
                             >
-                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out skew-y-12"></div>
+                                <div className="absolute inset-0 bg-linear-to-br from-[#5D1035]/20 to-purple-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <div className="relative flex items-center justify-center gap-2">
                                     {isLoading ? (
                                         <>

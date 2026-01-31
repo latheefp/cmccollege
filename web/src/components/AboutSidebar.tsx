@@ -47,7 +47,7 @@ export default function AboutSidebar() {
     };
 
     return (
-        <aside className="w-full lg:w-72 flex-shrink-0 sticky top-32 lg:top-32 z-40 self-start h-fit">
+        <aside className="w-full lg:w-72 shrink-0 sticky top-32 lg:top-32 z-40 self-start h-fit">
             {/* Mobile Toggle */}
             <div className="lg:hidden mb-6">
                 <button

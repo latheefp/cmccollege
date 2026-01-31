@@ -20,9 +20,10 @@ export async function POST(req: NextRequest) {
         const qualification = formData.get("qualification") as string;
         const experience = formData.get("experience") as string;
         const file = formData.get("resume") as File; // 'resume' field name for the photo file
+        const cvFile = formData.get("cv") as File;
 
         // 1. Validation
-        if (!fullName || !email || !phone || !applyingPosition || !file) {
+        if (!fullName || !email || !phone || !applyingPosition || !file || !cvFile) {
             return NextResponse.json(
                 { success: false, message: "Missing required fields" },
                 { status: 400 }
@@ -31,14 +32,14 @@ export async function POST(req: NextRequest) {
 
         // File Validation
         const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
-        if (!allowedTypes.includes(file.type)) {
+        if (!allowedTypes.includes(file.type) || !allowedTypes.includes(cvFile.type)) {
             return NextResponse.json(
-                { success: false, message: "Invalid file type. Only JPG, PNG, and WEBP are allowed." },
+                { success: false, message: "Invalid file type. Only JPG, PNG, and WEBP images are allowed for both Photo and CV." },
                 { status: 400 }
             );
         }
 
-        if (file.size > 2 * 1024 * 1024) { // 2MB
+        if (file.size > 2 * 1024 * 1024 || cvFile.size > 2 * 1024 * 1024) { // 2MB
             return NextResponse.json(
                 { success: false, message: "File size exceeds 2MB limit." },
                 { status: 400 }
@@ -49,14 +50,26 @@ export async function POST(req: NextRequest) {
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        const uploadResponse = await imagekit.upload({
-            file: buffer,
-            fileName: `career-${Date.now()}-${fullName.replace(/\s+/g, "_")}`,
-            folder: "/career-applications/photos/",
-        });
+        const cvArrayBuffer = await cvFile.arrayBuffer();
+        const cvBuffer = Buffer.from(cvArrayBuffer);
 
-        const imageUrl = uploadResponse.url;
-        const fileId = uploadResponse.fileId;
+        const [photoUpload, cvUpload] = await Promise.all([
+            imagekit.upload({
+                file: buffer,
+                fileName: `career-photo-${Date.now()}-${fullName.replace(/\s+/g, "_")}`,
+                folder: "/career-applications/photos/",
+            }),
+            imagekit.upload({
+                file: cvBuffer,
+                fileName: `career-cv-${Date.now()}-${fullName.replace(/\s+/g, "_")}`,
+                folder: "/career-applications/cvs/",
+            })
+        ]);
+
+        const imageUrl = photoUpload.url;
+        const fileId = photoUpload.fileId;
+        const cvUrl = cvUpload.url;
+        const cvFileId = cvUpload.fileId;
 
         // 3. Save to Database (No WhatsApp)
         await connectDB();
@@ -69,6 +82,8 @@ export async function POST(req: NextRequest) {
             experience,
             imageUrl,
             fileId,
+            cvUrl,
+            cvFileId,
             seen: false
         });
 
