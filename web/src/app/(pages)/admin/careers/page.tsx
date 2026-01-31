@@ -110,14 +110,16 @@ export default async function AdminCareersPage() {
                                                 <Eye className="w-4 h-4 text-emerald-600" />
                                                 <span>Photo</span>
                                             </Link>
-                                            <Link
-                                                href={app.cvUrl}
-                                                target="_blank"
-                                                className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-700 hover:bg-zinc-50 hover:border-blue-300 transition-all shadow-sm"
-                                            >
-                                                <FileText className="w-4 h-4 text-blue-600" />
-                                                <span>CV</span>
-                                            </Link>
+                                            {app.cvUrl && (
+                                                <Link
+                                                    href={app.cvUrl}
+                                                    target="_blank"
+                                                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-700 hover:bg-zinc-50 hover:border-blue-300 transition-all shadow-sm"
+                                                >
+                                                    <FileText className="w-4 h-4 text-blue-600" />
+                                                    <span>CV</span>
+                                                </Link>
+                                            )}
                                             <DeleteButton id={app._id.toString()} endpoint="/api/admin/career" />
                                         </td>
                                     </tr>

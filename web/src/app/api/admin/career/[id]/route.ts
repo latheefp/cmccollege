@@ -26,14 +26,17 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
             return NextResponse.json({ message: "Application not found" }, { status: 404 });
         }
 
-        // Delete image from ImageKit
-        if (application.fileId) {
+        // Delete images from ImageKit (Photo and CV)
+        const fileIdsToDelete = [];
+        if (application.fileId) fileIdsToDelete.push(application.fileId);
+        if (application.cvFileId) fileIdsToDelete.push(application.cvFileId);
+
+        if (fileIdsToDelete.length > 0) {
             try {
-                await imagekit.deleteFile(application.fileId);
+                await Promise.all(fileIdsToDelete.map(id => imagekit.deleteFile(id)));
             } catch (error) {
-                console.error("Error deleting file from ImageKit:", error);
-                // Continue to delete from DB even if ImageKit fails? 
-                // Better to log it and proceed so verify DB consistency.
+                console.error("Error deleting files from ImageKit:", error);
+                // Continue to delete from DB even if ImageKit fails
             }
         }
 
