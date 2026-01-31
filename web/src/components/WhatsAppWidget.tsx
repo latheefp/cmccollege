@@ -16,15 +16,14 @@ export default function WhatsAppWidget() {
     const [isHovered, setIsHovered] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     const pathname = usePathname();
-
-    if (pathname?.startsWith("/admin")) return null;
-
     // Auto-focus input when opened
     useEffect(() => {
         if (isOpen && inputRef.current) {
             setTimeout(() => inputRef.current?.focus(), 300);
         }
     }, [isOpen]);
+
+    if (pathname?.startsWith("/admin")) return null;
 
     const handleSend = () => {
         const text = message.trim() || DEFAULT_MESSAGE;
