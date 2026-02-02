@@ -154,15 +154,15 @@ export default function QuestionBankPage() {
                             </div>
 
                             {/* Semester Filter */}
-                            <div className="bg-white rounded-3xl p-6 border border-zinc-200 shadow-sm border-l-4 border-l-pink-500 mt-6">
-                                <h3 className="text-sm font-bold uppercase tracking-widest text-pink-600 mb-6 flex items-center gap-2">
+                            <div className="bg-white rounded-3xl p-6 border border-zinc-200 shadow-sm border-l-4 border-l-emerald-800 mt-6">
+                                <h3 className="text-sm font-bold uppercase tracking-widest text-emerald-800 mb-6 flex items-center gap-2">
                                     <Clock size={14} />
                                     Semester
                                 </h3>
                                 <div className="grid grid-cols-2 gap-2">
                                     <button
                                         onClick={() => setSelectedSem("All")}
-                                        className={`col-span-2 text-center px-4 py-3 rounded-xl text-sm font-bold transition-all ${selectedSem === "All" ? "bg-pink-600 text-white shadow-md" : "bg-zinc-50 text-zinc-600 border border-zinc-100 hover:border-pink-200 hover:bg-pink-50"}`}
+                                        className={`col-span-2 text-center px-4 py-3 rounded-xl text-sm hover:cursor-pointer font-bold transition-all ${selectedSem === "All" ? "bg-emerald-800 text-white shadow-md" : "bg-zinc-50 text-zinc-600 border border-zinc-100 hover:border-emerald-200 hover:bg-emerald-50"}`}
                                     >
                                         All
                                     </button>
@@ -170,7 +170,7 @@ export default function QuestionBankPage() {
                                         <button
                                             key={sem}
                                             onClick={() => setSelectedSem(sem)}
-                                            className={`text-center px-3 py-3 rounded-xl text-xs font-bold transition-all ${selectedSem === sem ? "bg-pink-600 text-white shadow-md" : "bg-zinc-50 text-zinc-600 border border-zinc-100 hover:border-pink-100 hover:bg-pink-50"}`}
+                                            className={`text-center px-3 py-3 rounded-xl text-xs hover:cursor-pointer font-bold transition-all ${selectedSem === sem ? "bg-emerald-800 text-white shadow-md" : "bg-zinc-50 text-zinc-600 border border-zinc-100 hover:border-emerald-100 hover:bg-emerald-50"}`}
                                         >
                                             Sem {sem.split(" ")[1]}
                                         </button>
