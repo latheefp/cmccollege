@@ -69,6 +69,7 @@ export default function Navbar() {
                 { name: "Syllabus", href: "https://docs.uoc.ac.in/website/Syll/" },
                 { name: "Time Table", href: "https://pareekshabhavan.uoc.ac.in/index.php/examination/timetable" },
                 { name: "Academic Calendar", href: "/academic-calender" },
+                { name: "Question Bank", href: "/question-bank" },
             ]
         },
         { name: "Students Zone", href: "/students-zone" },
