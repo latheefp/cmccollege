@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, BookOpen, Download, Filter, ChevronRight, Book, GraduationCap, Clock, Loader2, X, Menu } from "lucide-react";
 
@@ -39,6 +40,27 @@ export default function QuestionBankPage() {
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const [visibleCount, setVisibleCount] = useState(6);
     const [isMoreLoading, setIsMoreLoading] = useState(false);
+
+    // Prevent body scroll when mobile filter is open
+    useEffect(() => {
+        if (isFiltersOpen) {
+            document.body.style.overflow = "hidden";
+            document.body.style.height = "100vh";
+            document.body.style.position = "fixed";
+            document.body.style.width = "100%";
+        } else {
+            document.body.style.overflow = "";
+            document.body.style.height = "";
+            document.body.style.position = "";
+            document.body.style.width = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+            document.body.style.height = "";
+            document.body.style.position = "";
+            document.body.style.width = "";
+        };
+    }, [isFiltersOpen]);
 
     const filteredQuestions = mockQuestions.filter(q => {
         const matchesSearch = q.title.toLowerCase().includes(searchQuery.toLowerCase()) || q.code.toLowerCase().includes(searchQuery.toLowerCase());
@@ -139,7 +161,21 @@ export default function QuestionBankPage() {
                             </button>
                         </div>
 
-                        <div className={`${isFiltersOpen ? "block" : "hidden"} lg:block space-y-8`}>
+                        <div className={`${isFiltersOpen ? "fixed inset-0 z-[100] bg-white p-6 pt-28 overflow-y-auto overscroll-contain pb-20" : "hidden"} lg:relative lg:inset-auto lg:top-0 lg:block lg:bg-transparent lg:p-0 lg:overflow-visible space-y-8`}>
+                            {/* Mobile Header in Overlay */}
+                            <div className="lg:hidden flex items-center justify-between mb-8 border-b border-zinc-100 pb-4">
+                                <div className="flex items-center gap-2">
+                                    <Filter size={20} className="text-[#7a0b3a]" />
+                                    <h2 className="text-xl font-bold uppercase tracking-wider text-zinc-800">Filters</h2>
+                                </div>
+                                <button
+                                    onClick={() => setIsFiltersOpen(false)}
+                                    className="p-2 rounded-full bg-zinc-100 text-zinc-600 active:scale-95 transition-transform"
+                                >
+                                    <X size={24} />
+                                </button>
+                            </div>
+
                             <ScrollReveal>
                                 <div className="hidden lg:flex items-center gap-2 mb-6">
                                     <Filter size={18} className="text-[#7a0b3a]" />
