@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, BookOpen, Download, Filter, ChevronRight, Book, GraduationCap, Clock, Loader2 } from "lucide-react";
+import { Search, BookOpen, Download, Filter, ChevronRight, Book, GraduationCap, Clock, Loader2, X, Menu } from "lucide-react";
 
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -36,6 +36,7 @@ export default function QuestionBankPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedDept, setSelectedDept] = useState("All");
     const [selectedSem, setSelectedSem] = useState("All");
+    const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const [visibleCount, setVisibleCount] = useState(6);
     const [isMoreLoading, setIsMoreLoading] = useState(false);
 
@@ -118,66 +119,96 @@ export default function QuestionBankPage() {
 
             {/* Filter & Results Section */}
             <section className="py-16 px-6 max-w-7xl mx-auto w-full">
-                <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12">
-
+                <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12 items-start">
                     {/* Sidebar Filters */}
-                    <aside className="space-y-8">
-                        <ScrollReveal>
-                            <div className="flex items-center gap-2 mb-6">
-                                <Filter size={18} className="text-[#7a0b3a]" />
-                                <h2 className="text-lg font-bold uppercase tracking-wider text-zinc-800">Filters</h2>
-                            </div>
-
-                            {/* Department Filter */}
-                            <div className="bg-white rounded-3xl p-6 border border-zinc-200 shadow-sm border-l-4 border-l-[#7a0b3a]">
-                                <h3 className="text-sm font-bold uppercase tracking-widest text-[#7a0b3a] mb-6 flex items-center gap-2">
-                                    <Book size={14} />
-                                    Department
-                                </h3>
-                                <div className="space-y-3">
-                                    <button
-                                        onClick={() => setSelectedDept("All")}
-                                        className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all ${selectedDept === "All" ? "bg-[#7a0b3a] text-white shadow-md shadow-[#7a0b3a]/20" : "hover:bg-zinc-50 text-zinc-600 border border-transparent hover:border-zinc-200"}`}
-                                    >
-                                        All Departments
-                                    </button>
-                                    {departments.map(dept => (
-                                        <button
-                                            key={dept}
-                                            onClick={() => setSelectedDept(dept)}
-                                            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all ${selectedDept === dept ? "bg-[#7a0b3a] text-white shadow-md shadow-[#7a0b3a]/20" : "hover:bg-zinc-50 text-zinc-600 border border-transparent hover:border-zinc-200"}`}
-                                        >
-                                            {dept}
-                                        </button>
-                                    ))}
+                    <aside className="w-full lg:w-[300px] shrink-0 sticky top-35 lg:top-36 z-40 self-start h-fit">
+                        {/* Mobile Toggle */}
+                        <div className="lg:hidden mb-6">
+                            <button
+                                onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+                                className="w-full flex items-center justify-between bg-[#7a0b3a] text-white p-4 rounded-2xl shadow-lg font-bold uppercase tracking-wider backdrop-blur-sm"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <Filter size={20} />
+                                    <span>Filters</span>
+                                    {(selectedDept !== "All" || selectedSem !== "All") && (
+                                        <span className="ml-2 w-2 h-2 bg-pink-400 rounded-full animate-pulse" />
+                                    )}
                                 </div>
-                            </div>
+                                {isFiltersOpen ? <X size={20} /> : <Menu size={20} />}
+                            </button>
+                        </div>
 
-                            {/* Semester Filter */}
-                            <div className="bg-white rounded-3xl p-6 border border-zinc-200 shadow-sm border-l-4 border-l-emerald-800 mt-6">
-                                <h3 className="text-sm font-bold uppercase tracking-widest text-emerald-800 mb-6 flex items-center gap-2">
-                                    <Clock size={14} />
-                                    Semester
-                                </h3>
-                                <div className="grid grid-cols-2 gap-2">
-                                    <button
-                                        onClick={() => setSelectedSem("All")}
-                                        className={`col-span-2 text-center px-4 py-3 rounded-xl text-sm hover:cursor-pointer font-bold transition-all ${selectedSem === "All" ? "bg-emerald-800 text-white shadow-md" : "bg-zinc-50 text-zinc-600 border border-zinc-100 hover:border-emerald-200 hover:bg-emerald-50"}`}
-                                    >
-                                        All
-                                    </button>
-                                    {semesters.map(sem => (
-                                        <button
-                                            key={sem}
-                                            onClick={() => setSelectedSem(sem)}
-                                            className={`text-center px-3 py-3 rounded-xl text-xs hover:cursor-pointer font-bold transition-all ${selectedSem === sem ? "bg-emerald-800 text-white shadow-md" : "bg-zinc-50 text-zinc-600 border border-zinc-100 hover:border-emerald-100 hover:bg-emerald-50"}`}
-                                        >
-                                            Sem {sem.split(" ")[1]}
-                                        </button>
-                                    ))}
+                        <div className={`${isFiltersOpen ? "block" : "hidden"} lg:block space-y-8`}>
+                            <ScrollReveal>
+                                <div className="hidden lg:flex items-center gap-2 mb-6">
+                                    <Filter size={18} className="text-[#7a0b3a]" />
+                                    <h2 className="text-lg font-bold uppercase tracking-wider text-zinc-800">Filters</h2>
                                 </div>
-                            </div>
-                        </ScrollReveal>
+
+                                {/* Department Filter */}
+                                <div className="bg-white rounded-3xl p-6 border border-zinc-200 shadow-sm border-l-4 border-l-[#7a0b3a]">
+                                    <h3 className="text-sm font-bold uppercase tracking-widest text-[#7a0b3a] mb-6 flex items-center gap-2">
+                                        <Book size={14} />
+                                        Department
+                                    </h3>
+                                    <div className="space-y-3">
+                                        <button
+                                            onClick={() => {
+                                                setSelectedDept("All");
+                                                setIsFiltersOpen(false);
+                                            }}
+                                            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all hover:cursor-pointer ${selectedDept === "All" ? "bg-[#7a0b3a] text-white shadow-md shadow-[#7a0b3a]/20" : "hover:bg-zinc-50 text-zinc-600 border border-transparent hover:border-zinc-200"}`}
+                                        >
+                                            All Departments
+                                        </button>
+                                        {departments.map(dept => (
+                                            <button
+                                                key={dept}
+                                                onClick={() => {
+                                                    setSelectedDept(dept);
+                                                    setIsFiltersOpen(false);
+                                                }}
+                                                className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all hover:cursor-pointer ${selectedDept === dept ? "bg-[#7a0b3a] text-white shadow-md shadow-[#7a0b3a]/20" : "hover:bg-zinc-50 text-zinc-600 border border-transparent hover:border-zinc-200"}`}
+                                            >
+                                                {dept}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Semester Filter */}
+                                <div className="bg-white rounded-3xl p-6 border border-zinc-200 shadow-sm border-l-4 border-l-emerald-800 mt-6">
+                                    <h3 className="text-sm font-bold uppercase tracking-widest text-emerald-800 mb-6 flex items-center gap-2">
+                                        <Clock size={14} />
+                                        Semester
+                                    </h3>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            onClick={() => {
+                                                setSelectedSem("All");
+                                                setIsFiltersOpen(false);
+                                            }}
+                                            className={`col-span-2 text-center px-4 py-3 rounded-xl text-sm hover:cursor-pointer font-bold transition-all ${selectedSem === "All" ? "bg-emerald-800 text-white shadow-md" : "bg-zinc-50 text-zinc-600 border border-zinc-100 hover:border-emerald-200 hover:bg-emerald-50"}`}
+                                        >
+                                            All
+                                        </button>
+                                        {semesters.map(sem => (
+                                            <button
+                                                key={sem}
+                                                onClick={() => {
+                                                    setSelectedSem(sem);
+                                                    setIsFiltersOpen(false);
+                                                }}
+                                                className={`text-center px-3 py-3 rounded-xl text-xs hover:cursor-pointer font-bold transition-all ${selectedSem === sem ? "bg-emerald-800 text-white shadow-md" : "bg-zinc-50 text-zinc-600 border border-zinc-100 hover:border-emerald-100 hover:bg-emerald-50"}`}
+                                            >
+                                                Sem {sem.split(" ")[1]}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+                        </div>
                     </aside>
 
                     {/* Main Content: Question Paper Grid */}
