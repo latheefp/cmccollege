@@ -17,6 +17,7 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
     const pathname = usePathname();
 
     if (pathname === '/admin' || pathname.startsWith('/admin/')) {
@@ -76,7 +77,26 @@ export default function Navbar() {
             name: "Students Zone",
             href: "/students-zone",
             dropdown: [
-                { name: "Student Support", href: "/students-zone/support" },
+                {
+                    name: "Student Support",
+                    href: "/students-zone/support",
+                    dropdown: [
+                        { name: "Advisory Scheme", href: "/students-zone/support/advisory" },
+                        { name: "Career Guidance and Placement Cell", href: "/students-zone/support/career-guidance" },
+                        { name: "PSC Coaching", href: "/students-zone/support/psc-coaching" },
+                        { name: "Discipline Commitee", href: "/students-zone/support/discipline" },
+                        { name: "Placement Internships", href: "/students-zone/support/placement" },
+                        { name: "Fine Arts Commitee", href: "/students-zone/support/fine-arts" },
+                        { name: "Grievance Redressal Committee", href: "/students-zone/support/grievance-committee" },
+                        { name: "Public relation", href: "/students-zone/support/public-relation" },
+                        { name: "PTA", href: "/students-zone/support/pta" },
+                        { name: "Scholarship Committee", href: "/students-zone/support/scholarship" },
+                        { name: "Remedial Coaching", href: "/students-zone/support/remedial" },
+                        { name: "Anti-Ragging Committee", href: "/students-zone/support/anti-ragging" },
+                        { name: "Mentor Forum", href: "/students-zone/support/mentor-forum" },
+                        { name: "Sports Council", href: "/students-zone/support/sports-council" },
+                    ]
+                },
                 { name: "NSS", href: "/students-zone/nss" },
                 { name: "Students Union", href: "/students-zone/union" },
                 { name: "College Magazine", href: "/students-zone/magazine" },
@@ -144,21 +164,53 @@ export default function Navbar() {
                                             <AnimatePresence>
                                                 {activeDropdown === link.name && (
                                                     <motion.div
-                                                        initial={{ opacity: 0, y: 10, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
-                                                        animate={{ opacity: 1, y: 0, clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-                                                        exit={{ opacity: 0, y: 10, clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
+                                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
                                                         transition={{ duration: 0.2, ease: "easeOut" }}
-                                                        className="absolute top-full left-0 min-w-[200px] bg-[#7a0b3a] rounded-lg shadow-xl overflow-hidden py-2"
+                                                        onMouseLeave={() => setActiveSubDropdown(null)}
+                                                        className="absolute top-full left-0 min-w-[220px] bg-[#7a0b3a] rounded-lg shadow-xl py-2 z-50 overflow-visible"
                                                     >
                                                         {link.dropdown.map((subItem) => (
-                                                            <Link
+                                                            <div
                                                                 key={subItem.name}
-                                                                href={subItem.href}
-                                                                onClick={(e) => handleLinkClick(e, subItem.href)}
-                                                                className="block px-4 py-2.5 text-sm text-white/90 hover:text-white hover:bg-white/10 transition-colors font-medium border-l-2 border-transparent hover:border-white"
+                                                                className="relative"
+                                                                onMouseEnter={() => subItem.dropdown && setActiveSubDropdown(subItem.name)}
                                                             >
-                                                                {subItem.name}
-                                                            </Link>
+                                                                <Link
+                                                                    href={subItem.href}
+                                                                    onClick={(e) => handleLinkClick(e, subItem.href)}
+                                                                    className="flex items-center justify-between px-4 py-2.5 text-sm text-white/90 hover:text-white hover:bg-white/10 transition-colors font-medium border-l-2 border-transparent hover:border-white"
+                                                                >
+                                                                    <span>{subItem.name}</span>
+                                                                    {subItem.dropdown && <ChevronDown size={14} className="-rotate-90" />}
+                                                                </Link>
+
+                                                                {/* Flyout Sub-menu */}
+                                                                {subItem.dropdown && (
+                                                                    <AnimatePresence>
+                                                                        {activeSubDropdown === subItem.name && (
+                                                                            <motion.div
+                                                                                initial={{ opacity: 0, x: 10 }}
+                                                                                animate={{ opacity: 1, x: 0 }}
+                                                                                exit={{ opacity: 0, x: 10 }}
+                                                                                className="absolute left-full top-0 ml-0.5 min-w-[240px] bg-[#7a0b3a] rounded-lg shadow-2xl py-2 border-l border-white/10"
+                                                                            >
+                                                                                {subItem.dropdown.map(nestedItem => (
+                                                                                    <Link
+                                                                                        key={nestedItem.name}
+                                                                                        href={nestedItem.href}
+                                                                                        onClick={(e) => handleLinkClick(e, nestedItem.href)}
+                                                                                        className="block px-4 py-2 text-xs text-white/80 hover:text-white hover:bg-white/10 transition-colors uppercase tracking-wider font-bold"
+                                                                                    >
+                                                                                        {nestedItem.name}
+                                                                                    </Link>
+                                                                                ))}
+                                                                            </motion.div>
+                                                                        )}
+                                                                    </AnimatePresence>
+                                                                )}
+                                                            </div>
                                                         ))}
                                                     </motion.div>
                                                 )}
