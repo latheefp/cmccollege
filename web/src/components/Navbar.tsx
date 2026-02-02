@@ -72,7 +72,23 @@ export default function Navbar() {
                 { name: "Question Bank", href: "/question-bank" },
             ]
         },
-        { name: "Students Zone", href: "/students-zone" },
+        {
+            name: "Students Zone",
+            href: "/students-zone",
+            dropdown: [
+                { name: "Student Support", href: "/students-zone/support" },
+                { name: "NSS", href: "/students-zone/nss" },
+                { name: "Students Union", href: "/students-zone/union" },
+                { name: "College Magazine", href: "/students-zone/magazine" },
+                { name: "Alumni", href: "/alumni" },
+                { name: "SC/ST Equal Opportunity Cell", href: "/students-zone/sc-st-cell" },
+                { name: "Clubs And Forums", href: "/students-zone/clubs" },
+                { name: "Anti-Drug Cell", href: "/students-zone/anti-drug-cell" },
+                { name: "Pay Fees", href: "/students-zone/pay-fees" },
+                { name: "Prayukti", href: "/students-zone/prayukti" },
+                { name: "File Your Grievance", href: "/students-zone/grievance" },
+            ]
+        },
         { name: "Campus Life", href: "/campus-life" },
         { name: "Amenities", href: "/amenities" },
         { name: "Gallery", href: "/gallery" },
