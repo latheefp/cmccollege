@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,6 +17,8 @@ import { useAdmissionStatus } from "@/hooks/useAdmissionStatus";
 import DynamicCTA from "@/components/DynamicCTA";
 import HomeMap from "@/components/HomeMap";
 import toast from "react-hot-toast";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 
 
 interface GalleryImage {
@@ -217,6 +220,28 @@ export default function Home() {
     fetchGallery();
   }, []);
 
+  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleInteraction = () => {
+    setIsPaused(true);
+    if (pauseTimerRef.current) {
+      clearTimeout(pauseTimerRef.current);
+    }
+    pauseTimerRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 10000);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % deviceSlideCount);
+    handleInteraction();
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + deviceSlideCount) % deviceSlideCount);
+    handleInteraction();
+  };
+
   const imagesToRender = galleryImages.length > 0
     ? galleryImages.slice(0, 5).map((img, i) => ({
       title: img.title,
@@ -300,7 +325,10 @@ export default function Home() {
           {Array.from({ length: deviceSlideCount }).map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => {
+                setCurrentSlide(index);
+                handleInteraction();
+              }}
               className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentSlide
                 ? "bg-white w-8"
                 : "bg-white/50 hover:bg-white/80"
@@ -308,6 +336,24 @@ export default function Home() {
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
+        </div>
+
+        {/* Navigation Arrows */}
+        <div className="absolute inset-x-4 md:inset-x-8 top-1/2 -translate-y-1/2 z-20 flex justify-between pointer-events-none">
+          <button
+            onClick={prevSlide}
+            className="group p-2 md:p-3 rounded-full bg-black/20 hover:bg-white/20 backdrop-blur-md border border-white/10 text-white/70 hover:text-white transition-all duration-300 pointer-events-auto hover:scale-110 active:scale-90 hover:cursor-pointer"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="group p-2 md:p-3 rounded-full bg-black/20 hover:bg-white/20 backdrop-blur-md border border-white/10 text-white/70 hover:text-white transition-all duration-300 pointer-events-auto hover:scale-110 active:scale-90 hover:cursor-pointer"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+          </button>
         </div>
 
         {isAdmissionOpen && (
