@@ -169,7 +169,7 @@ export default function Navbar() {
                                                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                                                         transition={{ duration: 0.2, ease: "easeOut" }}
                                                         onMouseLeave={() => setActiveSubDropdown(null)}
-                                                        className="absolute top-full left-0 min-w-[220px] bg-[#7a0b3a] rounded-lg shadow-xl py-2 z-50 overflow-visible"
+                                                        className="absolute top-full left-0 min-w-[220px] bg-[#7a0b3a] rounded-lg shadow-xl py-2 z-50 overflow-visible transform-gpu"
                                                     >
                                                         {link.dropdown.map((subItem) => (
                                                             <div
@@ -194,7 +194,7 @@ export default function Navbar() {
                                                                                 initial={{ opacity: 0, x: 10 }}
                                                                                 animate={{ opacity: 1, x: 0 }}
                                                                                 exit={{ opacity: 0, x: 10 }}
-                                                                                className="absolute left-full top-0 ml-0.5 min-w-[240px] bg-[#7a0b3a] rounded-lg shadow-2xl py-2 border-l border-white/10"
+                                                                                className="absolute left-full top-0 ml-0.5 min-w-[240px] bg-[#7a0b3a] rounded-lg shadow-2xl py-2 border-l border-white/10 transform-gpu"
                                                                             >
                                                                                 {subItem.dropdown.map(nestedItem => (
                                                                                     <Link

@@ -45,8 +45,10 @@ export default function AcademicsPage() {
         <div className="flex min-h-screen flex-col bg-white">
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 px-6 overflow-hidden bg-zinc-900 text-white">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20" />
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#7a0b3a]/20 rounded-full blur-[120px] -mr-32 -mt-32" />
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 pointer-events-none" />
+                {/* Optimized Blur - Reduced radius for better performance */}
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#7a0b3a]/15 rounded-full blur-[80px] -mr-20 -mt-20 pointer-events-none transform-gpu" />
+                <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[60px] -ml-20 -mb-20 pointer-events-none transform-gpu" />
 
                 <div className="container mx-auto relative z-10">
                     <ScrollReveal>
@@ -77,10 +79,10 @@ export default function AcademicsPage() {
                             <ScrollReveal key={idx} delay={idx * 100}>
                                 <Link
                                     href={feature.link}
-                                    className="group block relative h-full bg-white p-8 rounded-[32px] border border-zinc-100 shadow-sm hover:shadow-2xl hover:shadow-zinc-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+                                    className="group block relative h-full bg-white p-8 rounded-[32px] border border-zinc-100 shadow-sm hover:shadow-2xl hover:shadow-zinc-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden transform-gpu will-change-transform"
                                 >
                                     {/* Icon Box */}
-                                    <div className={`w-14 h-14 ${feature.bgLight} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500`}>
+                                    <div className={`w-14 h-14 ${feature.bgLight} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 transform-gpu will-change-transform`}>
                                         <feature.icon size={28} className={feature.title === "Question Bank" ? "text-[#7a0b3a]" : feature.color.replace('bg-', 'text-')} />
                                     </div>
 
@@ -95,7 +97,7 @@ export default function AcademicsPage() {
                                     {/* Action Link */}
                                     <div className="flex items-center gap-2 text-[#7a0b3a] font-bold text-sm uppercase tracking-widest mt-auto">
                                         Explore Resource
-                                        <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                        <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform transform-gpu" />
                                     </div>
 
                                     {/* Hover Decorative Element */}
@@ -137,11 +139,11 @@ export default function AcademicsPage() {
                                     </p>
                                 </div>
                                 <div className="grid grid-cols-2 gap-8 pt-4">
-                                    <div>
+                                    <div className="transform-gpu">
                                         <div className="text-3xl font-black text-[#7a0b3a] mb-1">98%</div>
                                         <div className="text-sm font-bold uppercase tracking-widest text-zinc-400">Success Rate</div>
                                     </div>
-                                    <div>
+                                    <div className="transform-gpu">
                                         <div className="text-3xl font-black text-[#7a0b3a] mb-1">20+</div>
                                         <div className="text-sm font-bold uppercase tracking-widest text-zinc-400">Research Projects</div>
                                     </div>
