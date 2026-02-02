@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, BookOpen, Download, Filter, ChevronRight, Book, GraduationCap, Clock, Loader2, X, Menu } from "lucide-react";
 
@@ -362,10 +363,13 @@ export default function QuestionBankPage() {
                                                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
                                                         {q.type}
                                                     </span>
-                                                    <button className="flex items-center gap-2 px-5 py-2.5 bg-zinc-900 group-hover:bg-[#7a0b3a] text-white rounded-xl text-sm font-bold transition-all duration-300 hover:scale-105 shadow-md shadow-zinc-900/10 cursor-pointer">
+                                                    <Link
+                                                        href="/question-bank/download"
+                                                        className="flex items-center gap-2 px-5 py-2.5 bg-zinc-900 group-hover:bg-[#7a0b3a] text-white rounded-xl text-sm font-bold transition-all duration-300 hover:scale-105 shadow-md shadow-zinc-900/10 cursor-pointer"
+                                                    >
                                                         <Download size={16} />
                                                         Download
-                                                    </button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </motion.div>
