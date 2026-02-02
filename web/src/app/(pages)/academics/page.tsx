@@ -53,7 +53,7 @@ export default function AcademicsPage() {
                 <div className="container mx-auto relative z-10">
                     <ScrollReveal>
                         <div className="max-w-3xl">
-                            <div className="inline-flex items-center gap-3 mb-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+                            <div className="inline-flex mt-8 items-center gap-3 mb-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
                                 <GraduationCap size={18} className="text-pink-400" />
                                 <span className="text-xs font-black tracking-[0.2em] uppercase text-pink-100">Academic Hub</span>
                             </div>

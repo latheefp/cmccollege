@@ -1,0 +1,1 @@
+'use client'; import ComingSoon from '@/components/ComingSoon'; export default function Page() { return <ComingSoon title="Public Relations" parentLink="/students-zone/support" parentText="Back to Student Support" />; }
