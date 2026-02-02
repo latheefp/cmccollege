@@ -169,7 +169,7 @@ export default function Navbar() {
                                                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                                                         transition={{ duration: 0.2, ease: "easeOut" }}
                                                         onMouseLeave={() => setActiveSubDropdown(null)}
-                                                        className="absolute top-full left-0 min-w-[220px] bg-[#7a0b3a] rounded-lg shadow-xl py-2 z-50 overflow-visible transform-gpu"
+                                                        className="absolute top-full left-0 min-w-[260px] bg-[#7a0b3a] rounded-xl shadow-2xl py-3 z-50 overflow-visible transform-gpu"
                                                     >
                                                         {link.dropdown.map((subItem) => (
                                                             <div
@@ -180,7 +180,7 @@ export default function Navbar() {
                                                                 <Link
                                                                     href={subItem.href}
                                                                     onClick={(e) => handleLinkClick(e, subItem.href)}
-                                                                    className="flex items-center justify-between px-4 py-2.5 text-sm text-white/90 hover:text-white hover:bg-white/10 transition-colors font-medium border-l-2 border-transparent hover:border-white"
+                                                                    className="flex items-center justify-between px-6 py-3 text-sm text-white/95 hover:text-white hover:bg-white/10 transition-colors font-medium border-l-2 border-transparent hover:border-white"
                                                                 >
                                                                     <span>{subItem.name}</span>
                                                                     {subItem.dropdown && <ChevronDown size={14} className="-rotate-90" />}
@@ -194,14 +194,14 @@ export default function Navbar() {
                                                                                 initial={{ opacity: 0, x: 10 }}
                                                                                 animate={{ opacity: 1, x: 0 }}
                                                                                 exit={{ opacity: 0, x: 10 }}
-                                                                                className="absolute left-full top-0 ml-0.5 min-w-[240px] bg-[#7a0b3a] rounded-lg shadow-2xl py-2 border-l border-white/10 transform-gpu"
+                                                                                className="absolute left-full top-0 ml-1 min-w-[320px] bg-[#7a0b3a] rounded-xl shadow-2xl py-3 border-l border-white/10 transform-gpu"
                                                                             >
                                                                                 {subItem.dropdown.map(nestedItem => (
                                                                                     <Link
                                                                                         key={nestedItem.name}
                                                                                         href={nestedItem.href}
                                                                                         onClick={(e) => handleLinkClick(e, nestedItem.href)}
-                                                                                        className="block px-4 py-2 text-xs text-white/80 hover:text-white hover:bg-white/10 transition-colors uppercase tracking-wider font-bold"
+                                                                                        className="block px-6 py-2.5 text-[11px] text-white/90 hover:text-white hover:bg-white/10 transition-all uppercase tracking-[0.08em] font-bold"
                                                                                     >
                                                                                         {nestedItem.name}
                                                                                     </Link>
