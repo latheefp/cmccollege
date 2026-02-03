@@ -283,10 +283,8 @@ export default function Navbar() {
                                 animate={{ opacity: 1, height: "auto" }}
                                 exit={{ opacity: 0, height: 0 }}
                                 transition={{
-                                    type: "spring",
-                                    stiffness: 100,
-                                    damping: 20,
-                                    mass: 0.8
+                                    duration: 0.5,
+                                    ease: [0.19, 1, 0.22, 1] // "Expo.out" feel - fast start, very smooth end
                                 }}
                                 className="lg:hidden absolute top-full left-0 w-full z-40 bg-white border-t border-zinc-100 shadow-xl max-h-[85vh] overflow-y-auto overflow-x-hidden"
                             >

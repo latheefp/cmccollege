@@ -142,7 +142,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                         initial={{ scale: 0.95, opacity: 0, y: -20 }}
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.95, opacity: 0, y: -20 }}
-                        transition={{ duration: 0.2, type: "spring", stiffness: 300, damping: 25 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         onClick={(e) => e.stopPropagation()}
                         className="w-full max-w-2xl bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] border border-zinc-100 ring-1 ring-black/5"
                     >
@@ -244,8 +244,8 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                                                             <div className="flex items-start justify-between mb-2">
                                                                 <div className="flex items-center gap-2.5">
                                                                     <div className={`p-1.5 rounded-lg shrink-0 ${result.type === 'Department' ? 'bg-blue-50 text-blue-600' :
-                                                                            result.type === 'Amenity' ? 'bg-orange-50 text-orange-600' :
-                                                                                'bg-emerald-50 text-emerald-600'
+                                                                        result.type === 'Amenity' ? 'bg-orange-50 text-orange-600' :
+                                                                            'bg-emerald-50 text-emerald-600'
                                                                         }`}>
                                                                         <Icon size={16} strokeWidth={2.5} />
                                                                     </div>
