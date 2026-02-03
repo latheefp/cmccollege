@@ -6,8 +6,8 @@ import Lenis from "lenis";
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const lenis = new Lenis({
-            lerp: 0.1, // Responsiveness (lower = smoother/slower, higher = snappier)
-            wheelMultiplier: 1,
+            lerp: 0.07, // Smoother, "river-like" feel
+            wheelMultiplier: 1.2,
             touchMultiplier: 2,
             smoothWheel: true,
             infinite: false,

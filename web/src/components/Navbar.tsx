@@ -279,11 +279,16 @@ export default function Navbar() {
                     <AnimatePresence>
                         {isOpen && (
                             <motion.div
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ duration: 0.2, ease: "easeOut" }}
-                                className="lg:hidden absolute top-full left-0 w-full z-40 bg-white border-t border-zinc-100 shadow-xl max-h-[80vh] overflow-y-auto"
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 100,
+                                    damping: 20,
+                                    mass: 0.8
+                                }}
+                                className="lg:hidden absolute top-full left-0 w-full z-40 bg-white border-t border-zinc-100 shadow-xl max-h-[85vh] overflow-y-auto overflow-x-hidden"
                             >
                                 <div className="py-2 space-y-1">
                                     {navigation.map((link) => (
@@ -305,20 +310,28 @@ export default function Navbar() {
                                                         </button>
 
                                                         {/* Nested Mobile Links */}
-                                                        {activeDropdown === link.name && (
-                                                            <div className="bg-zinc-50/50">
-                                                                {link.dropdown.map(subItem => (
-                                                                    <Link
-                                                                        key={subItem.name}
-                                                                        href={subItem.href}
-                                                                        onClick={(e) => handleLinkClick(e, subItem.href)}
-                                                                        className="block px-10 py-3 text-sm text-zinc-600 hover:text-[#7a0b3a] font-medium border-l-[3px] border-transparent hover:border-[#7a0b3a] transition-colors"
-                                                                    >
-                                                                        {subItem.name}
-                                                                    </Link>
-                                                                ))}
-                                                            </div>
-                                                        )}
+                                                        <AnimatePresence>
+                                                            {activeDropdown === link.name && (
+                                                                <motion.div
+                                                                    initial={{ height: 0, opacity: 0 }}
+                                                                    animate={{ height: "auto", opacity: 1 }}
+                                                                    exit={{ height: 0, opacity: 0 }}
+                                                                    transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+                                                                    className="bg-zinc-50/50 overflow-hidden"
+                                                                >
+                                                                    {link.dropdown.map(subItem => (
+                                                                        <Link
+                                                                            key={subItem.name}
+                                                                            href={subItem.href}
+                                                                            onClick={(e) => handleLinkClick(e, subItem.href)}
+                                                                            className="block px-10 py-3 text-sm text-zinc-600 hover:text-[#7a0b3a] font-medium border-l-[3px] border-transparent hover:border-[#7a0b3a] transition-colors"
+                                                                        >
+                                                                            {subItem.name}
+                                                                        </Link>
+                                                                    ))}
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
                                                     </div>
                                                 ) : (
                                                     <Link
