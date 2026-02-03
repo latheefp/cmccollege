@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Skeleton from './Skeleton';
 
 interface NewsItem {
     _id: string;
@@ -69,9 +70,20 @@ export default function NewsSection() {
 
                 {/* Grid */}
                 {isLoading ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 min-h-[400px]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 overflow-hidden">
                         {[1, 2, 3].map((i) => (
-                            <div key={i} className="bg-zinc-100 rounded-xl h-[400px] animate-pulse" />
+                            <div key={i} className="bg-white rounded-xl overflow-hidden border border-zinc-100 flex flex-col h-[400px]">
+                                <Skeleton className="h-48 w-full" />
+                                <div className="p-5 flex flex-col gap-4 grow">
+                                    <Skeleton className="h-4 w-24" variant="text" />
+                                    <Skeleton className="h-6 w-full" variant="text" />
+                                    <div className="space-y-2">
+                                        <Skeleton className="h-3 w-full" variant="text" />
+                                        <Skeleton className="h-3 w-[80%]" variant="text" />
+                                    </div>
+                                    <Skeleton className="h-4 w-20 mt-auto" variant="text" />
+                                </div>
+                            </div>
                         ))}
                     </div>
                 ) : (
@@ -99,7 +111,7 @@ export default function NewsSection() {
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-5 flex flex-col flex-grow">
+                                <div className="p-5 flex flex-col grow">
                                     <div className="flex items-center gap-2 mb-2">
                                         <svg className="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />

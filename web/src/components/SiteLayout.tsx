@@ -9,6 +9,7 @@ import AdmissionPopup from "./AdmissionPopup";
 import WhatsAppWidget from "./WhatsAppWidget";
 import UserSync from "./UserSync";
 import { Toaster } from "react-hot-toast";
+import PageTransition from "./PageTransition";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -17,7 +18,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             <Navbar />
             <main className="min-h-screen">
                 <SmoothScroll>
-                    {children}
+                    <PageTransition>
+                        {children}
+                    </PageTransition>
                 </SmoothScroll>
             </main>
             <Footer />

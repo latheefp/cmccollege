@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import Skeleton from './Skeleton';
 
 interface GalleryItem {
     _id: string;
@@ -101,33 +102,41 @@ export default function Gallery() {
 
                 {/* Mobile: Horizontal Scroll Snap | Desktop: Grid */}
                 <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-                    {items.map((item, index) => (
-                        <motion.div
-                            key={item._id}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: index * 0.05 }}
-                            className="relative shrink-0 w-[85vw] md:w-auto aspect-[4/3] rounded-2xl md:rounded-[32px] overflow-hidden shadow-sm md:shadow-md hover:shadow-xl transition-all duration-500 group cursor-pointer border-2 md:border-4 border-white snap-center"
-                            onClick={() => openLightbox(index)}
-                        >
-                            <Image
-                                src={item.imageUrl || '/images/college.png'}
-                                alt="Gallery Thumbnail"
-                                fill
-                                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                sizes="(max-width: 768px) 85vw, 33vw"
-                            />
-
-                            {/* Mobile: Simple Gradient | Desktop: Hover Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 md:duration-500 flex items-end md:items-center justify-start md:justify-center p-6">
-                                <span className="text-white text-sm font-bold md:hidden">View Image</span>
-                                <div className="hidden md:flex w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md items-center justify-center border border-white/30 transform scale-90 group-hover:scale-100 transition-all duration-500">
-                                    <Maximize2 className="text-white w-8 h-8" />
-                                </div>
+                    {loading ? (
+                        Array.from({ length: 6 }).map((_, i) => (
+                            <div key={i} className="shrink-0 w-[85vw] md:w-auto aspect-4/3 rounded-2xl md:rounded-[32px] overflow-hidden border-2 md:border-4 border-white">
+                                <Skeleton className="w-full h-full" variant="rounded" />
                             </div>
-                        </motion.div>
-                    ))}
+                        ))
+                    ) : (
+                        items.map((item, index) => (
+                            <motion.div
+                                key={item._id}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ delay: index * 0.05 }}
+                                className="relative shrink-0 w-[85vw] md:w-auto aspect-4/3 rounded-2xl md:rounded-[32px] overflow-hidden shadow-sm md:shadow-md hover:shadow-xl transition-all duration-500 group cursor-pointer border-2 md:border-4 border-white snap-center"
+                                onClick={() => openLightbox(index)}
+                            >
+                                <Image
+                                    src={item.imageUrl || '/images/college.png'}
+                                    alt="Gallery Thumbnail"
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                    sizes="(max-width: 768px) 85vw, 33vw"
+                                />
+
+                                {/* Mobile: Simple Gradient | Desktop: Hover Overlay */}
+                                <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 md:duration-500 flex items-end md:items-center justify-start md:justify-center p-6">
+                                    <span className="text-white text-sm font-bold md:hidden">View Image</span>
+                                    <div className="hidden md:flex w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md items-center justify-center border border-white/30 transform scale-90 group-hover:scale-100 transition-all duration-500">
+                                        <Maximize2 className="text-white w-8 h-8" />
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))
+                    )}
                 </div>
 
                 {/* Explore Button */}
