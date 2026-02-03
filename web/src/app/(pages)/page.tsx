@@ -145,9 +145,9 @@ export default function Home() {
   ];
 
   const mobileImages = [
-    "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile1",
-    "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile2",
+    "https://ik.imagekit.io/5c6j602yp/Banner/mobile_banner_college1",
+    // "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile1",
+    // "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile2",
     "https://ik.imagekit.io/5c6j602yp/Banner/bannerMobile",
   ];
 
