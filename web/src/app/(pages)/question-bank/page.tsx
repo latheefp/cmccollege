@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, BookOpen, Download, Filter, ChevronRight, Book, GraduationCap, Clock, Loader2, X, Menu } from "lucide-react";
-
+import { Search, BookOpen, Download, Filter, ChevronRight, Book, GraduationCap, Clock, Loader2, X, Menu, CheckCircle } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import toast from "react-hot-toast";
 
 const departments = [
     "Computer Science",
@@ -19,19 +17,20 @@ const departments = [
 
 const semesters = ["Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6"];
 
+// Mock Data with PDF Links
 const mockQuestions = [
-    { id: 1, title: "Data Structures", code: "BCS3B04", department: "Computer Science", semester: "Semester 3", year: "2023", type: "Main Exam" },
-    { id: 2, title: "Micro Economics", code: "ECO1B01", department: "Economics", semester: "Semester 1", year: "2023", type: "Main Exam" },
-    { id: 3, title: "Business Management", code: "BBA1B01", department: "Management", semester: "Semester 1", year: "2022", type: "Main Exam" },
-    { id: 4, title: "Python Programming", code: "BCS4B05", department: "Computer Science", semester: "Semester 4", year: "2022", type: "Supplementary" },
-    { id: 5, title: "Digital Journalism", code: "JOU2B02", department: "Mass Communication", semester: "Semester 2", year: "2023", type: "Main Exam" },
-    { id: 6, title: "Financial Accounting", code: "BCM2B02", department: "Commerce", semester: "Semester 2", year: "2023", type: "Main Exam" },
-    { id: 7, title: "Operating Systems", code: "BCS4B06", department: "Computer Science", semester: "Semester 4", year: "2023", type: "Main Exam" },
-    { id: 8, title: "Managerial Economics", code: "ECO2B02", department: "Economics", semester: "Semester 2", year: "2022", type: "Main Exam" },
-    { id: 9, title: "Marketing Management", code: "BBA2B02", department: "Management", semester: "Semester 2", year: "2023", type: "Main Exam" },
-    { id: 10, title: "English Grammar", code: "ENG1B01", department: "English", semester: "Semester 1", year: "2023", type: "Main Exam" },
-    { id: 11, title: "Database Systems", code: "BCS5B07", department: "Computer Science", semester: "Semester 5", year: "2023", type: "Main Exam" },
-    { id: 12, title: "Corporate Accounting", code: "BCM3B03", department: "Commerce", semester: "Semester 3", year: "2022", type: "Main Exam" },
+    { id: 1, title: "Data Structures", code: "BCS3B04", department: "Computer Science", semester: "Semester 3", year: "2023", type: "Main Exam", pdfUrl: "/assets/question-papers/BCS3B04.pdf" },
+    { id: 2, title: "Micro Economics", code: "ECO1B01", department: "Economics", semester: "Semester 1", year: "2023", type: "Main Exam", pdfUrl: "/assets/question-papers/ECO1B01.pdf" },
+    { id: 3, title: "Business Management", code: "BBA1B01", department: "Management", semester: "Semester 1", year: "2022", type: "Main Exam", pdfUrl: "/assets/question-papers/BBA1B01.pdf" },
+    { id: 4, title: "Python Programming", code: "BCS4B05", department: "Computer Science", semester: "Semester 4", year: "2022", type: "Supplementary", pdfUrl: "/assets/question-papers/BCS4B05.pdf" },
+    { id: 5, title: "Digital Journalism", code: "JOU2B02", department: "Mass Communication", semester: "Semester 2", year: "2023", type: "Main Exam", pdfUrl: "/assets/question-papers/JOU2B02.pdf" },
+    { id: 6, title: "Financial Accounting", code: "BCM2B02", department: "Commerce", semester: "Semester 2", year: "2023", type: "Main Exam", pdfUrl: "/assets/question-papers/BCM2B02.pdf" },
+    { id: 7, title: "Operating Systems", code: "BCS4B06", department: "Computer Science", semester: "Semester 4", year: "2023", type: "Main Exam", pdfUrl: "/assets/question-papers/BCS4B06.pdf" },
+    { id: 8, title: "Managerial Economics", code: "ECO2B02", department: "Economics", semester: "Semester 2", year: "2022", type: "Main Exam", pdfUrl: "/assets/question-papers/ECO2B02.pdf" },
+    { id: 9, title: "Marketing Management", code: "BBA2B02", department: "Management", semester: "Semester 2", year: "2023", type: "Main Exam", pdfUrl: "/assets/question-papers/BBA2B02.pdf" },
+    { id: 10, title: "English Grammar", code: "ENG1B01", department: "English", semester: "Semester 1", year: "2023", type: "Main Exam", pdfUrl: "/assets/question-papers/ENG1B01.pdf" },
+    { id: 11, title: "Database Systems", code: "BCS5B07", department: "Computer Science", semester: "Semester 5", year: "2023", type: "Main Exam", pdfUrl: "/assets/question-papers/BCS5B07.pdf" },
+    { id: 12, title: "Corporate Accounting", code: "BCM3B03", department: "Commerce", semester: "Semester 3", year: "2022", type: "Main Exam", pdfUrl: "/assets/question-papers/BCM3B03.pdf" },
 ];
 
 export default function QuestionBankPage() {
@@ -41,25 +40,17 @@ export default function QuestionBankPage() {
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const [visibleCount, setVisibleCount] = useState(6);
     const [isMoreLoading, setIsMoreLoading] = useState(false);
+    const [downloadingId, setDownloadingId] = useState<number | null>(null);
 
     // Prevent body scroll when mobile filter is open
     useEffect(() => {
         if (isFiltersOpen) {
             document.body.style.overflow = "hidden";
-            document.body.style.height = "100vh";
-            document.body.style.position = "fixed";
-            document.body.style.width = "100%";
         } else {
             document.body.style.overflow = "";
-            document.body.style.height = "";
-            document.body.style.position = "";
-            document.body.style.width = "";
         }
         return () => {
             document.body.style.overflow = "";
-            document.body.style.height = "";
-            document.body.style.position = "";
-            document.body.style.width = "";
         };
     }, [isFiltersOpen]);
 
@@ -74,11 +65,42 @@ export default function QuestionBankPage() {
 
     const handleLoadMore = () => {
         setIsMoreLoading(true);
-        // Simulate network delay
         setTimeout(() => {
             setVisibleCount(prev => prev + 4);
             setIsMoreLoading(false);
         }, 800);
+    };
+
+    const handleDownload = (id: number, pdfUrl: string, title: string) => {
+        setDownloadingId(id);
+
+        // Simulate download delay
+        setTimeout(() => {
+            // Create a fake anchor to trigger download
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = `${title.replace(/\s+/g, '_')}_Paper.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            setDownloadingId(null);
+            toast.custom((t) => (
+                <div className={`${t.visible ? 'animate-enter' : 'animate-leave'} max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black/5`}>
+                    <div className="flex-1 w-0 p-4">
+                        <div className="flex items-start">
+                            <div className="shrink-0 pt-0.5">
+                                <CheckCircle className="h-10 w-10 text-emerald-500" />
+                            </div>
+                            <div className="ml-3 flex-1">
+                                <p className="text-sm font-medium text-gray-900">Download Started</p>
+                                <p className="mt-1 text-sm text-gray-500">{title} question paper is downloading.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ));
+        }, 1500);
     };
 
     return (
@@ -363,13 +385,23 @@ export default function QuestionBankPage() {
                                                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
                                                         {q.type}
                                                     </span>
-                                                    <Link
-                                                        href="/question-bank/download"
-                                                        className="flex items-center gap-2 px-5 py-2.5 bg-zinc-900 group-hover:bg-[#7a0b3a] text-white rounded-xl text-sm font-bold transition-all duration-300 hover:scale-105 shadow-md shadow-zinc-900/10 cursor-pointer"
+                                                    <button
+                                                        onClick={() => handleDownload(q.id, q.pdfUrl, q.title)}
+                                                        disabled={downloadingId === q.id}
+                                                        className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 hover:scale-105 shadow-md shadow-zinc-900/10 cursor-pointer ${downloadingId === q.id ? "bg-zinc-200 text-zinc-500 cursor-not-allowed" : "bg-zinc-900 group-hover:bg-[#7a0b3a] text-white"}`}
                                                     >
-                                                        <Download size={16} />
-                                                        Download
-                                                    </Link>
+                                                        {downloadingId === q.id ? (
+                                                            <>
+                                                                <Loader2 size={16} className="animate-spin" />
+                                                                Getting PDF...
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <Download size={16} />
+                                                                Download
+                                                            </>
+                                                        )}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </motion.div>
