@@ -153,9 +153,11 @@ export default function Home() {
 
   // Track visible slide count based on viewport
   const [deviceSlideCount, setDeviceSlideCount] = useState(desktopImages.length);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
       if (window.innerWidth < 768) {
         setDeviceSlideCount(mobileImages.length);
       } else if (window.innerWidth < 1024) {
@@ -522,7 +524,7 @@ export default function Home() {
               { name: "Department Of Human Resource Management", slug: "human-resource-management", img: "/images/modern_science_lab_1768116682208.png" },
               { name: "Department Of Sociology", slug: "sociology", img: "/images/science_exhibition_project_1768117868795.png" }
             ].map((dept, i) => (
-              <ScrollReveal key={i} delay={typeof window !== 'undefined' && window.innerWidth < 768 ? i * 50 : i * 100}>
+              <ScrollReveal key={i} delay={isMobile ? i * 50 : i * 100}>
                 <Link
                   href={`/departments/${dept.slug}`}
                   className="block h-full"
@@ -576,7 +578,7 @@ export default function Home() {
               { name: "Bus", slug: "bus-facility", img: "https://ik.imagekit.io/5c6j602yp/Home/images/buss.jpeg" }
 
             ].map((facility, i) => (
-              <ScrollReveal key={i} delay={typeof window !== 'undefined' && window.innerWidth < 768 ? i * 50 : i * 100} className="group cursor-pointer">
+              <ScrollReveal key={i} delay={isMobile ? i * 50 : i * 100} className="group cursor-pointer">
                 <Link href={`/amenities/${facility.slug}`}>
                   <div className="relative h-64 rounded-xl overflow-hidden shadow-lg border border-white">
                     <Image
