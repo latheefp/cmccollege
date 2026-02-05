@@ -11,7 +11,7 @@ const academicFeatures = [
         title: "Syllabus",
         description: "Access comprehensive course structures and learning objectives for all departments.",
         icon: BookOpen,
-        link: "/academics/syllabus",
+        link: "http://docs.uoc.ac.in/website/Syll/",
         color: "bg-blue-500",
         bgLight: "bg-blue-50"
     },
