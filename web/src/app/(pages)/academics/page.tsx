@@ -150,7 +150,7 @@ export default function AcademicsPage() {
                 </div>
             </section>
 
-            {/* Academic Philosophy - Sync with Home Page About Style */}
+            {/* Campus Excellence - Sync with Home Page About Style */}
             <section className="py-24 px-6 bg-emerald-50 border-y border-[#7B0046]/10 relative overflow-hidden">
                 {/* Background Decoration from Home Page */}
                 <div className="absolute top-0 right-0 w-96 h-96 bg-[#7B0046]/5 rounded-full blur-[120px] -mr-48 -mt-48 pointer-events-none" />
@@ -158,38 +158,39 @@ export default function AcademicsPage() {
                 <div className="container mx-auto">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <ScrollReveal>
-                            <div className="relative aspect-video rounded-[40px] overflow-hidden shadow-2xl border-l-[6px] border-[#7B0046] shadow-[#7B0046]/10 bg-white">
-                                <iframe
-                                    className="w-full h-full"
-                                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                                    title="Academic Excellence"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
+                            <div className="relative aspect-video rounded-[40px] overflow-hidden shadow-2xl border-l-[6px] border-[#7B0046] shadow-[#7B0046]/10 bg-white group">
+                                <Image
+                                    src="https://ik.imagekit.io/5c6j602yp/Home/images/library.jpeg"
+                                    alt="Campus Library"
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                />
+                                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
                             </div>
                         </ScrollReveal>
                         <ScrollReveal delay={200}>
                             <div className="space-y-8">
                                 <h2 className="text-4xl lg:text-5xl font-agency font-bold text-emerald-800 leading-tight tracking-tight uppercase">
-                                    Our Commitment to <br />
-                                    <span className="text-[#7a0b3a]">Academic Excellence</span>
+                                    A Campus Built for <br />
+                                    <span className="text-[#7a0b3a]">Future Leaders</span>
                                 </h2>
                                 <div className="space-y-6 text-zinc-600 text-lg leading-relaxed font-normal text-justify">
                                     <p>
-                                        At CM College, we believe that education is a transformative journey. Our academic framework is designed to challenge students, foster critical thinking, and provide the practical skills needed in today&apos;s global landscape.
+                                        Our 15-acre eco-friendly campus offers a serene and stimulating environment for academic and personal growth. Equipped with modern infrastructure, advanced laboratories, and a rich library, we ensure students have access to the best resources.
                                     </p>
                                     <p>
-                                        We provide a holistic learning environment where traditional values meet modern innovation, ensuring our graduates are well-prepared for both professional success and social leadership.
+                                        From smart classrooms to extensive sports facilities and vibrant student activity centers, every corner of CM College is designed to foster creativity, collaboration, and excellence.
                                     </p>
                                 </div>
                                 <div className="grid grid-cols-2 gap-8 pt-8 border-t border-[#7B0046]/10">
                                     <div className="transform-gpu">
-                                        <div className="text-4xl font-black text-[#7a0b3a] mb-1">98%</div>
-                                        <div className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Success Rate</div>
+                                        <div className="text-4xl font-black text-[#7a0b3a] mb-1">15+</div>
+                                        <div className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Acres of Campus</div>
                                     </div>
                                     <div className="transform-gpu">
-                                        <div className="text-4xl font-black text-[#7a0b3a] mb-1">20+</div>
-                                        <div className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Research Projects</div>
+                                        <div className="text-4xl font-black text-[#7a0b3a] mb-1">Modern</div>
+                                        <div className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Infrastructure</div>
                                     </div>
                                 </div>
                             </div>
