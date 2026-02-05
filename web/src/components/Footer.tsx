@@ -102,7 +102,7 @@ export default function Footer() {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/careers" className="hover:text-emerald-300 transition-colors inline-block py-0.5">
+                            <Link href="/careers/apply" className="hover:text-emerald-300 transition-colors inline-block py-0.5">
                                 Join our Faculty
                             </Link>
                         </li>

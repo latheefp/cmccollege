@@ -1,4 +1,4 @@
-import { LucideIcon, Book, Wifi, Coffee, Monitor, Dumbbell, Bus, Stethoscope, Home, Music, Drama, Cpu, HardDrive, Users, Mic2, Layout, Flower, Utensils } from "lucide-react";
+import { LucideIcon, Book, Coffee, Monitor, Dumbbell, Bus, Home, Users, Mic2, Layout, Flower, Utensils } from "lucide-react";
 
 export interface AmenityData {
     title: string;
