@@ -201,23 +201,15 @@ export default function ContactPage() {
                     </ScrollReveal>
 
                     <ScrollReveal delay={200} className="rounded-3xl overflow-hidden shadow-2xl border-8 border-white h-[450px] relative">
-                        <div className="absolute inset-0 bg-zinc-200 flex items-center justify-center">
-                            {/* Placeholder for Google Map - UI only as requested */}
-                            <div className="text-center">
-                                <span className="text-5xl mb-4 block">🗺️</span>
-                                <p className="text-zinc-500 font-medium">Google Map Placeholder</p>
-                                <p className="text-zinc-400 text-sm mt-2">(Iframe integration will be added in backend phase)</p>
-                            </div>
-                        </div>
-                        {/* Real iframe placeholder for visual weight */}
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125322.44173114002!2d75.76562098671876!3d11.2587531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba65938563d4747%3A0x321557147a375a8!2sKozhikode%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                            src="https://maps.google.com/maps?q=CM%20College%20of%20Arts%20and%20Science%2C%20Nadavayal%2C%20Wayanad&t=&z=15&ie=UTF8&iwloc=&output=embed"
                             width="100%"
                             height="100%"
-                            style={{ border: 0, opacity: 0.1 }}
+                            style={{ border: 0 }}
                             allowFullScreen
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
+                            className="w-full h-full grayscale-0 hover:grayscale-0 transition-all duration-500"
                         ></iframe>
                     </ScrollReveal>
                 </div>
