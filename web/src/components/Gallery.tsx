@@ -23,12 +23,18 @@ const fallbackItems: GalleryItem[] = [
     { _id: '6', imageUrl: '/images/college.png' }
 ];
 
-export default function Gallery() {
-    const [items, setItems] = useState<GalleryItem[]>([]);
-    const [loading, setLoading] = useState(true);
+interface GalleryProps {
+    initialItems?: GalleryItem[];
+}
+
+export default function Gallery({ initialItems }: GalleryProps) {
+    const [items, setItems] = useState<GalleryItem[]>(initialItems || []);
+    const [loading, setLoading] = useState(!initialItems);
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
     useEffect(() => {
+        if (initialItems) return;
+
         const fetchGallery = async () => {
             try {
                 const response = await fetch("/api/gallery");

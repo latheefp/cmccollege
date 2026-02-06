@@ -15,11 +15,17 @@ interface NewsItem {
     tag: string;
 }
 
-export default function NewsSection() {
-    const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+interface NewsSectionProps {
+    initialNews?: any[];
+}
+
+export default function NewsSection({ initialNews }: NewsSectionProps) {
+    const [newsItems, setNewsItems] = useState<NewsItem[]>(initialNews || []);
+    const [isLoading, setIsLoading] = useState(!initialNews);
 
     useEffect(() => {
+        if (initialNews) return;
+
         const fetchNews = async () => {
             try {
                 const res = await fetch("/api/news");
