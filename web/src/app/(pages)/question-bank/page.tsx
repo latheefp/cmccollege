@@ -58,9 +58,15 @@ export default function QuestionBankPage() {
     };
 
     const handleDownload = (id: number, pdfUrl: string, title: string) => {
+        // If it's an external link (like Google Drive), open in new tab
+        if (pdfUrl.startsWith("http") || pdfUrl.startsWith("https")) {
+            window.open(pdfUrl, "_blank");
+            return;
+        }
+
         setDownloadingId(id);
 
-        // Simulate download delay
+        // Simulate download delay for local files
         setTimeout(() => {
             // Create a fake anchor to trigger download
             const link = document.createElement('a');
@@ -384,7 +390,7 @@ export default function QuestionBankPage() {
                                                         ) : (
                                                             <>
                                                                 <Download size={16} />
-                                                                Download
+                                                                View / Download
                                                             </>
                                                         )}
                                                     </button>
