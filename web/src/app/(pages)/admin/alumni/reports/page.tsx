@@ -211,7 +211,9 @@ export default function AdminReportsPage() {
                                 target="_blank"
                                 className="px-5 py-2.5 bg-zinc-50 text-zinc-600 hover:text-emerald-700 hover:bg-emerald-50 border border-zinc-200 rounded-xl font-bold text-sm transition-all flex items-center gap-2 group/link"
                             >
-                                Open File
+                                <div>
+                                    Open File
+                                </div>
                                 <ExternalLink className="w-4 h-4 group-hover/link:translate-x-0.5 transition-transform" />
                             </Link>
                             <button
