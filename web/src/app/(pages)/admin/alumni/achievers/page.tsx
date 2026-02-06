@@ -151,6 +151,7 @@ export default function AdminAchieversPage() {
                                     >
                                         <IKUpload
                                             ref={ikUploadRef}
+                                            folder="Alumni/Achievers"
                                             onSuccess={onFileUploadSuccess}
                                             onError={onFileUploadError}
                                             onUploadStart={() => setIsUploading(true)}
