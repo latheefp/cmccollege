@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    qualities: [75, 90, 100],
+    qualities: [20, 75, 90, 100],
     // Allow any https hostname via a wildcard remotePattern
     remotePatterns: [
       {

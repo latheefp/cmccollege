@@ -106,11 +106,11 @@ export default function Gallery({ initialItems }: GalleryProps) {
                     </motion.p>
                 </div>
 
-                {/* Mobile: Horizontal Scroll Snap | Desktop: Grid */}
-                <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+                {/* Responsive Grid Layout */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {loading ? (
                         Array.from({ length: 6 }).map((_, i) => (
-                            <div key={i} className="shrink-0 w-[85vw] md:w-auto aspect-4/3 rounded-2xl md:rounded-[32px] overflow-hidden border-2 md:border-4 border-white">
+                            <div key={i} className="w-full aspect-4/3 rounded-2xl md:rounded-[32px] overflow-hidden border-2 md:border-4 border-white">
                                 <Skeleton className="w-full h-full" variant="rounded" />
                             </div>
                         ))
@@ -122,21 +122,30 @@ export default function Gallery({ initialItems }: GalleryProps) {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ delay: index * 0.05 }}
-                                className="relative shrink-0 w-[85vw] md:w-auto aspect-4/3 rounded-2xl md:rounded-[32px] overflow-hidden shadow-sm md:shadow-md hover:shadow-xl transition-all duration-500 group cursor-pointer border-2 md:border-4 border-white snap-center"
+                                className="relative w-full aspect-4/3 rounded-2xl md:rounded-[32px] overflow-hidden shadow-sm md:shadow-md hover:shadow-xl transition-all duration-500 group cursor-pointer border-2 md:border-4 border-white"
                                 onClick={() => openLightbox(index)}
                             >
+                                {/* Blurred Background Layer (Fills the container) */}
+                                <Image
+                                    src={item.imageUrl || '/images/college.png'}
+                                    alt="Background Effect"
+                                    fill
+                                    quality={20}
+                                    className="object-cover blur-2xl scale-125 opacity-60 pointer-events-none"
+                                />
+
+                                {/* Main Full Image (No Crop) */}
                                 <Image
                                     src={item.imageUrl || '/images/college.png'}
                                     alt="Gallery Thumbnail"
                                     fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                    sizes="(max-width: 768px) 85vw, 33vw"
+                                    className="object-cover z-10 transition-transform duration-700 group-hover:scale-110 drop-shadow-md"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                 />
 
-                                {/* Mobile: Simple Gradient | Desktop: Hover Overlay */}
-                                <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 md:duration-500 flex items-end md:items-center justify-start md:justify-center p-6">
-                                    <span className="text-white text-sm font-bold md:hidden">View Image</span>
-                                    <div className="hidden md:flex w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md items-center justify-center border border-white/30 transform scale-90 group-hover:scale-100 transition-all duration-500">
+                                {/* Hover Overlay */}
+                                <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 md:duration-500 flex items-center justify-center p-6">
+                                    <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 transform scale-90 group-hover:scale-100 transition-all duration-500">
                                         <Maximize2 className="text-white w-8 h-8" />
                                     </div>
                                 </div>
@@ -146,7 +155,7 @@ export default function Gallery({ initialItems }: GalleryProps) {
                 </div>
 
                 {/* Explore Button */}
-                <div className="mt-8 md:mt-24 text-center">
+                <div className="mt-12 text-center">
                     <Link href="/gallery">
                         <motion.button
                             whileHover={{ scale: 1.02 }}
