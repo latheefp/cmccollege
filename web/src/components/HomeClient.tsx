@@ -138,10 +138,11 @@ export default function HomeClient({ initialNews, initialGallery }: HomeClientPr
 
     // Hero Slider Configuration
     const desktopImages = [
-        "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
+        "https://ik.imagekit.io/1yxtj9qun/Banner/Banner4",
         "https://ik.imagekit.io/1yxtj9qun/Banner/Banner1.png",
         "https://ik.imagekit.io/1yxtj9qun/Banner/Banner2.png",
-        "https://ik.imagekit.io/1yxtj9qun/Banner/Banner.png"
+        "https://ik.imagekit.io/1yxtj9qun/Banner/Banner.png",
+        "https://cmcollege.edu.in/wp-content/uploads/2023/08/banner4.jpg",
     ];
 
     const tabletImages = [
