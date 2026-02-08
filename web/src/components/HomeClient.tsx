@@ -446,7 +446,7 @@ export default function HomeClient({ initialNews, initialGallery }: HomeClientPr
             </div>
 
             <section className="pb-16 md:pb-24 pt-8 px-4 md:px-6 bg-white overflow-hidden">
-                <div className="max-w-5xl mx-auto">
+                <div className="max-w-7xl mx-auto">
                     <ScrollReveal>
                         <div className="flex flex-col md:flex-row bg-white rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100">
 
