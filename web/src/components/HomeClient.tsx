@@ -134,6 +134,7 @@ export default function HomeClient({ initialNews, initialGallery }: HomeClientPr
     // Hero Slider State
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
+    const [isMsgExpanded, setIsMsgExpanded] = useState(false);
 
     // Hero Slider Configuration
     const desktopImages = [
@@ -477,9 +478,20 @@ export default function HomeClient({ initialNews, initialGallery }: HomeClientPr
                                 <div className="relative mb-10">
                                     <span className="absolute -top-8 -left-2 text-7xl text-emerald-100/40 font-serif leading-none select-none">&quot;</span>
                                     <div className="relative z-10 space-y-4 text-zinc-600 leading-relaxed text-base md:text-lg text-left">
-                                        <p className="block md:hidden font-medium">
-                                            Welcome to CM College of Arts and Science. We offer quality education rooted in discipline and values, providing an ideal environment for your academic and holistic growth.
-                                        </p>
+                                        <div className="block md:hidden">
+                                            <p className="font-medium">
+                                                {isMsgExpanded
+                                                    ? "Welcome to CM College of Arts and Science. Located in the serene surroundings of Wayanad, our college offers quality education rooted in discipline and strong human values. We focus on academic excellence, practical skills, and holistic development guided by a dedicated faculty. With modern facilities, eco-friendly campus, active student life, and strong placement support, CM College provides the ideal environment for learning and growth. We warmly invite students from Kerala and beyond to join us and build a successful future."
+                                                    : "Welcome to CM College of Arts and Science. We offer quality education rooted in discipline and values, providing an ideal environment for your academic and holistic growth."
+                                                }
+                                            </p>
+                                            <button
+                                                onClick={() => setIsMsgExpanded(!isMsgExpanded)}
+                                                className="mt-2 text-[#7B0046] font-bold text-sm flex items-center gap-1 cursor-pointer"
+                                            >
+                                                {isMsgExpanded ? "Read Less" : "Read More"}
+                                            </button>
+                                        </div>
                                         <p className="hidden md:block">
                                             Welcome to CM College of Arts and Science. Located in the serene surroundings of Wayanad, our college offers quality education rooted in discipline and strong human values. We focus on academic excellence, practical skills, and holistic development guided by a dedicated faculty. With modern facilities, eco-friendly campus, active student life, and strong placement support, CM College provides the ideal environment for learning and growth. We warmly invite students from Kerala and beyond to join us and build a successful future.
                                         </p>
