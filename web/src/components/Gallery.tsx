@@ -134,7 +134,7 @@ export default function Gallery({ initialItems }: GalleryProps) {
                 </div>
 
                 {/* Content: Loading / Grid / Carousel */}
-                <div className="min-h-[300px]">
+                <div className="min-h-[300px] overflow-hidden">
                     {loading ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             {Array.from({ length: 4 }).map((_, i) => (
@@ -175,12 +175,12 @@ export default function Gallery({ initialItems }: GalleryProps) {
                             <AnimatePresence mode='popLayout'>
                                 {getVisibleItems().map((item) => (
                                     <motion.div
-                                        key={`${item._id}-${currentIndex}`} // Unique key force animate
-                                        layoutId={item._id}
-                                        initial={{ opacity: 0, x: 100 }}
+                                        key={item._id}
+                                        layout
+                                        initial={{ opacity: 0, x: 50 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -100, scale: 0.9 }}
-                                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                                        exit={{ opacity: 0, x: -50 }}
+                                        transition={{ duration: 0.6, ease: "easeInOut" }}
                                         className="group relative aspect-video overflow-hidden rounded-xl cursor-pointer bg-zinc-100 shadow-sm hover:shadow-xl transition-shadow duration-300"
                                         onClick={() => openLightbox(items.findIndex(i => i._id === item._id))}
                                     >
