@@ -10,12 +10,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     useEffect(() => {
         const lenis = new Lenis({
-            lerp: 0.07, // Smoother, "river-like" feel
-            wheelMultiplier: 1.2,
+            lerp: 0.1, // Optimized for smoother feel on low-end devices
+            wheelMultiplier: 1,
             touchMultiplier: 2,
             smoothWheel: true,
-            // @ts-ignore - smoothTouch is sometimes deprecated but sometimes needed for specific v1 versions to force touch smoothing
-            smoothTouch: true,
+            // @ts-ignore - smoothTouch is heavy on low-end devices, disable to use native scroll which is hardware accelerated
+            smoothTouch: false,
             infinite: false,
         });
 
