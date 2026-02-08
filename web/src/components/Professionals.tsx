@@ -112,7 +112,7 @@ export default function Professionals() {
                             whileTap={{ scale: 0.95 }}
                             className="px-8 py-4 bg-emerald-800 text-white font-bold rounded-full shadow-lg hover:cursor-pointer hover:bg-emerald-900 transition-all flex items-center gap-2 mx-auto"
                         >
-                            <span>Browse All Alumni</span>
+                            <span>View more</span>
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
