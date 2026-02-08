@@ -14,6 +14,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
             wheelMultiplier: 1.2,
             touchMultiplier: 2,
             smoothWheel: true,
+            // @ts-ignore - smoothTouch is sometimes deprecated but sometimes needed for specific v1 versions to force touch smoothing
+            smoothTouch: true,
             infinite: false,
         });
 
