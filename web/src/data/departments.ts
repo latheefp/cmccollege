@@ -199,7 +199,7 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         },
         faculty: [
             { name: "Athira P R", role: "Assistant Professor", spec: "Broadcast Journalism", img: "/images/default-user-placeholder.png" },
-            { name: "Shafvana Sherin M", role: "Assistant Professor", spec: "Mass Communication", img: "/images/default-user-placeholder.png" },
+            { name: "Shafvana Sherin M", role: "Assistant Professor", spec: "Mass Communication", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Masscom/Safwana" },
         ],
         gallery: [
             { img: "/images/modern_science_lab_1768116682208.png", category: "MEDIA LAB" },
@@ -235,10 +235,10 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             name: "Safiya E C",
             qualification: "Ph.D in Applied Economics",
             quote: "Understanding scarcity and choice is fundamental to building a more equitable and efficient world.",
-            img: "/images/default-user-placeholder.png"
+            img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/Safiya.jpeg"
         },
         faculty: [
-            { name: "Anna Biju", role: "Assistant Professor", spec: "Development Economics", img: "/images/default-user-placeholder.png" }
+            { name: "Anna Biju", role: "Assistant Professor", spec: "Development Economics", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/Anna.jpeg" }
         ],
         gallery: [
             { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/image1.jpg", category: "" },
@@ -429,6 +429,64 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         ],
         gallery: [
             { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/New%20Folder/image2", category: "SOCIAL LAB" }
+        ]
+    },
+    "malayalam": {
+        about: "The Department of Malayalam focuses on the rich literary and cultural heritage of the Malayalam language.",
+        vision: "To promote the study and appreciation of Malayalam literature and culture.",
+        mission: [
+            "To provide in-depth knowledge of Malayalam language and literature.",
+            "To encourage creative writing and literary criticism."
+        ],
+        objectives: "To foster a deep understanding of Malayalam literary traditions.",
+        courses: "BA Malayalam",
+        highlights: ["Literary Week", "Kavyarangu"],
+        strengths: [
+            { icon: BookOpen, text: "Classical Literature", sub: "Ancient texts study" },
+            { icon: Users, text: "Language Lab", sub: "Phonetics training" },
+            { icon: Heart, text: "Cultural Club", sub: "Arts & Literature" },
+            { icon: Search, text: "Research Centre", sub: "Literary research" }
+        ],
+        hod: {
+            name: "Deepa NR",
+            qualification: "Ph.D in Malayalam",
+            quote: "Literature is the reflection of life.",
+            img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Malayalam/Deepa?updatedAt=1770627331874"
+        },
+        faculty: [
+            // { name: "Faculty 1", role: "Assistant Professor", spec: "Malayalam Literature", img: "/images/default-user-placeholder.png" }
+        ],
+        gallery: [
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Malayalam/malayalam", category: "DEPARTMENT" }
+        ]
+    },
+    "arabic": {
+        about: "The Department of Arabic offers comprehensive courses in Arabic language and literature, focusing on its cultural and historical significance.",
+        vision: "To be a centre of excellence in Arabic studies.",
+        mission: [
+            "To impart proficiency in Arabic language.",
+            "To study the rich literary heritage of the Arab world."
+        ],
+        objectives: "To enable students to communicate effectively in Arabic.",
+        courses: "BA Arabic",
+        highlights: ["Arabic Day", "Translation Workshop"],
+        strengths: [
+            { icon: Globe, text: "Global Communication", sub: "Language skills" },
+            { icon: BookOpen, text: "Islamic Studies", sub: "Historical context" },
+            { icon: Users, text: "Translation Bureau", sub: "Professional translation" },
+            { icon: Mic2, text: "Spoken Arabic", sub: "Communication skills" }
+        ],
+        hod: {
+            name: "HOD Name",
+            qualification: "Ph.D in Arabic",
+            quote: "Language bridges cultures.",
+            img: "/images/default-user-placeholder.png"
+        },
+        faculty: [
+            { name: "Faculty 1", role: "Assistant Professor", spec: "Arabic Language", img: "/images/default-user-placeholder.png" }
+        ],
+        gallery: [
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Arabic/Arabic-Language.jpg", category: "DEPARTMENT" }
         ]
     }
 };
