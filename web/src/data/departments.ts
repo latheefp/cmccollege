@@ -95,7 +95,7 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             { name: "Sumayya U", role: "Academic Coordinator", spec: "Artificial Intelligence", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/sumayya-u.jpg" },
             { name: "Rijilanadh", role: "Assistant Professor", spec: "Cyber Security", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/rijila-nath.jpg" },
             { name: "Vivek M V", role: "Lab Assistant", spec: "Data Science", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/vivek-mv-200x250.jpg" },
-            { name: "Asliya A", role: "Assistant Professor", spec: "Software Architecture", img: "/images/default-user-placeholder.png" },
+            { name: "Asliya A", role: "Assistant Professor", spec: "Software Architecture", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Asliya" },
         ],
         gallery: [
             { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image1?updatedAt=1768829462746", category: "" },
@@ -135,12 +135,12 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             name: "Athira P",
             qualification: "MBA, Ph.D in Strategic Management",
             quote: "Management is about more than just business; it is about leading with integrity and vision in a complex world.",
-            img: "/images/default-user-placeholder.png"
+            img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/Athira"
         },
         faculty: [
             { name: "Jaseela C M", role: "Assistant Professor", spec: "Finance", img: "/images/default-user-placeholder.png" },
             { name: "Aysha K P", role: "Assistant Professor", spec: "HR Management", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/Ayisha?updatedAt=1770620889342" },
-            { name: "Sini John", role: "Assistant Professor", spec: "Operations", img: "/images/default-user-placeholder.png" },
+            { name: "Sini John", role: "Assistant Professor", spec: "Operations", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/Sini%20Jhon" },
         ],
         gallery: [
             { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/New%20Folder/image1", category: "CONFERENCE ROOM" },
@@ -199,7 +199,7 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         },
         faculty: [
             { name: "Athira P R", role: "Assistant Professor", spec: "Broadcast Journalism", img: "/images/default-user-placeholder.png" },
-            { name: "Shafvana Sherin M", role: "Assistant Professor", spec: "Mass Communication", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Masscom/Safwana" },
+            { name: "Shafvana Sherin M", role: "Assistant Professor", spec: "Mass Communication", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Masscom/Safwana?updatedAt=1770627938287&tr=w-600,ar-4-5,fo-top" },
         ],
         gallery: [
             { img: "/images/modern_science_lab_1768116682208.png", category: "MEDIA LAB" },
