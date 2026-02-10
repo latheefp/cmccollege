@@ -10,7 +10,7 @@ const councilMembers = [
     {
         name: "T K Abdu Rahman Baqavi",
         role: "Chairman - CM College",
-        image: "https://ik.imagekit.io/1yxtj9qun/About/chairman"
+        image: "https://ik.imagekit.io/1yxtj9qun/About/chairman.png?updatedAt=1770370502173"
     },
     {
         name: "Zainudheen T K",

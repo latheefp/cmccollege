@@ -16,7 +16,7 @@ const managementMembers = [
     {
         name: "TK Abdu Rahman Baqavi",
         role: "General Secretary, CM Centre Madavoor",
-        image: "https://ik.imagekit.io/1yxtj9qun/About/chairman"
+        image: "https://ik.imagekit.io/1yxtj9qun/About/chairman.png?updatedAt=1770370502173"
     },
     {
         name: "NA Backer Haji",
@@ -119,7 +119,7 @@ export default function ManagementPage() {
 
                             <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-white rounded-full p-8 md:p-12 shadow-[0_0_50px_rgba(255,255,255,0.1)] flex items-center justify-center group flex-col overflow-hidden will-change-transform">
                                 <Image
-                                    src="https://ik.imagekit.io/1yxtj9qun/Home/images/cm-center-logo?updatedAt=1769708637046"
+                                    src="https://ik.imagekit.io/1yxtj9qun/Home/images/cm-center-logo.png?updatedAt=1770370304268"
                                     alt="CM Center Logo"
                                     width={300}
                                     height={300}
@@ -139,7 +139,7 @@ export default function ManagementPage() {
                         <div className="absolute top-4 -right-4 w-full h-full border-2 border-[#7a0b3a]/10 rounded-2xl md:rounded-[32px] -z-10 group-hover:top-2 group-hover:-right-2 transition-all duration-500"></div>
                         <div className="relative aspect-3/4 w-full rounded-2xl md:rounded-[32px] overflow-hidden shadow-xl shadow-zinc-200/50">
                             <Image
-                                src="https://ik.imagekit.io/1yxtj9qun/About/chairman"
+                                src="https://ik.imagekit.io/1yxtj9qun/About/chairman.png?updatedAt=1770370502173"
                                 alt="TK Abdurahiman Baquavi - Chairman"
                                 fill
                                 className="object-cover transition-transform duration-700 hover:scale-105"

@@ -31,7 +31,7 @@ export default function ChairmanMessagePage() {
                     >
                         <div className="relative w-full aspect-[4/5] lg:aspect-[3/4] rounded-[40px] overflow-hidden shadow-2xl">
                             <Image
-                                src="https://ik.imagekit.io/1yxtj9qun/About/chairman?updatedAt=1769708210678"
+                                src="https://ik.imagekit.io/1yxtj9qun/About/chairman.png?updatedAt=1770370502173"
                                 alt="T K Abdu Rahman Baqavi"
                                 fill
                                 className="object-cover"

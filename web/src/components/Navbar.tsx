@@ -74,6 +74,8 @@ export default function Navbar() {
                 { name: "Human Resource Management", href: "/departments/human-resource-management" },
                 { name: "Sociology", href: "/departments/sociology" },
                 { name: "Multimedia", href: "/departments/multimedia" },
+                { name: "Malayalam", href: "/departments/malayalam" },
+                { name: "Arabic", href: "/departments/arabic" },
             ]
         },
         {

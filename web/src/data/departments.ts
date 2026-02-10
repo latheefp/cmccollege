@@ -98,11 +98,11 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             { name: "Asliya A", role: "Assistant Professor", spec: "Software Architecture", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Asliya" },
         ],
         gallery: [
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image1?updatedAt=1768829462746", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image3?updatedAt=1768830080087", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image2?updatedAt=1768830059492", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image5", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image4", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image1.jpeg?updatedAt=1770370362463", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image3.jpeg?updatedAt=1770370362463", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image2.jpeg?updatedAt=1770370362463", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image5.jpeg?updatedAt=1770370362463", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image4.jpeg?updatedAt=1770370362463", category: "" },
 
         ]
     },
@@ -143,9 +143,6 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             { name: "Sini John", role: "Assistant Professor", spec: "Operations", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/Sini-Jhon" },
         ],
         gallery: [
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/New%20Folder/image1", category: "CONFERENCE ROOM" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/New%20Folder/image2", category: "SEMINAR HALL" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/New%20Folder/image3", category: "LIBRARY" }
         ]
     },
     "mass-communication": {
@@ -202,9 +199,6 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             { name: "Shafvana Sherin M", role: "Assistant Professor", spec: "Mass Communication", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Masscom/Safwana?updatedAt=1770627938287&tr=w-600,ar-4-5,fo-top" },
         ],
         gallery: [
-            { img: "/images/modern_science_lab_1768116682208.png", category: "MEDIA LAB" },
-            { img: "/images/science_exhibition_project_1768117868795.png", category: "NEWS ROOM" },
-            { img: "/images/classroom_learning_1768115518451.png", category: "STUDIO" }
         ]
     },
     "economics": {
@@ -242,9 +236,9 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         ],
         gallery: [
             { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/image1.jpg", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/image2", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/image3", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/image4", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/image2.jpeg", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/image3.jpeg", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Ecnomics/image4.jpeg", category: "" },
         ]
     },
     "english": {
@@ -341,10 +335,10 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             { name: "Jamsheena", role: "Assistant Professor", spec: "Commerce", img: "/images/default-user-placeholder.png" },
         ],
         gallery: [
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Commerce/Gallery/image1", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Commerce/Gallery/image2", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Commerce/Gallery/image3", category: "" },
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Commerce/Gallery/image4", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Commerce/Gallery/image1.jpeg?updatedAt=1770370362707", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Commerce/Gallery/image2.jpeg?updatedAt=1770370362707", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Commerce/Gallery/image3.jpeg?updatedAt=1770370362707", category: "" },
+            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Commerce/Gallery/image4.jpeg?updatedAt=1770370362707", category: "" },
         ]
     },
     "human-resource-management": {
@@ -457,7 +451,7 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
             // { name: "Faculty 1", role: "Assistant Professor", spec: "Malayalam Literature", img: "/images/default-user-placeholder.png" }
         ],
         gallery: [
-            { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Malayalam/malayalam", category: "DEPARTMENT" }
+            // { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Malayalam/malayalam", category: "DEPARTMENT" }
         ]
     },
     "arabic": {
