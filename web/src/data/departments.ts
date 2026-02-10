@@ -140,7 +140,7 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         faculty: [
             { name: "Jaseela C M", role: "Assistant Professor", spec: "Finance", img: "/images/default-user-placeholder.png" },
             { name: "Aysha K P", role: "Assistant Professor", spec: "HR Management", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/Ayisha?updatedAt=1770620889342" },
-            { name: "Sini John", role: "Assistant Professor", spec: "Operations", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/Sini%20Jhon" },
+            { name: "Sini John", role: "Assistant Professor", spec: "Operations", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/Sini-Jhon" },
         ],
         gallery: [
             { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Management/New%20Folder/image1", category: "CONFERENCE ROOM" },
@@ -285,15 +285,15 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         },
         faculty: [
             { name: "Ashif T A", role: "Assistant Professor", spec: "British Literature", img: "/images/default-user-placeholder.png" },
-            { name: "Ameera M", role: "Assistant Professor", spec: "American Lit", img: "/images/default-user-placeholder.png" },
-            { name: "Sara Subula", role: "Assistant Professor", spec: "Poetry & Arts", img: "/images/default-user-placeholder.png" },
-            { name: "Ajmal Musharaf", role: "Assistant Professor", spec: "Victorian Studies", img: "/images/default-user-placeholder.png" },
-            { name: "Aiswarya Manoj", role: "Assistant Professor", spec: "Victorian Studies", img: "/images/default-user-placeholder.png" },
+            { name: "Ameera M", role: "Assistant Professor", spec: "American Lit", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/English/Ameera" },
+            { name: "Sara Subula", role: "Assistant Professor", spec: "Poetry & Arts", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/English/Sara" },
+            { name: "Ajmal Musharaf", role: "Assistant Professor", spec: "Victorian Studies", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/English/Ajmal" },
+            { name: "Aiswarya Manoj", role: "Assistant Professor", spec: "Victorian Studies", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/English/Aiswarya?tr=w-600,ar-4-5,fo-top" },
         ],
         gallery: [
-            { img: "/images/academic_excellence_1768115933614.png", category: "LIBRARY" },
-            { img: "/images/classroom_learning_1768115518451.png", category: "WRITING HUB" },
-            { img: "/images/Principal.jpeg", category: "READING ROOM" }
+            // { img: "/images/academic_excellence_1768115933614.png", category: "LIBRARY" },
+            // { img: "/images/classroom_learning_1768115518451.png", category: "WRITING HUB" },
+            // { img: "/images/Principal.jpeg", category: "READING ROOM" }
         ]
     },
     "commerce": {
