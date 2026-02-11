@@ -112,18 +112,16 @@ export default function ManagementPage() {
                         }}
                         className="flex justify-center"
                     >
-                        <div className="relative will-change-transform">
-                            {/* CSS-based Rotating Outer Rings (Hardware Accelerated) */}
-                            <div className="absolute inset-[-20px] border border-white/10 rounded-full border-dashed animate-spin-slow pointer-events-none will-change-transform" />
-                            <div className="absolute inset-[-40px] border border-white/5 rounded-full animate-spin-reverse-slow pointer-events-none will-change-transform" />
-
-                            <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-white rounded-full p-8 md:p-12 shadow-[0_0_50px_rgba(255,255,255,0.1)] flex items-center justify-center group flex-col overflow-hidden will-change-transform">
+                        <div className="relative group">
+                            {/* Minimalism - Tighter Sleek Container */}
+                            <div className="relative w-48 h-20 md:w-80 md:h-36 bg-white rounded-xl md:rounded-2xl shadow-xl shadow-black/10 flex items-center justify-center p-4 md:p-8 transition-all duration-500 group-hover:scale-[1.02]">
                                 <Image
                                     src="https://ik.imagekit.io/1yxtj9qun/Home/images/cm-center-logo.png?updatedAt=1770370304268"
                                     alt="CM Center Logo"
-                                    width={300}
-                                    height={300}
-                                    className="object-contain w-full h-full p-2 transition-transform duration-500 scale-125 md:scale-[1.6] group-hover:scale-[1.7] transform-gpu"
+                                    width={400}
+                                    height={200}
+                                    priority
+                                    className="object-contain w-full h-full transform-gpu scale-110 md:scale-125"
                                 />
                             </div>
                         </div>
