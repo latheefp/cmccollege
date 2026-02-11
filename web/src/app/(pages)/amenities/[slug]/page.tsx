@@ -208,9 +208,6 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                 </div>
                                                 <p className="text-white/80 font-light text-lg">Daily shuttle services for {activeBusTab} commute.</p>
                                             </div>
-                                            <button className="bg-white text-[#5D1035] px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
-                                                Download PDF <ArrowRight className="w-4 h-4" />
-                                            </button>
                                         </div>
 
                                         <div className="space-y-6">
