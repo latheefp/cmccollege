@@ -10,22 +10,26 @@ import InstitutionsCarousel from "@/components/InstitutionsCarousel";
 const managementMembers = [
     {
         name: "CM Ibrahim",
-        role: "President, CM Centre Madavoor",
+        role: "President",
+        org: "CM Centre Madavoor",
         image: "https://ik.imagekit.io/1yxtj9qun/About/president.jpg"
     },
     {
         name: "TK Abdu Rahman Baqavi",
-        role: "General Secretary, CM Centre Madavoor",
+        role: "General Secretary",
+        org: "CM Centre Madavoor",
         image: "https://ik.imagekit.io/1yxtj9qun/About/chairman.png?updatedAt=1770370502173"
     },
     {
         name: "NA Backer Haji",
-        role: "Finance Secretary, CM Centre Madavoor",
+        role: "Finance Secretary",
+        org: "CM Centre Madavoor",
         image: "https://ik.imagekit.io/1yxtj9qun/About/finance.jpg"
     },
     {
         name: "Musthafa Saquafi",
-        role: "General Manager, CM Centre Madavoor",
+        role: "General Manager",
+        org: "CM Centre Madavoor",
         image: "https://ik.imagekit.io/1yxtj9qun/About/General-manager.jpg"
     }
 ];
@@ -206,13 +210,19 @@ export default function ManagementPage() {
 
                             {/* Details */}
                             <div className="text-center w-full">
-                                <h3 className="text-sm md:text-lg font-bold text-zinc-900 transition-colors duration-300 group-hover:text-[#7B0046] mb-1 md:mb-2 leading-tight px-1">
+                                <h3 className="text-sm md:text-lg font-bold text-zinc-900 transition-colors duration-300 group-hover:text-[#7B0046] mb-1 leading-tight px-1 uppercase tracking-tight">
                                     {member.name}
                                 </h3>
-                                <div className="h-0.5 w-6 bg-[#7B0046]/20 mx-auto my-3 group-hover:w-16 transition-all duration-300"></div>
-                                <p className="text-[#7B0046] text-[9px] md:text-xs font-bold tracking-widest uppercase leading-relaxed max-w-[200px] mx-auto opacity-80 group-hover:opacity-100 px-1">
-                                    {member.role}
-                                </p>
+
+                                <div className="space-y-1">
+                                    <p className="text-[#0CA789] text-[10px] md:text-xs font-black tracking-widest uppercase">
+                                        {member.role}
+                                    </p>
+                                    <div className="h-0.5 w-4 bg-[#7B0046]/10 mx-auto group-hover:w-12 transition-all duration-300"></div>
+                                    <p className="text-zinc-400 text-[8px] md:text-[10px] font-bold tracking-wider uppercase opacity-80">
+                                        {member.org}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </ScrollReveal>
