@@ -222,24 +222,38 @@ export default function ManagementPage() {
             </div>
 
             {/* Our Institutions Section */}
-            <div className="py-12 border-t border-zinc-100 bg-[#fcf9f5]/50">
-                <div className="text-center mb-8">
-                    <span className="text-[#0CA789] font-bold tracking-widest uppercase text-sm">Network</span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#7a0b3a] mt-2 font-agency">Our Institutions</h2>
-                </div>
+            <ScrollReveal>
+                <div className="py-20 border-y border-zinc-100 bg-linear-to-b from-white via-[#fcf9f5]/30 to-white overflow-hidden">
+                    <div className="max-w-7xl mx-auto px-4 text-center mb-12">
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="inline-flex items-center gap-2 mb-4"
+                        >
+                            <span className="h-px w-6 bg-[#0CA789]"></span>
+                            <span className="text-[#0CA789] font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs">Professional Network</span>
+                            <span className="h-px w-6 bg-[#0CA789]"></span>
+                        </motion.div>
+                        <h2 className="text-3xl md:text-5xl font-black text-[#7a0b3a] font-agency uppercase tracking-tight">Accredited Institutions</h2>
+                        <p className="text-zinc-500 mt-4 max-w-2xl mx-auto text-sm md:text-base font-medium">
+                            Recognized and affiliated with leading educational bodies and organizations
+                        </p>
+                    </div>
 
-                <InstitutionsCarousel
-                    items={[
-                        "https://ik.imagekit.io/1yxtj9qun/About/ifer.png?updatedAt=1769710741851",
-                        "https://ik.imagekit.io/1yxtj9qun/About/osams.png?updatedAt=1770370502238?updatedAt=1769710741865",
-                        "https://ik.imagekit.io/1yxtj9qun/About/keep.png?updatedAt=1769710741844",
-                        "https://ik.imagekit.io/1yxtj9qun/About/ceas.png?updatedAt=1769710741807",
-                        "https://ik.imagekit.io/1yxtj9qun/About/imsar.png?updatedAt=1769710741733",
-                        "https://ik.imagekit.io/1yxtj9qun/About/afaq.png?updatedAt=1769710741445",
-                        "https://ik.imagekit.io/1yxtj9qun/Home/images/PNG%20CM%20COLLEGE.png?updatedAt=1768917745508"
-                    ]}
-                />
-            </div>
+                    <InstitutionsCarousel
+                        items={[
+                            "https://ik.imagekit.io/1yxtj9qun/About/ifer.png?updatedAt=1769710741851",
+                            "https://ik.imagekit.io/1yxtj9qun/About/osams.png?updatedAt=1770370502238",
+                            "https://ik.imagekit.io/1yxtj9qun/About/keep.png?updatedAt=1769710741844",
+                            "https://ik.imagekit.io/1yxtj9qun/About/ceas.png?updatedAt=1769710741807",
+                            "https://ik.imagekit.io/1yxtj9qun/About/imsar.png?updatedAt=1769710741733",
+                            "https://ik.imagekit.io/1yxtj9qun/About/afaq.png?updatedAt=1769710741445",
+                            "https://ik.imagekit.io/1yxtj9qun/Home/images/PNG%20CM%20COLLEGE.png?updatedAt=1768917745508"
+                        ]}
+                    />
+                </div>
+            </ScrollReveal>
         </div>
     );
 }

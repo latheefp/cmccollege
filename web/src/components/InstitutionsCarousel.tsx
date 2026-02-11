@@ -1,124 +1,103 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
-interface Institution {
-    name?: string;
-    logo: string;
-}
+import { motion, useAnimationFrame, useMotionValue, useSpring } from "framer-motion";
 
 interface InstitutionsCarouselProps {
-    items: string[]; // specific to the simple array of strings used in parent
+    items: string[];
 }
 
 export default function InstitutionsCarousel({ items }: InstitutionsCarouselProps) {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(4); // Default to desktop
+    // Duplicate items for seamless loop
+    const duplicatedItems = [...items, ...items, ...items];
 
-    // Responsive items per page
+    // Using a more manual approach for precise control over the marquee
+    const x = useMotionValue(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                setItemsPerPage(2);
-            } else if (window.innerWidth < 1024) {
-                setItemsPerPage(3);
-            } else {
-                setItemsPerPage(5);
+        const updateWidth = () => {
+            if (containerRef.current) {
+                setContainerWidth(containerRef.current.scrollWidth / 3);
             }
         };
 
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+        updateWidth();
+        window.addEventListener("resize", updateWidth);
+        return () => window.removeEventListener("resize", updateWidth);
+    }, [items]);
 
-    const next = () => {
-        setCurrentIndex((prev) => (prev + 1) % items.length);
-    };
+    // Speed control
+    const baseVelocity = -2.5; // Increased from -1.2 for faster movement
+    const velocity = useSpring(isHovered ? baseVelocity * 0.2 : baseVelocity, {
+        damping: 50,
+        stiffness: 400
+    });
 
-    const prev = () => {
-        setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
-    };
+    useAnimationFrame(() => {
+        if (containerWidth === 0) return;
 
-    // Auto-slide 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            next();
-        }, 5000);
-        return () => clearInterval(timer);
-    }, [currentIndex, items.length]);
+        let newX = x.get() + velocity.get();
 
-    // Circular item retrieval logic
-    const getVisibleItems = () => {
-        const result = [];
-        for (let i = 0; i < itemsPerPage; i++) {
-            result.push(items[(currentIndex + i) % items.length]);
+        // Reset X when it reaches the end of one set of items
+        if (newX <= -containerWidth) {
+            newX += containerWidth;
+        } else if (newX > 0) {
+            newX -= containerWidth;
         }
-        return result;
-    };
 
-    const visibleItems = getVisibleItems();
+        x.set(newX);
+    });
 
     return (
-        <div className="relative max-w-7xl mx-auto px-4 md:px-12 group">
-            {/* Auto-slide Progress Bar */}
-            <div className="absolute top-0 left-12 right-12 h-0.5 bg-zinc-100 rounded-full overflow-hidden">
-                <motion.div
-                    key={currentIndex}
-                    initial={{ width: "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 5, ease: "linear" }}
-                    className="h-full bg-[#7a0b3a]/20"
-                />
-            </div>
+        <div className="relative w-full overflow-hidden py-12">
+            {/* Mask gradients for smooth fade out at edges */}
+            <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-[#fcf9f5] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-[#fcf9f5] to-transparent z-10 pointer-events-none" />
 
-            {/* Carousel Content Container */}
-            <div className="overflow-hidden py-10 px-2 cursor-grab active:cursor-grabbing">
-                <AnimatePresence mode="popLayout" initial={false}>
-                    <motion.div
-                        key={currentIndex}
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -30 }}
-                        drag="x"
-                        dragConstraints={{ left: 0, right: 0 }}
-                        dragElastic={0.2}
-                        onDragEnd={(_, info) => {
-                            const threshold = 50;
-                            if (info.offset.x > threshold) {
-                                prev();
-                            } else if (info.offset.x < -threshold) {
-                                next();
-                            }
-                        }}
-                        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                        className="flex items-center justify-center gap-4 md:gap-8"
-                    >
-                        {visibleItems.map((logo, idx) => (
-                            <motion.div
-                                key={`${currentIndex}-${idx}`}
-                                whileHover={{ scale: 1.05, y: -5 }}
-                                className="relative w-28 h-16 md:w-44 md:h-28 shrink-0 bg-white rounded-xl border border-zinc-100/50 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer flex items-center justify-center p-3 md:p-5 group/logo"
-                            >
-                                <div className="absolute inset-0 bg-linear-to-br from-zinc-50 to-transparent opacity-0 group-hover/logo:opacity-100 transition-opacity rounded-xl"></div>
+            <div
+                className="flex items-center"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <motion.div
+                    ref={containerRef}
+                    style={{ x }}
+                    className="flex gap-6 md:gap-12 px-6"
+                >
+                    {duplicatedItems.map((logo, idx) => (
+                        <div
+                            key={`${idx}`}
+                            className="relative shrink-0 group/card"
+                        >
+                            <div className="relative w-32 h-20 md:w-52 md:h-32 bg-white/40 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:shadow-maroon-900/5 group-hover/card:-translate-y-1 flex items-center justify-center p-4 md:p-8">
+                                {/* Subtle Inner Glow on Hover */}
+                                <div className="absolute inset-0 bg-linear-to-br from-white to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity rounded-2xl" />
+
                                 <div className="relative w-full h-full">
                                     <Image
                                         src={logo}
                                         alt={`Institution Logo`}
                                         fill
-                                        sizes="(max-width: 768px) 112px, 176px"
-                                        className={`object-contain transition-all duration-500 opacity-70 group-hover/logo:opacity-100 group-hover/logo:scale-110 ${logo.includes("CM%20COLLEGE") ? "scale-150 md:scale-200" : "scale-130"
+                                        sizes="(max-width: 768px) 128px, 208px"
+                                        className={`object-contain scale-[1.3] transition-all duration-700 opacity-90 group-hover/card:opacity-100 group-hover/card:scale-110 ${logo.includes("CM%20COLLEGE") ? "scale-125 md:scale-150" : "scale-100"
                                             }`}
                                     />
                                 </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </AnimatePresence>
+                            </div>
+
+                            {/* Decorative line below on hover */}
+                            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#7a0b3a]/30 rounded-full group-hover/card:w-1/2 transition-all duration-500" />
+                        </div>
+                    ))}
+                </motion.div>
             </div>
+
+            {/* Background Accent */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-px bg-linear-to-r from-transparent via-[#7a0b3a]/5 to-transparent pointer-events-none" />
         </div>
     );
 }
