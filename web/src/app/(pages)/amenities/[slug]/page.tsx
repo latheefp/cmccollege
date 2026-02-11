@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,6 +24,25 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
         );
     };
 
+    // --- REAL-TIME GPS TRACKING LOGIC ---
+    const [currentTime, setCurrentTime] = useState(new Date());
+
+    useEffect(() => {
+        const timer = setInterval(() => setCurrentTime(new Date()), 60000); // Update every minute
+        return () => clearInterval(timer);
+    }, []);
+
+    const parseTime = (timeStr: string) => {
+        const [time, modifier] = timeStr.split(' ');
+        let [hours, minutes] = time.split(':').map(Number);
+        if (modifier === 'PM' && hours < 12) hours += 12;
+        if (modifier === 'AM' && hours === 12) hours = 0;
+        return hours * 60 + minutes;
+    };
+
+    const currentMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();
+    const isWeekend = currentTime.getDay() === 0 || currentTime.getDay() === 6;
+
     if (!data) {
         return notFound();
     }
@@ -31,7 +50,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
     return (
         <div className="min-h-screen bg-[#FDFCFB] text-zinc-900 pt-[112px]">
             {/* Header / Hero */}
-            <section className="relative py-20 px-6 bg-gradient-to-br from-[#5D1035] via-[#4a0d2a] to-[#2a0616] text-white overflow-hidden">
+            <section className="relative py-20 px-6 bg-linear-to-br from-[#5D1035] via-[#4a0d2a] to-[#2a0616] text-white overflow-hidden">
                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "radial-gradient(#ffffff 1px, transparent 1px)", backgroundSize: "32px 32px" }}></div>
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
 
@@ -71,7 +90,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
 
                         {/* Featured Image & Gallery */}
                         <div className="space-y-6">
-                            <ScrollReveal className="relative h-[300px] md:h-[500px] w-full rounded-[2rem] overflow-hidden shadow-2xl shadow-[#5D1035]/10 group">
+                            <ScrollReveal className="relative h-[300px] md:h-[500px] w-full rounded-4xl overflow-hidden shadow-2xl shadow-[#5D1035]/10 group">
                                 <Image
                                     src={data.image}
                                     alt={data.title}
@@ -79,7 +98,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                     className="object-cover transition-transform duration-1000 group-hover:scale-105"
                                     priority
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60"></div>
+                                <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-60"></div>
                             </ScrollReveal>
 
                             {data.gallery && data.gallery.length > 0 && (
@@ -106,7 +125,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                     <span className="w-8 h-1 bg-[#5D1035] rounded-full"></span>
                                     Overview
                                 </h2>
-                                <p className="text-lg text-zinc-600 leading-relaxed text-left text-justify">
+                                <p className="text-lg text-zinc-600 leading-relaxed text-left">
                                     {data.description}
                                 </p>
                             </ScrollReveal>
@@ -233,7 +252,18 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                                         <Bus className="w-7 h-7" />
                                                                     </div>
                                                                     <div className="text-left">
-                                                                        <h3 className="text-xl font-bold">{schedule.busName}</h3>
+                                                                        <div className="flex items-center gap-2">
+                                                                            <h3 className="text-xl font-bold">{schedule.busName}</h3>
+                                                                            {isWeekend ? (
+                                                                                <span className="bg-white/10 text-white/40 text-[9px] font-black px-2 py-0.5 rounded-full border border-white/10 uppercase tracking-widest">
+                                                                                    No Service
+                                                                                </span>
+                                                                            ) : currentMinutes > parseTime(endStop.time) && (
+                                                                                <span className="bg-white/20 text-white text-[9px] font-black px-2 py-0.5 rounded-full border border-white/20 uppercase tracking-widest">
+                                                                                    Finished
+                                                                                </span>
+                                                                            )}
+                                                                        </div>
                                                                         <div className="flex items-center gap-3 text-sm text-white/70">
                                                                             <span className="bg-black/20 px-2 py-0.5 rounded text-xs font-mono">ID: {101 + idx}</span>
                                                                             {schedule.stops[0].driver && (
@@ -280,41 +310,54 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                                             const isStart = sIdx === 0;
                                                                             const isEnd = sIdx === schedule.stops.length - 1;
 
+                                                                            // GPS Tracking States
+                                                                            const stopMinutes = parseTime(stop.time);
+                                                                            const isPassed = !isWeekend && currentMinutes > stopMinutes;
+                                                                            const nextStop = !isWeekend ? schedule.stops.find(s => parseTime(s.time) >= currentMinutes) : null;
+                                                                            const isCurrent = !isWeekend && nextStop?.time === stop.time;
+
                                                                             return (
                                                                                 <div key={sIdx} className="grid grid-cols-[80px_40px_1fr] md:grid-cols-[100px_60px_1fr] items-stretch group relative">
                                                                                     {/* Time Column */}
-                                                                                    <div className={`text-right py-4 pr-4 border-r border-white/10 font-mono text-sm md:text-base ${isStart || isEnd ? "text-white font-bold" : "text-white/60"}`}>
+                                                                                    <div className={`text-right py-4 pr-4 border-r border-white/10 font-mono text-sm md:text-base transition-colors duration-500 ${isCurrent ? "text-emerald-400 font-black scale-110" : isPassed ? "text-white/30" : "text-white/60"}`}>
                                                                                         {stop.time}
                                                                                     </div>
-
                                                                                     {/* Timeline Node Column */}
                                                                                     <div className="relative flex flex-col items-center justify-center">
-                                                                                        {/* Connecting Line (conditionally rendered to not stick out top/bottom) */}
+                                                                                        {/* Connecting Line */}
                                                                                         {!isStart && (
-                                                                                            <div className="absolute top-0 bottom-1/2 w-0.5 bg-white/20"></div>
+                                                                                            <div className={`absolute top-0 bottom-1/2 w-0.5 transition-colors duration-500 ${isPassed || isCurrent ? "bg-emerald-400/50" : "bg-white/10"}`}></div>
                                                                                         )}
                                                                                         {!isEnd && (
-                                                                                            <div className="absolute top-1/2 bottom-0 w-0.5 bg-white/20"></div>
+                                                                                            <div className={`absolute top-1/2 bottom-0 w-0.5 transition-colors duration-500 ${isPassed ? "bg-emerald-400/50" : "bg-white/10"}`}></div>
                                                                                         )}
 
-                                                                                        {/* Node/Icon */}
-                                                                                        <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isStart || isEnd ? "bg-white border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.4)] text-[#5D1035]" : "bg-[#5D1035] border-white/40 text-transparent group-hover:bg-white group-hover:border-white"
+                                                                                        {/* GPS Indicator Node */}
+                                                                                        <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${isCurrent
+                                                                                            ? "bg-emerald-400 border-emerald-300 scale-125 shadow-[0_0_20px_rgba(52,211,153,0.6)] text-[#5D1035] animate-pulse"
+                                                                                            : isPassed
+                                                                                                ? "bg-emerald-400/20 border-emerald-400/40 text-emerald-400"
+                                                                                                : "bg-[#5D1035] border-white/40 text-transparent"
                                                                                             }`}>
-                                                                                            {isStart ? (
-                                                                                                <Play className="w-3 h-3 ml-0.5" fill="currentColor" />
-                                                                                            ) : isEnd ? (
-                                                                                                <MapPin className="w-3 h-3" fill="currentColor" />
+                                                                                            {isCurrent ? (
+                                                                                                <div className="relative">
+                                                                                                    <div className="absolute inset-0 bg-white rounded-full animate-ping opacity-75"></div>
+                                                                                                    <Bus className="w-4 h-4 relative z-20" />
+                                                                                                </div>
+                                                                                            ) : isPassed ? (
+                                                                                                <CheckCircle2 className="w-4 h-4" />
                                                                                             ) : (
-                                                                                                <div className="w-2 h-2 rounded-full bg-white/80" />
+                                                                                                <div className="w-2 h-2 rounded-full bg-white/40" />
                                                                                             )}
                                                                                         </div>
                                                                                     </div>
 
                                                                                     {/* Details Column */}
                                                                                     <div className="py-4 pl-4 flex items-center">
-                                                                                        <div className={`px-4 py-2 rounded-xl transition-all w-full md:w-auto ${isStart || isEnd ? "bg-white/15 border border-white/20" : "group-hover:bg-white/5 border border-transparent"}`}>
-                                                                                            <span className={`text-sm md:text-base block ${isStart || isEnd ? "font-bold text-white" : "font-medium text-white/90"}`}>
+                                                                                        <div className={`px-4 py-2 rounded-xl transition-all w-full md:w-auto ${isCurrent ? "bg-emerald-400/20 border border-emerald-400/40 shadow-[0_0_15px_rgba(52,211,153,0.1)]" : isPassed ? "opacity-40 grayscale-[0.5]" : "group-hover:bg-white/5 border border-transparent"}`}>
+                                                                                            <span className={`text-sm md:text-base block transition-colors duration-500 ${isCurrent ? "font-black text-emerald-400" : isPassed ? "text-white/60 line-through decoration-white/20" : "font-medium text-white/90"}`}>
                                                                                                 {stop.route}
+                                                                                                {isCurrent && <span className="ml-3 text-[10px] bg-emerald-400 text-[#5D1035] px-2 py-0.5 rounded-full font-black animate-bounce inline-block">LIVE</span>}
                                                                                             </span>
                                                                                         </div>
                                                                                     </div>
@@ -495,7 +538,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                     fill
                                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                                 />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
                                                 <div className="absolute bottom-3 left-3 text-white">
                                                     <span className="bg-[#5D1035] text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider mb-1 inline-block">
                                                         {item.date}
@@ -552,7 +595,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
                                     <div className="absolute bottom-4 left-4 text-white">
                                         <h4 className="font-bold text-lg leading-tight">{item.title}</h4>
                                         <div className="flex items-center gap-2 text-xs font-medium text-white/80 mt-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
