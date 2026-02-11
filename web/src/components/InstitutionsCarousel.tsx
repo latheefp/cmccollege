@@ -31,10 +31,10 @@ export default function InstitutionsCarousel({ items }: InstitutionsCarouselProp
     }, [items]);
 
     // Speed control
-    const baseVelocity = -2.5; // Increased from -1.2 for faster movement
-    const velocity = useSpring(isHovered ? baseVelocity * 0.2 : baseVelocity, {
-        damping: 50,
-        stiffness: 400
+    const baseVelocity = -5.0; // Significantly increased for noticeable speed
+    const velocity = useSpring(isHovered ? baseVelocity * 0.1 : baseVelocity, {
+        damping: 40,
+        stiffness: 200
     });
 
     useAnimationFrame(() => {
