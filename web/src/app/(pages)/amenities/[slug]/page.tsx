@@ -319,7 +319,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                                             return (
                                                                                 <div key={sIdx} className="grid grid-cols-[80px_40px_1fr] md:grid-cols-[100px_60px_1fr] items-stretch group relative">
                                                                                     {/* Time Column */}
-                                                                                    <div className={`text-right py-4 pr-4 border-r border-white/10 font-mono text-sm md:text-base transition-colors duration-500 ${isCurrent ? "text-emerald-400 font-black scale-110" : isPassed ? "text-white/30" : "text-white/60"}`}>
+                                                                                    <div className={`text-right py-4 pr-4 border-r border-white/10 font-mono text-sm md:text-base transition-colors duration-500 ${isCurrent ? "text-emerald-400 font-black scale-110" : (isStart || isEnd) ? "text-white font-bold" : isPassed ? "text-white/30" : "text-white/60"}`}>
                                                                                         {stop.time}
                                                                                     </div>
                                                                                     {/* Timeline Node Column */}
@@ -335,15 +335,21 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                                                         {/* GPS Indicator Node */}
                                                                                         <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${isCurrent
                                                                                             ? "bg-emerald-400 border-emerald-300 scale-125 shadow-[0_0_20px_rgba(52,211,153,0.6)] text-[#5D1035] animate-pulse"
-                                                                                            : isPassed
-                                                                                                ? "bg-emerald-400/20 border-emerald-400/40 text-emerald-400"
-                                                                                                : "bg-[#5D1035] border-white/40 text-transparent"
+                                                                                            : (isStart || isEnd)
+                                                                                                ? "bg-white border-white text-[#5D1035] scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                                                                                                : isPassed
+                                                                                                    ? "bg-emerald-400/20 border-emerald-400/40 text-emerald-400"
+                                                                                                    : "bg-[#5D1035] border-white/40 text-transparent"
                                                                                             }`}>
                                                                                             {isCurrent ? (
                                                                                                 <div className="relative">
                                                                                                     <div className="absolute inset-0 bg-white rounded-full animate-ping opacity-75"></div>
                                                                                                     <Bus className="w-4 h-4 relative z-20" />
                                                                                                 </div>
+                                                                                            ) : isStart ? (
+                                                                                                <Play className="w-3 h-3 ml-0.5" fill="currentColor" />
+                                                                                            ) : isEnd ? (
+                                                                                                <MapPin className="w-3 h-3" fill="currentColor" />
                                                                                             ) : isPassed ? (
                                                                                                 <CheckCircle2 className="w-4 h-4" />
                                                                                             ) : (
@@ -354,8 +360,8 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
 
                                                                                     {/* Details Column */}
                                                                                     <div className="py-4 pl-4 flex items-center">
-                                                                                        <div className={`px-4 py-2 rounded-xl transition-all w-full md:w-auto ${isCurrent ? "bg-emerald-400/20 border border-emerald-400/40 shadow-[0_0_15px_rgba(52,211,153,0.1)]" : isPassed ? "opacity-40 grayscale-[0.5]" : "group-hover:bg-white/5 border border-transparent"}`}>
-                                                                                            <span className={`text-sm md:text-base block transition-colors duration-500 ${isCurrent ? "font-black text-emerald-400" : isPassed ? "text-white/60 line-through decoration-white/20" : "font-medium text-white/90"}`}>
+                                                                                        <div className={`px-4 py-2 rounded-xl transition-all w-full md:w-auto ${isCurrent ? "bg-emerald-400/20 border border-emerald-400/40 shadow-[0_0_15px_rgba(52,211,153,0.1)]" : (isStart || isEnd) ? "bg-white/10 border border-white/20" : isPassed ? "opacity-40 grayscale-[0.5]" : "group-hover:bg-white/5 border border-transparent"}`}>
+                                                                                            <span className={`text-sm md:text-base block transition-colors duration-500 ${isCurrent ? "font-black text-emerald-400" : (isStart || isEnd) ? "font-bold text-white uppercase tracking-tight" : isPassed ? "text-white/60 line-through decoration-white/20" : "font-medium text-white/90"}`}>
                                                                                                 {stop.route}
                                                                                                 {isCurrent && <span className="ml-3 text-[10px] bg-emerald-400 text-[#5D1035] px-2 py-0.5 rounded-full font-black animate-bounce inline-block">LIVE</span>}
                                                                                             </span>
