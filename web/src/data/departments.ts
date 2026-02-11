@@ -94,8 +94,8 @@ export const DEPARTMENT_DATA: Record<string, DepartmentData> = {
         faculty: [
             { name: "Sumayya U", role: "Academic Coordinator", spec: "Artificial Intelligence", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/sumayya-u.jpg" },
             { name: "Rijilanadh", role: "Assistant Professor", spec: "Cyber Security", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/rijila-nath.jpg" },
-            { name: "Vivek M V", role: "Lab Assistant", spec: "Data Science", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/vivek-mv-200x250.jpg" },
             { name: "Asliya A", role: "Assistant Professor", spec: "Software Architecture", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Asliya" },
+            { name: "Vivek M V", role: "Lab Assistant", spec: "Data Science", img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/vivek-mv-200x250.jpg" },
         ],
         gallery: [
             { img: "https://ik.imagekit.io/1yxtj9qun/Departments%20/Computer%20Science/Gallery/image1.jpeg?updatedAt=1770370362463", category: "" },
