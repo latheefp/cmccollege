@@ -198,7 +198,7 @@ export default function CareerApplication() {
                                                         name="fullName"
                                                         value={formData.fullName}
                                                         onChange={handleInputChange}
-                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
+                                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 text-black focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
                                                         placeholder="Name"
                                                     />
                                                 </div>
@@ -214,7 +214,7 @@ export default function CareerApplication() {
                                                             name="email"
                                                             value={formData.email}
                                                             onChange={handleInputChange}
-                                                            className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
+                                                            className="w-full pl-10 pr-4 py-3 text-black rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
                                                             placeholder="john@example.com"
                                                         />
                                                     </div>
@@ -229,7 +229,7 @@ export default function CareerApplication() {
                                                             name="phone"
                                                             value={formData.phone}
                                                             onChange={handleInputChange}
-                                                            className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
+                                                            className="w-full pl-10 pr-4 py-3 rounded-lg border border-zinc-200 text-black focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-hidden transition-all placeholder:text-zinc-400"
                                                             placeholder="+91 9876543210"
                                                         />
                                                     </div>
