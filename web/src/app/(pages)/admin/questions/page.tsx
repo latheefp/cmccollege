@@ -188,7 +188,7 @@ export default function AdminQuestionBankPage() {
                             </div>
 
                             <a
-                                href={item.pdfUrl}
+                                href={item.pdfUrl.startsWith('http') ? item.pdfUrl : `https://${item.pdfUrl}`}
                                 target="_blank"
                                 className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-zinc-50 border border-zinc-100 text-zinc-600 font-bold text-sm hover:bg-zinc-100 transition-colors"
                             >
@@ -231,37 +231,37 @@ export default function AdminQuestionBankPage() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="col-span-2">
                                         <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2 block">Subject Title</label>
-                                        <input {...register('title', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none" placeholder="e.g., Data Structures" />
+                                        <input {...register('title', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none text-zinc-900 placeholder:text-zinc-400 font-semibold" placeholder="e.g., Data Structures" />
                                     </div>
                                     <div>
                                         <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2 block">Course Code</label>
-                                        <input {...register('code', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none" placeholder="e.g., BCS3B04" />
+                                        <input {...register('code', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none text-zinc-900 placeholder:text-zinc-400 font-semibold" placeholder="e.g., BCS3B04" />
                                     </div>
                                     <div>
                                         <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2 block">Exam Year</label>
-                                        <input {...register('year', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none" placeholder="2023" />
+                                        <input {...register('year', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none text-zinc-900 placeholder:text-zinc-400 font-semibold" placeholder="2023" />
                                     </div>
                                     <div>
                                         <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2 block">Department</label>
-                                        <select {...register('department', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none appearance-none font-medium">
+                                        <select {...register('department', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none appearance-none font-semibold text-zinc-900">
                                             {departments.map(d => <option key={d} value={d}>{d}</option>)}
                                         </select>
                                     </div>
                                     <div>
                                         <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2 block">Semester</label>
-                                        <select {...register('semester', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none appearance-none font-medium">
+                                        <select {...register('semester', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none appearance-none font-semibold text-zinc-900">
                                             {semesters.map(s => <option key={s} value={s}>{s}</option>)}
                                         </select>
                                     </div>
                                     <div>
                                         <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2 block">Exam Type</label>
-                                        <select {...register('type', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none appearance-none font-medium">
+                                        <select {...register('type', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none appearance-none font-semibold text-zinc-900">
                                             {types.map(t => <option key={t} value={t}>{t}</option>)}
                                         </select>
                                     </div>
                                     <div className="col-span-2">
                                         <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2 block">Google Drive / PDF Link</label>
-                                        <input {...register('pdfUrl', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none" placeholder="Paste shared link here..." />
+                                        <input {...register('pdfUrl', { required: true })} className="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-[#7a0b3a] transition-all outline-none text-zinc-900 placeholder:text-zinc-400 font-semibold" placeholder="Paste shared link here..." />
                                     </div>
                                 </div>
 

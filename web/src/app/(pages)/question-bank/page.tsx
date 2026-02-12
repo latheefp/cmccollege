@@ -66,9 +66,18 @@ export default function QuestionBankPage() {
     };
 
     const handleDownload = (id: string, pdfUrl: string, title: string) => {
-        // If it's an external link (like Google Drive), open in new tab
-        if (pdfUrl.startsWith("http") || pdfUrl.startsWith("https")) {
-            window.open(pdfUrl, "_blank");
+        // Handle potentially protocol-less URLs
+        let finalUrl = pdfUrl;
+        if (!pdfUrl.startsWith("http://") && !pdfUrl.startsWith("https://") && pdfUrl !== "#") {
+            // Check if it looks like a domain/path
+            if (pdfUrl.includes(".") || pdfUrl.includes("/")) {
+                finalUrl = `https://${pdfUrl}`;
+            }
+        }
+
+        // If it's an external link, open in new tab
+        if (finalUrl.startsWith("http") || finalUrl.startsWith("https")) {
+            window.open(finalUrl, "_blank");
             return;
         }
 
