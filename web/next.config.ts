@@ -27,7 +27,7 @@ const securityHeaders = [
   },
   {
     key: 'Content-Security-Policy',
-    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.clerk.accounts.dev clerk.com; connect-src 'self' *.clerk.accounts.dev clerk.com *; img-src 'self' data: ik.imagekit.io img.clerk.com api.qrserver.com i.pinimg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src 'self' www.google.com maps.google.com drive.google.com docs.google.com dropbox.com onedrive.live.com; frame-ancestors 'none';"
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.clerk.accounts.dev clerk.com; connect-src 'self' *.clerk.accounts.dev clerk.com *; img-src 'self' data: ik.imagekit.io img.clerk.com api.qrserver.com i.pinimg.com upload.wikimedia.org user-images.githubusercontent.com www.transparenttextures.com grainy-gradients.vercel.app; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src 'self' www.google.com maps.google.com drive.google.com docs.google.com dropbox.com onedrive.live.com; frame-ancestors 'none';"
   }
 ];
 
@@ -60,6 +60,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'i.pinimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
       },
     ],
   },
