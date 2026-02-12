@@ -330,7 +330,7 @@ export default function QuestionBankPage() {
                                     {displayedQuestions.length > 0 ? (
                                         displayedQuestions.map((q, idx) => (
                                             <motion.div
-                                                key={q.id}
+                                                key={`paper-${q._id || idx}`}
                                                 layout
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={{ opacity: 1, y: 0 }}

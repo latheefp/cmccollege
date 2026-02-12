@@ -147,9 +147,9 @@ export default function AdminQuestionBankPage() {
                 <div className="flex justify-center py-20"><Loader2 className="animate-spin text-maroon-600" /></div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {papers.map((item) => (
+                    {papers.map((item, idx) => (
                         <motion.div
-                            key={item._id}
+                            key={item._id || `admin-paper-${idx}`}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="bg-white rounded-2xl border border-zinc-200 p-6 shadow-sm hover:shadow-md transition-shadow group relative"
