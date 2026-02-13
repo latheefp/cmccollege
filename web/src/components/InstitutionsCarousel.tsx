@@ -31,7 +31,7 @@ export default function InstitutionsCarousel({ items }: InstitutionsCarouselProp
     }, [items]);
 
     // Speed control
-    const baseVelocity = -5.0; // Significantly increased for noticeable speed
+    const baseVelocity = -1.0; // Significantly increased for noticeable speed
     const velocity = useSpring(isHovered ? baseVelocity * 0.1 : baseVelocity, {
         damping: 40,
         stiffness: 200
