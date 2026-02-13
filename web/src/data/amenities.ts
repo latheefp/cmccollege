@@ -156,7 +156,6 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
         description: "We offer secure and homely accommodation for students coming from distant places. Our hostels are designed to provide a conducive environment for learning and personal growth.",
         features: [
             "Separate hostels for boys and girls",
-            "24/7 Security and CCTV surveillance",
             "Spacious and well-ventilated rooms",
             "Hygienic mess providing nutritious meals",
             "Study halls and recreation rooms",
@@ -165,11 +164,10 @@ export const AMENITIES_DATA: Record<string, AmenityData> = {
         image: "https://ik.imagekit.io/1yxtj9qun/Home/images/hostel.jpeg",
         icon: Home,
         gallery: [
-            "https://ik.imagekit.io/1yxtj9qun/Home/images/hostel.jpeg"
         ],
         hostelDetails: {
-            boys: { capacity: 150, vacancies: 12, warden: "Mr. Thomas K." },
-            girls: { capacity: 200, vacancies: 8, warden: "Mrs. Sheela V." },
+            boys: { capacity: 30, vacancies: 12, warden: "Mr. Thomas" },
+            girls: { capacity: 20, vacancies: 8, warden: "Mrs. Sheela V." },
             rules: [
                 "Students must be inside before 8:00 PM.",
                 "Visitors are allowed only on weekends.",

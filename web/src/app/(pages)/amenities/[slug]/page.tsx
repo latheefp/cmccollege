@@ -243,59 +243,66 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                         {/* Card Header / Summary View */}
                                                         <div
                                                             onClick={() => toggleRoute(idx)}
-                                                            className="p-6 cursor-pointer"
+                                                            className="p-4 md:p-6 cursor-pointer"
                                                         >
-                                                            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                                                                {/* Bus Info */}
-                                                                <div className="flex items-center gap-4 w-full md:w-auto">
-                                                                    <div className="w-14 h-14 rounded-2xl bg-white text-[#5D1035] flex items-center justify-center shadow-lg shrink-0">
-                                                                        <Bus className="w-7 h-7" />
+                                                            <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+                                                                {/* Top Row: Bus Info & Expand Action (Mobile) */}
+                                                                <div className="flex items-center justify-between w-full md:w-auto gap-4">
+                                                                    <div className="flex items-center gap-3 md:gap-4">
+                                                                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white text-[#5D1035] flex items-center justify-center shadow-lg shrink-0">
+                                                                            <Bus className="w-6 h-6 md:w-7 md:h-7" />
+                                                                        </div>
+                                                                        <div className="text-left">
+                                                                            <div className="flex items-center gap-2">
+                                                                                <h3 className="text-lg md:text-xl font-bold leading-tight">{schedule.busName}</h3>
+                                                                                {isWeekend ? (
+                                                                                    <span className="bg-white/10 text-white/40 text-[8px] md:text-[9px] font-black px-1.5 md:px-2 py-0.5 rounded-full border border-white/10 uppercase tracking-widest whitespace-nowrap">
+                                                                                        No Service
+                                                                                    </span>
+                                                                                ) : currentMinutes > parseTime(endStop.time) && (
+                                                                                    <span className="bg-white/20 text-white text-[8px] md:text-[9px] font-black px-1.5 md:px-2 py-0.5 rounded-full border border-white/20 uppercase tracking-widest whitespace-nowrap">
+                                                                                        Finished
+                                                                                    </span>
+                                                                                )}
+                                                                            </div>
+                                                                            <div className="flex items-center gap-2 md:gap-3 text-xs md:text-sm text-white/70">
+                                                                                <span className="bg-black/20 px-1.5 py-0.5 rounded text-[10px] md:text-xs font-mono">ID: {101 + idx}</span>
+                                                                                {schedule.stops[0].driver && (
+                                                                                    <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {schedule.stops[0].driver.split(' ')[1]}</span>
+                                                                                )}
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="text-left">
-                                                                        <div className="flex items-center gap-2">
-                                                                            <h3 className="text-xl font-bold">{schedule.busName}</h3>
-                                                                            {isWeekend ? (
-                                                                                <span className="bg-white/10 text-white/40 text-[9px] font-black px-2 py-0.5 rounded-full border border-white/10 uppercase tracking-widest">
-                                                                                    No Service
-                                                                                </span>
-                                                                            ) : currentMinutes > parseTime(endStop.time) && (
-                                                                                <span className="bg-white/20 text-white text-[9px] font-black px-2 py-0.5 rounded-full border border-white/20 uppercase tracking-widest">
-                                                                                    Finished
-                                                                                </span>
-                                                                            )}
-                                                                        </div>
-                                                                        <div className="flex items-center gap-3 text-sm text-white/70">
-                                                                            <span className="bg-black/20 px-2 py-0.5 rounded text-xs font-mono">ID: {101 + idx}</span>
-                                                                            {schedule.stops[0].driver && (
-                                                                                <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {schedule.stops[0].driver.split(' ')[1]}</span>
-                                                                            )}
-                                                                        </div>
+
+                                                                    {/* Mobile Expand Action */}
+                                                                    <div className={`md:hidden w-9 h-9 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 ${isExpanded ? "bg-white text-[#5D1035] rotate-180" : "bg-transparent text-white"}`}>
+                                                                        <ChevronDown className="w-5 h-5" />
                                                                     </div>
                                                                 </div>
 
                                                                 {/* Route Summary (Collapsed) */}
-                                                                <div className="flex-1 w-full md:w-auto flex items-center justify-between md:justify-center gap-4 md:gap-12 px-4">
+                                                                <div className="flex-1 w-full md:w-auto flex items-center justify-between md:justify-center gap-2 sm:gap-4 md:gap-12 px-2 md:px-4 py-2 md:py-0 bg-white/5 md:bg-transparent rounded-2xl">
                                                                     <div className="text-center">
-                                                                        <div className="text-xl font-bold">{startStop.time}</div>
-                                                                        <div className="text-xs text-white/60 font-medium uppercase tracking-wide truncate max-w-[100px]">{startStop.route}</div>
+                                                                        <div className="text-lg md:text-xl font-bold">{startStop.time}</div>
+                                                                        <div className="text-[10px] md:text-xs text-white/60 font-medium uppercase tracking-wide truncate max-w-[80px] md:max-w-[100px]">{startStop.route}</div>
                                                                     </div>
 
-                                                                    <div className="flex-1 md:flex-none flex flex-col items-center px-4 relative">
+                                                                    <div className="flex-1 md:flex-none flex flex-col items-center px-2 md:px-4 relative">
                                                                         <div className="h-0.5 w-full md:w-24 bg-white/20 relative">
-                                                                            <div className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-white"></div>
-                                                                            <div className="absolute -top-1 left-0 w-2 h-2 rounded-full bg-white"></div>
+                                                                            <div className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-white scale-75 md:scale-100"></div>
+                                                                            <div className="absolute -top-1 left-0 w-2 h-2 rounded-full bg-white scale-75 md:scale-100"></div>
                                                                         </div>
-                                                                        <div className="text-[10px] text-white/50 mt-1">{schedule.stops.length} Stops</div>
+                                                                        <div className="text-[9px] md:text-[10px] text-white/50 mt-1 whitespace-nowrap">{schedule.stops.length} Stops</div>
                                                                     </div>
 
                                                                     <div className="text-center">
-                                                                        <div className="text-xl font-bold">{endStop.time}</div>
-                                                                        <div className="text-xs text-white/60 font-medium uppercase tracking-wide truncate max-w-[100px]">{endStop.route}</div>
+                                                                        <div className="text-lg md:text-xl font-bold">{endStop.time}</div>
+                                                                        <div className="text-[10px] md:text-xs text-white/60 font-medium uppercase tracking-wide truncate max-w-[80px] md:max-w-[100px]">{endStop.route}</div>
                                                                     </div>
                                                                 </div>
 
-                                                                {/* Expand Action */}
-                                                                <div className={`w-10 h-10 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 ${isExpanded ? "bg-white text-[#5D1035] rotate-180" : "bg-transparent text-white hover:bg-white/10"}`}>
+                                                                {/* Desktop Expand Action */}
+                                                                <div className={`hidden md:flex w-10 h-10 rounded-full border border-white/20 items-center justify-center transition-all duration-300 ${isExpanded ? "bg-white text-[#5D1035] rotate-180" : "bg-transparent text-white hover:bg-white/10"}`}>
                                                                     <ChevronDown className="w-5 h-5" />
                                                                 </div>
                                                             </div>
@@ -317,9 +324,9 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                                             const isCurrent = !isWeekend && nextStop?.time === stop.time;
 
                                                                             return (
-                                                                                <div key={sIdx} className="grid grid-cols-[80px_40px_1fr] md:grid-cols-[100px_60px_1fr] items-stretch group relative">
+                                                                                <div key={sIdx} className="grid grid-cols-[72px_40px_1fr] md:grid-cols-[100px_60px_1fr] items-stretch group relative">
                                                                                     {/* Time Column */}
-                                                                                    <div className={`text-right py-4 pr-4 border-r border-white/10 font-mono text-sm md:text-base transition-colors duration-500 ${isCurrent ? "text-emerald-400 font-black scale-110" : (isStart || isEnd) ? "text-white font-bold" : isPassed ? "text-white/30" : "text-white/60"}`}>
+                                                                                    <div className={`text-right py-4 pr-3 md:pr-4 border-r border-white/10 font-mono text-[11px] md:text-sm transition-colors duration-500 ${isCurrent ? "text-emerald-400 font-black scale-105 md:scale-110" : (isStart || isEnd) ? "text-white font-bold" : isPassed ? "text-white/30" : "text-white/60"}`}>
                                                                                         {stop.time}
                                                                                     </div>
                                                                                     {/* Timeline Node Column */}
@@ -333,10 +340,10 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                                                         )}
 
                                                                                         {/* GPS Indicator Node */}
-                                                                                        <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${isCurrent
-                                                                                            ? "bg-emerald-400 border-emerald-300 scale-125 shadow-[0_0_20px_rgba(52,211,153,0.6)] text-[#5D1035] animate-pulse"
+                                                                                        <div className={`relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${isCurrent
+                                                                                            ? "bg-emerald-400 border-emerald-300 scale-110 md:scale-125 shadow-[0_0_15px_rgba(52,211,153,0.6)] text-[#5D1035]"
                                                                                             : (isStart || isEnd)
-                                                                                                ? "bg-white border-white text-[#5D1035] scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                                                                                                ? "bg-white border-white text-[#5D1035] scale-105 md:scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                                                                                                 : isPassed
                                                                                                     ? "bg-emerald-400/20 border-emerald-400/40 text-emerald-400"
                                                                                                     : "bg-[#5D1035] border-white/40 text-transparent"
@@ -344,26 +351,26 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                                                                             {isCurrent ? (
                                                                                                 <div className="relative">
                                                                                                     <div className="absolute inset-0 bg-white rounded-full animate-ping opacity-75"></div>
-                                                                                                    <Bus className="w-4 h-4 relative z-20" />
+                                                                                                    <Bus className="w-3.5 h-3.5 md:w-4 md:h-4 relative z-20" />
                                                                                                 </div>
                                                                                             ) : isStart ? (
-                                                                                                <Play className="w-3 h-3 ml-0.5" fill="currentColor" />
+                                                                                                <Play className="w-2.5 h-2.5 md:w-3 md:h-3 ml-0.5" fill="currentColor" />
                                                                                             ) : isEnd ? (
-                                                                                                <MapPin className="w-3 h-3" fill="currentColor" />
+                                                                                                <MapPin className="w-2.5 h-2.5 md:w-3 md:h-3" fill="currentColor" />
                                                                                             ) : isPassed ? (
-                                                                                                <CheckCircle2 className="w-4 h-4" />
+                                                                                                <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                                                                             ) : (
-                                                                                                <div className="w-2 h-2 rounded-full bg-white/40" />
+                                                                                                <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
                                                                                             )}
                                                                                         </div>
                                                                                     </div>
 
                                                                                     {/* Details Column */}
-                                                                                    <div className="py-4 pl-4 flex items-center">
-                                                                                        <div className={`px-4 py-2 rounded-xl transition-all w-full md:w-auto ${isCurrent ? "bg-emerald-400/20 border border-emerald-400/40 shadow-[0_0_15px_rgba(52,211,153,0.1)]" : (isStart || isEnd) ? "bg-white/10 border border-white/20" : isPassed ? "opacity-40 grayscale-[0.5]" : "group-hover:bg-white/5 border border-transparent"}`}>
-                                                                                            <span className={`text-sm md:text-base block transition-colors duration-500 ${isCurrent ? "font-black text-emerald-400" : (isStart || isEnd) ? "font-bold text-white uppercase tracking-tight" : isPassed ? "text-white/60 line-through decoration-white/20" : "font-medium text-white/90"}`}>
+                                                                                    <div className="py-3 md:py-4 pl-2 md:pl-4 flex items-center">
+                                                                                        <div className={`px-2.5 md:px-4 py-1.5 md:py-2 rounded-xl transition-all w-full md:w-auto ${isCurrent ? "bg-emerald-400/20 border border-emerald-400/40 shadow-[0_0_15px_rgba(52,211,153,0.1)]" : (isStart || isEnd) ? "bg-white/10 border border-white/20" : isPassed ? "opacity-40 grayscale-[0.5]" : "group-hover:bg-white/5 border border-transparent"}`}>
+                                                                                            <span className={`text-[13px] md:text-base block transition-colors duration-500 leading-tight ${isCurrent ? "font-black text-emerald-400" : (isStart || isEnd) ? "font-bold text-white uppercase tracking-tight" : isPassed ? "text-white/60 line-through decoration-white/20" : "font-medium text-white/90"}`}>
                                                                                                 {stop.route}
-                                                                                                {isCurrent && <span className="ml-3 text-[10px] bg-emerald-400 text-[#5D1035] px-2 py-0.5 rounded-full font-black animate-bounce inline-block">LIVE</span>}
+                                                                                                {isCurrent && <span className="ml-2 text-[9px] bg-emerald-400 text-[#5D1035] px-1.5 py-0.5 rounded-full font-black animate-bounce inline-block">LIVE</span>}
                                                                                             </span>
                                                                                         </div>
                                                                                     </div>
@@ -421,7 +428,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                         </div>
                                         <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Total Capacity</div>
                                     </div>
-                                    <div className="bg-white p-6 rounded-3xl shadow-md border border-zinc-100 flex flex-col items-center justify-center text-center group hover:border-[#5D1035]/20 transition-all">
+                                    {/* <div className="bg-white p-6 rounded-3xl shadow-md border border-zinc-100 flex flex-col items-center justify-center text-center group hover:border-[#5D1035]/20 transition-all">
                                         <div className="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                             <Bed className="w-6 h-6" />
                                         </div>
@@ -429,7 +436,7 @@ export default function AmenityDetailsPage({ params }: { params: Promise<{ slug:
                                             {data.hostelDetails[activeHostelTab].vacancies}
                                         </div>
                                         <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Available Spots</div>
-                                    </div>
+                                    </div> */}
                                     <div className="bg-white p-6 rounded-3xl shadow-md border border-zinc-100 flex flex-col items-center justify-center text-center group hover:border-[#5D1035]/20 transition-all">
                                         <div className="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                             <CheckCircle2 className="w-6 h-6" />
