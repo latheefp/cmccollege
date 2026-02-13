@@ -6,7 +6,7 @@ set -Eeuo pipefail
 
 REPO_URL="${REPO_URL:-https://github.com/kubeletinfotech/comcollege.git}"
 BRANCH="${BRANCH:-main}"
-DEPLOY_PATH="${DEPLOY_PATH:-/apps/web/beta-comcollege}"
+DEPLOY_PATH="${DEPLOY_PATH:-/apps/web/beta-comcollege/app}"
 APP_SUBDIR="${APP_SUBDIR:-web}"
 APP_NAME="${APP_NAME:-beta-comcollege}"
 PORT="${PORT:-3000}"
